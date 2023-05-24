@@ -1,0 +1,79 @@
+import {
+  fetch_page_urls,
+  fetch_unseen_urls,
+  fetch_report,
+  array_methods
+} from './fetch/index.js'
+import { parse_report_basic, parse_summary_basic } from './parse/index.js'
+import { try_create_csv, append_csv_row, write_log } from './write/index.js'
+
+array_methods()
+
+/** Type imports
+ * @typedef {import('cheerio').CheerioAPI} CheerioAPI
+ * @typedef {import('./fetch/helpers.js').NetworkError} NetworkError
+ * @typedef {import('./fetch/helpers.js').ElementError} ElementError
+ * @typedef {import('./parse/helpers.js').Parser} Parser
+ * @typedef {import('./parse/parse_report.js').Basic_Report} Report
+ * @typedef {import('./parse/parse_summary.js').Basic_Summary} Summary
+ */
+
+/** @typedef {{report_url: string, pdf_url: string}} URLs */
+
+/** Fetches and writes reports to the given `.csv` file
+ * @template R, S
+ * @param {string} reports_url the url to fetch from
+ * @param {string} csv_path the `.csv` file to write reports to
+ * @param {string} log_path where to write a log of the latest fetch
+ * @param {string[]} headers the headers we're using for the `.csv` file
+ * @param {Parser<R>} parse_report
+ * @param {Parser<S>} parse_summary
+ */
+export async function write_reports(
+  reports_url,
+  csv_path,
+  log_path,
+  headers,
+  parse_report,
+  parse_summary
+) {
+  await try_create_csv(csv_path, headers)
+  const page_urls = await fetch_page_urls(reports_url)
+  const urls = await fetch_unseen_urls(page_urls, csv_path)
+  await write_log(log_path, page_urls.length, urls.length)
+
+  if (urls.length === 0) return console.log('Reports up to date!')
+  await urls.map_async(async url => {
+    const report = await fetch_report(url, parse_report, parse_summary)
+    await append_csv_row(report, csv_path, headers)
+  }, 'Reading reports |:bar| :current/:total urls')
+}
+
+/** @typedef {Summary & Report & URLs} Full_Report */
+/** @type {(keyof Full_Report)[]} */
+const headers = [
+  'report_url',
+  'pdf_url',
+  'ref',
+  'date',
+  'area',
+  'name',
+  'to',
+  'deceased',
+  'category',
+  'circumstances',
+  'concerns',
+  'inquest',
+  'action',
+  'response',
+  'legal'
+]
+
+write_reports(
+  'https://www.judiciary.uk/prevention-of-future-death-reports/',
+  'src/data/reports.csv',
+  'src/data/latest.log',
+  headers,
+  parse_report_basic,
+  parse_summary_basic
+)

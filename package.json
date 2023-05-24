@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "csv-parse": "^5.3.10",
+    "pdf-parse": "^1.0.5",
+    "pdfjs-dist": "^3.6.172",
+    "progress": "^2.0.3",
+    "yaml": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/pdf-parse": "^1.1.1"
+  }
+}
