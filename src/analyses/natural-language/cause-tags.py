@@ -35,7 +35,7 @@ embed_model = SentenceTransformer(
 # ### Precalculating the encodings of the death causes
 
 with open(f'{PATH}/causes.txt', 'r', encoding='utf8') as rf:
-  causes = [line.strip() for line in rf.readlines()]
+  causes = [line.strip().lower() for line in rf.readlines()]
 
 with torch.no_grad():
   embed_list = [
@@ -51,37 +51,40 @@ from pandas import read_csv
 
 reports = read_csv(f"{DATA_PATH}/reports.csv")
 inquests = reports.loc[:, 'inquest']
+cause_sections = [
+  inquest + "\n\n" + circumstances
+    if isinstance(inquest, str) and isinstance(circumstances, str)
+    else inquest
+  for inquest, circumstances in zip(reports.inquest, reports.circumstances)
+]
 
 # %% [markdown]
 # ### Determine the top-k most likely causes
 
-K = 5
-
-progress = tqdm(desc="Calculating tags", total=len(inquests))
-
-@torch.no_grad()
 def get_most_likely(inquest, max_num=5, min_prob=0.3):
-  progress.update()
   if not isinstance(inquest, str):
     return inquest
 
   embed_list = [
     embed_model.encode(sentence.strip(), convert_to_tensor=True)
-    for sentence in inquest.split(".")
+    for sentence in inquest.split(".") if len(sentence) > 0
   ]
   inquest_embeds = torch.stack(embed_list)
   similarity = util.cos_sim(cause_embeds, inquest_embeds)
   max_sim, _ = torch.max(similarity, dim=1)
 
-  indices = torch.argsort(max_sim, descending=True)[:K]
+  indices = torch.argsort(max_sim, descending=True)[:max_num]
   return [
     (causes[i], max_sim[i].item())
     for i in indices if max_sim[i] > min_prob
   ]
 
+with torch.no_grad():
+  likely_causes = [
+    get_most_likely(section)
+    for section in tqdm(cause_sections, desc="Calculating tags")
+  ]
 
-likely_causes = inquests.map(get_most_likely)
-progress.close()
 likely_causes
 
 # %% [markdown]
