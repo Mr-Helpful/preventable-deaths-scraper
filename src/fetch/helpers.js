@@ -1,6 +1,6 @@
 import ProgressBar from 'progress'
 import { load } from 'cheerio/lib/slim'
-import pdfjs from 'pdfjs-dist'
+import pdfjs from 'pdfjs-dist/legacy/build/pdf.js'
 
 /**
  * @typedef {import('pdfjs-dist').PDFPageProxy} PDFPageProxy
@@ -76,11 +76,12 @@ async function load_page(page) {
  */
 async function load_pdf(data, verbosity = 0) {
   const doc = await pdfjs.getDocument({ data, verbosity }).promise
-  const pages = Array.from({ length: doc.numPages }, (_, i) =>
-    doc.getPage(i).then(load_page)
+  const page_nums = Array.from({ length: doc.numPages }, (_, i) => i + 1)
+  const pages = await map_async(page_nums, num =>
+    doc.getPage(num).then(load_page)
   )
   await doc.destroy()
-  return (await Promise.all(pages)).join('\n\n')
+  return pages.join('\n\n')
 }
 
 /** Fetches a pdf and loads it with the pdf-parse library
@@ -94,24 +95,21 @@ export async function fetch_pdf(url) {
   return await load_pdf(buff)
 }
 
-/** Explicitly adds the `map_async` method to the Array scope */
-export function array_methods() {
-  /** Maps a common async function in parallel on a list of data, updating a
-   * progress bar when each of the tasks finish.
-   * @template T, R
-   * @param {T[]} data the data to be processed
-   * @param {(d: T) => Promise<R>} func the task to be performed
-   * @param {string} msg the message format for the progress bar to use
-   * @return {Promise<R[]>} the result of applying func to all of the data
-   */
-  Array.prototype.map_async = function map_async(func, msg = ':progress') {
-    const progress = new ProgressBar(msg, this.length)
-    return Promise.all(
-      this.map(async d => {
-        const res = await func(d)
-        progress.tick()
-        return res
-      })
-    )
-  }
+/** Maps a common async function in parallel on a list of data, updating a
+ * progress bar when each of the tasks finish.
+ * @template T, R
+ * @param {T[]} xs the data to be processed
+ * @param {(d: T) => Promise<R>} func the task to be performed
+ * @param {string} msg the message format for the progress bar to use
+ * @return {Promise<R[]>} the result of applying func to all of the data
+ */
+export function map_async(xs, func, msg = undefined) {
+  const progress = msg ? new ProgressBar(msg, xs.length) : { tick() {} }
+  return Promise.all(
+    xs.map(async d => {
+      const res = await func(d)
+      progress.tick()
+      return res
+    })
+  )
 }

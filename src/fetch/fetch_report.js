@@ -60,6 +60,7 @@ async function try_fetch_pdf($, parse_report) {
   const pdf_path = 'a.related-content__link'
   const url = $(pdf_path).attr('href')
   if (url === undefined) throw new ElementError('pdf link not found')
+  if (url.length === 0) throw new ElementError('empty pdf link found')
 
   return parse_rows(await fetch_pdf(url), parse_report)
 }
@@ -77,10 +78,12 @@ export async function fetch_report(report_url, parse_report, parse_summary) {
   const pdf_path = 'a.related-content__link'
   const pdf_url = $(pdf_path).attr('href')
 
-  const ignore = _ => {}
-  const summary = await try_fetch_summary($, parse_summary).catch(ignore)
-  let report = await try_fetch_table($, parse_report).catch(ignore)
-  report ??= await try_fetch_pdf($, parse_report).catch(ignore)
+  const throw_network = err => {
+    if (err?.name === 'NetworkError') throw err
+  }
+  const summary = await try_fetch_summary($, parse_summary).catch(throw_network)
+  let report = await try_fetch_table($, parse_report).catch(throw_network)
+  report ??= await try_fetch_pdf($, parse_report).catch(throw_network)
 
   // the most reliable parses are from
   // 1. the summary

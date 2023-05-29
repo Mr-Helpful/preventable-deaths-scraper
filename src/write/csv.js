@@ -1,4 +1,5 @@
 import fs from 'fs/promises'
+import { sanitise_text } from '../parse/index.js'
 
 /** Creates a .csv file at the file path and adds headers if it doesn't exist
  * @param {string} csv_path where to attempt to create the .csv

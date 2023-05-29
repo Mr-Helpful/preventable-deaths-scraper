@@ -19,8 +19,7 @@ have in common
  * @param {(x: T, y: T) => boolean} elem_eq
  * @return {number[][]} the edit distance array
  */
-function edit_distances(xs, ys, elem_eq = (x, y) => x === y) {
-  console.log('calculating edit distances')
+export function edit_distances(xs, ys, elem_eq = (x, y) => x === y) {
   let [w, h] = [xs.length, ys.length]
   let distances = Array.from({ length: h + 1 }, () =>
     Array.from({ length: w + 1 }, () => 0)
@@ -48,9 +47,11 @@ function edit_distances(xs, ys, elem_eq = (x, y) => x === y) {
           ) + 1
       }
 
-  console.log('edit distances found!')
   return distances
 }
+
+export const str_edit_distance = (xs, ys) =>
+  edit_distances(xs, ys).at(-1).at(-1)
 
 /** Returns the index of the minimum member
  * @param {number[]} xs the values to compare
@@ -107,7 +108,7 @@ function edits(str1, str2) {
   return edits
 }
 
-console.log(edits('hello word!', 'hell world?'))
+// console.log(edits('hello word!', 'hell world?'))
 
 /** Attempts to naively cluster values by including values within a certain
  * distance of an existing cluster within that cluster.
@@ -135,7 +136,7 @@ function naive_clustering(strs, min_distance, distance) {
   return clusters.map(({ all }) => all)
 }
 
-const naive_edit_clustering = (
+export const naive_edit_clustering = (
   strs,
   min_distance,
   elem_eq = (x, y) => x === y

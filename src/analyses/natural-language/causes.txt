@@ -1,0 +1,271 @@
+Abdominal aortic aneurysm
+Acute alcoholism
+Acute dehydration
+Acute left/right ventricular failure
+Acute aortic syndrome
+Acute respiratory distress syndrome
+Adult respiratory distress syndrome
+Advancing years - old age
+Acquired Immunodeficiency Syndrome
+Alcohol abuse
+Alzheimer's disease
+Anaemia
+Anaphylaxis
+Ankylostomiasis
+Angiosarcoma of the liver
+Anorexia nervosa
+Anthracosis, Anthracosilicosis
+Anthrax
+Arrhythmia/Cardiac arrhythmia
+Arteriosclerosis/Atherosclerosis
+Asbestosis
+Aspergillosis
+Asphyxia
+Aspiration pneumonia
+Asystole
+Atrial fibrillation
+Bacterial meningitis
+Bagassosis
+Barotrauma
+Berylliosis
+Biliary (biliary tract) infection/sepsis
+Bilateral pleural thickening
+Birth asphyxia
+Birth injury
+Biventricular failure
+Bladder - Cancer of the bladder or renal pelvis or urethra or ureter
+Bleeding peptic ulcer
+Blood Poisoning/septicaemia
+Bone marrow failure
+Bowel obstruction
+Brain failure
+Bronchial or bronchus cancer
+Bronchopneumonia
+Bronchospasm
+Brucella/Brucellosis
+Byssinosis
+Cachexia
+Caisson disease
+Cancer of the bladder or renal pelvis or urethra or ureter
+Cancer of the lung/bronchus
+Cancer of the nose/nasopharynx/nasal sinuses
+Cancer of the skin/squamous-cell carcinoma
+Cardiac arrest
+Cardiac tamponade
+Cardiogenic shock
+Cardiorespiratory arrest
+Cardiovascular accident/event/incident
+Cellulitis
+Cerebral/intracerebral haemorrhage
+Cerebral palsy
+Cerebellar ataxia
+Cerebrovascular accident/event/haemorrhage
+Chest infection
+Cholecystitis
+Chronic airflow limitation
+Chronic bronchitis
+Chronic obstructive airways disease (COAD)
+Chronic obstructive pulmonary disease (COPD)
+Chronic alcoholism
+Circulatory failure
+Circulatory collapse
+Clostridium difficile
+Coma
+Compressed air illness
+Congenital
+Congenital ventricular septal defect
+Congestive cardiac failure
+Congestive heart failure
+Coronavirus infection/disease
+Cot death
+COVID-19
+COVID-19 infection/pneumonia
+Creutzfeldt Jakob disease
+Cryptogenic fibrosing alveolitis
+Debility
+Debility of old age
+Dehydration
+Dementia
+Depression
+Diabetes mellitus
+Diabetic foot gangrene
+Dissection of thoracic aorta/aortic
+Diver's palsy, Diver's paralysis
+Diverticulitis/diverticular abscess
+Digoxin toxicity
+Duodenal ulcer
+Dust reticulation
+Dysbarism
+Escherichia coli (E-coli)
+Escherichia coli (E-coli) septicaemia
+Electromechanical dissociation
+Emphysema
+Empyema
+Encephalitis
+Exhaustion
+Extreme prematurity
+Extrinsic allergic alveolitis
+Farmer's lung
+Fibrosing alveolitis
+Fracture
+Fracture - pathological
+Frailty of old age
+Frailty syndrome
+Gangrene
+Gastric aspiration/aspiration of gastric contents
+Gastroenteritis
+Gastrointestinal bleed/haemorrhage
+General debility
+General system failure
+Goodpasture's syndrome/Anti Glomerular Basement Membrane disease
+Gram negative septicaemia
+Grinder's asthma
+Grinder's phthisis
+Haematemesis
+Haemothorax
+Haemorrhagic shock
+Hartmann's procedure
+Heart attack
+Heart Block (Complete or Möbitz Type 2)
+Heart failure
+Hepatic failure
+Hepatitis
+Hepatitis Australian antigen
+Hepatitis B
+Hepatitis viral
+Hepatorenal failure
+Hernia
+Huntington's chorea/disease
+Hydrocephalus
+Hypertension
+Hyperthermia
+Hypothermia
+Hypovolaemia/hypovolaemic shock
+Hypoxic brain injury
+Iatrogenic
+Inanition
+Inflammatory bowel disease
+Infective endocarditis
+Influenza
+Injury
+Intestinal bleeding/haemorrhage
+Intestinal ischaemia
+Intestinal obstruction
+Intracerebral haemorrhage (duplication with cerebral)
+Intracranial haemorrhage (duplication with cerebral)
+Intraoral squamous-cell carcinoma
+Ischaemic heart disease
+Ischaemic bowel
+Jaundice
+Kidney failure/injury
+Kidney stones
+Leaking aortic aneurysm
+Left ventricular failure
+Leptospira canicola
+Leptospira icterohaemorrhagiae
+Learning disability/difficulties
+Lewy body dementia
+Linitis plastica
+Liver failure
+Lower respiratory tract infection
+Lung cancer (cancer of the lung, bronchus or bronchial)
+(Systemic) lupus erythematosus
+Lymphoproliferative disorder/disease
+Malignant disease (cancer or sarcoma or leukaemia or anaemia)
+Malnutrition
+Medical techniques
+Meningitis
+Meningococcal meningitis
+Meningococcal septicaemia
+Mesothelioma
+Motor neurone disease
+Meticillin Resistant Staphylococcus Aureus (MRSA)
+Meticillin Resistant Staphylococcus Aureus (MRSA) septicaemia
+Mycobacterium avium intracellulare infection
+Multiple sclerosis
+Multiple organ failure
+Multiple system atrophy
+Multiple organ failure/multiple organ dysfunction syndrome
+Myelodysplasia
+Myeloma
+Myeloproliferative disorder
+Myocardial infarction or degeneration
+Natural causes
+Nephrotic syndrome
+Neurodegenerative disease of unknown cause
+Neutropaenic sepsis
+Non-cirrhotic portal fibrosis
+Norovirus
+Occipital lobe infarction
+Old age
+On chronic renal failure
+Osteomyelitis
+Osteonecrosis
+Pancreatitis
+Parkinsonism, Parkinson's Disease
+Pathological fracture
+Peptic ulcer
+Perforated (perforation of the) bowel/intestine
+Perforated intra-abdominal viscus
+Perinatal asphyxia
+Peripheral vascular disease
+Peritonitis
+Pleural mesothelioma
+Pneumococcal septicaemia
+Pneumoconiosis
+Pneumothorax
+Pseudo-obstruction (of the intestine)
+Pulmonary embolism
+Pulmonary tuberculosis
+Radiation colitis
+Refusal to eat
+Renal failure
+Renal/kidney injury
+Respiratory arrest or failure
+Rheumatic heart disease
+Rheumatoid arthritis
+Right ventricular failure
+Ruptured abdominal aortic aneurysm
+SARS-CoV-2 infection
+Schizophrenia/psychosis
+Senile dementia
+Senility
+Sepsis
+Sepsis of unknown aetiology
+Septic arthritis
+Septic shock
+Septicaemia
+Siderosis
+Silicosis
+Smoking
+Spinal cord ischaemia
+Spirochaetal jaundice
+Spontaneous gastrointestinal
+Spontaneous intracerebral haemorrhage
+Staphylococcus (aureus)
+Steele Richardson syndrome
+Streptococcal septicaemia
+Streptococcus
+Streptococcus suis
+Stroke
+Spontaneous subarachnoid haemorrhage
+Stent/stented
+Subdural haematoma
+Sudden infant death syndrome
+Syncope
+(Systemic) mixed connective tissue disorder
+Tetanus
+Toxic anaemia
+Toxic jaundice
+Toxicity
+Tuberculosis
+Ulcer duodenal/gastric/peptic
+Unknown
+Uraemia
+Urinary tract infection
+Urosepsis
+Vagal inhibition
+Vascular dementia
+Ventricular failure
+Viral hepatitis
+Weil's disease

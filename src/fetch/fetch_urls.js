@@ -1,8 +1,6 @@
-import { fetch_html, array_methods } from './helpers.js'
+import { fetch_html, map_async } from './helpers.js'
 import { parse } from 'csv-parse/sync'
 import fs from 'fs/promises'
-
-array_methods()
 
 /** Determines the urls of all the pages we need to search
  * @param {string} report_url the prevention of death reports page
@@ -44,7 +42,8 @@ async function fetch_urls_from_page(page_url) {
  */
 export async function fetch_all_urls(page_urls) {
   return (
-    await page_urls.map_async(
+    await map_async(
+      page_urls,
       fetch_urls_from_page,
       'Fetching urls |:bar| :current/:total pages'
     )

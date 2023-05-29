@@ -2,12 +2,10 @@ import {
   fetch_page_urls,
   fetch_unseen_urls,
   fetch_report,
-  array_methods
+  map_async
 } from './fetch/index.js'
 import { parse_report_basic, parse_summary_basic } from './parse/index.js'
 import { try_create_csv, append_csv_row, write_log } from './write/index.js'
-
-array_methods()
 
 /** Type imports
  * @typedef {import('cheerio').CheerioAPI} CheerioAPI
@@ -43,10 +41,17 @@ export async function write_reports(
   await write_log(log_path, page_urls.length, urls.length)
 
   if (urls.length === 0) return console.log('Reports up to date!')
-  await urls.map_async(async url => {
-    const report = await fetch_report(url, parse_report, parse_summary)
-    await append_csv_row(report, csv_path, headers)
-  }, 'Reading reports |:bar| :current/:total urls')
+  await map_async(
+    urls,
+    url =>
+      fetch_report(url, parse_report, parse_summary)
+        .then(report => append_csv_row(report, csv_path, headers))
+        .catch(_ => {
+          // ignore any errors from this, we'll either get it next time
+          // or this report can't be effectively read at all
+        }),
+    'Reading reports |:bar| :current/:total urls'
+  )
 }
 
 /** @typedef {Summary & Report & URLs} Full_Report */
