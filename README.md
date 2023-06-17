@@ -40,7 +40,7 @@ The cause analysis can then be run by running the following command in the root 
 python src/analyses/cause-tags.py
 ```
 
-This will save the analysis to [`src/data/tagger-reports.csv`](./src/data/tagger-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
+This will save the analysis to [`src/data/tagged-reports.csv`](./src/data/tagged-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
 
 The annotated reports look like this:
 | ref       | date       | area         | ... | tags                                                         |
