@@ -38,11 +38,10 @@ with open(f'{PATH}/causes.txt', 'r', encoding='utf8') as rf:
   causes = [line.strip().lower() for line in rf.readlines()]
 
 with torch.no_grad():
-  embed_list = [
+  cause_embeds = torch.stack([
     embed_model.encode(cause, convert_to_tensor=True)
     for cause in tqdm(causes, "Calculating embeds")
-  ]
-  cause_embeds = torch.stack(embed_list)
+  ])
 
 # %% [markdown]
 # ### Read in the csv and circumstances
@@ -62,6 +61,11 @@ cause_sections = [
 # ### Determine the top-k most likely causes
 
 def get_most_likely(inquest, max_num=5, min_prob=0.3):
+  '''
+  Determines the most likely causes of death from the inquest text.
+  Returns the `max_num` most likely causes with a similarity of at least `min_prob`.
+  Similarity is determined by the cosine similarity between the sentence embeddings.
+  '''
   if not isinstance(inquest, str):
     return inquest
 
@@ -85,7 +89,7 @@ with torch.no_grad():
     for section in tqdm(cause_sections, desc="Calculating tags")
   ]
 
-likely_causes
+print(likely_causes)
 
 # %% [markdown]
 # ### Write the column to reports
