@@ -15,6 +15,36 @@
 # you will need huggingface sentence transformers installed:
 # `pip install sentence_transformers torch pandas tqdm`
 
+# %% [markdown]
+# ### Parsing arguments
+
+import argparse
+
+parser = argparse.ArgumentParser(
+  description="Process the cause of death tags for the reports"
+)
+parser.add_argument(
+  "-r", "--reports", type=str, default="reports.csv",
+  help="The .csv file containing the reports"
+)
+parser.add_argument(
+  "-c", "--causes", type=str, default="medical-causes.txt",
+  help="The .txt file containing the causes of death"
+)
+parser.add_argument(
+  "-o", "--output", type=str, default="medical-cause-reports.csv",
+  help="The .csv file to output the labelled reports to"
+)
+parser.add_argument(
+  "-l", "--label", type=str, default="tags",
+  help="The column to output the labels to"
+)
+
+args = parser.parse_args()
+
+# %% [markdown]
+# ### Importing libraries
+
 import os
 import torch
 from tqdm import tqdm
@@ -34,7 +64,7 @@ embed_model = SentenceTransformer(
 # %% [markdown]
 # ### Precalculating the encodings of the death causes
 
-with open(f'{PATH}/causes.txt', 'r', encoding='utf8') as rf:
+with open(f'{PATH}/{args.causes}', 'r', encoding='utf8') as rf:
   causes = [line.strip().lower() for line in rf.readlines()]
 
 with torch.no_grad():
@@ -48,7 +78,7 @@ with torch.no_grad():
 
 from pandas import read_csv
 
-reports = read_csv(f"{DATA_PATH}/reports.csv")
+reports = read_csv(f"{DATA_PATH}/{args.reports}")
 inquests = reports.loc[:, 'inquest']
 cause_sections = [
   inquest + "\n\n" + circumstances
@@ -94,5 +124,5 @@ print(likely_causes)
 # %% [markdown]
 # ### Write the column to reports
 
-reports.loc[:, "tags"] = likely_causes
-reports.to_csv(f"{DATA_PATH}/tagged-reports.csv", index=False)
+reports.loc[:, args.label] = likely_causes
+reports.to_csv(f"{DATA_PATH}/{args.output}", index=False)

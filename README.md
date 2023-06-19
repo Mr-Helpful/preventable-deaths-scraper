@@ -40,7 +40,7 @@ The cause analysis can then be run by running the following command in the root 
 python src/analyses/cause-tags.py
 ```
 
-This will save the analysis to [`src/data/tagged-reports.csv`](./src/data/tagged-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
+This will save the analysis to [`src/data/medical-cause-reports.csv`](./src/data/medical-cause-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
 
 The annotated reports look like this:
 | ref       | date       | area         | ... | tags                                                         |
@@ -50,3 +50,10 @@ The annotated reports look like this:
 | 2023-0074 | 27/02/2023 | Essex        | ... | [('spontaneous subarachnoid haemorrhage', 0.513), ...]       |
 | 2023-0073 | 28/02/2023 | Somerset     | ... | nan                                                          |
 | 2023-0071 | 23/02/2023 | Suffolk      | ... | [('biventricular failure', 0.380), ...]                      |
+
+Shortcuts for the two forms of this analysis (with medical categories and social categories) can be obtained by running the following commands in the root directory of this repository:
+
+```bash
+npm run label:medical
+npm run label:social
+```
