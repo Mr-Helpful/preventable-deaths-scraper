@@ -33,11 +33,5 @@ jobs:
     - name: Fetch up to date reports
       run: npm run fetch
     
-    - name: Configure user commiting
-      # feel free to change the username and password here
-      run: |
-        git config --global user.name "Alex Colby"
-        git config --global user.email "alexanderdcolby@gmail.com"
-    - run: git add -A
-    - run: git commit -m "latest report data fetched" || true
-    - run: git push
+    - name: Update GitHub with latest reports
+      uses: stefanzweifel/git-auto-commit-action@v4
