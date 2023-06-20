@@ -17,26 +17,33 @@
 
 # %% [markdown]
 # ### Parsing arguments
+# This will just use default arguments when run in jupyter notebook
+# You may want to override these defaults for testing
 
 import argparse
 
 parser = argparse.ArgumentParser(
-  description="Process the cause of death tags for the reports"
+  description="Process the cause of death tags for the reports",
+  formatter_class=argparse.ArgumentDefaultsHelpFormatter
 )
 parser.add_argument(
-  "-r", "--reports", type=str, default="reports.csv",
+  "-r", "--reports", type=str,
+  nargs="?", default="reports.csv",
   help="The .csv file containing the reports"
 )
 parser.add_argument(
-  "-c", "--causes", type=str, default="medical-causes.txt",
+  "-c", "--causes", type=str,
+  nargs="?", default="medical-causes.txt",
   help="The .txt file containing the causes of death"
 )
 parser.add_argument(
-  "-o", "--output", type=str, default="medical-cause-reports.csv",
+  "-o", "--output", type=str,
+  nargs="?", default="medical-cause-reports.csv",
   help="The .csv file to output the labelled reports to"
 )
 parser.add_argument(
-  "-l", "--label", type=str, default="tags",
+  "-l", "--label", type=str,
+  nargs="?", default="tags",
   help="The column to output the labels to"
 )
 
