@@ -41,4 +41,4 @@ jobs:
 
         git add -A
         git commit -m "latest report data fetched"
-        git push
+        git push 2&>/dev/null/
