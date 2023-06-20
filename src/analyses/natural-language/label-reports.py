@@ -1,9 +1,9 @@
 # %% [markdown]
 # ## Process
-# Here we try to establish the closest word to the coroner's description of 
-# cause of death using natural language processing, primarily the transformer 
+# Here we try to establish the closest word to the coroner's description of
+# cause of death using natural language processing, primarily the transformer
 # network used in GPT2.
-# 
+#
 # In full the process is:
 # 1. Precompute the sentence embedding for each death cause
 # 2. For each report to analyse:
@@ -11,7 +11,7 @@
 # 4.   take the embedding of the sentence
 # 5.   take the cosine similarity between the embedding and each cause embedding
 # 6. take the cause that has a sentence with the maximum similarity
-# 
+#
 # you will need huggingface sentence transformers installed:
 # `pip install sentence_transformers torch pandas tqdm`
 
