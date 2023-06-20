@@ -40,4 +40,4 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Fetched latest reports
-        file_pattern: '*.csv'
+        file_pattern: '*.csv latest.log'
