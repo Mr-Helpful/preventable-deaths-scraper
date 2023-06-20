@@ -39,5 +39,5 @@ jobs:
         git config --global user.name "Alex Colby"
         git config --global user.email "alexanderdcolby@gmail.com"
     - run: git add -A
-    - run: git commit -m "latest report data fetched" 2&>/dev/null
+    - run: git commit -m "latest report data fetched" 2>/dev/null
     - run: git push
