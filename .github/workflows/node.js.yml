@@ -1,7 +1,7 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# This workflow fetches the most up to date preventable death reports from https://www.judiciary.uk/prevention-of-future-death-reports/
+# using the `npm run fetch` command
 
-name: Node.js CI
+name: Fetch Reports
 
 # This can be configured to run on a cron schedule
 on:
@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
     
     - name: Fetch up to date reports
-      run: npm fetch
+      run: npm run fetch
     
     - name: Commit and push resulting changes
       # feel free to change the username and password here
