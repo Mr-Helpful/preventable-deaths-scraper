@@ -33,12 +33,11 @@ jobs:
     - name: Fetch up to date reports
       run: npm run fetch
     
-    - name: Commit and push resulting changes
+    - name: Configure user commiting
       # feel free to change the username and password here
       run: |
         git config --global user.name "Alex Colby"
         git config --global user.email "alexanderdcolby@gmail.com"
-
-        git add -A
-        git commit -m "latest report data fetched"
-        git push 2&>/dev/null/
+    - run: git add -A
+    - run: git commit -m "latest report data fetched"
+    - run: git push 2&>/dev/null/
