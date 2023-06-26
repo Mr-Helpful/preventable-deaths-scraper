@@ -57,15 +57,15 @@ export async function write_reports(
 /** @typedef {Summary & Report & URLs} Full_Report */
 /** @type {(keyof Full_Report)[]} */
 const headers = [
+  'date_of_report',
+  'ref',
+  'deceased_name',
+  'coroner_name',
+  'coroner_area',
+  'category',
+  'this_report_is_being_sent_to',
   'report_url',
   'pdf_url',
-  'ref',
-  'date',
-  'area',
-  'name',
-  'to',
-  'deceased',
-  'category',
   'circumstances',
   'concerns',
   'inquest',
