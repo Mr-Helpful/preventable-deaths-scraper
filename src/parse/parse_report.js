@@ -38,10 +38,10 @@ export const default_report = {
 export const report_headings = {
   'THIS REPORT IS BEING SENT TO:?': 'to',
   '1\\s*CORONER': 'name',
-  '2\\s*CORONER’S LEGAL POWERS': 'legal',
+  "2\\s*CORONER[’']S LEGAL POWERS": 'legal',
   '3\\s*INVESTIGATION and INQUEST': 'inquest',
   '4\\s*CIRCUMSTANCES OF THE DEATH': 'circumstances',
-  '5\\s*CORONER’S CONCERNS': 'concerns',
+  "5\\s*CORONER[’']S CONCERNS": 'concerns',
   '6\\s*ACTION SHOULD BE TAKEN': 'action',
   '7\\s*YOUR RESPONSE': 'response',
   '8\\s*COPIES and PUBLICATION': 'copies',
