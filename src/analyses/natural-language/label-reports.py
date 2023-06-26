@@ -86,7 +86,6 @@ with torch.no_grad():
 from pandas import read_csv
 
 reports = read_csv(f"{DATA_PATH}/{args.reports}")
-inquests = reports.loc[:, 'inquest']
 cause_sections = [
   inquest + "\n\n" + circumstances
     if isinstance(inquest, str) and isinstance(circumstances, str)

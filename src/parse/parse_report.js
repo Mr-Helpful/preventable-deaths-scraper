@@ -23,21 +23,21 @@ import { parse_list, table_parser } from './helpers.js'
 
 /** @type {Basic_Report} */
 export const default_report = {
-  to: '',
-  name: '',
+  this_report_is_being_sent_to: '',
+  coroner_name: '',
   legal: '',
   inquest: '',
   circumstances: '',
   concerns: '',
   action: '',
   response: '',
-  date: ''
+  date_of_report: ''
 }
 
 /** @type {HeadersFor<Basic_Report>} */
 export const report_headings = {
-  'THIS REPORT IS BEING SENT TO:?': 'to',
-  '1\\s*CORONER': 'name',
+  'THIS REPORT IS BEING SENT TO:?': 'this_report_is_being_sent_to',
+  '1\\s*CORONER': 'coroner_name',
   "2\\s*CORONER[’']S LEGAL POWERS": 'legal',
   '3\\s*INVESTIGATION and INQUEST': 'inquest',
   '4\\s*CIRCUMSTANCES OF THE DEATH': 'circumstances',
@@ -45,7 +45,7 @@ export const report_headings = {
   '6\\s*ACTION SHOULD BE TAKEN': 'action',
   '7\\s*YOUR RESPONSE': 'response',
   '8\\s*COPIES and PUBLICATION': 'copies',
-  9: 'date' // TODO: find out a good way to match this heading
+  9: 'date_of_report' // TODO: find out a good way to match this heading
 }
 
 /** Parses the rows of a table, using the headers
