@@ -39,5 +39,5 @@ jobs:
     - name: Update GitHub with latest reports
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: Fetched latest reports
-        file_pattern: '*.csv **/latest.log'
+        commit_message: "chore: fetch latest reports"
+        file_pattern: '**/*.csv **/latest.log'
