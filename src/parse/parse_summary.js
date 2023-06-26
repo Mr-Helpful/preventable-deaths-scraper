@@ -5,13 +5,13 @@ import { table_parser } from './helpers.js'
 /** Data generated from just the overview on the report page.
  * Less detailed but easier to parse and therefore more reliable.
  * @typedef {object} Basic_Summary
- * @prop {string} date
+ * @prop {string} date_of_report
  * @prop {string} ref
- * @prop {string} deceased
- * @prop {string} name
- * @prop {string} area
+ * @prop {string} deceased_name
+ * @prop {string} coroner_name
+ * @prop {string} coroner_area
  * @prop {string} category
- * @prop {string} to
+ * @prop {string} this_report_is_being_sent_to
  */
 
 /** @type {Basic_Summary} */

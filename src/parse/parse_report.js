@@ -10,15 +10,15 @@ import { parse_list, table_parser } from './helpers.js'
  *
  * @typedef Basic_Report
  * @type {object}
- * @prop {string} to *
- * @prop {string} name *
+ * @prop {string} this_report_is_being_sent_to *
+ * @prop {string} coroner_name *
  * @prop {string} legal *
  * @prop {string} inquest
  * @prop {string} circumstances
  * @prop {string} concerns
  * @prop {string} action *
  * @prop {string} response *
- * @prop {string} date *
+ * @prop {string} date_of_report *
  */
 
 /** @type {Basic_Report} */
