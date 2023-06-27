@@ -27,13 +27,15 @@ export const default_summary = {
 
 /** @type {HeadersFor<Basic_Summary>} */
 const summary_headers = {
-  'Date of report:?': 'date_of_report',
+  'Date of reports?:?': 'date_of_report',
   'Ref:?': 'ref',
-  'Deceased name:?': 'deceased_name',
-  'Coroner name:?': 'coroner_name',
-  'Coroner Area:?': 'coroner_area',
+  // &#x2019; is an apostrophe `’`
+  "Deceased(?:&#x2019;|')?s? names?:?|Name of deceased:?": 'deceased_name',
+  "Coroner(?:&#x2019;|')?s? names?:?|Name of coroner:?": 'coroner_name',
+  "Coroner(?:&#x2019;|')?s? Area:?": 'coroner_area',
   'Category:?': 'category',
-  'This report is being sent to:?': 'this_report_is_being_sent_to'
+  'This report is being sent to:?|These reports are being sent to:?':
+    'this_report_is_being_sent_to'
 }
 
 /** Parses a summary from a list of html rows

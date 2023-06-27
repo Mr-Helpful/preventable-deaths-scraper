@@ -31,11 +31,12 @@ export function table_parser(headers) {
   return function (html_rows) {
     const rows = html_rows
       .flatMap(row => row.split('<br><br>'))
+      .map(row => row.replace(/<\/?\w+>/g, ''))
       .filter(row => row !== '')
 
     const entries = rows.flatMap(row =>
       Object.entries(headers).flatMap(([header, key]) => {
-        const match = row.match(RegExp(`\\s*${header}\\s+(.*)`, 's'))
+        const match = row.match(RegExp(`^\\s*(?:${header})\\s*(.*)`, 'si'))
         return match ? [[key, match[1]]] : []
       })
     )
