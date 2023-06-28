@@ -10,6 +10,7 @@
     "cheerio": "^1.0.0-rc.12",
     "csv-parse": "^5.3.10",
     "pdfjs-dist": "^3.6.172",
+    "pdfreader": "^3.0.0",
     "progress": "^2.0.3"
   }
 }
