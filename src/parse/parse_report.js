@@ -57,7 +57,7 @@ export const report_headings = {
 export function parse_rows(text, parse_report) {
   let table = []
   for (const heading in report_headings) {
-    let match = text.match(RegExp(`(.*)\\s+(${heading}\\s+.*)`))
+    let match = text.match(RegExp(`(.*)\\s+(${heading}\\s+.*)`, 'i'))
     if (match) {
       table.push(match[1])
       text = match[2]
