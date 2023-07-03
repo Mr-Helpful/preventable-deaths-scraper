@@ -50,9 +50,6 @@ export function correct_date(text) {
   return date.toLocaleDateString('en-GB')
 }
 
-const csv = await fs.readFile('./src/data/reports.csv', 'utf-8')
-const lines = Papa.parse(csv, { header: true }).data
-
 function parse_or_none(text, pat) {
   const date = parse(text, pat, new Date())
   return isNaN(date) ? undefined : date
