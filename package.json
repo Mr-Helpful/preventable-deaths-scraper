@@ -9,6 +9,9 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "csv-parse": "^5.3.10",
+    "date-fns": "^2.30.0",
+    "fastest-levenshtein": "^1.0.16",
+    "papaparse": "^5.4.1",
     "pdfjs-dist": "^3.6.172",
     "pdfreader": "^3.0.0",
     "progress": "^2.0.3"
