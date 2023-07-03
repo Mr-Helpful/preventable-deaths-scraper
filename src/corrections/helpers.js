@@ -5,6 +5,9 @@
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
  */
 function edit_distances(str1, str2) {
+  // short circuit if strings are equal
+  if (str1 === str2) return 0
+
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
   let distances = new Array(str1.length + 1)
     .fill(0)
@@ -73,6 +76,10 @@ function min_edits_match(pats, text) {
  *    the slice, the edit distance and the location of the slice
  */
 function min_edit_slice(pat, text) {
+  // short circuit if we find a perfect match
+  const i = text.indexOf(pat)
+  if (i !== -1) return { slice: pat, edits: 0, loc: [i, i + pat.length] }
+
   let edits = Infinity
   let slice = ''
   let loc = [0, 0]
@@ -86,9 +93,6 @@ function min_edit_slice(pat, text) {
         edits = distance
         slice = text_slice.slice(0, j)
         loc = [i, i + j]
-
-        // short circuit if we find a perfect match
-        if (edits === 0) return { slice, edits, loc }
       }
     }
   }
