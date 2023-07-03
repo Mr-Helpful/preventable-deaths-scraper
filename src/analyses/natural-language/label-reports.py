@@ -131,4 +131,4 @@ print(likely_causes)
 # ### Write the column to reports
 
 reports.loc[:, args.label] = likely_causes
-reports.to_csv(f"{DATA_PATH}/{args.output}", index=False)
+reports.to_csv(f"{PATH}/{args.output}", index=False)
