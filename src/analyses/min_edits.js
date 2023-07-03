@@ -108,8 +108,6 @@ function edits(str1, str2) {
   return edits
 }
 
-// console.log(edits('hello word!', 'hell world?'))
-
 /** Attempts to naively cluster values by including values within a certain
  * distance of an existing cluster within that cluster.
  *

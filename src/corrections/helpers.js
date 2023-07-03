@@ -1,0 +1,125 @@
+/** Returns the minimum number of edits to transform str1 into str2
+ *
+ * @param {string} str1 the to transform
+ * @param {string} str2 the target to transform to
+ * @returns {number[][]} the edit distance between all prefixes of str1 and str2
+ */
+function edit_distances(str1, str2) {
+  // distances[i][j] = edits to get str1[0:i] to str2[0:j]
+  let distances = new Array(str1.length + 1)
+    .fill(0)
+    .map(() => new Array(str2.length + 1).fill(0))
+
+  // distance from empty string to str2[0:j] is j
+  for (let j = 0; j <= str2.length; j++) {
+    distances[0][j] = j
+  }
+
+  for (let i = 1; i <= str1.length; i++) {
+    distances[i][0] = i
+
+    for (let j = 1; j <= str2.length; j++) {
+      if (str1[i - 1] === str2[j - 1]) {
+        distances[i][j] = distances[i - 1][j - 1]
+        continue
+      }
+
+      distances[i][j] =
+        Math.min(
+          distances[i - 1][j], // deletion
+          distances[i][j - 1], // insertion
+          distances[i - 1][j - 1] // substitution
+        ) + 1
+    }
+  }
+
+  return distances
+}
+
+/** Finds the pattern with the minimum edit distance to the text
+ *
+ * @param {string[]} pats the patterns to search within
+ * @param {string} text the text to search in
+ * @returns {{match: string, edits: number}} the pattern and the edit distance
+ */
+function min_edits_match(pats, text) {
+  let edits = Infinity
+  let match = ''
+
+  for (const pat of pats) {
+    let distance = edit_distances(pat, text)[pat.length][text.length]
+    if (distance < edits) {
+      edits = distance
+      match = pat
+
+      // short circuit if we find a perfect match
+      if (edits === 0) return { match, edits }
+    }
+  }
+
+  return { match, edits }
+}
+
+/** Finds the slice of text that has the minimum edit distance to the pattern
+ *
+ * This is honestly a bit of a naive implementation, it acheives O(m^2 n) time,
+ * whereas the more sophisticated implementations can acheive O(mn) time (using
+ * weird bit tricks). However, we'll be using this only on short strings (< 50
+ * characters), so it shouldn't matter too much.
+ *
+ * @param {string} pat the pattern to search for
+ * @param {string} text the text to search in
+ * @returns {{slice: string, edits: number, loc: [number, number]}}
+ *    the slice, the edit distance and the location of the slice
+ */
+function min_edit_slice(pat, text) {
+  let edits = Infinity
+  let slice = ''
+  let loc = [0, 0]
+
+  for (let i = 0; i < text.length - pat.length + 1; i++) {
+    let text_slice = text.slice(i, i + pat.length)
+    let distances = edit_distances(pat, text_slice)
+
+    for (const [j, distance] of distances[pat.length].entries()) {
+      if (distance < edits) {
+        edits = distance
+        slice = text_slice.slice(0, j)
+        loc = [i, i + j]
+
+        // short circuit if we find a perfect match
+        if (edits === 0) return { slice, edits, loc }
+      }
+    }
+  }
+
+  return { slice, edits, loc }
+}
+
+/** Finds the pattern with the minimum edit distance to a slice of the text
+ *
+ * @param {string[]} pats the patterns to search within
+ * @param {string} text the text to search in
+ * @returns {{match: string, slice: string, edits: number, loc: [number, number]}}
+ *   the pattern, the slice, the edit distance and the location of the slice
+ */
+export function min_edit_slices_match(pats, text) {
+  let edits = Infinity
+  let match = ''
+  let slice = ''
+  let loc = [0, 0]
+
+  for (const pat of pats) {
+    let min_result = min_edit_slice(pat, text)
+
+    if (min_result.edits < edits) {
+      ;({ slice, edits, loc } = min_result)
+      match = pat
+
+      // short circuit if we find a perfect match
+      if (edits === 0) return { match, slice, edits, loc }
+    }
+  }
+
+  return { match, slice, edits, loc }
+}
