@@ -57,7 +57,8 @@ import torch
 from tqdm import tqdm
 
 PATH = os.path.dirname(__file__)
-DATA_PATH = os.path.abspath(f"{PATH}/../../Data")
+DATA_PATH = os.path.abspath(f"{PATH}/data")
+REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
 
 # %% [markdown]
 # ### Import and load model
@@ -71,7 +72,7 @@ embed_model = SentenceTransformer(
 # %% [markdown]
 # ### Precalculating the encodings of the death causes
 
-with open(f'{PATH}/{args.causes}', 'r', encoding='utf8') as rf:
+with open(f'{DATA_PATH}/{args.causes}', 'r', encoding='utf8') as rf:
   causes = [line.strip().lower() for line in rf.readlines()]
 
 with torch.no_grad():
@@ -85,7 +86,7 @@ with torch.no_grad():
 
 from pandas import read_csv
 
-reports = read_csv(f"{DATA_PATH}/{args.reports}")
+reports = read_csv(f"{REPORTS_PATH}/{args.reports}")
 cause_sections = [
   inquest + "\n\n" + circumstances
     if isinstance(inquest, str) and isinstance(circumstances, str)
