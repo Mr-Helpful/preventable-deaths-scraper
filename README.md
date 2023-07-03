@@ -69,6 +69,6 @@ There are 6 main directories in the [`src`](./src) directory:
 - [`parse`](./src/parse): Parsing the scraped data (i.e. html -> csv).
 - [`write`](./src/write): Writing to both the `reports.csv` file and the log file.
 
-The [`examples`](./examples) directory contains reference report files (you probably won't need to look at this).
+The [`examples`](./examples) directory contains reference report PDFs (you probably won't need to look at this).
 
 All javascript code for is documented with JSDoc and all python code is written in an interactive python file (you should hopefully be able to run this like a jupyter notebook).
