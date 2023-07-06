@@ -1,17 +1,23 @@
+export const max_by = (xs, f) =>
+  xs.reduce(
+    ([x, v], y) => (f(y) > v ? [y, f(y)] : [x, v]),
+    [undefined, -Infinity]
+  )[0]
+
 /** Returns the minimum number of edits to transform str1 into str2
  *
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
  */
-function edit_distances(str1, str2) {
-  // short circuit if strings are equal
-  if (str1 === str2) return 0
-
+export function edit_distances(str1, str2) {
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
-  let distances = new Array(str1.length + 1)
-    .fill(0)
-    .map(() => new Array(str2.length + 1).fill(0))
+  let distances = Array.from({ length: str1.length + 1 }, _ =>
+    Array(str2.length + 1).fill(0)
+  )
+
+  // short circuit if strings are equal
+  if (str1 === str2) return distances
 
   // distance from empty string to str2[0:j] is j
   for (let j = 0; j <= str2.length; j++) {
@@ -22,8 +28,20 @@ function edit_distances(str1, str2) {
     distances[i][0] = i
 
     for (let j = 1; j <= str2.length; j++) {
+      // identical characters
       if (str1[i - 1] === str2[j - 1]) {
         distances[i][j] = distances[i - 1][j - 1]
+        continue
+      }
+
+      // transposed characters
+      if (
+        i > 1 &&
+        j > 1 &&
+        str1[i - 1] === str2[j - 2] &&
+        str1[i - 2] === str2[j - 1]
+      ) {
+        distances[i][j] = distances[i - 2][j - 2] + 1
         continue
       }
 
