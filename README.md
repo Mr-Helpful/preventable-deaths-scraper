@@ -26,18 +26,56 @@ npm run fetch
 
 This will then save the scraped data to [`src/data/reports.csv`](./src/data/reports.csv).
 
-### Analysis
+### Analyses
 
-The analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
+#### Year Count Analysis
+
+The year count analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
 
 ```bash
-pip install -r requirements.txt
+pip install -r src/analyses/aggregation/requirements.txt
+```
+
+The year count analysis can then be run by running the following command in the root directory of this repository:
+
+```bash
+python src/analyses/aggregation/year-counts.py
+```
+
+This will save the number of reports per year to [`src/data/year-counts.csv`](./src/data/year-counts.csv), in the following format:
+
+| year | count |
+|:-----|:------|
+| 2013 |   173 |
+| 2014 |   559 |
+| 2015 |   490 |
+| 2016 |   477 |
+| 2017 |   446 |
+| 2018 |   418 |
+| 2019 |   528 |
+| 2020 |   314 |
+| 2021 |   432 |
+| 2022 |   416 |
+| 2023 |   213 |
+
+A shortcut to run the analysis is defined in the [`package.json`](./package.json) file and can be run as so:
+
+```bash
+npm run analyse:year-counts
+```
+
+#### Medical Cause Analysis
+
+The cause analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
+
+```bash
+pip install -r src/analyses/natural-language/requirements.txt
 ```
 
 The cause analysis can then be run by running the following command in the root directory of this repository:
 
 ```bash
-python src/analyses/cause-tags.py
+python src/analyses/natural-language/cause-tags.py
 ```
 
 This will save the analysis to [`src/data/medical-cause-reports.csv`](./src/data/medical-cause-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
@@ -51,11 +89,10 @@ The annotated reports look like this:
 | 2023-0073 | 28/02/2023 | Somerset     | ... | nan                                                          |
 | 2023-0071 | 23/02/2023 | Suffolk      | ... | [('biventricular failure', 0.380), ...]                      |
 
-Shortcuts for the two forms of this analysis (with medical categories and social categories) can be obtained by running the following commands in the root directory of this repository:
+A shortcut to run the analysis is defined in the [`package.json`](./package.json) file and can be run as so:
 
 ```bash
-npm run label:medical
-npm run label:social
+npm run analyse:label-medical
 ```
 
 ## Layout
