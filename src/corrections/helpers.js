@@ -57,6 +57,14 @@ export function edit_distances(str1, str2) {
   return distances
 }
 
+/** Helper function for the edit distance of the full strings */
+export function edit_distance(str1, str2) {
+  // short circuit if strings are equal
+  if (str1 === str2) return 0
+
+  return edit_distances(str1, str2)[str1.length][str2.length]
+}
+
 /** Finds the pattern with the minimum edit distance to the text
  *
  * @param {string[]} pats the patterns to search within
@@ -147,4 +155,32 @@ export function min_edit_slices_match(pats, text, relative = false) {
   }
 
   return { match, slice, edits, loc }
+}
+
+/** Tests whether the text contains all the words in another string, up to a
+ * given edit distance or relative error distance per word
+ * @param {string} text the string to test
+ * @param {string } pattern the words to test for
+ * @param {number} [edits=2] the maximum number of edits per word
+ * @param {number} [relative=0.1] the maximum relative error per word
+ * @returns {boolean} whether the text approximately contains all the words
+ */
+export function approx_contains_all(text, pattern, edits = 2, relative = 0.1) {
+  const text_words = text.split(/[^\w]+/g)
+  const pattern_words = pattern.split(/[^\w]+/g)
+  // console.log(text_words, pattern_words)
+
+  return pattern_words.every(pattern_word => {
+    // console.log('> pattern =', pattern_word)
+    const error = Math.min(edits, Math.floor(pattern_word.length * relative))
+    // console.log('> error =', error)
+    const match_found = text_words.some(word => {
+      // console.log('>>', pattern_word, 'vs', word)
+      const distance = edit_distance(pattern_word, word)
+      // console.log('>> edits =', distance)
+      return distance <= error
+    })
+    // console.log('> match found =', match_found)
+    return match_found
+  })
 }
