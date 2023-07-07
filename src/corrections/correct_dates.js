@@ -45,6 +45,10 @@ export function correct_date(text) {
     parse_do_MMM_Y_date(text)
 
   if (date === undefined) return text
+  // special case: someone doesn't include the leading 20 in the year
+  if (date.getFullYear() < 2000) {
+    date.setFullYear(date.getFullYear() + 2000)
+  }
   return date.toLocaleDateString('en-GB')
 }
 
