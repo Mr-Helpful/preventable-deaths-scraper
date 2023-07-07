@@ -29,6 +29,10 @@ year_counts = reports.groupby('year').size().reset_index(name='count')
 year_counts['count'].sum()
 
 # %% [markdown]
+# ### Debug: find rows that don't match regex
+reports[~(reports['date_of_report'].str.contains(r'\d{2}\/\d{2}\/\d{4}') == True)]
+
+# %% [markdown]
 # ### Saving the results
 
 year_counts.to_csv(f"{DATA_PATH}/year-counts.csv", index=False)
