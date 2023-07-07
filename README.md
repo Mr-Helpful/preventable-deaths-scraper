@@ -28,9 +28,11 @@ This will then save the scraped data to [`src/data/reports.csv`](./src/data/repo
 
 ### Analyses
 
+Both the analyses are written in python and require [python 3.8](https://www.python.org/downloads/) or above. You'll also need to have [pip](https://pip.pypa.io/en/stable/installation/) installed.
+
 #### Year Count Analysis
 
-The year count analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
+To install the dependencies for the year count analysis, you can run the following command in the root directory of this repository:
 
 ```bash
 pip install -r src/analyses/aggregation/requirements.txt
@@ -66,7 +68,7 @@ npm run analyse:year-counts
 
 #### Medical Cause Analysis
 
-The cause analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
+To install the dependencies for the medical cause analysis, you can run the following command in the root directory of this repository:
 
 ```bash
 pip install -r src/analyses/natural-language/requirements.txt
