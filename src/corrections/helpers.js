@@ -5,7 +5,6 @@ export const max_by = (xs, f) =>
   )[0]
 
 /** Returns the minimum number of edits to transform str1 into str2
- *
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
@@ -66,7 +65,6 @@ export function edit_distance(str1, str2) {
 }
 
 /** Finds the pattern with the minimum edit distance to the text
- *
  * @param {string[]} pats the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
@@ -129,7 +127,6 @@ function min_edit_slice(pat, text) {
 }
 
 /** Finds the pattern with the minimum edit distance to a slice of the text
- *
  * @param {string[]} pats the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
@@ -183,4 +180,36 @@ export function approx_contains_all(text, pattern, edits = 2, relative = 0.1) {
     // console.log('> match found =', match_found)
     return match_found
   })
+}
+
+export function to_keywords(text) {
+  return text
+    .split(/[^\w]+/g)
+    .filter(word => word.length > 0)
+    .filter(word => word[0].toUpperCase() === word[0])
+    .join(' ')
+}
+
+/** Attempts to match area text against a possible list of matches
+ * @param {string} text the text to be corrected
+ * @param {Map<string, string>} matches the list of strings to match against
+ * @param {number} [edits=2] the maximum number of edits per word
+ * @param {number} [relative=0.1] the maximum number of relative edits per word
+ * @returns {string | undefined} the value for the match, or undefined if no good match
+ */
+export function try_matching(text, matches, edits = 2, relative = 0.2) {
+  const keys = Object.keys(matches)
+
+  // first test a direct match
+  const direct_match = keys.find(area => area === text)
+  if (direct_match) return matches[direct_match]
+
+  // then test whether text is a superset of an area,
+  // up to 2 edits or 10% relative error per word
+  // we take the longest such match to avoid false positives
+  const superset_match = max_by(
+    keys.filter(area => approx_contains_all(text, area, 2, 0.2)),
+    match => match.length
+  )
+  if (superset_match) return matches[superset_match]
 }
