@@ -9,7 +9,7 @@ import pdfjs from 'pdfjs-dist/legacy/build/pdf.js'
 export class NetworkError extends Error {
   name = 'NetworkError'
 
-  /**
+  /** Creates a new network error from an existing error
    * @param {Error} err the error to generate from
    * @param {string} url the url we attempted to fetch
    * @returns {NetworkError}

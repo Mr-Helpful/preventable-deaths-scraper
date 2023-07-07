@@ -2,8 +2,7 @@ import { fetch_html } from '../fetch/helpers.js'
 import { max_by, approx_contains_all } from './helpers.js'
 import fs from 'fs/promises'
 
-/** Fetches the list of coroner areas from the coroner society website.
- *
+/** Fetches the list of coroner areas from the coroner society website
  * @param {string} url the coroner society url
  * @returns {Promise<string[]>} the list of coroner areas
  */

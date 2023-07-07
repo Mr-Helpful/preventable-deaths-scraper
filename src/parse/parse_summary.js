@@ -2,8 +2,10 @@ import { table_parser } from './helpers.js'
 /** @typedef {import('./helpers.js').Parser} Parser */
 /** @typedef {import('./helpers.js').HeadersFor} HeadersFor */
 
-/** Data generated from just the overview on the report page.
+/** Data generated from just the overview on the report page
+ *
  * Less detailed but easier to parse and therefore more reliable.
+ *
  * @typedef {object} Basic_Summary
  * @prop {string} date_of_report
  * @prop {string} ref
