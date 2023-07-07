@@ -25,6 +25,7 @@ export async function correct_current_reports(csv_path, out_path) {
   const file = await fs.readFile(csv_path, 'utf8')
   const reports = Papa.parse(file, { header: true }).data
   const headers = Object.keys(reports[0] ?? {})
+  await fs.rm(csv_path, { force: true })
   await try_create_csv(out_path, headers)
 
   await map_async(
@@ -34,7 +35,7 @@ export async function correct_current_reports(csv_path, out_path) {
   )
 }
 
-correct_current_reports(
-  './src/data/reports.csv',
-  './src/corrections/reports_corrected.csv'
-)
+// correct_current_reports(
+//   './src/data/reports.csv',
+//   './src/corrections/reports_corrected.csv'
+// )
