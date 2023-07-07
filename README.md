@@ -26,7 +26,45 @@ npm run fetch
 
 This will then save the scraped data to [`src/data/reports.csv`](./src/data/reports.csv).
 
-### Analysis
+### Analyses
+
+#### Year Count Analysis
+
+The year count analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
+
+```bash
+pip install -r src/analyses/aggregation/requirements.txt
+```
+
+The year count analysis can then be run by running the following command in the root directory of this repository:
+
+```bash
+python src/analyses/aggregation/year-counts.py
+```
+
+This will save the number of reports per year to [`src/data/year-counts.csv`](./src/data/year-counts.csv), in the following format:
+
+| year | count |
+|:-----|:------|
+| 2013 |   173 |
+| 2014 |   559 |
+| 2015 |   490 |
+| 2016 |   477 |
+| 2017 |   446 |
+| 2018 |   418 |
+| 2019 |   528 |
+| 2020 |   314 |
+| 2021 |   432 |
+| 2022 |   416 |
+| 2023 |   213 |
+
+A shortcut to run the analysis is defined in the [`package.json`](./package.json) file and can be run as so:
+
+```bash
+npm run analyse:year-counts
+```
+
+#### Medical Cause Analysis
 
 The cause analysis is written in python, and requires [python 3.8](https://www.python.org/downloads/) or above. To install the analysis, you will need to have [pip](https://pip.pypa.io/en/stable/installation/) installed. Once you have pip installed, you can install the analysis by running the following command in the root directory of this repository:
 

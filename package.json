@@ -4,6 +4,7 @@
   "scripts": {
     "fetch": "node src/index.js",
     "correct": "node src/corrections/run_corrections.js",
+    "analyse:year-counts": "python src/analyses/aggregation/year-counts.py",
     "analyse:label-medical": "python src/analyses/natural-language/label-reports.py --causes medical-causes.txt --output medical-cause-reports.csv"
   },
   "dependencies": {
