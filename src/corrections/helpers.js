@@ -5,7 +5,6 @@ export const max_by = (xs, f) =>
   )[0]
 
 /** Returns the minimum number of edits to transform str1 into str2
- *
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
@@ -66,7 +65,6 @@ export function edit_distance(str1, str2) {
 }
 
 /** Finds the pattern with the minimum edit distance to the text
- *
  * @param {string[]} pats the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
@@ -129,7 +127,6 @@ function min_edit_slice(pat, text) {
 }
 
 /** Finds the pattern with the minimum edit distance to a slice of the text
- *
  * @param {string[]} pats the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
