@@ -40,7 +40,7 @@ const SHORT_MONTHS = [
 export function correct_date(text) {
   text = text.replace('&#xa0;', '').trim()
   const date =
-    parse_dd_MM_yyyy_date(text) ??
+    parse_dd_MM_y_date(text) ??
     parse_do_MMMM_Y_date(text) ??
     parse_do_MMM_Y_date(text)
 
@@ -57,12 +57,12 @@ function parse_or_none(text, pat) {
   return isNaN(date) ? undefined : date
 }
 
-/** Parses a date in `dd/MM/yyyy` format, i.e. 04/01/2015
+/** Parses a date in `dd/MM/y` format, i.e. 04/01/2015
  * @param {string} text the text to be parsed
  */
-function parse_dd_MM_yyyy_date(text) {
+function parse_dd_MM_y_date(text) {
   text = text.replace(/[^\/0-9]/g, '')
-  return parse_or_none(text, 'dd/MM/yyyy')
+  return parse_or_none(text, 'dd/MM/y')
 }
 
 /** Parses a date in `do MMMM Y` format, i.e. 4th January 2015
