@@ -4,9 +4,7 @@
   "scripts": {
     "fetch": "node src/index.js",
     "correct": "node src/corrections/run_corrections.js",
-    "label:medical": "python src/analyses/natural-language/label-reports.py --causes medical-causes.txt --output medical-cause-reports.csv",
-    "label:social": "python src/analyses/natural-language/label-reports.py --causes social-causes.txt --output social-cause-reports.csv",
-    "year-counts": "python src/analyses/aggregation/year-counts.py"
+    "analyse:label-medical": "python src/analyses/natural-language/label-reports.py --causes medical-causes.txt --output medical-cause-reports.csv"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
