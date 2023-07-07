@@ -61,14 +61,16 @@ export function edit_distances(str1, str2) {
  *
  * @param {string[]} pats the patterns to search within
  * @param {string} text the text to search in
+ * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
  * @returns {{match: string, edits: number}} the pattern and the edit distance
  */
-function min_edits_match(pats, text) {
+export function min_edits_match(pats, text, relative = false) {
   let edits = Infinity
   let match = ''
 
   for (const pat of pats) {
-    let distance = edit_distances(pat, text)[pat.length][text.length]
+    let distance = edit_distance(pat, text)
+    if (relative) distance /= pat.length
     if (distance < edits) {
       edits = distance
       match = pat
@@ -122,10 +124,11 @@ function min_edit_slice(pat, text) {
  *
  * @param {string[]} pats the patterns to search within
  * @param {string} text the text to search in
+ * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
  * @returns {{match: string, slice: string, edits: number, loc: [number, number]}}
  *   the pattern, the slice, the edit distance and the location of the slice
  */
-export function min_edit_slices_match(pats, text) {
+export function min_edit_slices_match(pats, text, relative = false) {
   let edits = Infinity
   let match = ''
   let slice = ''
@@ -133,7 +136,7 @@ export function min_edit_slices_match(pats, text) {
 
   for (const pat of pats) {
     let min_result = min_edit_slice(pat, text)
-
+    if (relative) min_result.edits /= pat.length
     if (min_result.edits < edits) {
       ;({ slice, edits, loc } = min_result)
       match = pat
