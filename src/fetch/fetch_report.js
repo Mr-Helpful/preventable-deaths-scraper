@@ -26,6 +26,27 @@ async function try_fetch_summary($, parse_summary) {
   return parse_summary(data_rows.get().map(row => $(row).text()))
 }
 
+/** Attempts to fetch the category of death from the report's tags.
+ *
+ * @template S
+ * @throws {ElementError}
+ * @param {CheerioAPI} $ JQuery in the page given
+ * @param {Parser<S>} parse_summary the custom summary parser to use
+ * @return {Promise<S>} the formatted summary
+ */
+async function try_fetch_tags($) {
+  const tag_path = '.single__title + p.pill--single > a'
+  const tags = $(tag_path)
+  if (tags.length === 0) throw new ElementError('tags not found')
+
+  return {
+    category: tags
+      .get()
+      .map(tag => $(tag).text())
+      .join(' | ')
+  }
+}
+
 /** Attempts to fetch a table from the report webpage.
  * Some of the report webpages have a nice table on them, which is honestly
  * just easier to scrape than trying to work out what's in the pdf download.
@@ -83,7 +104,8 @@ export async function fetch_report(report_url, parse_report, parse_summary) {
   const throw_network = err => {
     if (err?.name === 'NetworkError') throw err
   }
-  const summary = await try_fetch_summary($, parse_summary).catch(throw_network)
+  let summary = await try_fetch_summary($, parse_summary).catch(throw_network)
+  summary ??= await try_fetch_tags($).catch(throw_network)
   let report = await try_fetch_table($, parse_report).catch(throw_network)
   report ??= await try_fetch_pdf($, parse_report).catch(throw_network)
 
