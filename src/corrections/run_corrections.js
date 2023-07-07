@@ -18,4 +18,4 @@ export async function correct_current_reports(csv_path, out_path) {
   )
 }
 
-correct_current_reports('./src/data/reports.csv', './src/data/reports.csv')
+correct_current_reports('./src/data/reports.csv', './src/data/corrected.csv')
