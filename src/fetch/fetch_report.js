@@ -20,8 +20,10 @@ async function try_fetch_summary($, parse_summary) {
   const data_rows = $(data_path)
   if (data_rows.length === 0) throw new ElementError('summary rows not found')
 
-  const html_rows = data_rows.get().map(row => $(row).html())
-  return parse_summary(html_rows)
+  // we need to clean up the html a bit
+  data_rows.before('\n')
+  data_rows.find(`br`).replaceWith('\n')
+  return parse_summary(data_rows.get().map(row => $(row).text()))
 }
 
 /** Attempts to fetch a table from the report webpage.
@@ -38,8 +40,8 @@ async function try_fetch_table($, parse_report) {
   if (table_rows.length === 0) throw new ElementError('table rows not found')
 
   // we need to clean up the html a bit
-  $(row_path).before('\n')
-  $(`${row_path} br`).before('\n').remove()
+  table_rows.before('\n')
+  table_rows.find(`br`).replaceWith('\n')
   return parse_report(table_rows.get().map(row => $(row).text()))
 }
 

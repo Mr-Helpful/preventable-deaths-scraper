@@ -57,3 +57,18 @@ Shortcuts for the two forms of this analysis (with medical categories and social
 npm run label:medical
 npm run label:social
 ```
+
+## Layout
+
+There are 6 main directories in the [`src`](./src) directory:
+
+- [`analyses`](./src/analyses): Analysis of the scraped data (mostly in python).
+- [`corrections`](./src/corrections): Correcting/cleaning the scraped data.
+- [`data`](./src/data): The raw report data.
+- [`fetch`](./src/fetch): Fetching/scraping the report data.
+- [`parse`](./src/parse): Parsing the scraped data (i.e. html -> csv).
+- [`write`](./src/write): Writing to both the `reports.csv` file and the log file.
+
+The [`examples`](./examples) directory contains reference report PDFs (you probably won't need to look at this).
+
+All javascript code for is documented with JSDoc and all python code is written in an interactive python file (you should hopefully be able to run this like a jupyter notebook).

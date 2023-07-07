@@ -28,10 +28,9 @@ export function parse_list(list) {
  * @return {Parser<T>} the relevant parser
  */
 export function table_parser(headers) {
-  return function (html_rows) {
-    const rows = html_rows
-      .flatMap(row => row.split('<br><br>'))
-      .map(row => row.replace(/<\/?\w+>/g, ''))
+  return function (text_rows) {
+    const rows = text_rows
+      .flatMap(row => row.split('\n\n'))
       .filter(row => row !== '')
 
     const entries = rows.flatMap(row =>
