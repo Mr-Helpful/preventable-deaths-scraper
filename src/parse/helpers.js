@@ -10,10 +10,12 @@
  */
 
 /** Parses the section as if it were a list
+ *
  * The list may be:
  * 1. a numbered list (like this one)
  * 2. a bulleted list (either with `-`,`*` or `>`)
  * 3. a list separated by newlines
+ *
  * @param {string} list the string to parse
  * @return {string[]} the broken up list of strings
  */

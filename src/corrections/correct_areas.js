@@ -1,9 +1,8 @@
 import { fetch_html } from '../fetch/helpers.js'
-import { max_by, approx_contains_all } from './helpers.js'
+import { to_keywords, try_matching } from './helpers.js'
 import fs from 'fs/promises'
 
-/** Fetches the list of coroner areas from the coroner society website.
- *
+/** Fetches the list of coroner areas from the coroner society website
  * @param {string} url the coroner society url
  * @returns {Promise<string[]>} the list of coroner areas
  */
@@ -17,14 +16,6 @@ async function fetch_area_list(url) {
     .get()
     .map(row => $(row).text())
     .filter(x => x !== 'Choose your area')
-}
-
-function to_keywords(text) {
-  return text
-    .split(/[^\w]+/g)
-    .filter(word => word.length > 0)
-    .filter(word => word[0].toUpperCase() === word[0])
-    .join(' ')
 }
 
 let areas = await fetch_area_list('https://www.coronersociety.org.uk/coroners/')
@@ -45,26 +36,4 @@ corrections = Object.fromEntries(
 export function correct_area(text) {
   if (text === undefined) return undefined
   return try_matching(text, areas) ?? try_matching(text, corrections) ?? text
-}
-
-/** Attempts to match area text against a possible list of areas
- * @param {string} text the text to be corrected
- * @param {Map<string, string>} areas the list of areas to match against
- * @returns {string | undefined} the matched area, or undefined if no good match
- */
-function try_matching(text, areas) {
-  const keys = Object.keys(areas)
-
-  // first test a direct match
-  const direct_match = keys.find(area => area === text)
-  if (direct_match) return areas[direct_match]
-
-  // then test whether text is a superset of an area,
-  // up to 2 edits or 10% relative error per word
-  // we take the longest such match to avoid false positives
-  const superset_match = max_by(
-    keys.filter(area => approx_contains_all(text, area, 2, 0.2)),
-    match => match.length
-  )
-  if (superset_match) return areas[superset_match]
 }
