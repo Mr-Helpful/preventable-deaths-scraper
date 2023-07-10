@@ -26,13 +26,6 @@ len(reports)
 area_counts = reports.groupby('coroner_area').size().reset_index(name='count')
 area_counts['count'].sum()
 
-# %% [markdown]
-# ### Debug: print the unknown coroner areas in the reports
-
-area_names = pd.read_csv(f"{REPORTS_PATH}/areas.csv")
-name_regex = '|'.join(area_names['coroner_area'])
-unknown_areas = area_counts[~area_counts['coroner_area'].str.contains(name_regex)]
-unknown_areas
 
 # %% [markdown]
 # ### Saving the results
