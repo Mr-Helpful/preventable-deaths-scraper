@@ -22,7 +22,10 @@ let areas = await fetch_area_list('https://www.coronersociety.org.uk/coroners/')
 areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
 await fs.writeFile(
   './src/data/areas.csv',
-  'coroner_area' + '\n' + Object.values(areas).join('\n')
+  'coroner_area\n' +
+    Object.values(areas)
+      .map(area => `"${area}"`)
+      .join('\n')
 )
 
 // manual corrections for a very small (<1%) of areas
