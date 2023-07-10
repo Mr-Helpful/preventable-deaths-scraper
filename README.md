@@ -101,8 +101,8 @@ npm run analyse:label-medical
 
 There are 6 main directories in the [`src`](./src) directory:
 
-- [`analyses`](./src/analyse): Analysis of the scraped data (mostly in python).
-- [`corrections`](./src/correct): Correcting/cleaning the scraped data.
+- [`analyse`](./src/analyse): Analysis of the scraped data (mostly in python).
+- [`correct`](./src/correct): Correcting/cleaning the scraped data.
 - [`data`](./src/data): The raw report data.
 - [`fetch`](./src/fetch): Fetching/scraping the report data.
 - [`parse`](./src/parse): Parsing the scraped data (i.e. html -> csv).
