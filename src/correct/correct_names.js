@@ -18,24 +18,6 @@ async function fetch_page_urls(url) {
 }
 
 /**
- * Fetches a non-empty html document from a url
- * We sometimes receive an empty document from the coroner society website
- *
- * @param {string} url the url to fetch
- * @param {number} [retries=10] the number of times to retry fetching the url
- * @returns {Promise<CheerioAPI>} the parsed html document
- */
-async function fetch_non_empty(url, retries = 10) {
-  let $
-  for (let i = 0; i < retries; i++) {
-    $ = await fetch_html(url)
-    if ($.length > 2) return $
-  }
-  console.log('empty document', url)
-  return $
-}
-
-/**
  * Fetches the list of coroners from a coroner page
  *
  * @param {string} page_url the url of the coroner page to fetch names from
@@ -44,7 +26,6 @@ async function fetch_non_empty(url, retries = 10) {
 async function fetch_page(page_url) {
   const $ = await fetch_html(page_url)
   const people = $('ul.people > li')
-  if (people.length === 0) console.log(`"${$.html()}"`)
 
   return people.get().map(person => {
     // fetches the name, title, role, and email of a coroner
@@ -69,7 +50,6 @@ async function fetch_page(page_url) {
  */
 async function fetch_name_list(url) {
   const page_urls = await fetch_page_urls(url)
-  console.log(page_urls)
   const pages = await map_series(
     page_urls,
     fetch_page,

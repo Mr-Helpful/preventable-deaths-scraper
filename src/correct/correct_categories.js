@@ -54,11 +54,7 @@ export function correct_category(text) {
   if (text === undefined) return undefined
   return text
     .split('|')
-    .map(category => {
-      const match = try_matching(category, categories)
-      if (match) return match
-      console.log('no match found for category:', category)
-    })
+    .map(category => try_matching(category, categories))
     .filter(match => match !== undefined)
     .join(' | ')
 }
