@@ -38,7 +38,7 @@ corrections = Object.fromEntries(
 
 /** Corrects the area name to the closest match in the coroner society list
  * @param {string} text the text to be corrected
- * @returns {string | undefined} the corrected area name or undefined if no good match
+ * @returns {string | undefined} the corrected area name or the text if no good match
  */
 export function correct_area(text) {
   if (text === undefined) return undefined
