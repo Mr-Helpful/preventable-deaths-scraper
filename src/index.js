@@ -1,4 +1,4 @@
-import { correct_report } from './corrections/index.js'
+import { correct_report } from './correct/index.js'
 import {
   fetch_page_urls,
   fetch_unseen_urls,
