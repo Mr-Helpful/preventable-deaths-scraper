@@ -1,4 +1,5 @@
 import { fetch_html, map_async, map_series } from '../fetch/helpers.js'
+import { try_matching } from './helpers.js'
 
 /**
  * Fetches the list of page urls from the coroner society website
@@ -90,3 +91,12 @@ const coroner_map = Object.fromEntries(
   })
 )
 console.log(coroner_map)
+
+/** Corrects the coroner name to the closest match in the coroner society list
+ * @param {string} text the text to be corrected
+ * @returns {string | undefined} the corrected coroner name or the text if no good match
+ */
+export function correct_name(text) {
+  if (text === undefined) return undefined
+  return try_matching(text, coroner_map)?.name ?? text
+}
