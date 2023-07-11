@@ -95,8 +95,17 @@ export async function fetch_pdf(url) {
   return await load_pdf(buff)
 }
 
-/** Maps a common async function in parallel on a list of data, updating a
+/**
+ * Returns a promise that resolves after a given number of milliseconds
+ * @param {number} ms the number of milliseconds to sleep for
+ * @returns {Promise<void>}
+ */
+export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+/**
+ * Maps a common async function in parallel on a list of data, updating a
  * progress bar when each of the tasks finish.
+ *
  * @template T, R
  * @param {T[]} xs the data to be processed
  * @param {(d: T) => Promise<R>} func the task to be performed
@@ -112,4 +121,27 @@ export function map_async(xs, func, msg = undefined) {
       return res
     })
   )
+}
+
+/**
+ * Maps a common async function in series on a list of data, updating a
+ * progress bar when each of the tasks finish.
+ *
+ * We sometimes will have to use a sequential fetch instead of a parallel one
+ * as some sites will return no webpage if we make too many requests at once.
+ *
+ * @param {T[]} xs the data to be processed
+ * @param {(d: T) => Promise<R>} func the task to be performed
+ * @param {string} msg the message format for the progress bar to use
+ * @returns {Promise<R[]>} the result of applying func to all of the data
+ */
+export async function map_series(xs, func, msg = undefined) {
+  const progress = msg ? new ProgressBar(msg, xs.length) : { tick() {} }
+  const res = []
+  for (const x of xs) {
+    const r = await func(x)
+    res.push(r)
+    progress.tick()
+  }
+  return res
 }
