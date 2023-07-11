@@ -30,7 +30,7 @@ await fs.writeFile(
 
 // manual corrections for a very small (<1%) of areas
 let corrections = JSON.parse(
-  await fs.readFile('./src/corrections/area_corrections.json', 'utf8')
+  await fs.readFile('./src/correct/area_corrections.json', 'utf8')
 )
 corrections = Object.fromEntries(
   Object.entries(corrections).map(([k, v]) => [to_keywords(k), v])
