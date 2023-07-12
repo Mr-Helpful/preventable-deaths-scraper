@@ -165,19 +165,13 @@ export function min_edit_slices_match(pats, text, relative = false) {
 export function approx_contains_all(text, pattern, edits = 2, relative = 0.1) {
   const text_words = text.split(/[^\w]+/g)
   const pattern_words = pattern.split(/[^\w]+/g)
-  // console.log(text_words, pattern_words)
 
   return pattern_words.every(pattern_word => {
-    // console.log('> pattern =', pattern_word)
     const error = Math.min(edits, Math.floor(pattern_word.length * relative))
-    // console.log('> error =', error)
     const match_found = text_words.some(word => {
-      // console.log('>>', pattern_word, 'vs', word)
       const distance = edit_distance(pattern_word, word)
-      // console.log('>> edits =', distance)
       return distance <= error
     })
-    // console.log('> match found =', match_found)
     return match_found
   })
 }
@@ -191,11 +185,13 @@ export function to_keywords(text) {
 }
 
 /** Attempts to match area text against a possible list of matches
+ * @template R
+ * @template {{[key: string]: R}} T
  * @param {string} text the text to be corrected
- * @param {Map<string, string>} matches the list of strings to match against
+ * @param {T} matches the list of strings to match against
  * @param {number} [edits=2] the maximum number of edits per word
  * @param {number} [relative=0.1] the maximum number of relative edits per word
- * @returns {string | undefined} the value for the match, or undefined if no good match
+ * @returns {T[keyof T] | undefined} the value for the match, or undefined if no good match
  */
 export function try_matching(text, matches, edits = 2, relative = 0.2) {
   const keys = Object.keys(matches)
