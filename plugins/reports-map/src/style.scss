@@ -7,4 +7,15 @@
 
 .wp-block-create-block-reports-map {
 	background-color: white;
+
+	.svg-coroner-area {
+		stroke: #454546;
+		stroke-width: 0.25px;
+	}
+
+	.svg-coroner-area:hover {
+		filter: brightness(0.95);
+		transition: filter .3s ease-in-out;
+		cursor: pointer;
+	}
 }

@@ -21,7 +21,17 @@ import { useBlockProps } from "@wordpress/block-editor";
  */
 import "./editor.scss";
 
-import { TextControl, TabPanel, FormFileUpload } from "@wordpress/components";
+import {
+	TextControl,
+	TabPanel,
+	FormFileUpload,
+	Panel,
+	PanelBody,
+	PanelRow,
+	PanelHeader,
+	Flex,
+} from "@wordpress/components";
+import { SaveBlock } from "./save.js";
 import { useState } from "@wordpress/element";
 
 /**
@@ -42,24 +52,30 @@ function read_to_url(file) {
  * A file input that converts the input to a data url
  *
  * @param {any} param0 The parameters for the CSVInput component
- * @param {(url: string, csv: any[]) => void} param0.onChange A callback that is called when a file is uploaded
+ * @param {(url: string, csv: any[]) => Promise<void>} param0.onChange A callback that is called when a file is uploaded
  * @returns {WPElement}
  */
-const CsvFileSource = ({ onChange }) => (
-	<FormFileUpload
-		accept="text/csv"
-		variant="secondary"
-		className="file-input"
-		onChange={async ({ target: { files } }) => {
-			console.log(files[0]);
-			const url = await read_to_url(files[0]);
-			console.log(url);
-			onChange(url);
-		}}
-	>
-		{__("Upload .csv File", "reports-map")}
-	</FormFileUpload>
-);
+const CsvFileSource = ({ onChange }) => {
+	const [name, setName] = useState("");
+	return (
+		<Flex style={{ width: "auto" }}>
+			<div>{name}</div>
+			<FormFileUpload
+				accept="text/csv"
+				variant="secondary"
+				className="file-input"
+				onChange={async ({ target: { files } }) => {
+					if (files.length === 0) return;
+					setName(files[0].name);
+					const url = await read_to_url(files[0]);
+					await onChange(url);
+				}}
+			>
+				{__("Upload .csv File", "reports-map")}
+			</FormFileUpload>
+		</Flex>
+	);
+};
 
 /**
  * A text input that validates the input as a url to the given content type
@@ -74,8 +90,9 @@ const CsvUrlSource = ({ onChange }) => {
 	return (
 		<TextControl
 			type="url"
-			label={__("Remote Url", "reports-map")}
+			label={__("Remote CSV Url", "reports-map")}
 			className="csv-input"
+			help={valid ? "" : __("invalid CSV url", "reports-map")}
 			onChange={async (url) => {
 				try {
 					const response = await fetch(url);
@@ -111,7 +128,7 @@ const CsvSource = ({ onChange }) => (
 				content: <CsvUrlSource onChange={onChange} />,
 			},
 		]}
-		children={(tab) => tab.content}
+		children={({ content }) => content}
 	/>
 );
 
@@ -123,10 +140,32 @@ const CsvSource = ({ onChange }) => (
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ setAttributes }) {
+export default function Edit({ attributes: { csv_text }, setAttributes }) {
 	return (
 		<div {...useBlockProps()}>
-			<CsvSource onChange={(url) => setAttributes({ url })} />
+			<Panel>
+				{/* Header and CSV loading */}
+				<PanelHeader>
+					<h6>{__("Reports Heatmap", "reports-map")}</h6>
+					<CsvFileSource
+						onChange={async (url) => {
+							const response = await fetch(url);
+							const csv_text = await response.text();
+							setAttributes({ csv_text });
+						}}
+					/>
+				</PanelHeader>
+				{/* Preview Heatmap */}
+				<PanelBody
+					title={__("Preview", "reports-map")}
+					initialOpen={false}
+					buttonProps={{ disabled: csv_text.length === 0 }}
+				>
+					<PanelRow>
+						<SaveBlock csv_text={csv_text} />
+					</PanelRow>
+				</PanelBody>
+			</Panel>
 		</div>
 	);
 }
