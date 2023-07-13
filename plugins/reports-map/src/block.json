@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Reports Map",
 	"category": "embed",
-	"icon": "smiley",
+	"icon": "location",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false
