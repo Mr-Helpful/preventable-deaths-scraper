@@ -17,6 +17,12 @@
 			"selector": "div",
 			"default": ""
 		},
+		"csv_name": {
+			"type": "string",
+			"source": "text",
+			"selector": "div",
+			"default": ""
+		},
 		"csv_text": {
 			"type": "string",
 			"source": "text",

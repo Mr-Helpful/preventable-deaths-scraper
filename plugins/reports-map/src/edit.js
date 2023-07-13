@@ -32,7 +32,6 @@ import {
 	Flex,
 } from "@wordpress/components";
 import { SaveBlock } from "./save.js";
-import { useState } from "@wordpress/element";
 
 /**
  * Converts a File object to a data url asynchronously
@@ -52,11 +51,10 @@ function read_to_url(file) {
  * A file input that converts the input to a data url
  *
  * @param {any} param0 The parameters for the CSVInput component
- * @param {(url: string, csv: any[]) => Promise<void>} param0.onChange A callback that is called when a file is uploaded
+ * @param {({url: string, name: string}) => Promise<void>} param0.onChange A callback that is called when a file is uploaded
  * @returns {WPElement}
  */
-const CsvFileSource = ({ onChange }) => {
-	const [name, setName] = useState("");
+const CsvFileSource = ({ name, onChange }) => {
 	return (
 		<Flex style={{ width: "auto" }}>
 			<div>{name}</div>
@@ -66,9 +64,8 @@ const CsvFileSource = ({ onChange }) => {
 				className="file-input"
 				onChange={async ({ target: { files } }) => {
 					if (files.length === 0) return;
-					setName(files[0].name);
 					const url = await read_to_url(files[0]);
-					await onChange(url);
+					await onChange({ url, name: files[0].name });
 				}}
 			>
 				{__("Upload .csv File", "reports-map")}
@@ -81,26 +78,29 @@ const CsvFileSource = ({ onChange }) => {
  * A text input that validates the input as a url to the given content type
  *
  * @param {any} param0 The parameters for the CSVInput component
- * @param {(url: string, csv: any[]) => void} param0.onChange A callback that is provided with the url and the parsed csv
+ * @param {({url: string, name: string}) => void} param0.onChange A callback that is provided with the url
  * @returns {WPElement}
  */
 const CsvUrlSource = ({ onChange }) => {
-	const [valid, setValid] = useState(false);
-
 	return (
 		<TextControl
 			type="url"
 			label={__("Remote CSV Url", "reports-map")}
 			className="csv-input"
-			help={valid ? "" : __("invalid CSV url", "reports-map")}
 			onChange={async (url) => {
 				try {
 					const response = await fetch(url);
 					const type = response.headers.get("content-type");
-					setValid(type && type.includes("text/csv"));
-					onChange(url);
+					const disp = response.headers.get("content-disposition");
+					console.log(disp);
+					const name = disp.split(";")[1].split("=")[1];
+					if (type && type.includes("text/csv")) {
+						// TODO: make dialog flash on valid input
+						onChange({ url, name });
+					}
 				} catch {
-					setValid(false);
+					// TODO: We should only get network errors in here
+					// maybe we want to notify the user of these errors
 				}
 			}}
 		/>
@@ -111,7 +111,7 @@ const CsvUrlSource = ({ onChange }) => {
  * An input that allows the user to load a csv from a file or external url
  *
  * @param {any} param0 The parameters for the CSVInput component
- * @param {(url: string, csv: any[]) => void} param0.onChange A callback that is provided with the url and the parsed csv
+ * @param {({url: string, name: string}) => void} param0.onChange A callback that is provided with the url and the parsed csv
  * @returns {WPElement}
  */
 const CsvSource = ({ onChange }) => (
@@ -140,7 +140,10 @@ const CsvSource = ({ onChange }) => (
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ attributes: { csv_text }, setAttributes }) {
+export default function Edit({
+	attributes: { csv_name, csv_text },
+	setAttributes,
+}) {
 	return (
 		<div {...useBlockProps()}>
 			<Panel>
@@ -148,10 +151,11 @@ export default function Edit({ attributes: { csv_text }, setAttributes }) {
 				<PanelHeader>
 					<h6>{__("Reports Heatmap", "reports-map")}</h6>
 					<CsvFileSource
-						onChange={async (url) => {
+						name={csv_name}
+						onChange={async ({ url, name }) => {
 							const response = await fetch(url);
 							const csv_text = await response.text();
-							setAttributes({ csv_text });
+							setAttributes({ csv_text, csv_name: name });
 						}}
 					/>
 				</PanelHeader>
