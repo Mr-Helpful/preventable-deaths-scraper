@@ -20,13 +20,12 @@
 		"csv_name": {
 			"type": "string",
 			"source": "text",
-			"selector": "div",
+			"selector": "div.file-name",
 			"default": ""
 		},
 		"csv_text": {
 			"type": "string",
 			"source": "text",
-			"selector": "div",
 			"default": ""
 		}
 	},

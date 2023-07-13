@@ -57,7 +57,7 @@ function read_to_url(file) {
 const CsvFileSource = ({ name, onChange }) => {
 	return (
 		<Flex style={{ width: "auto" }}>
-			<div>{name}</div>
+			<div className="file-name">{name}</div>
 			<FormFileUpload
 				accept="text/csv"
 				variant="secondary"
