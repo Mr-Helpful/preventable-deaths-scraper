@@ -1,6 +1,6 @@
 # Preventable Deaths Scraper and Analysis
 
-[![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml)
+[![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml)
 
 ## Introduction
 
