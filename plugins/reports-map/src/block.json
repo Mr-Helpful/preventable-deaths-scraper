@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/reports-map",
+	"version": "0.1.0",
+	"title": "Reports Map",
+	"category": "embed",
+	"icon": "location",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"source_url": {
+			"type": "string",
+			"source": "text",
+			"selector": "div",
+			"default": ""
+		},
+		"csv_name": {
+			"type": "string",
+			"source": "text",
+			"selector": "div.file-name",
+			"default": ""
+		},
+		"csv_text": {
+			"type": "string",
+			"source": "text",
+			"default": ""
+		}
+	},
+	"textdomain": "reports-map",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

@@ -1,0 +1,21 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-reports-map {
+	background-color: white;
+
+	.svg-coroner-area {
+		stroke: #454546;
+		stroke-width: 0.25px;
+	}
+
+	.svg-coroner-area:hover {
+		filter: brightness(0.95);
+		transition: filter .3s ease-in-out;
+		cursor: pointer;
+	}
+}

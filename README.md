@@ -110,4 +110,6 @@ There are 6 main directories in the [`src`](./src) directory:
 
 The [`examples`](./examples) directory contains reference report PDFs (you probably won't need to look at this).
 
+The [`plugins`](./plugins) directory contains wordpress plugins to be used with the report CSVs produced by the scraper (these are probably only interesting if you're interested in data vis/wordpress plugins).
+
 All javascript code for is documented with JSDoc and all python code is written in an interactive python file (you should hopefully be able to run this like a jupyter notebook).
