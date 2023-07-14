@@ -13,19 +13,14 @@
 	"attributes": {
 		"source_url": {
 			"type": "string",
-			"source": "text",
-			"selector": "div",
 			"default": ""
 		},
 		"csv_name": {
 			"type": "string",
-			"source": "text",
-			"selector": "div.file-name",
 			"default": ""
 		},
 		"csv_text": {
 			"type": "string",
-			"source": "text",
 			"default": ""
 		}
 	},
