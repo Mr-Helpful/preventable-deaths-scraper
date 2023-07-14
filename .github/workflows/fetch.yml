@@ -46,7 +46,7 @@ jobs:
         cache: 'pip'
         
     - name: Install Analysis requirements
-      run: pip install -r src/analyse/counts
+      run: pip install -r src/analyse/counts/requirements.txt
       
     - name: Run Analyses
       run: |
