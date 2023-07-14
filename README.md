@@ -1,5 +1,6 @@
 # Preventable Deaths Scraper and Analysis
 
+[![CodeQL](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/github-code-scanning/codeql)
 [![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml)
 
 ## Introduction
