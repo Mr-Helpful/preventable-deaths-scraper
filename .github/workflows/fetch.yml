@@ -3,7 +3,6 @@
 
 name: Fetch Reports
 
-# This can be configured to run on a cron schedule
 on:
   schedule:
     - cron: '0 17 * * SUN'
