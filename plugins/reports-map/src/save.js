@@ -16,7 +16,7 @@ export function SaveBlock({ csv_text }) {
 	// 2. Time selection controls
 	const csv = Papa.parse(csv_text, { header: true, skipEmptyLines: true }).data;
 	const area_counts = Object.fromEntries(
-		csv.map(({ coroner_area, count }) => [coroner_area, parseInt(count)])
+		Object.entries(csv[0]).map(([area, count]) => [area, parseInt(count)])
 	);
 	const max = Math.max(...Object.values(area_counts), 0);
 	return (
