@@ -1,5 +1,6 @@
 import { fetch_html } from '../fetch/helpers.js'
 import { to_keywords, try_matching } from './helpers.js'
+import corrections from './area_corrections.json'
 import fs from 'fs/promises'
 
 /** Fetches the list of coroner areas from the coroner society website
@@ -26,14 +27,6 @@ await fs.writeFile(
     Object.values(areas)
       .map(area => `"${area}"`)
       .join('\n')
-)
-
-// manual corrections for a very small (<1%) of areas
-let corrections = JSON.parse(
-  await fs.readFile('./src/correct/area_corrections.json', 'utf8')
-)
-corrections = Object.fromEntries(
-  Object.entries(corrections).map(([k, v]) => [to_keywords(k), v])
 )
 
 /** Corrects the area name to the closest match in the coroner society list

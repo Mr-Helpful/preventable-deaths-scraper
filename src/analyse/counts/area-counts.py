@@ -20,14 +20,22 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 len(reports)
 
 # %% [markdown]
+
+# use a regex to extract the year from the date of report
+reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
+
+# %% [markdown]
 # ### Counting the number of reports in each coroner area
 
-# group by the coroner area and count the number of reports
-area_counts = reports.groupby('coroner_area').size().reset_index(name='count')
-area_counts['count'].sum()
+# count the number of reports in each year
+grouped_counts = reports.groupby(['year', 'coroner_area']).size().reset_index(name='count')
+area_counts = grouped_counts.pivot(index='year', columns='coroner_area', values='count').fillna(0).astype(int)
+area_counts
 
 
 # %% [markdown]
 # ### Saving the results
 
-area_counts.to_csv(f"{DATA_PATH}/area-counts.csv", index=False)
+area_counts.to_csv(f"{DATA_PATH}/area-years.csv")
+sum_counts = pd.DataFrame(area_counts.sum()).transpose()
+sum_counts.to_csv(f"{DATA_PATH}/area-counts.csv", index=False)

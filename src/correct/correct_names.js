@@ -1,5 +1,6 @@
 import { fetch_html, map_async, map_series } from '../fetch/helpers.js'
 import { try_matching } from './helpers.js'
+import fs from 'fs/promises'
 
 /**
  * Fetches the list of page urls from the coroner society website
@@ -90,7 +91,13 @@ const coroner_map = Object.fromEntries(
     return [remove_titles(name), { name, ...coroner }]
   })
 )
-console.log(coroner_map)
+await fs.writeFile(
+  './src/data/names.csv',
+  'coroner_name\n' +
+    Object.values(coroner_map)
+      .map(({ name }) => `"${name}"`)
+      .join('\n')
+)
 
 /** Corrects the coroner name to the closest match in the coroner society list
  * @param {string} text the text to be corrected
