@@ -1,5 +1,6 @@
 import { fetch_html } from '../fetch/helpers.js'
 import { to_keywords, try_matching } from './helpers.js'
+import corrections from './area_corrections.json' assert { type: 'json' }
 import fs from 'fs/promises'
 
 /** Fetches the list of coroner areas from the coroner society website
@@ -20,18 +21,17 @@ async function fetch_area_list(url) {
 
 let areas = await fetch_area_list('https://www.coronersociety.org.uk/coroners/')
 areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
-
-// manual corrections for a very small (<1%) of areas
-let corrections = JSON.parse(
-  await fs.readFile('./src/corrections/area_corrections.json', 'utf8')
-)
-corrections = Object.fromEntries(
-  Object.entries(corrections).map(([k, v]) => [to_keywords(k), v])
+await fs.writeFile(
+  './src/data/areas.csv',
+  'coroner_area\n' +
+    Object.values(areas)
+      .map(area => `"${area}"`)
+      .join('\n')
 )
 
 /** Corrects the area name to the closest match in the coroner society list
  * @param {string} text the text to be corrected
- * @returns {string | undefined} the corrected area name or undefined if no good match
+ * @returns {string | undefined} the corrected area name or the text if no good match
  */
 export function correct_area(text) {
   if (text === undefined) return undefined

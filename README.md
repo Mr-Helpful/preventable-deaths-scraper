@@ -1,6 +1,7 @@
 # Preventable Deaths Scraper and Analysis
 
-[![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml)
+[![CodeQL](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/github-code-scanning/codeql)
+[![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml)
 
 ## Introduction
 
@@ -35,13 +36,13 @@ Both the analyses are written in python and require [python 3.8](https://www.pyt
 To install the dependencies for the year count analysis, you can run the following command in the root directory of this repository:
 
 ```bash
-pip install -r src/analyses/aggregation/requirements.txt
+pip install -r src/analyse/aggregation/requirements.txt
 ```
 
 The year count analysis can then be run by running the following command in the root directory of this repository:
 
 ```bash
-python src/analyses/aggregation/year-counts.py
+python src/analyse/aggregation/year-counts.py
 ```
 
 This will save the number of reports per year to [`src/data/year-counts.csv`](./src/data/year-counts.csv), in the following format:
@@ -71,13 +72,13 @@ npm run analyse:year-counts
 To install the dependencies for the medical cause analysis, you can run the following command in the root directory of this repository:
 
 ```bash
-pip install -r src/analyses/natural-language/requirements.txt
+pip install -r src/analyse/natural-language/requirements.txt
 ```
 
 The cause analysis can then be run by running the following command in the root directory of this repository:
 
 ```bash
-python src/analyses/natural-language/cause-tags.py
+python src/analyse/natural-language/cause-tags.py
 ```
 
 This will save the analysis to [`src/data/medical-cause-reports.csv`](./src/data/medical-cause-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
@@ -101,8 +102,8 @@ npm run analyse:label-medical
 
 There are 6 main directories in the [`src`](./src) directory:
 
-- [`analyses`](./src/analyses): Analysis of the scraped data (mostly in python).
-- [`corrections`](./src/corrections): Correcting/cleaning the scraped data.
+- [`analyse`](./src/analyse): Analysis of the scraped data (mostly in python).
+- [`correct`](./src/correct): Correcting/cleaning the scraped data.
 - [`data`](./src/data): The raw report data.
 - [`fetch`](./src/fetch): Fetching/scraping the report data.
 - [`parse`](./src/parse): Parsing the scraped data (i.e. html -> csv).

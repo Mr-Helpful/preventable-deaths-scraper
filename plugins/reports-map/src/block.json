@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Reports Map",
 	"category": "embed",
-	"icon": "smiley",
+	"icon": "location",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false
@@ -13,8 +13,14 @@
 	"attributes": {
 		"source_url": {
 			"type": "string",
-			"source": "text",
-			"selector": "div",
+			"default": ""
+		},
+		"csv_name": {
+			"type": "string",
+			"default": ""
+		},
+		"csv_text": {
+			"type": "string",
 			"default": ""
 		}
 	},
