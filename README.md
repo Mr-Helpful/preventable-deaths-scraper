@@ -52,14 +52,7 @@ This will save the number of reports per year to [`src/data/year-counts.csv`](./
 | 2013 |   173 |
 | 2014 |   559 |
 | 2015 |   490 |
-| 2016 |   477 |
-| 2017 |   446 |
-| 2018 |   418 |
-| 2019 |   528 |
-| 2020 |   314 |
-| 2021 |   432 |
-| 2022 |   416 |
-| 2023 |   213 |
+| ...  |   ... |
 
 A shortcut to run the analysis is defined in the [`package.json`](./package.json) file and can be run as so:
 
