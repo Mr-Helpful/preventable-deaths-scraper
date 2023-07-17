@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name:       Reports Map
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:       Reports Heatmap
+ * Description:       A Heatmap of the frequency of PFD reports in the UK.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Version:           1.0.0
+ * Author:            Alex Colby
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       reports-map
