@@ -89,3 +89,6 @@ web_modules/
 
 # Stores built versions of WordPress blocks
 **/build
+
+# Wordpress plugin zips
+**/*.zip
