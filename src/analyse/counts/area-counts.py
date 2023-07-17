@@ -35,6 +35,7 @@ area_counts = grouped_counts.pivot(index='year', columns='coroner_area', values=
 # ### Various statistics about the counts
 
 sum_counts = pd.DataFrame(area_counts.sum()).rename(columns={0: 'count'})
+sum_counts = sum_counts.sort_values(by='count', ascending=False)
 
 print(f"Total number of reports: {sum_counts.sum().sum()}")
 print(f"Number of coroner areas: {len(sum_counts.columns)}")
@@ -42,7 +43,7 @@ print(f"Mean number of reports: {sum_counts.mean().mean()}")
 print(f"Median number of reports: {sum_counts.median().median()}")
 print(f"IQR of number of reports: {sum_counts.mean().quantile([0.25, 0.75])}")
 
-print(f"Sorted counts: {sum_counts.sort_values(by='count', ascending=False)}")
+print(f"Sorted counts: {sum_counts}")
 
 # %% [markdown]
 # ### Saving the results
