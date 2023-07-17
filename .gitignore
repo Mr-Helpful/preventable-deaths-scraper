@@ -88,4 +88,4 @@ web_modules/
 .pnp.*
 
 # Stores built versions of WordPress blocks
-**/build/*
+**/build
