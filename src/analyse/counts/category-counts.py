@@ -38,14 +38,16 @@ with open(f"{CORRECT_PATH}/category_corrections.json", 'r', encoding='utf8') as 
 
 # Create a column for each category with a 1 if the report is in that category
 for category in categories:
-  reports[category] = (reports['category'].str.contains(category) == True).astype(int)
+  reports[category] = reports['category'].str.contains(category, regex=False)
 
 category_counts = reports[categories].groupby(reports['year']).sum()
+sum_counts = pd.DataFrame(category_counts.sum()).rename(columns={0: 'count'})
+sum_counts = sum_counts.sort_values(by='count', ascending=False)
+sum_counts.index.name = 'category'
 category_counts
 
 # %% [markdown]
 # ### Saving the results
 
 category_counts.to_csv(f"{DATA_PATH}/category-years.csv")
-sum_counts = pd.DataFrame(category_counts.sum()).transpose()
-sum_counts.to_csv(f"{DATA_PATH}/category-counts.csv", index=False)
+sum_counts.to_csv(f"{DATA_PATH}/category-counts.csv")
