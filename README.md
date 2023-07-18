@@ -1,6 +1,7 @@
 # Preventable Deaths Scraper and Analysis
 
-[![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/node.js.yml)
+[![CodeQL](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/github-code-scanning/codeql)
+[![Fetch Reports](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml/badge.svg)](https://github.com/Mr-Helpful/preventable-deaths-scraper/actions/workflows/fetch.yml)
 
 ## Introduction
 
@@ -51,14 +52,7 @@ This will save the number of reports per year to [`src/data/year-counts.csv`](./
 | 2013 |   173 |
 | 2014 |   559 |
 | 2015 |   490 |
-| 2016 |   477 |
-| 2017 |   446 |
-| 2018 |   418 |
-| 2019 |   528 |
-| 2020 |   314 |
-| 2021 |   432 |
-| 2022 |   416 |
-| 2023 |   213 |
+| ...  |   ... |
 
 A shortcut to run the analysis is defined in the [`package.json`](./package.json) file and can be run as so:
 
@@ -109,5 +103,7 @@ There are 6 main directories in the [`src`](./src) directory:
 - [`write`](./src/write): Writing to both the `reports.csv` file and the log file.
 
 The [`examples`](./examples) directory contains reference report PDFs (you probably won't need to look at this).
+
+The [`plugins`](./plugins) directory contains wordpress plugins to be used with the report CSVs produced by the scraper (these are probably only interesting if you're interested in data vis/wordpress plugins).
 
 All javascript code for is documented with JSDoc and all python code is written in an interactive python file (you should hopefully be able to run this like a jupyter notebook).

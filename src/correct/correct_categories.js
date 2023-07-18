@@ -1,7 +1,7 @@
 import { try_matching } from './helpers.js'
 import { fetch_html } from '../fetch/helpers.js'
 import { ElementError } from '../fetch/helpers.js'
-import categories from './category_corrections.json'
+import categories from './category_corrections.json' assert { type: 'json' }
 
 /** Fetches the list of report categories from the preventable deaths website
  * @param {string} url the coroner society url

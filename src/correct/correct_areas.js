@@ -1,6 +1,6 @@
 import { fetch_html } from '../fetch/helpers.js'
 import { to_keywords, try_matching } from './helpers.js'
-import corrections from './area_corrections.json'
+import corrections from './area_corrections.json' assert { type: 'json' }
 import fs from 'fs/promises'
 
 /** Fetches the list of coroner areas from the coroner society website
