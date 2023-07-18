@@ -41,10 +41,21 @@ for category in categories:
   reports[category] = reports['category'].str.contains(category, regex=False)
 
 category_counts = reports[categories].groupby(reports['year']).sum()
+
+# %% [markdown]
+# ### Various statistics about the counts
+
 sum_counts = pd.DataFrame(category_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
 sum_counts.index.name = 'category'
-category_counts
+
+print(f"Total number of categories: {sum_counts.sum()}")
+print(f"Number of death categories: {len(sum_counts)}")
+print(f"Mean number of reports: {sum_counts.mean()}")
+print(f"Median number of reports: {sum_counts.median()}")
+print(f"IQR of number of reports: {sum_counts.quantile([0.25, 0.75])}")
+
+print(f"Sorted counts: {sum_counts}")
 
 # %% [markdown]
 # ### Saving the results
