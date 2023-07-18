@@ -46,7 +46,7 @@ export async function write_reports(
     urls,
     url =>
       fetch_report(url, parse_report, parse_summary)
-        .then(report => correct_report(report))
+        // .then(report => correct_report(report))
         .then(report => append_csv_row(report, csv_path, headers))
         .catch(_ => {
           // ignore any errors from this, we'll either get it next time
