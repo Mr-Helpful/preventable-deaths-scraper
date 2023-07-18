@@ -38,7 +38,7 @@ with open(f"{CORRECT_PATH}/category_corrections.json", 'r', encoding='utf8') as 
 
 # Create a column for each category with a 1 if the report is in that category
 for category in categories:
-  reports[category] = (reports['category'].str.contains(category) == True).astype(int)
+  reports[category] = reports['category'].str.contains(category, regex=False)
 
 category_counts = reports[categories].groupby(reports['year']).sum()
 category_counts
