@@ -1,2 +1,20 @@
-Police related deaths,Suicide (from 2015),Prevention of Future Deaths,Emergency services related deaths (2019 onwards),Hospital Death (Clinical Procedures and medical management) related deaths,Child Death (from 2015),Railway related deaths,Wales prevention of future deaths reports (2019 onwards),Accident at Work and Health and Safety related deaths,State Custody related deaths,Community health care and emergency services related deaths,Road (Highways Safety) related deaths,"Alcohol, drug and medication related deaths",Product related deaths,Emergency Services related deaths,Care Home Health related deaths,Other related deaths,Service Personnel related deaths,Mental Health related deaths
-92,0,81,0,0,0,69,0,66,231,181,0,306,83,354,285,542,32,393
+category,count
+Hospital Death (Clinical Procedures and medical management) related deaths,0.0
+Emergency Services related deaths,0.0
+Mental Health related deaths,0.0
+Community health care and emergency services related deaths,0.0
+State Custody related deaths,0.0
+Service Personnel related deaths,0.0
+Railway related deaths,0.0
+"Alcohol, drug and medication related deaths",0.0
+Road (Highways Safety) related deaths,0.0
+Accident at Work and Health and Safety related deaths,0.0
+Wales prevention of future deaths reports (2019 onwards),0.0
+Suicide (from 2015),0.0
+Product related deaths,0.0
+Police related deaths,0.0
+Emergency services related deaths (2019 onwards),0.0
+Other related deaths,0.0
+Child Death (from 2015),0.0
+Care Home Health related deaths,0.0
+Prevention of Future Deaths,0.0

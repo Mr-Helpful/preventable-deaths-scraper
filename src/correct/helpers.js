@@ -209,3 +209,24 @@ export function try_matching(text, matches, edits = 2, relative = 0.2) {
   )
   if (superset_match) return matches[superset_match]
 }
+
+/** Attempts to match area text against a possible list of matches, giving earlier matches a higher priority
+ * @template R
+ * @template {{[key: string]: R}} T
+ * @param {string} text the text to be corrected
+ * @param {T[]} priority_matches the list of strings to match against
+ * @param {number} [edits=2] the maximum number of edits per word
+ * @param {number} [relative=0.1] the maximum number of relative edits per word
+ * @returns {T[keyof T] | undefined} the value for the match, or undefined if no good match
+ */
+export function priority_match(
+  text,
+  priority_matches,
+  edits = 2,
+  relative = 0.2
+) {
+  for (const matches of priority_matches) {
+    const match = try_matching(text, matches, edits, relative)
+    if (match) return match
+  }
+}
