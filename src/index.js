@@ -55,7 +55,7 @@ export async function write_reports(
   const all_urls = await fetch_all_urls(page_urls)
   const seen_urls = new Set(reports.map(report => report.report_url))
   const urls = all_urls.filter(url => !seen_urls.has(url))
-  await write_log(log_path, page_urls.length, urls.length)
+  await write_log(log_path, page_urls.length, all_urls.length, urls.length)
 
   if (urls.length === 0) return console.log('Reports up to date!')
   let new_reports = await map_async(
