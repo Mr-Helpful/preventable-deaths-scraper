@@ -6,7 +6,7 @@ import {
   map_async
 } from './fetch/index.js'
 import { parse_report_basic, parse_summary_basic } from './parse/index.js'
-import { try_create_csv, append_csv_row, write_log } from './write/index.js'
+import { write_log } from './write/index.js'
 import { parse, unparse } from 'papaparse'
 import fs from 'fs/promises'
 
@@ -15,8 +15,10 @@ import fs from 'fs/promises'
  * @return {Promise<Full_Report[]>} all urls that we've already seen
  */
 async function fetch_seen_reports(file_path) {
-  const text = await fs.readFile(file_path, 'utf8')
-  return parse(text, { header: true }).data
+  return await fs
+    .readFile(file_path, 'utf8')
+    .then(text => parse(text, { header: true }).data)
+    .catch(_ => [])
 }
 
 /** Type imports
@@ -47,7 +49,6 @@ export async function write_reports(
   parse_report,
   parse_summary
 ) {
-  await try_create_csv(csv_path, headers)
   const reports = await fetch_seen_reports(csv_path)
 
   const page_urls = await fetch_page_urls(reports_url)
@@ -72,7 +73,10 @@ export async function write_reports(
   new_reports.sort((a, b) => b.ref.localeCompare(a.ref)) // descending sort ref
   reports.unshift(...new_reports)
 
-  await fs.writeFile(csv_path, unparse(reports, { header: true }))
+  await fs.writeFile(
+    csv_path,
+    unparse(reports, { header: true, columns: headers })
+  )
 }
 
 /** @typedef {Summary & Report & URLs} Full_Report */
