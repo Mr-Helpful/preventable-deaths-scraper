@@ -92,3 +92,6 @@ web_modules/
 
 # Wordpress plugin zips
 **/*.zip
+
+# Ignore any testing I do.
+**/test.js
