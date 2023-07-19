@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { fetch_html } from '../fetch/helpers.js'
+import { ElementError, fetch_html } from '../fetch/helpers.js'
 import corrections from './area_corrections.json' assert { type: 'json' }
 import { to_keywords, try_matching } from './helpers.js'
 
