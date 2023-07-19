@@ -1,4 +1,4 @@
-export const max_by = (xs, f) =>
+const max_by = (xs, f) =>
   xs.reduce(
     ([x, v], y) => (f(y) > v ? [y, f(y)] : [x, v]),
     [undefined, -Infinity]
@@ -9,7 +9,7 @@ export const max_by = (xs, f) =>
  * @param {string} str2 the target to transform to
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
  */
-export function edit_distances(str1, str2) {
+function edit_distances(str1, str2) {
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
   let distances = Array.from({ length: str1.length + 1 }, _ =>
     Array(str2.length + 1).fill(0)
@@ -57,36 +57,11 @@ export function edit_distances(str1, str2) {
 }
 
 /** Helper function for the edit distance of the full strings */
-export function edit_distance(str1, str2) {
+function edit_distance(str1, str2) {
   // short circuit if strings are equal
   if (str1 === str2) return 0
 
   return edit_distances(str1, str2)[str1.length][str2.length]
-}
-
-/** Finds the pattern with the minimum edit distance to the text
- * @param {string[]} pats the patterns to search within
- * @param {string} text the text to search in
- * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
- * @returns {{match: string, edits: number}} the pattern and the edit distance
- */
-export function min_edits_match(pats, text, relative = false) {
-  let edits = Infinity
-  let match = ''
-
-  for (const pat of pats) {
-    let distance = edit_distance(pat, text)
-    if (relative) distance /= pat.length
-    if (distance < edits) {
-      edits = distance
-      match = pat
-
-      // short circuit if we find a perfect match
-      if (edits === 0) return { match, edits }
-    }
-  }
-
-  return { match, edits }
 }
 
 /** Finds the slice of text that has the minimum edit distance to the pattern
@@ -162,7 +137,7 @@ export function min_edit_slices_match(pats, text, relative = false) {
  * @param {number} [relative=0.1] the maximum relative error per word
  * @returns {boolean} whether the text approximately contains all the words
  */
-export function approx_contains_all(text, pattern, edits = 2, relative = 0.1) {
+function approx_contains_all(text, pattern, edits = 2, relative = 0.1) {
   const text_words = text.split(/[^\w]+/g)
   const pattern_words = pattern.split(/[^\w]+/g)
 

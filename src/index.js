@@ -1,14 +1,14 @@
+import fs from 'fs/promises'
+import { parse, unparse } from 'papaparse'
 import { correct_report } from './correct/index.js'
 import {
-  fetch_page_urls,
   fetch_all_urls,
+  fetch_page_urls,
   fetch_report,
   map_async
 } from './fetch/index.js'
 import { parse_report_basic, parse_summary_basic } from './parse/index.js'
 import { write_log } from './write/index.js'
-import { parse, unparse } from 'papaparse'
-import fs from 'fs/promises'
 
 /** Finds all reports already present in our csv
  * @param {string} file_path the path to our reports csv

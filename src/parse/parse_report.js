@@ -1,4 +1,4 @@
-import { parse_list, table_parser } from './helpers.js'
+import { table_parser } from './helpers.js'
 /** @typedef {import('./helpers.js').Parser} Parser */
 /** @typedef {import('./helpers.js').HeadersFor} HeadersFor */
 
@@ -35,7 +35,7 @@ export const default_report = {
 }
 
 /** @type {HeadersFor<Basic_Report>} */
-export const report_headings = {
+const report_headings = {
   'THIS REPORT IS BEING SENT TO:?': 'this_report_is_being_sent_to',
   '1\\s*CORONER': 'coroner_name',
   "2\\s*CORONER[’']S LEGAL POWERS": 'legal',

@@ -1,6 +1,6 @@
-import { fetch_html, map_async, map_series } from '../fetch/helpers.js'
-import { try_matching } from './helpers.js'
 import fs from 'fs/promises'
+import { fetch_html, map_series } from '../fetch/helpers.js'
+import { try_matching } from './helpers.js'
 
 /**
  * Fetches the list of page urls from the coroner society website

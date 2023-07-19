@@ -1,6 +1,4 @@
 import { fetch_html, map_async } from './helpers.js'
-import { parse } from 'csv-parse/sync'
-import fs from 'fs/promises'
 
 /** Determines the urls of all the pages we need to search
  * @param {string} report_url the prevention of death reports page
@@ -48,24 +46,4 @@ export async function fetch_all_urls(page_urls) {
       'Fetching urls |:bar| :current/:total pages'
     )
   ).flat()
-}
-
-/** Finds all reports already present in our csv
- * @param {string} file_path the path to our reports csv
- * @return {Promise<string[]>} all urls that we've already seen
- */
-export async function fetch_seen_urls(file_path) {
-  const text = await fs.readFile(file_path, 'utf8')
-  const records = parse(text, { columns: true })
-  return records.map(row => row.report_url)
-}
-
-/** Fetches the urls for all reports that haven't already been seen
- * @param {string[]} page_urls the pages that reports are fetched from
- * @param {string} file_path the path of the csv file for reports
- * @return {Promise<string[]>} all urls that we haven't seen
- */
-export async function fetch_unseen_urls(page_urls, file_path) {
-  const seen_urls = new Set(await fetch_seen_urls(file_path))
-  return (await fetch_all_urls(page_urls)).filter(url => !seen_urls.has(url))
 }
