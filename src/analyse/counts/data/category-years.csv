@@ -1,12 +1,1 @@
-year,Care Home Health related deaths,Child Death (from 2015),Service Personnel related deaths,Product related deaths,Police related deaths,Accident at Work and Health and Safety related deaths,Road (Highways Safety) related deaths,Railway related deaths,Other related deaths,Mental Health related deaths,"Alcohol, drug and medication related deaths",Emergency Services related deaths,Prevention of Future Deaths,Hospital Death (Clinical Procedures and medical management) related deaths,Community health care and emergency services related deaths,Emergency services related deaths (2019 onwards),Suicide (from 2015),State Custody related deaths,Wales prevention of future deaths reports (2019 onwards)
-2013,15,0,0,4,2,2,15,2,15,14,6,24,0,62,4,0,0,8,0
-2014,28,0,6,12,8,5,57,5,67,15,15,68,0,238,0,0,0,34,0
-2015,25,34,13,8,5,8,37,4,48,11,10,47,0,203,1,0,9,27,0
-2016,25,28,0,4,9,9,37,5,43,22,10,62,0,185,0,0,7,31,0
-2017,28,17,1,11,7,8,38,9,26,14,4,60,0,202,0,0,0,21,0
-2018,31,18,2,2,3,8,32,8,39,29,22,48,0,142,1,0,13,20,0
-2019,27,30,4,3,6,7,45,7,40,40,48,3,22,141,29,41,10,26,0
-2020,20,24,1,7,6,5,18,5,37,31,38,18,8,70,55,9,22,6,0
-2021,43,39,5,27,34,5,27,11,104,111,64,7,17,199,76,18,87,29,0
-2022,32,34,0,5,12,4,33,10,85,89,69,17,23,135,15,34,95,19,0
-2023,11,21,0,0,0,5,17,3,38,17,20,0,11,55,0,15,56,10,0
+year,Hospital Death (Clinical Procedures and medical management) related deaths,Wales prevention of future deaths reports (2019 onwards),Care Home Health related deaths,Child Death (from 2015),Other related deaths,Emergency services related deaths (2019 onwards),Police related deaths,Product related deaths,Suicide (from 2015),Accident at Work and Health and Safety related deaths,Emergency Services related deaths,Road (Highways Safety) related deaths,"Alcohol, drug and medication related deaths",Railway related deaths,Service Personnel related deaths,State Custody related deaths,Community health care and emergency services related deaths,Mental Health related deaths,Prevention of Future Deaths
