@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { parse, unparse } from 'papaparse'
+import Papa from 'papaparse'
 import { correct_report } from './correct/index.js'
 import {
   fetch_all_urls,
@@ -17,7 +17,7 @@ import { write_log } from './write/index.js'
 async function fetch_seen_reports(file_path) {
   return await fs
     .readFile(file_path, 'utf8')
-    .then(text => parse(text, { header: true }).data)
+    .then(text => Papa.parse(text, { header: true }).data)
     .catch(_ => [])
 }
 
@@ -75,7 +75,7 @@ export async function write_reports(
 
   await fs.writeFile(
     csv_path,
-    unparse(reports, { header: true, columns: headers })
+    Papa.unparse(reports, { header: true, columns: headers })
   )
 }
 
