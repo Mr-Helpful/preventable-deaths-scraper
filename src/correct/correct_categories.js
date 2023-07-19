@@ -1,4 +1,4 @@
-import { try_matching } from './helpers.js'
+import { priority_match } from './helpers.js'
 import { fetch_html } from '../fetch/helpers.js'
 import { ElementError } from '../fetch/helpers.js'
 import categories from './category_corrections.json' assert { type: 'json' }
@@ -27,7 +27,7 @@ export function correct_category(text) {
   if (text === undefined) return undefined
   return text
     .split('|')
-    .map(category => try_matching(category, categories))
+    .map(category => priority_match(category, categories))
     .filter(match => match !== undefined)
     .join(' | ')
 }
