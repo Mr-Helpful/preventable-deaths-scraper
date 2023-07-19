@@ -109,19 +109,21 @@ export async function fetch_report(report_url, parse_report, parse_summary) {
   const throw_network = err => {
     if (err?.name === 'NetworkError') throw err
   }
+  let tags = await try_fetch_tags($).catch(throw_network)
   let summary = await try_fetch_summary($, parse_summary).catch(throw_network)
-  summary ??= await try_fetch_tags($).catch(throw_network)
   let report = await try_fetch_table($, parse_report).catch(throw_network)
   report ??= await try_fetch_pdf($, parse_report).catch(throw_network)
 
   // the most reliable parses are from
-  // 1. the summary
-  // 2. the html table
-  // 3. the pdf table
+  // 1. the tags
+  // 2. the summary
+  // 3. the html table
+  // 4. the pdf table
   // hence we give them priority in that order, and provide sensible falbacks
   return {
     ...report,
     ...summary,
+    ...tags,
     pdf_url,
     report_url
   }
