@@ -17,7 +17,7 @@ export function SaveBlock({ csv_text }) {
 	const csv = Papa.parse(csv_text, { header: true, skipEmptyLines: true }).data;
 	if (csv.length === 0) return <div>No data</div>;
 	const area_counts = Object.fromEntries(
-		Object.entries(csv[0]).map(([area, count]) => [area, parseInt(count)])
+		csv.map(({ coroner_area, count }) => [coroner_area, parseInt(count)])
 	);
 	const max = Math.max(...Object.values(area_counts), 0);
 	return (
