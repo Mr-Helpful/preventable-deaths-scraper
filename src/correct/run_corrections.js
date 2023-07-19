@@ -7,7 +7,7 @@ import { correct_report } from './index.js'
 export async function correct_current_reports(csv_path, out_path) {
   const file = await fs.readFile(csv_path, 'utf8')
   const reports = Papa.parse(file, { header: true }).data
-  const headers = Object.keys(correct_report(reports[0]) ?? {})
+  const headers = Object.keys(reports[0] ?? {})
   await fs.rm(out_path, { force: true })
   await try_create_csv(out_path, headers)
 
