@@ -21,11 +21,16 @@ export function SaveBlock({ csv_text }) {
 	);
 	const max = Math.max(...Object.values(area_counts), 0);
 	return (
-		<ReportHeatMap
-			area_counts={area_counts}
-			max={max}
-			scale={color_scales.custom}
-		/>
+		<div
+			className="report-heatmap-block"
+			data-props={JSON.stringify({ csv_text })}
+		>
+			<ReportHeatMap
+				area_counts={area_counts}
+				max={max}
+				scale={color_scales.custom}
+			/>
+		</div>
 	);
 }
 
