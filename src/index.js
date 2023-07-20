@@ -1,12 +1,25 @@
+import fs from 'fs/promises'
+import Papa from 'papaparse'
 import { correct_report } from './correct/index.js'
 import {
+  fetch_all_urls,
   fetch_page_urls,
-  fetch_unseen_urls,
   fetch_report,
   map_async
 } from './fetch/index.js'
 import { parse_report_basic, parse_summary_basic } from './parse/index.js'
-import { try_create_csv, append_csv_row, write_log } from './write/index.js'
+import { write_log } from './write/index.js'
+
+/** Finds all reports already present in our csv
+ * @param {string} file_path the path to our reports csv
+ * @return {Promise<Full_Report[]>} all urls that we've already seen
+ */
+async function fetch_seen_reports(file_path) {
+  return await fs
+    .readFile(file_path, 'utf8')
+    .then(text => Papa.parse(text, { header: true }).data)
+    .catch(_ => [])
+}
 
 /** Type imports
  * @typedef {import('cheerio').CheerioAPI} CheerioAPI
@@ -36,23 +49,33 @@ export async function write_reports(
   parse_report,
   parse_summary
 ) {
-  await try_create_csv(csv_path, headers)
+  const reports = await fetch_seen_reports(csv_path)
+
   const page_urls = await fetch_page_urls(reports_url)
-  const urls = await fetch_unseen_urls(page_urls, csv_path)
-  await write_log(log_path, page_urls.length, urls.length)
+  const all_urls = await fetch_all_urls(page_urls)
+  const seen_urls = new Set(reports.map(report => report.report_url))
+  const urls = all_urls.filter(url => !seen_urls.has(url))
+  await write_log(log_path, page_urls.length, all_urls.length, urls.length)
 
   if (urls.length === 0) return console.log('Reports up to date!')
-  await map_async(
+  let new_reports = await map_async(
     urls,
     url =>
       fetch_report(url, parse_report, parse_summary)
         .then(report => correct_report(report))
-        .then(report => append_csv_row(report, csv_path, headers))
         .catch(_ => {
           // ignore any errors from this, we'll either get it next time
           // or this report can't be effectively read at all
         }),
     'Reading reports |:bar| :current/:total urls'
+  )
+  new_reports = new_reports.filter(report => report !== undefined)
+  new_reports.sort((a, b) => b.ref.localeCompare(a.ref)) // descending sort ref
+  reports.unshift(...new_reports)
+
+  await fs.writeFile(
+    csv_path,
+    Papa.unparse(reports, { header: true, columns: headers })
   )
 }
 

@@ -16,7 +16,7 @@ REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/corrected.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 len(reports)
 
 # %% [markdown]
@@ -32,13 +32,10 @@ reports['category'].str.split('|').str.len().sum()
 # %% [markdown]
 # ### Calculate number of categories in uncorrected data
 
-uncorrected = pd.read_csv(f"{DATA_PATH}/reports 19:07:23.csv")
-uncorrected['category'].str.split('|').str.len().sum()
-
 # %%
 
 categories = pd.DataFrame({0: reports['category'].str.cat(sep="|").split('|')})
-categories.sort_values(by=0).drop_duplicates().to_csv(f"{DATA_PATH}/categories.csv", index=False)
+categories.sort_values(by=0).drop_duplicates()
 
 # %% [markdown]
 # ### Fetching the categories
