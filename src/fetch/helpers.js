@@ -1,6 +1,6 @@
-import ProgressBar from 'progress'
 import { load } from 'cheerio/lib/slim'
 import pdfjs from 'pdfjs-dist/legacy/build/pdf.js'
+import ProgressBar from 'progress'
 
 /**
  * @typedef {import('pdfjs-dist').PDFPageProxy} PDFPageProxy
@@ -30,7 +30,7 @@ export class ElementError extends Error {
  * @param {RequestInit} init the initialisation options for fetch
  * @return {Promise<Response>} the result from the url
  */
-export async function retry_fetch(url, n = 50, init = {}) {
+async function retry_fetch(url, n = 50, init = {}) {
   let err
   for (let i = 0; i < n; i++)
     try {
@@ -94,13 +94,6 @@ export async function fetch_pdf(url) {
   const buff = await data.arrayBuffer()
   return await load_pdf(buff)
 }
-
-/**
- * Returns a promise that resolves after a given number of milliseconds
- * @param {number} ms the number of milliseconds to sleep for
- * @returns {Promise<void>}
- */
-export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 /**
  * Maps a common async function in parallel on a list of data, updating a
