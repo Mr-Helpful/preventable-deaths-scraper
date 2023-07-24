@@ -19,21 +19,32 @@ async function fetch_area_list(url) {
     .filter(x => x !== 'Choose your area')
 }
 
-let areas = await fetch_area_list('https://www.coronersociety.org.uk/coroners/')
-areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
-await fs.writeFile(
-  './src/data/areas.csv',
-  'coroner_area\n' +
-    Object.values(areas)
-      .map(area => `"${area}"`)
-      .join('\n')
-)
-
-/** Corrects the area name to the closest match in the coroner society list
- * @param {string} text the text to be corrected
- * @returns {string | undefined} the corrected area name or the text if no good match
+/**
+ * Creates a function that corrects the area name to the closest match in the
+ * coroner society list and saves the failed matches on close
+ * @param {boolean} keep_failed whether to keep existing failed parses
+ * @returns {Promise<import('.').CorrectFn<string>>}
  */
-export function correct_area(text) {
-  if (text === undefined) return undefined
-  return try_matching(text, areas) ?? try_matching(text, corrections) ?? text
+export default async function Corrector(keep_failed = true) {
+  let areas = await fetch_area_list(
+    'https://www.coronersociety.org.uk/coroners/'
+  )
+  await fs.writeFile('./src/correct/data/areas.json', JSON.stringify(areas))
+  areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
+
+  let { default: failed } = keep_failed
+    ? await import('./data/failed_areas.json', { assert: { type: 'json' } })
+    : { default: [] }
+
+  function correct_area(text) {
+    if (text === undefined || text.length === 0) return text
+
+    const match = try_matching(text, areas) ?? try_matching(text, corrections)
+    if (match === undefined) failed.push(text)
+    return match ?? text
+  }
+
+  correct_area.close = () =>
+    fs.writeFile('./src/correct/data/failed_areas.json', JSON.stringify(failed))
+  return correct_area
 }

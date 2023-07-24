@@ -1,3 +1,4 @@
+import fs from 'fs/promises'
 import parse from 'date-fns/parse/index.js'
 import { min_edit_slices_match } from './helpers.js'
 
@@ -33,25 +34,6 @@ const SHORT_MONTHS = [
   ' Dec '
 ]
 
-/** Converts all dates passed in into dd/mm/yyyy format
- * @param {string} text the text to be corrected
- * @returns {string} the corrected date formatted as dd/mm/yyyy
- */
-export function correct_date(text) {
-  text = text.replace('&#xa0;', '').trim()
-  const date =
-    parse_dd_MM_y_date(text) ??
-    parse_do_MMMM_Y_date(text) ??
-    parse_do_MMM_Y_date(text)
-
-  if (date === undefined) return text
-  // special case: someone doesn't include the leading 20 in the year
-  if (date.getFullYear() < 2000) {
-    date.setFullYear(date.getFullYear() + 2000)
-  }
-  return date.toLocaleDateString('en-GB')
-}
-
 function parse_or_none(text, pat) {
   const date = parse(text, pat, new Date())
   return isNaN(date) ? undefined : date
@@ -81,4 +63,39 @@ function parse_do_MMM_Y_date(text) {
   const { slice, match } = min_edit_slices_match(SHORT_MONTHS, text)
   text = text.replace(slice, match)
   return parse_or_none(text, 'do MMM yyyy')
+}
+
+/**
+ * Creates a function that corrects the date to the nearest plausible
+ * representation in en-GB format
+ * @param {boolean} keep_failed whether to keep existing failed parses
+ * @returns {Promise<import('.').CorrectFn<string>>}
+ */
+export default async function Corrector(keep_failed = true) {
+  let { default: failed } = keep_failed
+    ? await import('./data/failed_dates.json', { assert: { type: 'json' } })
+    : { default: [] }
+
+  function correct_date(text) {
+    if (text === undefined || text.length === 0) return text
+
+    const date =
+      parse_dd_MM_y_date(text) ??
+      parse_do_MMMM_Y_date(text) ??
+      parse_do_MMM_Y_date(text)
+
+    if (date === undefined) {
+      failed.push(text)
+      return text
+    }
+    // special case: someone doesn't include the leading 20 in the year
+    if (date.getFullYear() < 2000) {
+      date.setFullYear(date.getFullYear() + 2000)
+    }
+    return date.toLocaleDateString('en-GB')
+  }
+
+  correct_date.close = () =>
+    fs.writeFile('./src/correct/data/failed_dates.json', JSON.stringify(failed))
+  return correct_date
 }

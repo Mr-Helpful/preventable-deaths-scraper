@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import Papa from 'papaparse'
-import { correct_report } from './correct/index.js'
+import ReportCorrector from './correct/index.js'
 import {
   fetch_all_urls,
   fetch_page_urls,
@@ -50,6 +50,7 @@ export async function write_reports(
   parse_summary
 ) {
   const reports = await fetch_seen_reports(csv_path)
+  const correct_report = await ReportCorrector()
 
   const page_urls = await fetch_page_urls(reports_url)
   const all_urls = await fetch_all_urls(page_urls)
