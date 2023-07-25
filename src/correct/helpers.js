@@ -155,8 +155,8 @@ function approx_contains_all(
   relative = 0.1,
   ignore_case = false
 ) {
-  const text_words = text.split(/[^\w]+/g)
-  const pattern_words = pattern.split(/[^\w]+/g)
+  const text_words = text.split(/[^\w']+/g)
+  const pattern_words = pattern.split(/[^\w']+/g)
 
   return pattern_words.every(pattern_word => {
     const error = Math.min(edits, Math.floor(pattern_word.length * relative))
