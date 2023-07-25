@@ -7,13 +7,12 @@ async function correct_current_reports(csv_path, out_path) {
   const reports = Papa.parse(file, { header: true }).data
   const headers = Object.keys(reports[0] ?? {})
   await fs.rm(out_path, { force: true })
-  const correct_report = await ReportCorrector()
+  const correct_report = await ReportCorrector(false)
 
   const corrected = reports.map(report => {
     const correct = correct_report(report)
     return Object.fromEntries(headers.map(header => [header, correct[header]]))
   })
-  console.log('corrections applied')
   await correct_report.close()
   await fs.writeFile(out_path, Papa.unparse(corrected))
 }

@@ -14,11 +14,11 @@ import NameCorrector from './correct_names.js'
  * @param {boolean} keep_failed whether to keep existing failed parses
  * @returns {Promise<CorrectFn<Full_Report>>}
  */
-export default async function Corrector() {
-  const correct_date = await DateCorrector()
-  const correct_area = await AreaCorrector()
-  const correct_name = await NameCorrector()
-  const correct_category = await CategoryCorrector()
+export default async function Corrector(keep_failed = true) {
+  const correct_date = await DateCorrector(keep_failed)
+  const correct_area = await AreaCorrector(keep_failed)
+  const correct_name = await NameCorrector(keep_failed)
+  const correct_category = await CategoryCorrector(keep_failed)
 
   function correct_report(report) {
     return {
