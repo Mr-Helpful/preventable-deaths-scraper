@@ -161,6 +161,8 @@ function approx_contains_all(
   return pattern_words.every(pattern_word => {
     const error = Math.min(edits, Math.floor(pattern_word.length * relative))
     const match_found = text_words.some(word => {
+      // short circuit if the difference in length is too great
+      if (Math.abs(word.length - pattern_word.length) > error) return false
       const distance = edit_distance(pattern_word, word, ignore_case)
       return distance <= error
     })
