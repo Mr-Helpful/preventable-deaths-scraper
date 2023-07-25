@@ -81,8 +81,9 @@ export function split_caps(text) {
  * @returns {string}
  */
 function trimRegExp(text, regex) {
-  const { source } = new RegExp(regex)
-  return text.replace(new RegExp(`^(${source})*|(${source})*$`, 'g'), '')
+  let { source, flags } = new RegExp(regex)
+  if (!flags.includes('g')) flags += 'g'
+  return text.replace(new RegExp(`^(${source})*|(${source})*$`, flags), '')
 }
 
 /**
