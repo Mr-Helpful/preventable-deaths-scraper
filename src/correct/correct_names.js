@@ -4,7 +4,8 @@ import { priority_match, try_matching } from './helpers.js'
 import {
   get_initials,
   remove_email_block,
-  simplify_name
+  simplify_name,
+  split_caps
 } from './simplify_name.js'
 
 /**
@@ -134,7 +135,8 @@ export default async function Corrector(keep_failed = true) {
   function correct_name(text) {
     if (text === undefined || text.length === 0) return text
 
-    const match = priority_match(text, replacements, 2, 0.2, true)
+    const name = split_caps(text)
+    const match = priority_match(name, replacements, 2, 0.2, true)
     if (match === undefined) failed.push(text)
     return match?.name ?? text
   }

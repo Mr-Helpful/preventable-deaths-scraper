@@ -48,16 +48,30 @@ const qualification_regex = new RegExp(`\\s*\\b${qualification}\\b\\s*`, 'g')
  */
 export function simplify_name(name) {
   // remove all punctuation (i.e. `A. Mc'Nice-Cat.` -> `A Mc'Nice Cat`)
-  name = name.replace(/[^\w\s']/g, '')
+  name = name.replace(/[^\w']/g, ' ')
+  // remove extra whitespace introduced by this
+  name = name.replace(/\s+/g, ' ')
   // split on capitalised words (i.e. `A NiceCat` -> `A Nice Cat`)
-  name = name.replace(/(?<=[a-z])[A-Z]/g, ' $&')
-  // remove titles (i.e. `Dr A Nice Cat` -> `A Nice Cat`)
-  name = name.replace(title_regex, '')
+  name = split_caps(name)
   // trim qualifications (i.e. `OBE FCP A Nice Cat MD` -> `A Nice Cat`)
   name = trimRegExp(name, qualification_regex)
+  // remove titles (i.e. `Dr A Nice Cat` -> `A Nice Cat`)
+  name = name.replace(title_regex, '')
+  // remove unnecessary whitespace from simplification
+  name = name.replace(/\s+/g, ' ')
+  name = name.trim()
 
   name = extract_first_last(name)
   return to_camel_case(name)
+}
+
+/**
+ * Splits a string on capitalised words
+ * @param {string} text the text to split apart
+ * @returns {string}
+ */
+export function split_caps(text) {
+  return text.replace(/(?<=[a-z])[A-Z]/g, ' $&')
 }
 
 /**
