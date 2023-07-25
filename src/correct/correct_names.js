@@ -101,32 +101,53 @@ export function merge_incorrect(names) {
 }
 
 /**
+ * Calculates a list of possible replacements for a name map, with different
+ * levels of simplification and priorities
+ * @param {{[key: string]: string}} full_name_map a map from a simple to match name to the full name
+ * @returns {{[key: string]: string}[]} a list of maps from a name to the full name, with different levels of simplification
+ */
+function replacements_from(full_name_map) {
+  const full_names = Object.entries(full_name_map)
+  const short_names = full_names.map(([full_name, name]) => [
+    simplify_name(full_name),
+    name
+  ])
+  const initials = short_names.flatMap(([short_name, name]) =>
+    get_initials(short_name).map(initial => [initial, name])
+  )
+
+  // replacements have priority as so:
+  // 1. match on full name
+  // 2. match on shortened name (first and last name only)
+  // 3. match on initials
+  return [
+    full_name_map,
+    Object.fromEntries(short_names),
+    Object.fromEntries(initials)
+  ]
+}
+
+/**
  * Creates a function that corrects the coroner name to the closest match in the
  * coroner society list and saves the failed matches on close
  * @param {boolean} keep_failed whether to keep existing failed parses
  * @returns {Promise<import('.').CorrectFn<string>>}
  */
 export default async function Corrector(keep_failed = true) {
-  const coroners = await fetch_name_list(
+  const fetched = await fetch_name_list(
     'https://www.coronersociety.org.uk/coroners/'
   )
-  const full_names = coroners.map(({ name }) => remove_email_block(name))
-  const short_names = full_names.map(simplify_name)
-  const initials = short_names.flatMap(get_initials)
-
-  // replacements have priority as so:
-  // 1. match on full name
-  // 2. match on shortened name (first and last name only)
-  // 3. match on initials
-  const replacements = [
-    Object.fromEntries(full_names.map((name, i) => [name, coroners[i]])),
-    Object.fromEntries(short_names.map((name, i) => [name, coroners[i]])),
-    Object.fromEntries(initials.map((name, i) => [name, coroners[i]]))
-  ]
-  await fs.writeFile(
-    './src/correct/data/name_corrections.json',
-    JSON.stringify(replacements)
+  const fetched_replace = Object.fromEntries(
+    fetched.map(({ name }) => [remove_email_block(name), name])
   )
+  const { default: manual_replace } = await import('./data/manual_names.json', {
+    assert: { type: 'json' }
+  })
+
+  const replacements = [
+    ...replacements_from(fetched_replace),
+    ...manual_replace.flatMap(replacements_from)
+  ]
 
   let { default: failed } = keep_failed
     ? await import('./data/failed_names.json', { assert: { type: 'json' } })
