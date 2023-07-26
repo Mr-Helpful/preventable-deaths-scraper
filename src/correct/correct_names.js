@@ -1,6 +1,13 @@
 import fs from 'fs/promises'
 import { fetch_html, map_series } from '../fetch/helpers.js'
-import { try_matching } from './helpers.js'
+import { priority_match, try_matching } from './helpers.js'
+import {
+  get_initials,
+  remove_email_block,
+  first_last_name,
+  split_caps,
+  shorten_whitespace
+} from './simplify_name.js'
 
 /**
  * Fetches the list of page urls from the coroner society website
@@ -61,49 +68,113 @@ async function fetch_name_list(url) {
 }
 
 /**
- * Removes all titles from a name
+ * Attempts to merge all unmatched names together, into the corrections needed
+ * to match them all.
  *
- * @param {string} name the name to strip
- * @returns {string} the name with titles removed
+ * We do this on the basis of:
+ * - if a name roughly matches another name and is longer, we keep it
+ * - if a name is the initials of another name, we keep the full name
+ *
+ * @param {string[]} names the unmatched names to merge together
+ * @return {{[key: string]: string}} the corrections needed to match the names
  */
-function remove_titles(name) {
-  const titles =
-    /(Mr|Mrs|Ms|Dr|Miss|Judge|Cdr|Justice|The|Hon|HHJ|QC)(\s+\.?|$)/gi
-  return name.replace(titles, '')
+export function merge_incorrect(names) {
+  /** @type {{[key: string]: {name: string, simple: string}}} */
+  const corrections = {}
+
+  for (const name of names) {
+    const simple = first_last_name(name)
+
+    for (const possible of [simple, ...get_initials(simple)]) {
+      const match = try_matching(possible, corrections)
+      // if we find an existing shorter match, remove it
+      if (match !== undefined && match.simple.length < possible.length) {
+        delete corrections[match]
+      }
+    }
+
+    corrections[simple] = { name, simple }
+  }
+
+  return Object.fromEntries(
+    Object.entries(corrections).map(([simple, { name }]) => [simple, name])
+  )
 }
 
 /**
- * Removes the [email protected] text from a name
- *
- * @param {string} name the name to strip
- * @returns {string} the name with email block removed
+ * Calculates a list of possible replacements for a name map, with different
+ * levels of simplification and priorities
+ * @param {{[key: string]: string}} full_name_map a map from a simple to match name to the full name
+ * @returns {{[key: string]: string}[]} a list of maps from a name to the full name, with different levels of simplification
  */
-function remove_email_block(name) {
-  return name.replace(/\[.*\]/g, '')
+function replacements_from(full_name_map) {
+  const full_names = Object.entries(full_name_map)
+  const short_names = full_names.map(([full_name, name]) => [
+    first_last_name(full_name),
+    name
+  ])
+  const initials = short_names.flatMap(([short_name, name]) =>
+    get_initials(short_name).map(initial => [initial, name])
+  )
+
+  // replacements have priority as so:
+  // 1. match on full name
+  // 2. match on shortened name (first and last name only)
+  // 3. match on initials
+  return [
+    full_name_map,
+    Object.fromEntries(short_names),
+    Object.fromEntries(initials)
+  ]
 }
 
-const coroners = await fetch_name_list(
-  'https://www.coronersociety.org.uk/coroners/'
-)
-const coroner_map = Object.fromEntries(
-  coroners.map(({ name, ...coroner }) => {
-    name = remove_email_block(name)
-    return [remove_titles(name), { name, ...coroner }]
-  })
-)
-await fs.writeFile(
-  './src/data/names.csv',
-  'coroner_name\n' +
-    Object.values(coroner_map)
-      .map(({ name }) => `"${name}"`)
-      .join('\n')
-)
-
-/** Corrects the coroner name to the closest match in the coroner society list
- * @param {string} text the text to be corrected
- * @returns {string | undefined} the corrected coroner name or the text if no good match
+/**
+ * Creates a function that corrects the coroner name to the closest match in the
+ * coroner society list and saves the failed matches on close
+ * @param {boolean} keep_failed whether to keep existing failed parses
+ * @returns {Promise<import('.').CorrectFn<string>>}
  */
-export function correct_name(text) {
-  if (text === undefined) return undefined
-  return try_matching(text, coroner_map)?.name ?? text
+export default async function Corrector(keep_failed = true) {
+  const fetched = await fetch_name_list(
+    'https://www.coronersociety.org.uk/coroners/'
+  )
+  const fetched_replace = Object.fromEntries(
+    fetched
+      .map(({ name }) => shorten_whitespace(remove_email_block(name)))
+      .map(name => [name, name])
+  )
+  const { default: manual_replace } = await import('./data/manual_names.json', {
+    assert: { type: 'json' }
+  })
+
+  const replacements = [
+    ...replacements_from(fetched_replace),
+    ...manual_replace.flatMap(replacements_from)
+  ]
+
+  let { default: failed } = keep_failed
+    ? await import('./data/failed_names.json', { assert: { type: 'json' } })
+    : { default: [] }
+
+  function correct_name(text) {
+    if (text === undefined || text.length === 0) return text
+
+    const name = split_caps(text)
+    const match = priority_match(name, replacements, 2, 0.2, true)
+    if (match === undefined) failed.push(text)
+    return match
+  }
+
+  correct_name.close = async () =>
+    Promise.all([
+      fs.writeFile(
+        './src/correct/data/failed_names.json',
+        JSON.stringify(failed)
+      ),
+      fs.writeFile(
+        './src/correct/data/merged_names.json',
+        JSON.stringify(merge_incorrect(failed))
+      )
+    ])
+  return correct_name
 }
