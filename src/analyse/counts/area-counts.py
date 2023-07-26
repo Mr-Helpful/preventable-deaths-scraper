@@ -7,6 +7,7 @@
 # ### Importing libraries
 
 import os
+import toml
 import pandas as pd
 
 PATH = os.path.dirname(__file__)
@@ -37,13 +38,26 @@ area_counts = grouped_counts.pivot(index='year', columns='coroner_area', values=
 sum_counts = pd.DataFrame(area_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
 
-print(f"Total number of reports: {sum_counts.sum().sum()}")
-print(f"Number of coroner areas: {len(sum_counts.columns)}")
-print(f"Mean number of reports: {sum_counts.mean().mean()}")
-print(f"Median number of reports: {sum_counts.median().median()}")
-print(f"IQR of number of reports: {sum_counts.mean().quantile([0.25, 0.75])}")
+statistics = {
+  "total": int(sum_counts.sum()[0]),
+  "number of areas": len(sum_counts),
+  "mean": int(sum_counts.mean()[0]),
+  "median": int(sum_counts.median()[0]),
+  "IQR": list(sum_counts.quantile([0.25, 0.75])["count"]),
+}
 
+print(f"Area count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
+
+# %% [markdown]
+# ### Saving the statistics
+
+with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
+  stats = toml.load(rf)
+  stats['coroner areas'] = statistics
+
+with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
+  toml.dump(stats, wf)
 
 # %% [markdown]
 # ### Saving the results
