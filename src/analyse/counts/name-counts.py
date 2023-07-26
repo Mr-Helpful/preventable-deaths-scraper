@@ -60,7 +60,14 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
   toml.dump(stats, wf)
 
 # %% [markdown]
+# ### Calculating the top 30 coroners
+
+top_30_names = list(sum_counts.head(30).index)
+top_30 = name_counts[top_30_names]
+
+# %% [markdown]
 # ### Saving the results
 
 name_counts.to_csv(f"{DATA_PATH}/name-years.csv")
+top_30.to_csv(f"{DATA_PATH}/name-years-top-30.csv")
 sum_counts.to_csv(f"{DATA_PATH}/name-counts.csv")
