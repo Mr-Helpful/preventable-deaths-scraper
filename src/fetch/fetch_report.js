@@ -1,5 +1,5 @@
 import { parse_rows } from '../parse/parse_report.js'
-import { fetch_html, fetch_pdf, ElementError } from './helpers.js'
+import { ElementError, fetch_html, fetch_pdf } from './helpers.js'
 
 /** Type imports
  * @typedef {import('cheerio').CheerioAPI} CheerioAPI

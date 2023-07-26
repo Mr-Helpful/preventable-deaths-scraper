@@ -1,33 +1,38 @@
-import { priority_match } from './helpers.js'
-import { fetch_html } from '../fetch/helpers.js'
-import { ElementError } from '../fetch/helpers.js'
+import fs from 'fs/promises'
 import categories from './category_corrections.json' assert { type: 'json' }
+import { priority_match } from './helpers.js'
 
-/** Fetches the list of report categories from the preventable deaths website
- * @param {string} url the coroner society url
- * @returns {Promise<string[]>} the list of coroner areas
+/**
+ * Creates a function that corrects the category to the closest match in the
+ * preventable deaths list and saves the failed matches on close
+ * @param {boolean} keep_failed whether to keep existing failed parses
+ * @returns {Promise<import('.').CorrectFn<string>>}
  */
-async function fetch_category_list(url) {
-  const $ = await fetch_html(url)
-  const list_path = '#filter-pfd_report_type > option'
-  const list_rows = $(list_path)
-  if (list_rows.length === 0) throw new ElementError('category list not found')
+export default async function Corrector(keep_failed = true) {
+  let { default: failed } = keep_failed
+    ? await import('./data/failed_categories.json', {
+        assert: { type: 'json' }
+      })
+    : { default: [] }
 
-  return list_rows
-    .get()
-    .map(row => $(row).text())
-    .filter(x => x !== 'Select element')
-}
+  function correct_category(text) {
+    if (text === undefined || text.length === 0) return text
 
-/** Corrects the category to the closest match in the preventable deaths list
- * @param {string} text the text to be corrected
- * @returns {string | undefined} the corrected category or undefined if no good match
- */
-export function correct_category(text) {
-  if (text === undefined) return undefined
-  return text
-    .split('|')
-    .map(category => priority_match(category, categories))
-    .filter(match => match !== undefined)
-    .join(' | ')
+    return text
+      .split(/\s*\|\s*/g)
+      .flatMap(category => {
+        // I'm using flatMap like a filterMap here.
+        const match = priority_match(category, categories)
+        if (match === undefined) failed.push(category)
+        return match ? [match] : []
+      })
+      .join(' | ')
+  }
+
+  correct_category.close = () =>
+    fs.writeFile(
+      './src/correct/data/category_corrections.json',
+      JSON.stringify(failed)
+    )
+  return correct_category
 }
