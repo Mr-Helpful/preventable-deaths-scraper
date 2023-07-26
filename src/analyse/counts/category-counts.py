@@ -25,6 +25,11 @@ len(reports)
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
 
 # %% [markdown]
+# ### Calculate number of categorised reports
+
+(reports['category'].str.len() > 0).sum()
+
+# %% [markdown]
 # ### Calculate number of categories we expect
 
 reports['category'].str.split('|').str.len().sum()
