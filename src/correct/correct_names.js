@@ -4,8 +4,9 @@ import { priority_match, try_matching } from './helpers.js'
 import {
   get_initials,
   remove_email_block,
-  simplify_name,
-  split_caps
+  first_last_name,
+  split_caps,
+  shorten_whitespace
 } from './simplify_name.js'
 
 /**
@@ -82,7 +83,7 @@ export function merge_incorrect(names) {
   const corrections = {}
 
   for (const name of names) {
-    const simple = simplify_name(name)
+    const simple = first_last_name(name)
 
     for (const possible of [simple, ...get_initials(simple)]) {
       const match = try_matching(possible, corrections)
@@ -109,7 +110,7 @@ export function merge_incorrect(names) {
 function replacements_from(full_name_map) {
   const full_names = Object.entries(full_name_map)
   const short_names = full_names.map(([full_name, name]) => [
-    simplify_name(full_name),
+    first_last_name(full_name),
     name
   ])
   const initials = short_names.flatMap(([short_name, name]) =>
@@ -138,7 +139,9 @@ export default async function Corrector(keep_failed = true) {
     'https://www.coronersociety.org.uk/coroners/'
   )
   const fetched_replace = Object.fromEntries(
-    fetched.map(({ name }) => [remove_email_block(name), name])
+    fetched
+      .map(({ name }) => shorten_whitespace(remove_email_block(name)))
+      .map(name => [name, name])
   )
   const { default: manual_replace } = await import('./data/manual_names.json', {
     assert: { type: 'json' }
@@ -159,7 +162,7 @@ export default async function Corrector(keep_failed = true) {
     const name = split_caps(text)
     const match = priority_match(name, replacements, 2, 0.2, true)
     if (match === undefined) failed.push(text)
-    return match?.name ?? text
+    return match
   }
 
   correct_name.close = async () =>
