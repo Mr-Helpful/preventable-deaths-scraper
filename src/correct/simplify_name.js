@@ -47,7 +47,7 @@ const qualification_regex = new RegExp(`\\s*\\b(${qualification})\\b\\s*`, 'gi')
  * @param {string} name some name in `<start-title>* <first-name> <middle-name>* <last-name> <qualification>*` format
  * @returns {string} the simplified name in `<first-name> <last-name>` format
  */
-export function simplify_name(name) {
+export function first_last_name(name) {
   // remove all punctuation (i.e. `A. Mc'Nice-Cat.` -> `A Mc'Nice Cat`)
   name = name.replace(/[^\w']/g, ' ')
   // remove extra whitespace introduced by this
@@ -58,10 +58,8 @@ export function simplify_name(name) {
   name = trimRegExp(name, qualification_regex)
   // remove titles (i.e. `Dr A Nice Cat` -> `A Nice Cat`)
   name = name.replace(title_regex, '')
-  // remove unnecessary whitespace from simplification
-  name = name.replace(/\s+/g, ' ')
-  name = name.trim()
 
+  name = shorten_whitespace(name)
   name = extract_first_last(name)
   return to_camel_case(name)
 }
@@ -109,6 +107,15 @@ function to_camel_case(name) {
     .filter(word => word.length > 0)
     .map(word => word[0].toUpperCase() + word.slice(1).toLowerCase())
     .join(' ')
+}
+
+/**
+ * Shortens a string by removing all unneccesary whitespace and trimming
+ * @param {string} text the text to shorten
+ * @returns {string}
+ */
+export function shorten_whitespace(text) {
+  return text.replace(/\s+/g, ' ').trim()
 }
 
 /**
