@@ -1,0 +1,27 @@
+["coroner areas"]
+total = 4469
+"number of areas" = 82
+mean = 54
+median = 45
+IQR = [ 20.25, 66.75,]
+
+["death categories"]
+total = 6665
+"number of categories" = 19
+mean = 350
+median = 278
+IQR = [ 97.0, 464.0,]
+
+["coroner name"]
+total = 4470
+"number of names" = 421
+mean = 10
+median = 5
+IQR = [ 2.0, 11.0,]
+
+[year]
+total = 4485
+"number of years" = 11
+mean = 449
+median = 432
+IQR = [ 365.0, 478.0,]

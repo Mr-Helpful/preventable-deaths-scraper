@@ -7,6 +7,7 @@
 # ### Importing libraries
 
 import os
+import toml
 import pandas as pd
 
 PATH = os.path.dirname(__file__)
@@ -20,17 +21,43 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 len(reports)
 
 # %% [markdown]
-# ### Counting the number of reports in each year
+# ### Extracting the dates of reports
 
 # use a regex to extract the year from the date of report
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
-# group by the year and count the number of reports
-year_counts = reports.groupby('year').size().reset_index(name='count')
-year_counts['count'].sum()
+reports['datetime'] = pd.to_datetime(reports["date_of_report"], format="%d/%m/%Y", errors="coerce")
+
+earliest = reports["datetime"].min()
+latest = reports["datetime"].max()
+year_diff = latest.year - earliest.year + (latest.month - earliest.month) / 12 + (latest.day - earliest.day) / 365
+print(earliest, latest, year_diff)
 
 # %% [markdown]
-# ### Debug: find rows that don't match regex
-reports[~(reports['date_of_report'].str.contains(r'\d{2}\/\d{2}\/\d{4}') == True)]
+# ### Counting the number of reports in each year
+
+# group by the year and count the number of reports
+year_counts = reports.groupby('year').size().reset_index(name='count').set_index('year')
+
+statistics = {
+  "total": int(year_counts.sum()[0]),
+  "number of years": len(year_counts),
+  "mean": int((year_counts.sum() / year_diff)[0]),
+  "median": int(year_counts.median()[0]),
+  "IQR": list(year_counts.quantile([0.25, 0.75])["count"]),
+}
+
+print(f"Year counts statistics: {statistics}")
+print(f"Sorted counts: {year_counts}")
+
+# %% [markdown]
+# ### Saving the statistics
+
+with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
+  stats = toml.load(rf)
+  stats['year'] = statistics
+
+with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
+  toml.dump(stats, wf)
 
 # %% [markdown]
 # ### Saving the results
