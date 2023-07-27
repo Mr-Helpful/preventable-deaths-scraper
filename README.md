@@ -9,6 +9,8 @@ This repository represents a rewrite of the [Preventable Deaths Scraper](https:/
 
 We also include a natural language analysis of the scraped data, which uses a Large Language model approach (specifically a [form of BioBert](https://huggingface.co/pritamdeka/BioBERT-mnli-snli-scinli-scitail-mednli-stsb)) to automatically generate likely causes of death for the scraped data.
 
+Finally, we also provide 2 custom [wordpress gutenberg blocks](https://developer.wordpress.org/block-editor/how-to-guides/platform/) to be used alongside the scraped data. The first plugin generates a heatmap of coroner areas from the scraped data and the second allows for statistics of the data to be inserted into any block.
+
 ## Installation and Usage
 
 ### Scraper
@@ -89,6 +91,22 @@ A shortcut to run the analysis is defined in the [`package.json`](./package.json
 
 ```bash
 npm run analyse:label-medical
+```
+
+### Wordpress Plugins
+
+The wordpress plugins are written using the Project Gutenberg [block editor](https://developer.wordpress.org/block-editor/getting-started/devenv/). To install the plugins, you'll need to have [node.js](https://nodejs.org/en/) installed. Once you have node.js installed, you can install the plugins by running the following command in either of the plugins' project directories:
+
+```bash
+npm install -g @wordpress/env
+npm install
+```
+
+You can then run the development server and build the plugin as so:
+
+```bash
+wp-env start
+npm run start
 ```
 
 ## Layout
