@@ -29,8 +29,6 @@ CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
   coroner_names = json.load(rf)
 
-print(coroner_names)
-
 # %% [markdown]
 
 # use a regex to extract the year from the date of report

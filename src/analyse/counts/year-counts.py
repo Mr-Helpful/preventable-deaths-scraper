@@ -30,7 +30,6 @@ reports['datetime'] = pd.to_datetime(reports["date_of_report"], format="%d/%m/%Y
 earliest = reports["datetime"].min()
 latest = reports["datetime"].max()
 year_diff = latest.year - earliest.year + (latest.month - earliest.month) / 12 + (latest.day - earliest.day) / 365
-print(earliest, latest, year_diff)
 
 # %% [markdown]
 # ### Counting the number of reports in each year
