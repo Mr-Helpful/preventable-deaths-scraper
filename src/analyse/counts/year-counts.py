@@ -62,4 +62,4 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
 # %% [markdown]
 # ### Saving the results
 
-year_counts.to_csv(f"{DATA_PATH}/year-counts.csv", index=False)
+year_counts.to_csv(f"{DATA_PATH}/year-counts.csv")
