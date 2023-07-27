@@ -73,11 +73,11 @@ sum_counts = sum_counts.sort_values(by='count', ascending=False)
 sum_counts.index.name = 'category'
 
 statistics = {
-  "total": int(sum_counts.sum()[0]),
-  "number of categories": len(sum_counts),
-  "mean": int(sum_counts.mean()[0]),
-  "median": int(sum_counts.median()[0]),
-  "IQR": list(sum_counts.quantile([0.25, 0.75])["count"]),
+  "no. categories in reports": int(sum_counts.sum()[0]),
+  "no. categories": len(sum_counts),
+  "mean per category": int(sum_counts.mean()[0]),
+  "median per category": int(sum_counts.median()[0]),
+  "IQR of categories": list(sum_counts.quantile([0.25, 0.75])["count"]),
 }
 
 print(f"Category count statistics: {statistics}")
