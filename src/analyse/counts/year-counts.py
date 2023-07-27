@@ -39,11 +39,11 @@ print(earliest, latest, year_diff)
 year_counts = reports.groupby('year').size().reset_index(name='count').set_index('year')
 
 statistics = {
-  "total": int(year_counts.sum()[0]),
-  "number of years": len(year_counts),
-  "mean": int((year_counts.sum() / year_diff)[0]),
-  "median": int(year_counts.median()[0]),
-  "IQR": list(year_counts.quantile([0.25, 0.75])["count"]),
+  "no. reports parsed": int(year_counts.sum()[0]),
+  "no. years covered": len(year_counts),
+  "mean per year": int((year_counts.sum() / year_diff)[0]),
+  "median per year": int(year_counts.median()[0]),
+  "IQR of years": list(year_counts.quantile([0.25, 0.75])["count"]),
 }
 
 print(f"Year counts statistics: {statistics}")
@@ -62,4 +62,4 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
 # %% [markdown]
 # ### Saving the results
 
-year_counts.to_csv(f"{DATA_PATH}/year-counts.csv", index=False)
+year_counts.to_csv(f"{DATA_PATH}/year-counts.csv")

@@ -138,14 +138,19 @@ export default async function Corrector(keep_failed = true) {
   const fetched = await fetch_name_list(
     'https://www.coronersociety.org.uk/coroners/'
   )
+  const fetched_simple = fetched.map(({ name }) =>
+    shorten_whitespace(remove_email_block(name))
+  )
   const fetched_replace = Object.fromEntries(
-    fetched
-      .map(({ name }) => shorten_whitespace(remove_email_block(name)))
-      .map(name => [name, name])
+    fetched_simple.map(name => [name, name])
   )
   const { default: manual_replace } = await import('./data/manual_names.json', {
     assert: { type: 'json' }
   })
+  await fs.writeFile(
+    './src/correct/data/fetched_names.json',
+    JSON.stringify(fetched_simple)
+  )
 
   const replacements = [
     ...replacements_from(fetched_replace),

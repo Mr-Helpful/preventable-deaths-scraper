@@ -4,9 +4,10 @@
   "scripts": {
     "fetch": "node src/index.js",
     "correct": "node src/correct/run_corrections.js",
-    "analyse:counts": "npm run analyse:years && npm run analyse:areas && npm run analyse:categories",
-    "analyse:years": "python src/analyse/counts/year-counts.py",
+    "analyse:counts": "npm run analyse:areas && npm run analyse:names && npm run analyse:years && npm run analyse:categories",
     "analyse:areas": "python src/analyse/counts/area-counts.py",
+    "analyse:names": "python src/analyse/counts/name-counts.py",
+    "analyse:years": "python src/analyse/counts/year-counts.py",
     "analyse:categories": "python src/analyse/counts/category-counts.py",
     "analyse:label-medical": "python src/analyse/natural-language/label-reports.py --causes medical-causes.txt --output medical-cause-reports.csv"
   },
