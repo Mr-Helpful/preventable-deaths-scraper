@@ -14,7 +14,8 @@ IQR = [ 97.0, 464.0,]
 
 ["coroner name"]
 total = 4470
-"number of names" = 421
+"number with report(s)" = 421
+"number without reports" = 297
 mean = 10
 median = 5
 IQR = [ 2.0, 11.0,]
