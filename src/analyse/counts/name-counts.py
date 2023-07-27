@@ -50,12 +50,12 @@ sum_counts = pd.DataFrame(name_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
 
 statistics = {
-  "total": int(sum_counts.sum()[0]),
-  "number with report(s)": len(sum_counts),
-  "number without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-  "mean": int(sum_counts.mean()[0]),
-  "median": int(sum_counts.median()[0]),
-  "IQR": list(sum_counts.quantile([0.25, 0.75])["count"]),
+  "no. reports parsed": int(sum_counts.sum()[0]),
+  "no. names with report(s)": len(sum_counts),
+  "no. names without reports": len([name for name in coroner_names if name not in sum_counts.index]),
+  "mean per name": int(sum_counts.mean()[0]),
+  "median per name": int(sum_counts.median()[0]),
+  "IQR of names": list(sum_counts.quantile([0.25, 0.75])["count"]),
 }
 
 print(f"Name count statistics: {statistics}")
