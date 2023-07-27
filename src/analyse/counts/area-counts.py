@@ -39,11 +39,11 @@ sum_counts = pd.DataFrame(area_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
 
 statistics = {
-  "total": int(sum_counts.sum()[0]),
-  "number of areas": len(sum_counts),
-  "mean": int(sum_counts.mean()[0]),
-  "median": int(sum_counts.median()[0]),
-  "IQR": list(sum_counts.quantile([0.25, 0.75])["count"]),
+  "no. parsed reports": int(sum_counts.sum()[0]),
+  "no. areas": len(sum_counts),
+  "mean per area": int(sum_counts.mean()[0]),
+  "median per area": int(sum_counts.median()[0]),
+  "IQR of areas": list(sum_counts.quantile([0.25, 0.75])["count"]),
 }
 
 print(f"Area count statistics: {statistics}")

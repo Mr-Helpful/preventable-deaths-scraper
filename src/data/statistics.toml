@@ -1,27 +1,28 @@
 ["coroner areas"]
-total = 4469
-"number of areas" = 82
-mean = 54
-median = 45
-IQR = [ 20.25, 66.75,]
+"no. parsed reports" = 4469
+"no. areas" = 82
+"mean per area" = 54
+"median per area" = 45
+"IQR of areas" = [ 20.25, 66.75,]
 
 ["death categories"]
-total = 6665
-"number of categories" = 19
-mean = 350
-median = 278
-IQR = [ 97.0, 464.0,]
+"no. categories in reports" = 6665
+"no. categories" = 19
+"mean per category" = 350
+"median per category" = 278
+"IQR of categories" = [ 97.0, 464.0,]
 
 ["coroner name"]
-total = 4470
-"number of names" = 421
-mean = 10
-median = 5
-IQR = [ 2.0, 11.0,]
+"no. reports parsed" = 4470
+"no. names with report(s)" = 421
+"no. names without reports" = 297
+"mean per name" = 10
+"median per name" = 5
+"IQR of names" = [ 2.0, 11.0,]
 
 [year]
-total = 4485
-"number of years" = 11
-mean = 449
-median = 432
-IQR = [ 365.0, 478.0,]
+"no. reports parsed" = 4485
+"no. years covered" = 11
+"mean per year" = 449
+"median per year" = 432
+"IQR of years" = [ 365.0, 478.0,]
