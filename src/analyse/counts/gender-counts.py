@@ -15,6 +15,7 @@ import pandas as pd
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
 REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
+CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 
 # %% [markdown]
 # ### Regexes for coroner titles
@@ -26,12 +27,9 @@ FEMALE_NAME = r"\b(?:mrs|miss|ms|lady|dame)\b"
 # ### Reading the reports
 
 reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
-len(reports)
 
 # %% [markdown]
 # ### Reading coroner names
-
-CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 
 with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
   coroner_names = json.load(rf)
@@ -41,6 +39,7 @@ coroners_female = len([name for name in coroner_names if re.match(FEMALE_NAME, n
 coroners_unknown = len(coroner_names) - coroners_male - coroners_female
 
 # %% [markdown]
+# ### Calculating the year of each report
 
 # use a regex to extract the year from the date of report
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
@@ -54,11 +53,10 @@ reports['female'] = reports['coroner_name'].str.contains(FEMALE_NAME, na=False, 
 reports['unknown'] = ~reports['male'] & ~reports['female']
 reports = reports[['year', 'male', 'female', 'unknown']]
 gender_counts = reports.groupby('year').sum()
+sum_counts = gender_counts.sum()
 
 # %% [markdown]
 # ### Various statistics about the counts
-
-sum_counts = gender_counts.sum()
 
 statistics = {
   "no. coroners male": coroners_male,

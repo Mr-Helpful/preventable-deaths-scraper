@@ -21,6 +21,7 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 len(reports)
 
 # %% [markdown]
+# ### Calculating the year of each report
 
 # use a regex to extract the year from the date of report
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
@@ -32,11 +33,11 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 grouped_counts = reports.groupby(['year', 'coroner_area']).size().reset_index(name='count')
 area_counts = grouped_counts.pivot(index='year', columns='coroner_area', values='count').fillna(0).astype(int)
 
-# %% [markdown]
-# ### Various statistics about the counts
-
 sum_counts = pd.DataFrame(area_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
+
+# %% [markdown]
+# ### Various statistics about the counts
 
 statistics = {
   "no. parsed reports": int(sum_counts.sum()[0]),
