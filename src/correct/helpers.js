@@ -108,14 +108,14 @@ function min_edit_slice(pat, text, ignore_case = false) {
 }
 
 /** Finds the pattern with the minimum edit distance to a slice of the text
- * @param {string[]} pats the patterns to search within
+ * @param {string[]} to_match the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
  * @returns {{match: string, slice: string, edits: number, loc: [number, number]}}
  *   the pattern, the slice, the edit distance and the location of the slice
  */
 export function min_edit_slices_match(
-  pats,
+  to_match,
   text,
   relative = false,
   ignore_case = false
@@ -125,7 +125,7 @@ export function min_edit_slices_match(
   let slice = ''
   let loc = [0, 0]
 
-  for (const pat of pats) {
+  for (const pat of to_match) {
     let min_result = min_edit_slice(pat, text, ignore_case)
     if (relative) min_result.edits /= pat.length
     if (min_result.edits < edits) {
@@ -180,55 +180,70 @@ export function to_keywords(text) {
 
 /** Attempts to match area text against a possible list of matches
  * @template R
- * @template {{[key: string]: R}} T
  * @param {string} text the text to be corrected
- * @param {T} matches the list of strings to match against
+ * @param {{[key: string]: R}} to_match the list of strings to match against
  * @param {number} [edits=2] the maximum number of edits per word
  * @param {number} [relative=0.1] the maximum number of relative edits per word
- * @returns {T[keyof T] | undefined} the value for the match, or undefined if no good match
+ * @returns {R[] | undefined} possible matches or undefined if no good match
  */
-export function try_matching(
+export function try_matches(
   text,
-  matches,
+  to_match,
   edits = 2,
   relative = 0.2,
   ignore_case = false
 ) {
-  const keys = Object.keys(matches)
+  const keys = Object.keys(to_match)
 
   // first test a direct match
   const direct_match = keys.find(area => area === text)
-  if (direct_match) return matches[direct_match]
+  if (direct_match) return [to_match[direct_match]]
 
   // then test whether text is a superset of an area,
   // up to 2 edits or 10% relative error per word
   // we take the longest such match to avoid false positives
-  const superset_match = max_by(
-    keys.filter(area =>
-      approx_contains_all(text, area, edits, relative, ignore_case)
-    ),
-    match => match.length
+  const superset_match = keys.filter(area =>
+    approx_contains_all(text, area, edits, relative, ignore_case)
   )
-  if (superset_match) return matches[superset_match]
+  if (superset_match.length > 0)
+    return superset_match.map(match => to_match[match])
 }
 
-/** Attempts to match area text against a possible list of matches, giving earlier matches a higher priority
+/** Attempts to match area text against a possible list of matches
  * @template R
- * @template {{[key: string]: R}} T
  * @param {string} text the text to be corrected
- * @param {T[]} priority_matches the list of strings to match against
+ * @param {{[key: string]: R}} to_match the list of strings to match against
  * @param {number} [edits=2] the maximum number of edits per word
  * @param {number} [relative=0.1] the maximum number of relative edits per word
- * @returns {T[keyof T] | undefined} the value for the match, or undefined if no good match
+ * @returns {R | undefined} the value for the match, or undefined if no good match
  */
-export function priority_match(
+export function try_matching(
   text,
-  priority_matches,
+  to_match,
   edits = 2,
   relative = 0.2,
   ignore_case = false
 ) {
-  for (const matches of priority_matches) {
+  const matches = try_matches(text, to_match, edits, relative, ignore_case)
+  if (matches) return max_by(matches, match => match.length)
+}
+
+/** Attempts to match area text against a possible list of matches, giving earlier matches a higher priority
+ * @template R
+ * @param {string} text the text to be corrected
+ * @param {{[key: string]: R}[]} match_list the list of strings to match against
+ * @param {number} [edits=2] the maximum number of edits per word
+ * @param {number} [relative=0.1] the maximum number of relative edits per word
+ * @returns {R | undefined} the value for the match, or undefined if no good match
+ */
+export function priority_match(
+  text,
+  match_list,
+  edits = 2,
+  relative = 0.2,
+  ignore_case = false
+) {
+  for (const matches of match_list) {
     const match = try_matching(text, matches, edits, relative, ignore_case)
     if (match) return match
   }
