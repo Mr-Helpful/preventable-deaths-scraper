@@ -15,6 +15,7 @@ import pandas as pd
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
 REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
+CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 
 # %% [markdown]
 # ### Regexes for coroner titles
@@ -30,8 +31,6 @@ len(reports)
 
 # %% [markdown]
 # ### Reading coroner names
-
-CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 
 with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
   coroner_names = json.load(rf)

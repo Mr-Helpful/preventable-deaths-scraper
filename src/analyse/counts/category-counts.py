@@ -7,12 +7,14 @@
 # ### Importing libraries
 
 import os
+import json
 import toml
 import pandas as pd
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
 REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
+CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 
 # %% [markdown]
 # ### Reading the reports
@@ -45,9 +47,6 @@ categories.sort_values(by=0).drop_duplicates()
 
 # %% [markdown]
 # ### Fetching the categories
-import json
-
-CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 
 with open(f"{CORRECT_PATH}/category_corrections.json", 'r', encoding='utf8') as f:
   categories = []
