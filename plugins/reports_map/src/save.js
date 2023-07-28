@@ -12,6 +12,10 @@ import color_scales from "./heatmap/report-scales.json";
 import { useEffect, useState } from "@wordpress/element";
 import { useMemo } from "react";
 
+import { MultiRangeSlider } from "two-thumb-range-slider";
+import MultiRangeSlider2 from "multi-range-slider-react";
+import MultiRangeSlider3 from "@saidaitdriss/multirangeslider";
+
 /** @typedef {{csv_text: string, source_url: string}} SaveBlockProps */
 
 /** Maps a function over the values of an object, leaving keys unaffected */
@@ -42,7 +46,7 @@ export function SaveBlock({ csv_text, source_url }) {
 		if (url === source_url) setCsv(csv);
 	}, [source_url]);
 
-	const filtered = useMemo(() => csv_.filter({ year }));
+	// const filtered = useMemo(() => csv_.filter({ year }), [csv_]);
 
 	const csv = Papa.parse(csv_text, { header: true, skipEmptyLines: true }).data;
 	if (csv.length === 0) return <div>No data</div>;
@@ -51,13 +55,18 @@ export function SaveBlock({ csv_text, source_url }) {
 	);
 	const max = Math.max(...Object.values(area_counts), 0);
 	return (
-		<ReportHeatMap
-			area_counts={area_counts}
-			max={max}
-			scale={color_scales.custom}
-			className="report-heatmap-block"
-			data-props={JSON.stringify({ csv_text, source_url })}
-		/>
+		<>
+			<ReportHeatMap
+				area_counts={area_counts}
+				max={max}
+				scale={color_scales.custom}
+				className="report-heatmap-block"
+				data-props={JSON.stringify({ csv_text, source_url })}
+			/>
+			<MultiRangeSlider min={0} max={1} value={[0, 1]} />
+			<MultiRangeSlider2 min={0} max={1} value={[0, 1]} />
+			<MultiRangeSlider3 min={0} max={1} value={[0, 1]} />
+		</>
 	);
 }
 
