@@ -144,9 +144,10 @@ export default async function Corrector(keep_failed = true) {
   const fetched_replace = Object.fromEntries(
     fetched_simple.map(name => [name, name])
   )
-  const { default: manual_replace } = await import('./data/manual_names.json', {
-    assert: { type: 'json' }
-  })
+  const { default: manual_replace } = await import(
+    './manual_replace/manual_names.json',
+    { assert: { type: 'json' } }
+  )
   await fs.writeFile(
     './src/correct/data/fetched_names.json',
     JSON.stringify(fetched_simple)
@@ -158,7 +159,9 @@ export default async function Corrector(keep_failed = true) {
   ]
 
   let { default: failed } = keep_failed
-    ? await import('./data/failed_names.json', { assert: { type: 'json' } })
+    ? await import('./failed_parses/failed_names.json', {
+        assert: { type: 'json' }
+      })
     : { default: [] }
 
   function correct_name(text) {
@@ -173,11 +176,11 @@ export default async function Corrector(keep_failed = true) {
   correct_name.close = async () =>
     Promise.all([
       fs.writeFile(
-        './src/correct/data/failed_names.json',
+        './src/correct/failed_parses/failed_names.json',
         JSON.stringify(failed)
       ),
       fs.writeFile(
-        './src/correct/data/merged_names.json',
+        './src/correct/failed_parses/merged_names.json',
         JSON.stringify(merge_incorrect(failed))
       )
     ])

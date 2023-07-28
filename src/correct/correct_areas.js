@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import { ElementError, fetch_html } from '../fetch/helpers.js'
-import corrections from './area_corrections.json' assert { type: 'json' }
+import corrections from './manual_replace/areas.json' assert { type: 'json' }
 import { to_keywords, try_matching } from './helpers.js'
 
 /** Fetches the list of coroner areas from the coroner society website
@@ -33,7 +33,9 @@ export default async function Corrector(keep_failed = true) {
   areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
 
   let { default: failed } = keep_failed
-    ? await import('./data/failed_areas.json', { assert: { type: 'json' } })
+    ? await import('./failed_parses/failed_areas.json', {
+        assert: { type: 'json' }
+      })
     : { default: [] }
 
   function correct_area(text) {
@@ -45,6 +47,9 @@ export default async function Corrector(keep_failed = true) {
   }
 
   correct_area.close = () =>
-    fs.writeFile('./src/correct/data/failed_areas.json', JSON.stringify(failed))
+    fs.writeFile(
+      './src/correct/failed_parses/failed_areas.json',
+      JSON.stringify(failed)
+    )
   return correct_area
 }

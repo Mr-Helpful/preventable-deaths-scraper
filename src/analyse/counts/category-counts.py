@@ -49,7 +49,7 @@ import json
 
 CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 
-with open(f"{CORRECT_PATH}/category_corrections.json", 'r', encoding='utf8') as f:
+with open(f"{CORRECT_PATH}/manual_replace/categories.json", 'r', encoding='utf8') as f:
   categories = []
   for category in json.load(f):
     categories.extend(category.values())

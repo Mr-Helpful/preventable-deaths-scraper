@@ -106,7 +106,7 @@ function try_complete_matching(text, names) {
  */
 export default async function Corrector(keep_failed = true) {
   const { default: manual_replacements } = await import(
-    './data/manual_destinations.json',
+    './manual_replace/manual_destinations.json',
     { assert: { type: 'json' } }
   )
   let { default: known_replacements } = await import(
@@ -115,7 +115,9 @@ export default async function Corrector(keep_failed = true) {
   )
 
   let { default: failed } = keep_failed
-    ? await import('./data/failed_names.json', { assert: { type: 'json' } })
+    ? await import('./failed_parses/failed_names.json', {
+        assert: { type: 'json' }
+      })
     : { default: [] }
 
   /** @param {string} text */
@@ -162,7 +164,7 @@ export default async function Corrector(keep_failed = true) {
   correct_name.close = async () =>
     Promise.all([
       fs.writeFile(
-        './src/correct/data/failed_destinations.json',
+        './src/correct/failed_parses/failed_destinations.json',
         JSON.stringify(failed)
       ),
       fs.writeFile(

@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import categories from './category_corrections.json' assert { type: 'json' }
+import categories from './manual_replace/categories.json' assert { type: 'json' }
 import { priority_match } from './helpers.js'
 
 /**
@@ -10,7 +10,7 @@ import { priority_match } from './helpers.js'
  */
 export default async function Corrector(keep_failed = true) {
   let { default: failed } = keep_failed
-    ? await import('./data/failed_categories.json', {
+    ? await import('./failed_parses/failed_categories.json', {
         assert: { type: 'json' }
       })
     : { default: [] }
@@ -31,7 +31,7 @@ export default async function Corrector(keep_failed = true) {
 
   correct_category.close = () =>
     fs.writeFile(
-      './src/correct/data/category_corrections.json',
+      './src/correct/failed_parses/failed_categories.json',
       JSON.stringify(failed)
     )
   return correct_category
