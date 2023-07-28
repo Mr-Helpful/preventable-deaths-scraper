@@ -26,3 +26,11 @@
 "mean per year" = 449
 "median per year" = 432
 "IQR of years" = [ 365.0, 478.0,]
+
+["coroner gender"]
+"no. coroners male" = 252
+"no. coroners female" = 235
+"no. coroners unknown" = 155
+"no. reports male" = 2020
+"no. reports female" = 1737
+"no. reports unknown" = 728
