@@ -27,7 +27,6 @@ FEMALE_NAME = r"\b(?:mrs|miss|ms|lady|dame)\b"
 # ### Reading the reports
 
 reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
-len(reports)
 
 # %% [markdown]
 # ### Reading coroner names
