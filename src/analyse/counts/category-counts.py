@@ -23,6 +23,7 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 len(reports)
 
 # %% [markdown]
+# ### Calculating the year of each report
 
 # use a regex to extract the year from the date of report
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
@@ -64,12 +65,12 @@ for category in categories:
 
 category_counts = reports[categories].groupby(reports['year']).sum()
 
-# %% [markdown]
-# ### Various statistics about the counts
-
 sum_counts = pd.DataFrame(category_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
 sum_counts.index.name = 'category'
+
+# %% [markdown]
+# ### Various statistics about the counts
 
 statistics = {
   "no. categories in reports": int(sum_counts.sum()[0]),

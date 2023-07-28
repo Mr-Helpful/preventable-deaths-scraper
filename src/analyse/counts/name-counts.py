@@ -29,6 +29,7 @@ with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
   coroner_names = json.load(rf)
 
 # %% [markdown]
+# ### Calculating the year of each report
 
 # use a regex to extract the year from the date of report
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
@@ -40,11 +41,11 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 grouped_counts = reports.groupby(['year', 'coroner_name']).size().reset_index(name='count')
 name_counts = grouped_counts.pivot(index='year', columns='coroner_name', values='count').fillna(0).astype(int)
 
-# %% [markdown]
-# ### Various statistics about the counts
-
 sum_counts = pd.DataFrame(name_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
+
+# %% [markdown]
+# ### Various statistics about the counts
 
 statistics = {
   "no. reports parsed": int(sum_counts.sum()[0]),
