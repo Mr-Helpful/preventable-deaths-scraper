@@ -1,7 +1,5 @@
 import fs from 'fs/promises'
-import { fetch_html, map_series } from '../fetch/helpers.js'
-import { priority_match, try_matches, try_matching } from './helpers.js'
-import { get_initials, first_last_name, split_caps } from './simplify_name.js'
+import { try_matches, try_matching } from './helpers.js'
 import {
   conjunctions,
   connectives,

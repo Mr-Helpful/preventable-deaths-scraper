@@ -18,12 +18,3 @@ export function to_acronym(organisation) {
 
   return words.map(word => word[0]).join('')
 }
-
-/**
- * Tests whether a string only contains an acronym
- * @param {string} text the text to test
- * @returns {boolean} whether the text is an acronym
- */
-export function is_acronym(text) {
-  return text === text.toUpperCase()
-}
