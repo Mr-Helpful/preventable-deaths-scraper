@@ -73,7 +73,7 @@ function parse_do_MMM_Y_date(text) {
  */
 export default async function Corrector(keep_failed = true) {
   let { default: failed } = keep_failed
-    ? await import('./failed_parses/failed_dates.json', {
+    ? await import('./failed_parses/dates.json', {
         assert: { type: 'json' }
       })
     : { default: [] }
@@ -99,7 +99,7 @@ export default async function Corrector(keep_failed = true) {
 
   correct_date.close = () =>
     fs.writeFile(
-      './src/correct/failed_parses/failed_dates.json',
+      './src/correct/failed_parses/dates.json',
       JSON.stringify(failed)
     )
   return correct_date

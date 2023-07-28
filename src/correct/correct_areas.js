@@ -33,7 +33,7 @@ export default async function Corrector(keep_failed = true) {
   areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
 
   let { default: failed } = keep_failed
-    ? await import('./failed_parses/failed_areas.json', {
+    ? await import('./failed_parses/areas.json', {
         assert: { type: 'json' }
       })
     : { default: [] }
@@ -48,7 +48,7 @@ export default async function Corrector(keep_failed = true) {
 
   correct_area.close = () =>
     fs.writeFile(
-      './src/correct/failed_parses/failed_areas.json',
+      './src/correct/failed_parses/areas.json',
       JSON.stringify(failed)
     )
   return correct_area
