@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import parse from 'date-fns/parse/index.js'
-import { min_edit_slices_match } from './helpers.js'
+import { min_edit_slices_match } from './approx_match.js'
 
 // we put spaces around the months to attempt to avoid weird characters being
 // placed around them
