@@ -76,9 +76,12 @@ function try_complete_matching(text, names) {
  * @returns {Promise<import('./index.js').CorrectFn<string>>}
  */
 export default async function Corrector(keep_failed = true) {
-  const { default: manual_replacements } = await import(
+  const { default: manual_replace_list } = await import(
     './manual_replace/destinations.json',
     { assert: { type: 'json' } }
+  )
+  const manual_replacements = Object.fromEntries(
+    manual_replace_list.flatMap(replace => Object.entries(replace))
   )
   let { default: known_replacements } = await import(
     './data/known_destinations.json',

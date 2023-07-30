@@ -42,7 +42,7 @@ export default async function Corrector(keep_failed = true) {
   function correct_area(text) {
     if (text === undefined || text.length === 0) return text
 
-    const match = try_matching(text, areas) ?? try_matching(text, corrections)
+    const match = priority_match(text, [areas, ...corrections])
     if (match === undefined) failed.push(text)
     return match ?? text
   }
