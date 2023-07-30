@@ -2,6 +2,7 @@ import fs from 'fs/promises'
 import { ElementError, fetch_html } from '../fetch/helpers.js'
 import corrections from './manual_replace/areas.json' assert { type: 'json' }
 import { to_keywords, try_matching } from './approx_match.js'
+import { merge_failed } from './helpers.js'
 
 /** Fetches the list of coroner areas from the coroner society website
  * @param {string} url the coroner society url
@@ -49,7 +50,7 @@ export default async function Corrector(keep_failed = true) {
   correct_area.close = () =>
     fs.writeFile(
       './src/correct/failed_parses/areas.json',
-      JSON.stringify(failed)
+      JSON.stringify(merge_failed(failed))
     )
   return correct_area
 }

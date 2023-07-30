@@ -8,6 +8,7 @@ import {
   split_caps,
   shorten_whitespace
 } from './simplify_name.js'
+import { merge_failed } from './helpers.js'
 
 /**
  * Fetches the list of page urls from the coroner society website
@@ -65,40 +66,6 @@ async function fetch_name_list(url) {
     'Fetching coroners |:bar| :current/:total pages'
   )
   return pages.flat()
-}
-
-/**
- * Attempts to merge all unmatched names together, into the corrections needed
- * to match them all.
- *
- * We do this on the basis of:
- * - if a name roughly matches another name and is longer, we keep it
- * - if a name is the initials of another name, we keep the full name
- *
- * @param {string[]} names the unmatched names to merge together
- * @return {{[key: string]: string}} the corrections needed to match the names
- */
-export function merge_incorrect(names) {
-  /** @type {{[key: string]: {name: string, simple: string}}} */
-  const corrections = {}
-
-  for (const name of names) {
-    const simple = first_last_name(name)
-
-    for (const possible of [simple, ...get_initials(simple)]) {
-      const match = try_matching(possible, corrections)
-      // if we find an existing shorter match, remove it
-      if (match !== undefined && match.simple.length < possible.length) {
-        delete corrections[match]
-      }
-    }
-
-    corrections[simple] = { name, simple }
-  }
-
-  return Object.fromEntries(
-    Object.entries(corrections).map(([simple, { name }]) => [simple, name])
-  )
 }
 
 /**
@@ -181,7 +148,7 @@ export default async function Corrector(keep_failed = true) {
       ),
       fs.writeFile(
         './src/correct/failed_parses/merged_names.json',
-        JSON.stringify(merge_incorrect(failed))
+        JSON.stringify(merge_failed(failed, get_initials))
       )
     ])
   return correct_name
