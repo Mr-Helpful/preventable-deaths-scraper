@@ -63,7 +63,7 @@ export async function write_reports(
     urls,
     url =>
       fetch_report(url, parse_report, parse_summary)
-        .then(report => correct_report(report))
+        .then(correct_report)
         .catch(_ => {
           // ignore any errors from this, we'll either get it next time
           // or this report can't be effectively read at all
