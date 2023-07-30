@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import { fetch_html, map_series } from '../fetch/helpers.js'
-import { priority_match, try_matching } from './approx_match.js'
+import { priority_match } from './approx_match.js'
 import {
   get_initials,
   remove_email_block,

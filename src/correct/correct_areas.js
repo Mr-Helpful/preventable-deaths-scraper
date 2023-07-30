@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import { ElementError, fetch_html } from '../fetch/helpers.js'
 import corrections from './manual_replace/areas.json' assert { type: 'json' }
-import { to_keywords, try_matching } from './approx_match.js'
+import { priority_match, to_keywords } from './approx_match.js'
 import { merge_failed } from './helpers.js'
 
 /** Fetches the list of coroner areas from the coroner society website
