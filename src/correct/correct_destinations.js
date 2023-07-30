@@ -5,6 +5,7 @@ import {
   connectives,
   to_acronym
 } from './simplify_destination.js'
+import { merge_failed } from './helpers.js'
 
 /* Assumptions
 
@@ -22,36 +23,6 @@ we'll be relying on is that:
 - if there are no connecting words / punctuation (i.e. `,`,`|`,`and`,`or`), we 
   can consider the whole field an unmatched name
 */
-
-/**
- * Attempts to merge all unmatched names together, into the corrections needed
- * to match them all.
- *
- * We do this on the basis of:
- * - if a name roughly matches another name and is longer, we keep it
- * - if a name is the initials of another name, we keep the full name
- *
- * @param {string[]} names the unmatched names to merge together
- * @return {string[]} the corrections needed to match the names
- */
-export function merge_failed(names) {
-  /** @type {Set<string>} */
-  let corrections = new Set()
-
-  for (const name of names) {
-    for (const possible of [name, to_acronym(name)]) {
-      const match = try_matching(possible, corrections)
-      // if we find an existing shorter match, remove it
-      if (match !== undefined && match.simple.length < possible.length) {
-        corrections.delete(match)
-      }
-    }
-
-    corrections.add(name)
-  }
-
-  return Array.from(corrections.values())
-}
 
 /**
  * Calculates a list of possible replacements for a name map, with different
@@ -151,9 +122,9 @@ export default async function Corrector(keep_failed = true) {
 
     // next we check if adding known names helps
     names.push(...Object.keys(known_replacements))
-    const matches = try_complete_matching(text, names)
-    if (matches)
-      return matches.map(
+    const all_matches = try_complete_matching(text, names)
+    if (all_matches)
+      return all_matches.map(
         name => manual_replacements[name] ?? known_replacements[name]
       )
 
@@ -165,7 +136,7 @@ export default async function Corrector(keep_failed = true) {
     Promise.all([
       fs.writeFile(
         './src/correct/failed_parses/destinations.json',
-        JSON.stringify(failed)
+        JSON.stringify(merge_failed(failed, dest => [to_acronym(dest)]))
       ),
       fs.writeFile(
         './src/correct/data/known_destinations.json',
