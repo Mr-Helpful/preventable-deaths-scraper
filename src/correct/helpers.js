@@ -1,4 +1,4 @@
-import { try_matching } from './approx_match'
+import { try_matching } from './approx_match.js'
 
 /**
  * Attempts to merge all unmatched names together, into the corrections needed
@@ -20,7 +20,7 @@ export function merge_failed(texts, simplify = field => [field]) {
     for (const possible of [name, ...simplify(name)]) {
       const match = try_matching(possible, corrections)
       // if we find an existing simplified match, remove it
-      if (match !== undefined && match.simple.length < possible.length) {
+      if (match !== undefined && match.length < possible.length) {
         delete corrections[match]
       }
     }
@@ -28,5 +28,5 @@ export function merge_failed(texts, simplify = field => [field]) {
     corrections[name] = name
   }
 
-  return Array.from(corrections.keys())
+  return Array.from(Object.keys(corrections))
 }
