@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import categories from './manual_replace/categories.json' assert { type: 'json' }
 import { priority_match } from './approx_match.js'
-import { merge_failed } from './helpers'
+import { merge_failed } from './helpers.js'
 
 /**
  * Creates a function that corrects the category to the closest match in the
