@@ -140,16 +140,10 @@ export default async function Corrector(keep_failed = true) {
     return match
   }
 
-  correct_name.close = async () =>
-    Promise.all([
-      fs.writeFile(
-        './src/correct/failed_parses/names.json',
-        JSON.stringify(failed)
-      ),
-      fs.writeFile(
-        './src/correct/failed_parses/merged_names.json',
-        JSON.stringify(merge_failed(failed, get_initials))
-      )
-    ])
+  correct_name.close = () =>
+    fs.writeFile(
+      './src/correct/failed_parses/names.json',
+      JSON.stringify(merge_failed(failed, get_initials))
+    )
   return correct_name
 }
