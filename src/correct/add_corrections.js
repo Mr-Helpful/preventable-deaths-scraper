@@ -79,7 +79,13 @@ for (; i < decisions.length; i++) {
       { name: 'skip', value: ['skipped', _ => []] },
       {
         name: 'back',
-        value: ['skipped', _ => ((i -= 2), [])]
+        value: [
+          'skipped',
+          _ => {
+            if (i > 0) i -= 2
+            return []
+          }
+        ]
       },
       { name: 'quit', value: ['quit', _ => []] }
     ]
