@@ -15,6 +15,11 @@ export default async function Corrector(keep_failed = true) {
         assert: { type: 'json' }
       })
     : { default: [] }
+  let { default: incorrect } = await import(
+    './incorrect_fields/categories.json',
+    { assert: { type: 'json' } }
+  )
+  incorrect = new Set(incorrect)
 
   function correct_category(text) {
     if (text === undefined || text.length === 0) return text
@@ -22,6 +27,9 @@ export default async function Corrector(keep_failed = true) {
     return text
       .split(/\s*\|\s*/g)
       .flatMap(category => {
+        if (category === undefined || category.length === 0) return []
+        if (incorrect.has(category)) return []
+
         // I'm using flatMap like a filterMap here.
         const match = priority_match(category, categories)
         if (match === undefined) failed.push(category)

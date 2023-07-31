@@ -38,13 +38,18 @@ export default async function Corrector(keep_failed = true) {
         assert: { type: 'json' }
       })
     : { default: [] }
+  let { default: incorrect } = await import('./incorrect_fields/areas.json', {
+    assert: { type: 'json' }
+  })
+  incorrect = new Set(incorrect)
 
   function correct_area(text) {
-    if (text === undefined || text.length === 0) return text
+    if (text === undefined || text.length === 0) return undefined
+    if (incorrect.has(text)) return undefined
 
     const match = priority_match(text, [areas, ...corrections])
     if (match === undefined) failed.push(text)
-    return match ?? text
+    return match
   }
 
   correct_area.close = () =>

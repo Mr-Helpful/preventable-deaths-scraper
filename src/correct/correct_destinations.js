@@ -93,10 +93,16 @@ export default async function Corrector(keep_failed = true) {
         assert: { type: 'json' }
       })
     : { default: [] }
+  let { default: incorrect } = await import(
+    './incorrect_fields/destinations.json',
+    { assert: { type: 'json' } }
+  )
+  incorrect = new Set(incorrect)
 
   /** @param {string} text */
   function correct_name(text) {
-    if (text === undefined || text.length === 0) return text
+    if (text === undefined || text.length === 0) return undefined
+    if (incorrect.has(text)) return undefined
 
     if (text.match(/[;|]/)) {
       const destinations = text.split(/[;|]/g).map(dest => dest.trim())

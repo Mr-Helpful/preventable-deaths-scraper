@@ -77,9 +77,14 @@ export default async function Corrector(keep_failed = true) {
         assert: { type: 'json' }
       })
     : { default: [] }
+  let { default: incorrect } = await import('./incorrect_fields/dates.json', {
+    assert: { type: 'json' }
+  })
+  incorrect = new Set(incorrect)
 
   function correct_date(text) {
-    if (text === undefined || text.length === 0) return text
+    if (text === undefined || text.length === 0) return undefined
+    if (incorrect.has(text)) return undefined
 
     const date =
       parse_dd_MM_y_date(text) ??

@@ -130,9 +130,14 @@ export default async function Corrector(keep_failed = true) {
         assert: { type: 'json' }
       })
     : { default: [] }
+  let { default: incorrect } = await import('./incorrect_fields/names.json', {
+    assert: { type: 'json' }
+  })
+  incorrect = new Set(incorrect)
 
   function correct_name(text) {
-    if (text === undefined || text.length === 0) return text
+    if (text === undefined || text.length === 0) return undefined
+    if (incorrect.has(text)) return undefined
 
     const name = split_caps(text)
     const match = priority_match(name, replacements, 2, 0.2, true)
