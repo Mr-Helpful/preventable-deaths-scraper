@@ -2,8 +2,9 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "fetch": "node src/index.js",
-    "correct": "node src/correct/run_corrections.js",
+    "fetch": "node --no-warnings src/index.js",
+    "correct": "node --no-warnings src/correct/run_corrections.js",
+    "correct:update": "node --no-warnings src/correct/add_corrections.js",
     "analyse:counts": "npm run analyse:areas && npm run analyse:names && npm run analyse:years && npm run analyse:genders && npm run analyse:categories",
     "analyse:areas": "python src/analyse/counts/area-counts.py",
     "analyse:names": "python src/analyse/counts/name-counts.py",
