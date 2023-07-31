@@ -7,47 +7,28 @@
 # ### Importing libraries
 
 import os
+import json
 import toml
 import pandas as pd
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
 REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
+CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 
 # %% [markdown]
 # ### Reading the reports
 
 reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
-len(reports)
 
 # %% [markdown]
+# ### Calculating the year of each report
 
 # use a regex to extract the year from the date of report
 reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})')
 
 # %% [markdown]
-# ### Calculate number of categorised reports
-
-(reports['category'].str.len() > 0).sum()
-
-# %% [markdown]
-# ### Calculate number of categories we expect
-
-reports['category'].str.split('|').str.len().sum()
-
-# %% [markdown]
-# ### Calculate number of categories in uncorrected data
-
-# %%
-
-categories = pd.DataFrame({0: reports['category'].str.cat(sep="|").split('|')})
-categories.sort_values(by=0).drop_duplicates()
-
-# %% [markdown]
 # ### Fetching the categories
-import json
-
-CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 
 with open(f"{CORRECT_PATH}/manual_replace/categories.json", 'r', encoding='utf8') as f:
   categories = []
@@ -65,12 +46,12 @@ for category in categories:
 
 category_counts = reports[categories].groupby(reports['year']).sum()
 
-# %% [markdown]
-# ### Various statistics about the counts
-
 sum_counts = pd.DataFrame(category_counts.sum()).rename(columns={0: 'count'})
 sum_counts = sum_counts.sort_values(by='count', ascending=False)
 sum_counts.index.name = 'category'
+
+# %% [markdown]
+# ### Various statistics about the counts
 
 statistics = {
   "no. categories in reports": int(sum_counts.sum()[0]),
