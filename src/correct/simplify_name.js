@@ -34,13 +34,11 @@ we'll also include matches for:
 - initials for the last name
 */
 
-const title =
-  'mr|mrs|ms|dr|miss|judge|cdr|justice|hon(?:ourable)?|the|prof|dame|sir'
-const title_regex = new RegExp(`\\b(${title})\\b`, 'gi')
+const title_regex =
+  /\b(mr|mrs|ms|dr|miss|judge|cdr|justice|hon(?:ourable)?|the|prof|dame|sir)\b/gi
 
-const qualification =
-  'cbe|cvo|dl|eng|frcpc|hg|hh|hhj|kc|mbe|md|me|obe|phd|qc|rn|kc'
-const qualification_regex = new RegExp(`\\s*\\b(${qualification})\\b\\s*`, 'gi')
+const qualification_regex =
+  /\s*\b(cbe|cvo|dl|eng|frcpc|hg|hh|hhj|kc|mbe|md|me|obe|phd|qc|rn|kc)\b\s*/gi
 
 /**
  * Simplifies a name to a first and last name

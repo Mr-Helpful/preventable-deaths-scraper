@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import parse from 'date-fns/parse/index.js'
-import { min_edit_slices_match } from './helpers.js'
+import { min_edit_slices_match } from './approx_match.js'
 
 // we put spaces around the months to attempt to avoid weird characters being
 // placed around them
@@ -73,7 +73,9 @@ function parse_do_MMM_Y_date(text) {
  */
 export default async function Corrector(keep_failed = true) {
   let { default: failed } = keep_failed
-    ? await import('./data/failed_dates.json', { assert: { type: 'json' } })
+    ? await import('./failed_parses/dates.json', {
+        assert: { type: 'json' }
+      })
     : { default: [] }
 
   function correct_date(text) {
@@ -96,6 +98,9 @@ export default async function Corrector(keep_failed = true) {
   }
 
   correct_date.close = () =>
-    fs.writeFile('./src/correct/data/failed_dates.json', JSON.stringify(failed))
+    fs.writeFile(
+      './src/correct/failed_parses/dates.json',
+      JSON.stringify(failed)
+    )
   return correct_date
 }

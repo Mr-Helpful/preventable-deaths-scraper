@@ -1,7 +1,8 @@
 import fs from 'fs/promises'
 import { ElementError, fetch_html } from '../fetch/helpers.js'
-import corrections from './area_corrections.json' assert { type: 'json' }
-import { to_keywords, try_matching } from './helpers.js'
+import corrections from './manual_replace/areas.json' assert { type: 'json' }
+import { priority_match, to_keywords } from './approx_match.js'
+import { merge_failed } from './helpers.js'
 
 /** Fetches the list of coroner areas from the coroner society website
  * @param {string} url the coroner society url
@@ -33,18 +34,23 @@ export default async function Corrector(keep_failed = true) {
   areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
 
   let { default: failed } = keep_failed
-    ? await import('./data/failed_areas.json', { assert: { type: 'json' } })
+    ? await import('./failed_parses/areas.json', {
+        assert: { type: 'json' }
+      })
     : { default: [] }
 
   function correct_area(text) {
     if (text === undefined || text.length === 0) return text
 
-    const match = try_matching(text, areas) ?? try_matching(text, corrections)
+    const match = priority_match(text, [areas, ...corrections])
     if (match === undefined) failed.push(text)
     return match ?? text
   }
 
   correct_area.close = () =>
-    fs.writeFile('./src/correct/data/failed_areas.json', JSON.stringify(failed))
+    fs.writeFile(
+      './src/correct/failed_parses/areas.json',
+      JSON.stringify(merge_failed(failed))
+    )
   return correct_area
 }

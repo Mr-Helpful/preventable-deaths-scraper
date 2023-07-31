@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
-import categories from './category_corrections.json' assert { type: 'json' }
-import { priority_match } from './helpers.js'
+import categories from './manual_replace/categories.json' assert { type: 'json' }
+import { priority_match } from './approx_match.js'
+import { merge_failed } from './helpers.js'
 
 /**
  * Creates a function that corrects the category to the closest match in the
@@ -10,7 +11,7 @@ import { priority_match } from './helpers.js'
  */
 export default async function Corrector(keep_failed = true) {
   let { default: failed } = keep_failed
-    ? await import('./data/failed_categories.json', {
+    ? await import('./failed_parses/categories.json', {
         assert: { type: 'json' }
       })
     : { default: [] }
@@ -31,8 +32,8 @@ export default async function Corrector(keep_failed = true) {
 
   correct_category.close = () =>
     fs.writeFile(
-      './src/correct/data/category_corrections.json',
-      JSON.stringify(failed)
+      './src/correct/failed_parses/categories.json',
+      JSON.stringify(merge_failed(failed))
     )
   return correct_category
 }
