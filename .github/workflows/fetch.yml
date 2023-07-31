@@ -49,10 +49,7 @@ jobs:
       run: pip install -r src/analyse/counts/requirements.txt
       
     - name: Run Analyses
-      run: |
-        python src/analyse/counts/area-counts.py
-        python src/analyse/counts/category-counts.py
-        python src/analyse/counts/year-counts.py
+      run: npm run analyse:counts
     
     - name: Update GitHub with latest reports and analysis
       uses: stefanzweifel/git-auto-commit-action@v4
