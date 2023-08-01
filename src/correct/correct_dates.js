@@ -81,7 +81,7 @@ export default async function Corrector(keep_failed = true) {
     if (incorrect.has(text)) return undefined
 
     const manual = corrections.find(replace => replace[text])
-    if (manual) return manual
+    if (manual) return manual[text]
 
     const date =
       parse_dd_MM_y_date(text) ??
