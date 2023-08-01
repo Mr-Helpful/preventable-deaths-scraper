@@ -194,6 +194,8 @@ function approx_contains_all(
     const match_found = text_words.some(word => {
       // short circuit if the difference in length is too great
       if (Math.abs(word.length - pattern_word.length) > error) return false
+      // short circuit if no error is allowed and the words are different
+      if (error === 0 && word !== pattern_word) return false
       const distance = edit_distance(pattern_word, word, ignore_case)
       return distance <= error
     })
