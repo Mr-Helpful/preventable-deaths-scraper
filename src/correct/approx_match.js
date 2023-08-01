@@ -72,6 +72,23 @@ function edit_distance(str1, str2, ignore_case = false) {
   return edit_distances(str1, str2, ignore_case)[str1.length][str2.length]
 }
 
+/**
+ * A generalised version of indexOf that works on any array-like object
+ * @template {any[]|string} T
+ * @param {T} xs the array to search in
+ * @param {T} ys the array to search for
+ * @return {number} the index of the first element of ys in xs, or -1 if not found
+ */
+function index_of(xs, ys) {
+  let idxs = []
+  for (let i = 0; i < xs.length; i++) {
+    if (xs[i] === ys[0]) idxs.push(0)
+    idxs = idxs.flatMap(idx => (xs[i] === ys[idx] ? [idx + 1] : []))
+    if (idxs.includes(ys.length)) return i - ys.length + 1
+  }
+  return -1
+}
+
 /** Finds the slice of text that has the minimum edit distance to the pattern
  *
  * This is honestly a bit of a naive implementation, it acheives O(m^2 n) time,
@@ -86,6 +103,7 @@ function edit_distance(str1, str2, ignore_case = false) {
  */
 function min_edit_slice(pat, text, ignore_case = false) {
   // short circuit if we find a perfect match
+  const i = index_of(text, pat)
   if (i !== -1)
     return {
       slice: pat,
