@@ -12,7 +12,7 @@ const fields = names.map(name => name.split('.')[0])
 const field_arg = new Argument(
   '<field>',
   'Field to add corrections to'
-).choices(fields)
+).choices([...fields, 'all'])
 
 program
   .description('Add manual corrections to pre-existing corrections')
@@ -25,122 +25,141 @@ const field = program.args[0]
 
 import inquirer from 'inquirer'
 
-const { default: failed } = await import(`./failed_parses/${field}.json`, {
-  assert: { type: 'json' }
-})
+const choices = [
+  {
+    name: 'mark incorrect',
+    value: { name: 'incorrect' }
+  },
+  { name: 'mark correct', value: { name: 'correct', action: text => [text] } },
+  {
+    name: 'correct typos',
+    value: {
+      name: 'replace',
+      async action() {
+        const { replace } = await inquirer.prompt({
+          type: 'input',
+          name: 'replace',
+          message: 'Corrected text:'
+        })
+        return [replace]
+      }
+    }
+  },
+  {
+    name: 'add categories',
+    value: {
+      name: 'categories',
+      async action() {
+        const { categories } = await inquirer.prompt({
+          type: 'input',
+          name: 'categories',
+          message: 'Categories seperated by `|`:'
+        })
+        return categories.split('|')
+      }
+    }
+  },
+  { name: 'skip', value: { name: 'skipped' } },
+  {
+    name: 'back',
+    value: { name: 'skipped', update_index: i => i - 1 }
+  },
+  {
+    name: 'quit',
+    value: {
+      name: 'skipped',
+      update_index: _ => Number.MAX_VALUE
+    }
+  }
+]
 
-console.log(`- Manual corrections for '${field}' -`)
+/**
+ * Gets the decisions for a list of texts
+ * @param {string[]} failed a list of texts that failed to parse
+ * @returns {Promise<{skipped: string[], incorrect: string[], correct: {[key: string]: string}}>} a list of texts that were skipped, incorrect, and correct
+ */
+async function categorise_failures(failed) {
+  let decisions = failed.map(text => [text, 'skipped', {}])
+  let i = 0
 
-let decisions = failed.map(text => [text, 'skipped', {}])
-let i = 0
+  while (i < decisions.length) {
+    const [text] = decisions[i]
+    const {
+      type: { name, action = _ => [], update_index = i => i + 1 }
+    } = await inquirer.prompt({
+      type: 'list',
+      name: 'type',
+      message: `For the text '${text}':`,
+      choices
+    })
 
-for (; i < decisions.length; i++) {
-  const [text] = decisions[i]
-  const {
-    type: [name, action]
-  } = await inquirer.prompt({
-    type: 'list',
-    name: 'type',
-    message: `For the text '${text}':`,
-    choices: [
-      {
-        name: 'mark incorrect',
-        value: ['incorrect', _ => []]
-      },
-      { name: 'mark correct', value: ['correct', text => [text]] },
-      {
-        name: 'correct typos',
-        value: [
-          'replace',
-          async _ => {
-            const { replace } = await inquirer.prompt({
-              type: 'input',
-              name: 'replace',
-              message: 'Corrected text:'
-            })
-            return [replace]
-          }
-        ]
-      },
-      {
-        name: 'add categories',
-        value: [
-          'categories',
-          async _ => {
-            const { categories } = await inquirer.prompt({
-              type: 'input',
-              name: 'categories',
-              message: 'Categories seperated by `|`:'
-            })
-            return categories.split('|')
-          }
-        ]
-      },
-      { name: 'skip', value: ['skipped', _ => []] },
-      {
-        name: 'back',
-        value: [
-          'skipped',
-          _ => {
-            if (i > 0) i -= 2
-            return []
-          }
-        ]
-      },
-      { name: 'quit', value: ['quit', _ => []] }
-    ]
-  })
+    decisions[i] = [text, name, await action(text)]
+    i = update_index(i)
+  }
 
-  if (name === 'quit') break
+  let skipped = []
+  let incorrect = []
+  let correct = {}
 
-  decisions[i] = [text, name, await action(text)]
+  for (const [text, name, replacements] of decisions) {
+    switch (name) {
+      case 'skipped':
+        skipped.push(text)
+        break
+      case 'incorrect':
+        incorrect.push(text)
+        break
+      case 'replace':
+        correct[replacements[0]] = text
+        break
+      case 'correct':
+      case 'categories':
+        replacements.forEach(replacement => {
+          correct[replacement] = replacement
+        })
+    }
+  }
+
+  return { skipped, incorrect, correct }
 }
 
-/* Separate decisions into different files */
+async function update_corrections_for(field) {
+  console.log(`- Manual corrections for '${field}' -`)
 
-const skipped = decisions
-  .filter(([_1, name, _2]) => name === 'skipped')
-  .map(([text, _1, _2]) => text)
-const incorrect = decisions
-  .filter(([_1, name, _2]) => name === 'incorrect')
-  .map(([text, _1, _2]) => text)
-const correct = Object.fromEntries([
-  ...decisions
-    .filter(([_1, name, _2]) => name === 'correct')
-    .map(([text, _1, _2]) => [text, text]),
-  ...decisions
-    .filter(([_1, name, _2]) => name === 'replace')
-    .map(([text, _, [replace]]) => [text, replace]),
-  ...decisions
-    .filter(([_1, name, _2]) => name === 'categories')
-    .flatMap(([_1, _2, categories]) =>
-      categories.map(category => [category, category])
-    )
-])
+  const { default: failed } = await import(`./failed_parses/${field}.json`, {
+    assert: { type: 'json' }
+  })
 
-/* Write to files */
+  const { skipped, incorrect, correct } = await categorise_failures(failed)
 
-await fs.writeFile(
-  `${path}/failed_parses/${field}.json`,
-  JSON.stringify(skipped, null, 2)
-)
+  await fs.writeFile(
+    `${path}/failed_parses/${field}.json`,
+    JSON.stringify(skipped, null, 2)
+  )
 
-const { default: incorrect_fields = [] } = await import(
-  `./incorrect_fields/${field}.json`,
-  { assert: { type: 'json' } }
-).catch(_ => [])
-incorrect_fields.push(...incorrect)
-await fs.writeFile(
-  `${path}/incorrect_fields/${field}.json`,
-  JSON.stringify(incorrect_fields, null, 2)
-)
+  const { default: incorrect_fields = [] } = await import(
+    `./incorrect_fields/${field}.json`,
+    { assert: { type: 'json' } }
+  ).catch(_ => [])
+  incorrect_fields.push(...incorrect)
+  await fs.writeFile(
+    `${path}/incorrect_fields/${field}.json`,
+    JSON.stringify(incorrect_fields, null, 2)
+  )
 
-const { default: corrections = [] } = await import(
-  `./manual_replace/${field}.json`,
-  { assert: { type: 'json' } }
-).catch(_ => [])
-if (Object.keys(correct).length > 0) corrections.push(correct)
-await fs.writeFile(
-  `${path}/manual_replace/${field}.json`,
-  JSON.stringify(corrections, null, 2)
-)
+  const { default: corrections = [] } = await import(
+    `./manual_replace/${field}.json`,
+    { assert: { type: 'json' } }
+  ).catch(_ => [])
+  if (Object.keys(correct).length > 0) corrections.push(correct)
+  await fs.writeFile(
+    `${path}/manual_replace/${field}.json`,
+    JSON.stringify(corrections, null, 2)
+  )
+}
+
+if (field === 'all')
+  for (const field of fields) {
+    await update_corrections_for(field)
+  }
+else await update_corrections_for(field)

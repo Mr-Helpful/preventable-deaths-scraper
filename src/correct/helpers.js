@@ -1,6 +1,38 @@
 import { try_matching } from './approx_match.js'
 
 /**
+ * @typedef {Object} CorrectionData
+ * @property {string[]} failed the list of failed matches
+ * @property {Set<string>} incorrect the list of incorrect matches
+ * @property {{[key: string]: string}[]} corrections the list of manual corrections
+ */
+
+/**
+ * Loads data common to all correction methods, used to log failed matches and
+ * short circuit matches for manually corrected fields
+ * @param {string} field the field currently being corrected
+ * @returns {Promise<CorrectionData>} the data needed to correct the field
+ */
+export async function load_correction_data(field) {
+  const { default: failed } = await import(`./failed_parses/${field}.json`, {
+    assert: { type: 'json' }
+  })
+
+  let { default: incorrect } = await import(
+    `./incorrect_fields/${field}.json`,
+    { assert: { type: 'json' } }
+  )
+  incorrect = new Set(incorrect)
+
+  const { default: corrections } = await import(
+    `./manual_replace/${field}.json`,
+    { assert: { type: 'json' } }
+  )
+
+  return { failed, incorrect, corrections }
+}
+
+/**
  * Attempts to merge all unmatched names together, into the corrections needed
  * to match them all.
  *

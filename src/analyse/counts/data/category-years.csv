@@ -1,12 +1,12 @@
-year,Emergency Services related deaths,Wales prevention of future deaths reports (2019 onwards),Prevention of Future Deaths,Other related deaths,Road (Highways Safety) related deaths,Suicide (from 2015),Mental Health related deaths,Hospital Death (Clinical Procedures and medical management) related deaths,State Custody related deaths,Accident at Work and Health and Safety related deaths,"Alcohol, drug and medication related deaths",Child Death (from 2015),Service Personnel related deaths,Police related deaths,Railway related deaths,Product related deaths,Community health care and emergency services related deaths,Care Home Health related deaths,Emergency services related deaths (2019 onwards)
-2013,0,0,0,15,15,0,14,62,8,2,6,0,0,2,2,4,30,14,0
-2014,0,0,0,66,57,0,18,241,36,5,16,0,6,9,5,13,69,30,0
-2015,0,0,0,54,39,14,11,223,31,8,10,34,7,7,5,9,47,25,0
-2016,1,0,0,50,40,45,27,227,33,9,10,35,0,13,7,9,62,26,0
-2017,0,0,3,38,41,20,17,238,23,9,4,24,1,10,11,11,63,29,0
-2018,0,0,0,45,34,33,33,180,22,8,23,21,3,5,8,3,52,33,0
-2019,1,31,0,46,51,55,64,215,36,7,53,38,4,12,10,5,41,34,42
-2020,3,12,4,66,26,56,65,98,13,5,45,28,1,10,7,9,63,25,20
-2021,1,19,1,105,27,91,112,199,30,5,64,40,5,36,11,27,82,43,19
-2022,0,26,272,85,33,93,86,135,20,5,69,35,0,12,11,4,32,34,34
-2023,0,11,251,45,19,57,18,76,11,6,24,24,0,0,3,1,0,12,16
+year,Wales prevention of future deaths reports (2019 onwards),Other related deaths,Police related deaths,"Alcohol, drug and medication related deaths",Product related deaths,State Custody related deaths,Mental Health related deaths,Community health care and emergency services related deaths,Accident at Work and Health and Safety related deaths,Emergency Services related deaths,Hospital Death (Clinical Procedures and medical management) related deaths,Road (Highways Safety) related deaths,Prevention of Future Deaths,Service Personnel related deaths,Suicide (from 2015),Child Death (from 2015),Care Home Health related deaths,Emergency services related deaths (2019 onwards),Railway related deaths
+2013,0,15,2,6,4,8,14,30,2,0,62,15,0,0,0,0,14,0,2
+2014,0,66,9,16,13,36,18,69,5,0,241,57,0,6,0,0,30,0,5
+2015,0,54,7,10,9,31,11,47,8,0,223,39,0,7,14,34,25,0,5
+2016,0,50,13,10,9,33,27,62,9,1,227,40,0,0,45,35,26,0,7
+2017,0,38,10,4,11,23,17,63,9,0,238,41,3,1,20,24,29,0,11
+2018,0,45,5,23,3,22,33,52,8,0,180,34,0,3,33,21,33,0,8
+2019,31,46,12,53,5,36,64,41,7,1,215,51,0,4,55,38,34,42,10
+2020,12,66,10,45,9,13,65,63,5,3,98,26,4,1,56,28,25,20,7
+2021,19,105,36,64,27,30,112,82,5,1,199,27,1,5,91,40,43,19,11
+2022,26,85,12,69,4,20,86,32,5,0,135,33,272,0,93,35,34,34,11
+2023,11,45,0,24,1,11,18,0,6,0,76,19,251,0,57,24,12,16,3
