@@ -152,6 +152,11 @@ async function update_corrections_for(field) {
     `./manual_replace/${field}.json`,
     { assert: { type: 'json' } }
   ).catch(_ => [])
+  for (const key in correct) {
+    for (const correction of corrections) {
+      if (correction[key]) delete correct[key]
+    }
+  }
   if (Object.keys(correct).length > 0) corrections.push(correct)
   await fs.writeFile(
     `${path}/manual_replace/${field}.json`,
