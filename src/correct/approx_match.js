@@ -1,3 +1,5 @@
+const non_words = /[^\w'-]+/g
+
 const max_by = (xs, f) =>
   xs.reduce(
     ([x, v], y) => (f(y) > v ? [y, f(y)] : [x, v]),
@@ -155,8 +157,8 @@ function approx_contains_all(
   relative = 0.1,
   ignore_case = false
 ) {
-  const text_words = text.split(/[^\w']+/g)
-  const pattern_words = pattern.split(/[^\w']+/g)
+  const text_words = text.split(non_words)
+  const pattern_words = pattern.split(non_words)
 
   return pattern_words.every(pattern_word => {
     const error = Math.min(edits, Math.floor(pattern_word.length * relative))
@@ -172,7 +174,7 @@ function approx_contains_all(
 
 export function to_keywords(text) {
   return text
-    .split(/[^\w]+/g)
+    .split(non_words)
     .filter(word => word.length > 0)
     .filter(word => word[0].toUpperCase() === word[0])
     .join(' ')
@@ -257,8 +259,8 @@ export function priority_match(
  * @returns {boolean} whether the text only contains the names
  */
 function only_contains(text, names) {
-  const names_words = new Set(names.flatMap(name => name.split(/[^\w]+/g)))
-  const text_words = text.split(/[^\w]+/g)
+  const names_words = new Set(names.flatMap(name => name.split(non_words)))
+  const text_words = text.split(non_words)
   return text_words.every(word => names_words.has(word))
 }
 
