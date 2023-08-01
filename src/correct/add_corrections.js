@@ -111,7 +111,7 @@ async function categorise_failures(failed) {
         incorrect.push(text)
         break
       case 'replace':
-        correct[replacements[0]] = text
+        correct[text] = replacements[0]
         break
       case 'correct':
       case 'categories':
