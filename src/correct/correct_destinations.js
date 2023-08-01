@@ -65,6 +65,17 @@ export default async function Corrector(keep_failed = true) {
     'destinations'
   )
   if (!keep_failed) failed = []
+
+  for (const correction of corrections) {
+    for (const [key, value] of Object.entries(correction)) {
+      const simple = key
+        .replace(conjunctive_words, '')
+        .replace(/[^\w']+/g, ' ')
+        .trim()
+      delete correction[key]
+      correction[simple] = value
+    }
+  }
   if (corrections.length < 2) corrections.unshift({}, {})
   let known_replacements = corrections.slice(0, 2)
 
