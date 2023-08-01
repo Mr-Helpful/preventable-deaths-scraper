@@ -18,11 +18,6 @@ function edit_distances(str1, str2, ignore_case = false) {
     Array(str2.length + 1).fill(0)
   )
 
-  if (ignore_case) {
-    str1 = str1.toLowerCase()
-    str2 = str2.toLowerCase()
-  }
-
   // short circuit if strings are equal
   if (str1 === str2) return distances
 
@@ -66,6 +61,11 @@ function edit_distances(str1, str2, ignore_case = false) {
 
 /** Helper function for the edit distance of the full strings */
 function edit_distance(str1, str2, ignore_case = false) {
+  if (ignore_case) {
+    str1 = str1.toLowerCase()
+    str2 = str2.toLowerCase()
+  }
+
   // short circuit if strings are equal
   if (str1 === str2) return 0
 
@@ -122,12 +122,13 @@ export function min_edit_slices_match(
   relative = false,
   ignore_case = false
 ) {
-  let edits = Infinity
+  if (ignore_case) text = text.toLowerCase()
   let match = ''
   let slice = ''
   let loc = [0, 0]
 
   for (const pat of to_match) {
+    if (ignore_case) pat = pat.toLowerCase()
     let min_result = min_edit_slice(pat, text, ignore_case)
     if (relative) min_result.edits /= pat.length
     if (min_result.edits < edits) {
