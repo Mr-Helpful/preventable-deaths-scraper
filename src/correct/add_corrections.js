@@ -79,6 +79,7 @@ const choices = [
  * @returns {Promise<{skipped: string[], incorrect: string[], correct: {[key: string]: string}}>} a list of texts that were skipped, incorrect, and correct
  */
 async function categorise_failures(failed) {
+  failed.sort((a, b) => a.length - b.length)
   let decisions = failed.map(text => [text, 'skipped', {}])
   let i = 0
 
