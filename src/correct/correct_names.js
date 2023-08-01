@@ -8,7 +8,7 @@ import {
   split_caps,
   shorten_whitespace
 } from './simplify_name.js'
-import { merge_failed } from './helpers.js'
+import { merge_failed, load_correction_data } from './helpers.js'
 
 /**
  * Fetches the list of page urls from the coroner society website
@@ -111,29 +111,18 @@ export default async function Corrector(keep_failed = true) {
   const fetched_replace = Object.fromEntries(
     fetched_simple.map(name => [name, name])
   )
-  const { default: manual_replace } = await import(
-    './manual_replace/names.json',
-    { assert: { type: 'json' } }
-  )
   await fs.writeFile(
     './src/correct/data/fetched_names.json',
     JSON.stringify(fetched_simple)
   )
 
+  let { failed, incorrect, corrections } = await load_correction_data('names')
+  if (!keep_failed) failed = []
+
   const replacements = [
     ...replacements_from(fetched_replace),
-    ...manual_replace.flatMap(replacements_from)
+    ...corrections.flatMap(replacements_from)
   ]
-
-  let { default: failed } = keep_failed
-    ? await import('./failed_parses/names.json', {
-        assert: { type: 'json' }
-      })
-    : { default: [] }
-  let { default: incorrect } = await import('./incorrect_fields/names.json', {
-    assert: { type: 'json' }
-  })
-  incorrect = new Set(incorrect)
 
   function correct_name(text) {
     if (text === undefined || text.length === 0) return undefined

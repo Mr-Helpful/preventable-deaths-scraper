@@ -1,11 +1,13 @@
 import fs from 'fs/promises'
-import { try_matches } from './approx_match.js'
+import { priority_complete_matching, try_matches } from './approx_match.js'
 import {
   conjunctions,
+  conjunctive_words,
   connectives,
+  connective_words,
   to_acronym
 } from './simplify_destination.js'
-import { merge_failed } from './helpers.js'
+import { merge_failed, load_correction_data } from './helpers.js'
 
 /* Assumptions
 
@@ -23,22 +25,6 @@ we'll be relying on is that:
 - if there are no connecting words / punctuation (i.e. `,`,`|`,`and`,`or`), we 
   can consider the whole field an unmatched name
 */
-
-/**
- * Calculates a list of possible replacements for a name map, with different
- * levels of simplification and priorities
- * @param {string[]} names a map from a simple to match name to the full name
- * @returns {{[key: string]: string}[]} a list of maps from a name to the full name, with different levels of simplification
- */
-function replacements_from(names) {
-  const name_map = names.map(name => [name, name])
-  const acronyms = names.map(name => [to_acronym(name), name])
-
-  // replacements have priority as so:
-  // 1. match on full name
-  // 2. match on acronym
-  return [Object.fromEntries(name_map), Object.fromEntries(acronyms)]
-}
 
 /**
  * Tests whether a text only comprises of a list of names, up to connectives
@@ -76,81 +62,60 @@ function try_complete_matching(text, names) {
  * @returns {Promise<import('./index.js').CorrectFn<string>>}
  */
 export default async function Corrector(keep_failed = true) {
-  const { default: manual_replace_list } = await import(
-    './manual_replace/destinations.json',
-    { assert: { type: 'json' } }
-  )
-  const manual_replacements = Object.fromEntries(
-    manual_replace_list.flatMap(replace => Object.entries(replace))
-  )
-  let { default: known_replacements } = await import(
-    './data/known_destinations.json',
-    { assert: { type: 'json' } }
-  )
+  let known_replacements = {}
 
-  let { default: failed } = keep_failed
-    ? await import('./failed_parses/destinations.json', {
-        assert: { type: 'json' }
-      })
-    : { default: [] }
-  let { default: incorrect } = await import(
-    './incorrect_fields/destinations.json',
-    { assert: { type: 'json' } }
+  let { failed, incorrect, corrections } = await load_correction_data(
+    'destinations'
   )
-  incorrect = new Set(incorrect)
+  if (!keep_failed) failed = []
 
   /** @param {string} text */
   function correct_name(text) {
     if (text === undefined || text.length === 0) return undefined
     if (incorrect.has(text)) return undefined
 
+    // if we have `;` or `|` in the text we can assume it's a well formed list
     if (text.match(/[;|]/)) {
       const destinations = text.split(/[;|]/g).map(dest => dest.trim())
       for (const destination of destinations) {
-        known_replacements[destination] = destination
-        known_replacements[to_acronym(destination)] = destination
+        const simple = destination.replace(conjunctive_words, '')
+        known_replacements[simple] = destination
+        known_replacements[to_acronym(simple)] = destination
       }
-      return text
+      return text.replace(';', '|')
     }
 
     // if there's no connectives or punctuation, we can just return the text
-    if (!text.match(/[;|,]/) && !text.match(connectives)) {
-      known_replacements[text] = text
-      known_replacements[to_acronym(text)] = text
+    if (!text.match(/,/) && !text.match(connectives)) {
+      const simple = text.replace(conjunctive_words, '')
+      known_replacements[simple] = text
+      known_replacements[to_acronym(simple)] = text
       return text
     }
 
-    let names = []
-
-    // first we check if manual names fully match the text
-    // we prefer these over the known names, as they can be more accurate
-    names.push(...Object.keys(manual_replacements))
-    const manual_matches = try_complete_matching(text, names)
-    if (manual_matches)
-      return manual_matches.map(name => manual_replacements[name])
-
-    // next we check if adding known names helps
-    names.push(...Object.keys(known_replacements))
-    const all_matches = try_complete_matching(text, names)
-    if (all_matches)
-      return all_matches.map(
-        name => manual_replacements[name] ?? known_replacements[name]
-      )
-
-    // at this point, we have a field that we can't match
-    failed.push(text)
+    // remove conjunctions i.e. `and`, `or` as they get in the way of matching
+    const simple = text.replace(conjunctive_words, '')
+    const matches = priority_complete_matching(simple, [
+      known_replacements,
+      ...corrections
+    ])
+    if (!matches) failed.push(text)
+    return matches
   }
 
-  correct_name.close = async () =>
-    Promise.all([
+  correct_name.close = async () => {
+    if (Object.keys(known_replacements).length > 0)
+      corrections.unshift(known_replacements)
+    await Promise.all([
       fs.writeFile(
         './src/correct/failed_parses/destinations.json',
         JSON.stringify(merge_failed(failed, dest => [to_acronym(dest)]))
       ),
       fs.writeFile(
-        './src/correct/data/known_destinations.json',
-        JSON.stringify(known_replacements)
+        './src/correct/manual_replace/destinations.json',
+        JSON.stringify(corrections)
       )
     ])
+  }
   return correct_name
 }

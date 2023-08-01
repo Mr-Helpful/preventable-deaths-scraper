@@ -1,5 +1,10 @@
 export const connectives = /and|or/gi
+export const connective_words = RegExp(`\\b(?:${connectives.source})\\b`, 'gi')
 export const conjunctions = /and|or|of|the|for/gi
+export const conjunctive_words = RegExp(
+  `\\b(?:${conjunctions.source})\\b`,
+  'gi'
+)
 
 /**
  * Returns the acronym of an organisation name
