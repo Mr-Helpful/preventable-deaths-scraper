@@ -109,11 +109,15 @@ export default async function Corrector(keep_failed = true) {
     await Promise.all([
       fs.writeFile(
         './src/correct/failed_parses/destinations.json',
-        JSON.stringify(merge_failed(failed, dest => [to_acronym(dest)]))
+        JSON.stringify(
+          merge_failed(failed, dest => [to_acronym(dest)]),
+          null,
+          2
+        )
       ),
       fs.writeFile(
         './src/correct/manual_replace/destinations.json',
-        JSON.stringify(corrections)
+        JSON.stringify(corrections, null, 2)
       )
     ])
   }
