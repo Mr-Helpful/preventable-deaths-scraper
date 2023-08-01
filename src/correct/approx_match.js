@@ -120,7 +120,7 @@ function min_edit_slice(pat, text, ignore_case = false) {
   let loc = [0, 0]
 
   for (let i = 0; i < text.length - pat.length + 1; i++) {
-    let text_slice = text.slice(i, i + pat.length)
+    let text_slice = text.slice(i)
     let distances = edit_distances(pat, text_slice, ignore_case)
 
     for (const [j, distance] of distances[pat.length].entries()) {
