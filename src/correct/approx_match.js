@@ -248,3 +248,47 @@ export function priority_match(
     if (match) return match
   }
 }
+
+/**
+ * Tests whether a text only comprises of a list of names, up to connectives
+ * and punctuation
+ * @param {string} text the text to test the names against
+ * @param {string[]} names the names to test
+ * @returns {boolean} whether the text only contains the names
+ */
+function only_contains(text, names) {
+  const names_words = new Set(names.flatMap(name => name.split(/[^\w]+/g)))
+  const text_words = text.split(/[^\w]+/g)
+  return text_words.every(word => names_words.has(word))
+}
+
+/**
+ * Attempts to match a list of replacements against a text, and only returns a
+ * match if the text only contains the matched keys (i.e. no other possible
+ * keys are left unmatched)
+ * @param {string} text the text to match names within
+ * @param {{[key: string]: string}[]} to_match replacements to match against
+ * @returns {string[] | undefined} the matches, or undefined if no good match
+ */
+export function try_complete_matching(text, to_match) {
+  const key_map = Object.fromEntries(Object.keys(to_match).map(k => [k, k]))
+  const matches = try_matches(text, key_map, 2, 0.2)
+  if (matches && only_contains(text, matches))
+    return matches.map(match => to_match[match])
+}
+
+/**
+ * Takes a list of replacements to match against, and returns the first match
+ * that is complete, extending the list of replacements if necessary
+ * @param {string} text the text to match names within
+ * @param {{[key: string]: string}[]} to_match_list list of replacements to match against
+ * @returns {string[] | undefined} the matches, or undefined if no good match
+ */
+export function priority_complete_matching(text, to_match_list) {
+  let to_match = {}
+  for (const new_matches of to_match_list) {
+    Object.assign(to_match, new_matches)
+    const match = try_complete_matching(text, to_match)
+    if (match) return match
+  }
+}
