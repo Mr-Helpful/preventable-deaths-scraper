@@ -81,15 +81,23 @@ function edit_distance(str1, str2, ignore_case = false) {
  *
  * @param {string} pat the pattern to search for
  * @param {string} text the text to search in
- * @returns {{slice: string, edits: number, loc: [number, number]}}
- *    the slice, the edit distance and the location of the slice
+ * @returns {{slice: string, error: number, errors: number[][], loc: [number, number]}}
+ *    the slice, the edit distance, all distances and the location of the slice
  */
 function min_edit_slice(pat, text, ignore_case = false) {
   // short circuit if we find a perfect match
-  const i = text.indexOf(pat)
-  if (i !== -1) return { slice: pat, edits: 0, loc: [i, i + pat.length] }
+  if (i !== -1)
+    return {
+      slice: pat,
+      error: 0,
+      errors: Array.from({ length: pat.length }, () =>
+        Array(text.length).fill(0)
+      ),
+      loc: [i, i + pat.length]
+    }
 
-  let edits = Infinity
+  let error = Infinity
+  let errors = []
   let slice = ''
   let loc = [0, 0]
 
@@ -98,22 +106,23 @@ function min_edit_slice(pat, text, ignore_case = false) {
     let distances = edit_distances(pat, text_slice, ignore_case)
 
     for (const [j, distance] of distances[pat.length].entries()) {
-      if (distance < edits) {
-        edits = distance
+      if (distance < error) {
+        errors = distances.map(row => row.slice(0, j))
+        error = distance
         slice = text_slice.slice(0, j)
         loc = [i, i + j]
       }
     }
   }
 
-  return { slice, edits, loc }
+  return { slice, error, errors, loc }
 }
 
 /** Finds the pattern with the minimum edit distance to a slice of the text
  * @param {string[]} to_match the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
- * @returns {{match: string, slice: string, edits: number, loc: [number, number]}}
+ * @returns {{match: string, slice: string, error: number, loc: [number, number]}}
  *   the pattern, the slice, the edit distance and the location of the slice
  */
 export function min_edit_slices_match(
@@ -123,6 +132,7 @@ export function min_edit_slices_match(
   ignore_case = false
 ) {
   if (ignore_case) text = text.toLowerCase()
+  let error = Infinity
   let match = ''
   let slice = ''
   let loc = [0, 0]
@@ -130,17 +140,17 @@ export function min_edit_slices_match(
   for (const pat of to_match) {
     if (ignore_case) pat = pat.toLowerCase()
     let min_result = min_edit_slice(pat, text, ignore_case)
-    if (relative) min_result.edits /= pat.length
-    if (min_result.edits < edits) {
-      ;({ slice, edits, loc } = min_result)
+    if (relative) min_result.error /= pat.length
+    if (min_result.error < error) {
+      ;({ slice, error, loc } = min_result)
       match = pat
 
       // short circuit if we find a perfect match
-      if (edits === 0) return { match, slice, edits, loc }
+      if (error === 0) return { match, slice, error, loc }
     }
   }
 
-  return { match, slice, edits, loc }
+  return { match, slice, error, loc }
 }
 
 /** Tests whether the text contains all the words in another string, up to a
