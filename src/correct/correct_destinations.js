@@ -86,7 +86,7 @@ export default async function Corrector(keep_failed = true) {
     }
 
     // if there's no connectives or punctuation, we can just return the text
-    if (!text.match(/,/) && !text.match(connectives)) {
+    if (!text.match(/,/) && !text.match(connective_words)) {
       const simple = text.replace(conjunctive_words, '')
       known_replacements[simple] = text
       known_replacements[to_acronym(simple)] = text
