@@ -1,4 +1,4 @@
-const non_words = /[^\w'-]+/g
+const non_words = /[^\w']+/g
 
 const max_by = (xs, f) =>
   xs.reduce(
