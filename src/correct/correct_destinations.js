@@ -3,7 +3,6 @@ import { priority_complete_matching, try_matches } from './approx_match.js'
 import {
   conjunctions,
   conjunctive_words,
-  connectives,
   connective_words,
   to_acronym
 } from './simplify_destination.js'
@@ -62,12 +61,23 @@ function try_complete_matching(text, names) {
  * @returns {Promise<import('./index.js').CorrectFn<string>>}
  */
 export default async function Corrector(keep_failed = true) {
-  let known_replacements = {}
-
   let { failed, incorrect, corrections } = await load_correction_data(
     'destinations'
   )
   if (!keep_failed) failed = []
+
+  for (const correction of corrections) {
+    for (const [key, value] of Object.entries(correction)) {
+      const simple = key
+        .replace(conjunctive_words, '')
+        .replace(/[^\w']+/g, ' ')
+        .trim()
+      delete correction[key]
+      correction[simple] = value
+    }
+  }
+  if (corrections.length < 2) corrections.unshift({}, {})
+  let known_replacements = corrections.slice(0, 2)
 
   /** @param {string} text */
   function correct_name(text) {
@@ -79,41 +89,40 @@ export default async function Corrector(keep_failed = true) {
       const destinations = text.split(/[;|]/g).map(dest => dest.trim())
       for (const destination of destinations) {
         const simple = destination.replace(conjunctive_words, '')
-        known_replacements[simple] = destination
-        known_replacements[to_acronym(simple)] = destination
+        known_replacements[0][simple] = destination
+        known_replacements[1][to_acronym(simple)] = destination
       }
       return text.replace(';', '|')
     }
 
     // if there's no connectives or punctuation, we can just return the text
-    if (!text.match(/,/) && !text.match(connectives)) {
+    if (!text.match(/,/) && !text.match(connective_words)) {
       const simple = text.replace(conjunctive_words, '')
-      known_replacements[simple] = text
-      known_replacements[to_acronym(simple)] = text
+      known_replacements[0][simple] = text
+      known_replacements[1][to_acronym(simple)] = text
       return text
     }
 
     // remove conjunctions i.e. `and`, `or` as they get in the way of matching
     const simple = text.replace(conjunctive_words, '')
-    const matches = priority_complete_matching(simple, [
-      known_replacements,
-      ...corrections
-    ])
+    const matches = priority_complete_matching(simple, corrections)
     if (!matches) failed.push(text)
     return matches
   }
 
   correct_name.close = async () => {
-    if (Object.keys(known_replacements).length > 0)
-      corrections.unshift(known_replacements)
     await Promise.all([
       fs.writeFile(
         './src/correct/failed_parses/destinations.json',
-        JSON.stringify(merge_failed(failed, dest => [to_acronym(dest)]))
+        JSON.stringify(
+          merge_failed(failed, dest => [to_acronym(dest)]),
+          null,
+          2
+        )
       ),
       fs.writeFile(
         './src/correct/manual_replace/destinations.json',
-        JSON.stringify(corrections)
+        JSON.stringify(corrections, null, 2)
       )
     ])
   }

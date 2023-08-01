@@ -79,6 +79,7 @@ const choices = [
  * @returns {Promise<{skipped: string[], incorrect: string[], correct: {[key: string]: string}}>} a list of texts that were skipped, incorrect, and correct
  */
 async function categorise_failures(failed) {
+  failed.sort((a, b) => a.length - b.length)
   let decisions = failed.map(text => [text, 'skipped', {}])
   let i = 0
 
@@ -110,7 +111,7 @@ async function categorise_failures(failed) {
         incorrect.push(text)
         break
       case 'replace':
-        correct[replacements[0]] = text
+        correct[text] = replacements[0]
         break
       case 'correct':
       case 'categories':
@@ -124,11 +125,11 @@ async function categorise_failures(failed) {
 }
 
 async function update_corrections_for(field) {
-  console.log(`- Manual corrections for '${field}' -`)
-
   const { default: failed } = await import(`./failed_parses/${field}.json`, {
     assert: { type: 'json' }
   })
+
+  console.log(`- Manual corrections for '${field}' (${failed.length} left) -`)
 
   const { skipped, incorrect, correct } = await categorise_failures(failed)
 
@@ -151,6 +152,11 @@ async function update_corrections_for(field) {
     `./manual_replace/${field}.json`,
     { assert: { type: 'json' } }
   ).catch(_ => [])
+  for (const key in correct) {
+    for (const correction of corrections) {
+      if (correction[key]) delete correct[key]
+    }
+  }
   if (Object.keys(correct).length > 0) corrections.push(correct)
   await fs.writeFile(
     `${path}/manual_replace/${field}.json`,

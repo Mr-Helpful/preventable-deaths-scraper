@@ -1,3 +1,5 @@
+const non_words = /[^\w']+/g
+
 const max_by = (xs, f) =>
   xs.reduce(
     ([x, v], y) => (f(y) > v ? [y, f(y)] : [x, v]),
@@ -15,11 +17,6 @@ function edit_distances(str1, str2, ignore_case = false) {
   let distances = Array.from({ length: str1.length + 1 }, _ =>
     Array(str2.length + 1).fill(0)
   )
-
-  if (ignore_case) {
-    str1 = str1.toLowerCase()
-    str2 = str2.toLowerCase()
-  }
 
   // short circuit if strings are equal
   if (str1 === str2) return distances
@@ -64,10 +61,32 @@ function edit_distances(str1, str2, ignore_case = false) {
 
 /** Helper function for the edit distance of the full strings */
 function edit_distance(str1, str2, ignore_case = false) {
+  if (ignore_case) {
+    str1 = str1.toLowerCase()
+    str2 = str2.toLowerCase()
+  }
+
   // short circuit if strings are equal
   if (str1 === str2) return 0
 
   return edit_distances(str1, str2, ignore_case)[str1.length][str2.length]
+}
+
+/**
+ * A generalised version of indexOf that works on any array-like object
+ * @template {any[]|string} T
+ * @param {T} xs the array to search in
+ * @param {T} ys the array to search for
+ * @return {number} the index of the first element of ys in xs, or -1 if not found
+ */
+function index_of(xs, ys) {
+  let idxs = []
+  for (let i = 0; i < xs.length; i++) {
+    if (xs[i] === ys[0]) idxs.push(0)
+    idxs = idxs.flatMap(idx => (xs[i] === ys[idx] ? [idx + 1] : []))
+    if (idxs.includes(ys.length)) return i - ys.length + 1
+  }
+  return -1
 }
 
 /** Finds the slice of text that has the minimum edit distance to the pattern
@@ -79,39 +98,49 @@ function edit_distance(str1, str2, ignore_case = false) {
  *
  * @param {string} pat the pattern to search for
  * @param {string} text the text to search in
- * @returns {{slice: string, edits: number, loc: [number, number]}}
- *    the slice, the edit distance and the location of the slice
+ * @returns {{slice: string, error: number, errors: number[][], loc: [number, number]}}
+ *    the slice, the edit distance, all distances and the location of the slice
  */
 function min_edit_slice(pat, text, ignore_case = false) {
   // short circuit if we find a perfect match
-  const i = text.indexOf(pat)
-  if (i !== -1) return { slice: pat, edits: 0, loc: [i, i + pat.length] }
+  const i = index_of(text, pat)
+  if (i !== -1)
+    return {
+      slice: pat,
+      error: 0,
+      errors: Array.from({ length: pat.length }, () =>
+        Array(text.length).fill(0)
+      ),
+      loc: [i, i + pat.length]
+    }
 
-  let edits = Infinity
+  let error = Infinity
+  let errors = []
   let slice = ''
   let loc = [0, 0]
 
   for (let i = 0; i < text.length - pat.length + 1; i++) {
-    let text_slice = text.slice(i, i + pat.length)
+    let text_slice = text.slice(i)
     let distances = edit_distances(pat, text_slice, ignore_case)
 
     for (const [j, distance] of distances[pat.length].entries()) {
-      if (distance < edits) {
-        edits = distance
+      if (distance < error) {
+        errors = distances.map(row => row.slice(0, j))
+        error = distance
         slice = text_slice.slice(0, j)
         loc = [i, i + j]
       }
     }
   }
 
-  return { slice, edits, loc }
+  return { slice, error, errors, loc }
 }
 
 /** Finds the pattern with the minimum edit distance to a slice of the text
  * @param {string[]} to_match the patterns to search within
  * @param {string} text the text to search in
  * @param {boolean} [relative=false] whether to normalise the edit distance by the pattern length
- * @returns {{match: string, slice: string, edits: number, loc: [number, number]}}
+ * @returns {{match: string, slice: string, error: number, loc: [number, number]}}
  *   the pattern, the slice, the edit distance and the location of the slice
  */
 export function min_edit_slices_match(
@@ -120,24 +149,26 @@ export function min_edit_slices_match(
   relative = false,
   ignore_case = false
 ) {
-  let edits = Infinity
+  if (ignore_case) text = text.toLowerCase()
+  let error = Infinity
   let match = ''
   let slice = ''
   let loc = [0, 0]
 
   for (const pat of to_match) {
+    if (ignore_case) pat = pat.toLowerCase()
     let min_result = min_edit_slice(pat, text, ignore_case)
-    if (relative) min_result.edits /= pat.length
-    if (min_result.edits < edits) {
-      ;({ slice, edits, loc } = min_result)
+    if (relative) min_result.error /= pat.length
+    if (min_result.error < error) {
+      ;({ slice, error, loc } = min_result)
       match = pat
 
       // short circuit if we find a perfect match
-      if (edits === 0) return { match, slice, edits, loc }
+      if (error === 0) return { match, slice, error, loc }
     }
   }
 
-  return { match, slice, edits, loc }
+  return { match, slice, error, loc }
 }
 
 /** Tests whether the text contains all the words in another string, up to a
@@ -155,14 +186,16 @@ function approx_contains_all(
   relative = 0.1,
   ignore_case = false
 ) {
-  const text_words = text.split(/[^\w']+/g)
-  const pattern_words = pattern.split(/[^\w']+/g)
+  const text_words = text.split(non_words)
+  const pattern_words = pattern.split(non_words)
 
   return pattern_words.every(pattern_word => {
     const error = Math.min(edits, Math.floor(pattern_word.length * relative))
     const match_found = text_words.some(word => {
       // short circuit if the difference in length is too great
       if (Math.abs(word.length - pattern_word.length) > error) return false
+      // short circuit if no error is allowed and the words are different
+      if (error === 0 && word !== pattern_word) return false
       const distance = edit_distance(pattern_word, word, ignore_case)
       return distance <= error
     })
@@ -172,7 +205,7 @@ function approx_contains_all(
 
 export function to_keywords(text) {
   return text
-    .split(/[^\w]+/g)
+    .split(non_words)
     .filter(word => word.length > 0)
     .filter(word => word[0].toUpperCase() === word[0])
     .join(' ')
@@ -245,6 +278,50 @@ export function priority_match(
 ) {
   for (const matches of match_list) {
     const match = try_matching(text, matches, edits, relative, ignore_case)
+    if (match) return match
+  }
+}
+
+/**
+ * Tests whether a text only comprises of a list of names, up to connectives
+ * and punctuation
+ * @param {string} text the text to test the names against
+ * @param {string[]} names the names to test
+ * @returns {boolean} whether the text only contains the names
+ */
+function only_contains(text, names) {
+  const names_words = new Set(names.flatMap(name => name.split(non_words)))
+  const text_words = text.split(non_words)
+  return text_words.every(word => names_words.has(word))
+}
+
+/**
+ * Attempts to match a list of replacements against a text, and only returns a
+ * match if the text only contains the matched keys (i.e. no other possible
+ * keys are left unmatched)
+ * @param {string} text the text to match names within
+ * @param {{[key: string]: string}[]} to_match replacements to match against
+ * @returns {string[] | undefined} the matches, or undefined if no good match
+ */
+export function try_complete_matching(text, to_match) {
+  const key_map = Object.fromEntries(Object.keys(to_match).map(k => [k, k]))
+  const matches = try_matches(text, key_map, 2, 0.2)
+  if (matches && only_contains(text, matches))
+    return matches.map(match => to_match[match])
+}
+
+/**
+ * Takes a list of replacements to match against, and returns the first match
+ * that is complete, extending the list of replacements if necessary
+ * @param {string} text the text to match names within
+ * @param {{[key: string]: string}[]} to_match_list list of replacements to match against
+ * @returns {string[] | undefined} the matches, or undefined if no good match
+ */
+export function priority_complete_matching(text, to_match_list) {
+  let to_match = {}
+  for (const new_matches of to_match_list) {
+    Object.assign(to_match, new_matches)
+    const match = try_complete_matching(text, to_match)
     if (match) return match
   }
 }

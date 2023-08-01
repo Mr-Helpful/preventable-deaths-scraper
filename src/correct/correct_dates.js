@@ -102,7 +102,7 @@ export default async function Corrector(keep_failed = true) {
   correct_date.close = () =>
     fs.writeFile(
       './src/correct/failed_parses/dates.json',
-      JSON.stringify(failed)
+      JSON.stringify(failed, null, 2)
     )
   return correct_date
 }

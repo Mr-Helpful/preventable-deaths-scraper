@@ -113,7 +113,7 @@ export default async function Corrector(keep_failed = true) {
   )
   await fs.writeFile(
     './src/correct/data/fetched_names.json',
-    JSON.stringify(fetched_simple)
+    JSON.stringify(fetched_simple, null, 2)
   )
 
   let { failed, incorrect, corrections } = await load_correction_data('names')
@@ -137,7 +137,7 @@ export default async function Corrector(keep_failed = true) {
   correct_name.close = () =>
     fs.writeFile(
       './src/correct/failed_parses/names.json',
-      JSON.stringify(merge_failed(failed, get_initials))
+      JSON.stringify(merge_failed(failed, get_initials), null, 2)
     )
   return correct_name
 }

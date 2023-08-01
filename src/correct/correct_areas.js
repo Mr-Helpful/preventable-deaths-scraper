@@ -29,7 +29,10 @@ export default async function Corrector(keep_failed = true) {
   let areas = await fetch_area_list(
     'https://www.coronersociety.org.uk/coroners/'
   )
-  await fs.writeFile('./src/correct/data/areas.json', JSON.stringify(areas))
+  await fs.writeFile(
+    './src/correct/data/areas.json',
+    JSON.stringify(areas, null, 2)
+  )
   areas = Object.fromEntries(areas.map(area => [to_keywords(area), area]))
 
   let { failed, incorrect, corrections } = await load_correction_data('areas')
@@ -47,7 +50,7 @@ export default async function Corrector(keep_failed = true) {
   correct_area.close = () =>
     fs.writeFile(
       './src/correct/failed_parses/areas.json',
-      JSON.stringify(merge_failed(failed))
+      JSON.stringify(merge_failed(failed), null, 2)
     )
   return correct_area
 }

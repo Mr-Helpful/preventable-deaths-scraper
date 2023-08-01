@@ -34,7 +34,7 @@ export default async function Corrector(keep_failed = true) {
   correct_category.close = () =>
     fs.writeFile(
       './src/correct/failed_parses/categories.json',
-      JSON.stringify(merge_failed(failed))
+      JSON.stringify(merge_failed(failed), null, 2)
     )
   return correct_category
 }
