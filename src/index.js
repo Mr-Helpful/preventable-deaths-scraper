@@ -30,7 +30,7 @@ async function fetch_seen_reports(file_path) {
  * @typedef {import('./parse/parse_summary.js').Basic_Summary} Summary
  */
 
-/** @typedef {{report_url: string, pdf_url: string}} URLs */
+/** @typedef {{report_url: string, pdf_url: string, reply_urls: string}} URLs */
 
 /** Fetches and writes reports to the given `.csv` file
  * @template R, S
@@ -92,6 +92,7 @@ const headers = [
   'this_report_is_being_sent_to',
   'report_url',
   'pdf_url',
+  'reply_urls',
   'circumstances',
   'concerns',
   'inquest',
