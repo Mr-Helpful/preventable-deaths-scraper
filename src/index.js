@@ -70,9 +70,8 @@ export async function write_reports(
         }),
     'Reading reports |:bar| :current/:total urls'
   )
-  new_reports = new_reports.filter(report => report !== undefined)
-  new_reports.sort((a, b) => b.ref.localeCompare(a.ref)) // descending sort ref
-  reports.unshift(...new_reports)
+  reports.unshift(...new_reports.filter(report => report !== undefined))
+  reports.sort(({ ref: a = '' }, { ref: b = '' }) => b.localeCompare(a)) // descending sort ref
 
   await fs.writeFile(
     csv_path,
