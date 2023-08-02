@@ -107,7 +107,7 @@ export default async function Corrector(keep_failed = true) {
     const simple = text.replace(conjunctive_words, '')
     const matches = priority_complete_matching(simple, corrections)
     if (!matches) failed.push(text)
-    return matches.filter(match => match.length > 0).join('|')
+    return matches && matches.filter(match => match.length > 0).join('|')
   }
 
   correct_name.close = async () => {
