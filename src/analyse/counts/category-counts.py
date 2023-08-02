@@ -30,7 +30,7 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 # %% [markdown]
 # ### Fetching the categories
 
-with open(f"{CORRECT_PATH}/category_corrections.json", 'r', encoding='utf8') as f:
+with open(f"{CORRECT_PATH}/manual_replace/categories.json", 'r', encoding='utf8') as f:
   categories = []
   for category in json.load(f):
     categories.extend(category.values())
