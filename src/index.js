@@ -30,7 +30,7 @@ async function fetch_seen_reports(file_path) {
  * @typedef {import('./parse/parse_summary.js').Basic_Summary} Summary
  */
 
-/** @typedef {{report_url: string, pdf_url: string}} URLs */
+/** @typedef {{report_url: string, pdf_url: string, reply_urls: string}} URLs */
 
 /** Fetches and writes reports to the given `.csv` file
  * @template R, S
@@ -70,9 +70,8 @@ export async function write_reports(
         }),
     'Reading reports |:bar| :current/:total urls'
   )
-  new_reports = new_reports.filter(report => report !== undefined)
-  new_reports.sort((a, b) => b.ref.localeCompare(a.ref)) // descending sort ref
-  reports.unshift(...new_reports)
+  reports.unshift(...new_reports.filter(report => report !== undefined))
+  reports.sort(({ ref: a = '' }, { ref: b = '' }) => b.localeCompare(a)) // descending sort ref
 
   await fs.writeFile(
     csv_path,
@@ -92,6 +91,7 @@ const headers = [
   'this_report_is_being_sent_to',
   'report_url',
   'pdf_url',
+  'reply_urls',
   'circumstances',
   'concerns',
   'inquest',
