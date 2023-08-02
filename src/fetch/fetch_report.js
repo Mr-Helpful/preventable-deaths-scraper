@@ -1,14 +1,16 @@
 import { parse_rows } from '../parse/parse_report.js'
-import { fetch_html, fetch_pdf, ElementError } from './helpers.js'
+import { ElementError, fetch_html, fetch_pdf } from './helpers.js'
 
 /** Type imports
  * @typedef {import('cheerio').CheerioAPI} CheerioAPI
  * @typedef {import('../parse/helpers.js').Parser} Parser
  */
 
-/** Attempts to fetch a table from the report's overview.
+/** Attempts to fetch a table from the report's overview
+ *
  * All of the reports have a pdf overview attached, but its data is much more
  * limited than either the html table or the pdf table
+ *
  * @template S
  * @throws {ElementError}
  * @param {CheerioAPI} $ JQuery in the page given
@@ -20,13 +22,38 @@ async function try_fetch_summary($, parse_summary) {
   const data_rows = $(data_path)
   if (data_rows.length === 0) throw new ElementError('summary rows not found')
 
-  const html_rows = data_rows.get().map(row => $(row).html())
-  return parse_summary(html_rows)
+  // we need to clean up the html a bit
+  data_rows.before('\n')
+  data_rows.find(`br`).replaceWith('\n')
+  return parse_summary(data_rows.get().map(row => $(row).text()))
 }
 
-/** Attempts to fetch a table from the report webpage.
+/** Attempts to fetch the category of death from the report's tags
+ *
+ * @template S
+ * @throws {ElementError}
+ * @param {CheerioAPI} $ JQuery in the page given
+ * @param {Parser<S>} parse_summary the custom summary parser to use
+ * @return {Promise<S>} the formatted summary
+ */
+async function try_fetch_tags($) {
+  const tag_path = '.single__title + p.pill--single > a'
+  const tags = $(tag_path)
+  if (tags.length === 0) throw new ElementError('tags not found')
+
+  return {
+    category: tags
+      .get()
+      .map(tag => $(tag).text())
+      .join(' | ')
+  }
+}
+
+/** Attempts to fetch a table from the report webpage
+ *
  * Some of the report webpages have a nice table on them, which is honestly
  * just easier to scrape than trying to work out what's in the pdf download.
+ *
  * @template R
  * @param {CheerioAPI} $ JQuery in the page given
  * @param {Parser<R>} parse_report the custom report parser to use
@@ -38,12 +65,13 @@ async function try_fetch_table($, parse_report) {
   if (table_rows.length === 0) throw new ElementError('table rows not found')
 
   // we need to clean up the html a bit
-  $(row_path).before('\n')
-  $(`${row_path} br`).before('\n').remove()
+  table_rows.before('\n')
+  table_rows.find(`br`).replaceWith('\n')
   return parse_report(table_rows.get().map(row => $(row).text()))
 }
 
-/** Attempts to fetch a table from the report's pdf.
+/** Attempts to fetch a table from the report's pdf
+ *
  * All of the reports have a pdf attached, which we can attempt to parse.
  * Unfortunately the method we use to parse uses OCR and hence isn't perfect.
  *
@@ -81,18 +109,21 @@ export async function fetch_report(report_url, parse_report, parse_summary) {
   const throw_network = err => {
     if (err?.name === 'NetworkError') throw err
   }
-  const summary = await try_fetch_summary($, parse_summary).catch(throw_network)
+  let tags = await try_fetch_tags($).catch(throw_network)
+  let summary = await try_fetch_summary($, parse_summary).catch(throw_network)
   let report = await try_fetch_table($, parse_report).catch(throw_network)
   report ??= await try_fetch_pdf($, parse_report).catch(throw_network)
 
   // the most reliable parses are from
-  // 1. the summary
-  // 2. the html table
-  // 3. the pdf table
+  // 1. the tags
+  // 2. the summary
+  // 3. the html table
+  // 4. the pdf table
   // hence we give them priority in that order, and provide sensible falbacks
   return {
     ...report,
     ...summary,
+    ...tags,
     pdf_url,
     report_url
   }

@@ -1,4 +1,4 @@
-import { parse_list, table_parser } from './helpers.js'
+import { table_parser } from './helpers.js'
 /** @typedef {import('./helpers.js').Parser} Parser */
 /** @typedef {import('./helpers.js').HeadersFor} HeadersFor */
 
@@ -35,7 +35,7 @@ export const default_report = {
 }
 
 /** @type {HeadersFor<Basic_Report>} */
-export const report_headings = {
+const report_headings = {
   'THIS REPORT IS BEING SENT TO:?': 'this_report_is_being_sent_to',
   '1\\s*CORONER': 'coroner_name',
   "2\\s*CORONER[’']S LEGAL POWERS": 'legal',
@@ -72,27 +72,3 @@ export function parse_rows(text, parse_report) {
  * @type {Parser<Basic_Report>}
  */
 export const parse_report_basic = table_parser(report_headings)
-
-// export function parse_report(string) {
-//   const template = { to: parse_to_field, name: parse_name_field }
-// }
-
-// /** Attempts to parse the `to` field of a report
-//  * @param {string} field the string representation to parse
-//  * @return {string[]} names contained within the field
-//  */
-// function parse_to_field(field) {
-//   const field_template = /(?:THIS REPORT IS BEING SENT TO:)?\s*(?<names>.*)/i
-//   return parse_list(field.match(field_template).groups.names)
-// }
-
-// /** Attempts to parse the `name` field of a report
-//  * @param {string} field the string representation to parse
-//  * @return {{name: string, area: string}} name contained within the field
-//  */
-// function parse_name_field(field) {
-//   const common_prefix = /CORONER\s*(?:I am)\s*?/
-//   return field.replace(common_prefix, '')
-// }
-
-// function parse_legal_field(field) {}

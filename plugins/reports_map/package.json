@@ -1,0 +1,26 @@
+{
+	"name": "reports-map",
+	"version": "1.0.0",
+	"description": "A Heatmap of coroner reports in the UK",
+	"author": "Alex Colby",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^26.8.0"
+	},
+	"dependencies": {
+		"@wordpress/components": "^25.3.0",
+		"@wordpress/element": "^5.14.0",
+		"@wordpress/primitives": "^3.35.0",
+		"papaparse": "^5.4.1"
+	}
+}

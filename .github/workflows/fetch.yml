@@ -1,0 +1,58 @@
+# This workflow fetches the most up to date preventable death reports from https://www.judiciary.uk/prevention-of-future-death-reports/
+# using the `npm run fetch` command
+
+name: Fetch Reports
+
+on:
+  schedule:
+    - cron: '0 17 * * SUN'
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install Fetch dependencies
+      run: npm ci
+    
+    - name: Fetch up to date reports
+      run: npm run fetch
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4.7.0
+      with:
+        # Version range or exact version of Python or PyPy to use, using SemVer's version range syntax. Reads from .python-version if unset.
+        python-version: 3.8
+        # Used to specify a package manager for caching in the default directory. Supported values: pip, pipenv, poetry.
+        cache: 'pip'
+        
+    - name: Install Analysis requirements
+      run: pip install -r src/analyse/counts/requirements.txt
+      
+    - name: Run Analyses
+      run: npm run analyse:counts
+    
+    - name: Update GitHub with latest reports and analysis
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "chore: fetch latest reports"
+        file_pattern: '**/*.csv **/latest.log **/*.toml'

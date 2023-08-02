@@ -1,6 +1,6 @@
-import ProgressBar from 'progress'
 import { load } from 'cheerio/lib/slim'
 import pdfjs from 'pdfjs-dist/legacy/build/pdf.js'
+import ProgressBar from 'progress'
 
 /**
  * @typedef {import('pdfjs-dist').PDFPageProxy} PDFPageProxy
@@ -9,7 +9,7 @@ import pdfjs from 'pdfjs-dist/legacy/build/pdf.js'
 export class NetworkError extends Error {
   name = 'NetworkError'
 
-  /**
+  /** Creates a new network error from an existing error
    * @param {Error} err the error to generate from
    * @param {string} url the url we attempted to fetch
    * @returns {NetworkError}
@@ -30,7 +30,7 @@ export class ElementError extends Error {
  * @param {RequestInit} init the initialisation options for fetch
  * @return {Promise<Response>} the result from the url
  */
-export async function retry_fetch(url, n = 50, init = {}) {
+async function retry_fetch(url, n = 50, init = {}) {
   let err
   for (let i = 0; i < n; i++)
     try {
@@ -95,8 +95,10 @@ export async function fetch_pdf(url) {
   return await load_pdf(buff)
 }
 
-/** Maps a common async function in parallel on a list of data, updating a
+/**
+ * Maps a common async function in parallel on a list of data, updating a
  * progress bar when each of the tasks finish.
+ *
  * @template T, R
  * @param {T[]} xs the data to be processed
  * @param {(d: T) => Promise<R>} func the task to be performed
@@ -112,4 +114,27 @@ export function map_async(xs, func, msg = undefined) {
       return res
     })
   )
+}
+
+/**
+ * Maps a common async function in series on a list of data, updating a
+ * progress bar when each of the tasks finish.
+ *
+ * We sometimes will have to use a sequential fetch instead of a parallel one
+ * as some sites will return no webpage if we make too many requests at once.
+ *
+ * @param {T[]} xs the data to be processed
+ * @param {(d: T) => Promise<R>} func the task to be performed
+ * @param {string} msg the message format for the progress bar to use
+ * @returns {Promise<R[]>} the result of applying func to all of the data
+ */
+export async function map_series(xs, func, msg = undefined) {
+  const progress = msg ? new ProgressBar(msg, xs.length) : { tick() {} }
+  const res = []
+  for (const x of xs) {
+    const r = await func(x)
+    res.push(r)
+    progress.tick()
+  }
+  return res
 }

@@ -1,0 +1,28 @@
+[
+  {
+    "Community Health": "Community health care and emergency services related deaths",
+    "Community Healthcare": "Community health care and emergency services related deaths",
+    "Emergency Services 2019": "Emergency services related deaths (2019 onwards)",
+    "Wales": "Wales prevention of future deaths reports (2019 onwards)"
+  },
+  {
+    "Health Safety": "Accident at Work and Health and Safety related deaths",
+    "Alcohol Medication": "Alcohol, drug and medication related deaths",
+    "Care Home": "Care Home Health related deaths",
+    "Care home": "Care Home Health related deaths",
+    "Child Death": "Child Death (from 2015)",
+    "Emergency Services": "Emergency Services related deaths",
+    "Hospital": "Hospital Death (Clinical Procedures and medical management) related deaths",
+    "Mental Health": "Mental Health related deaths",
+    "Other": "Other related deaths",
+    "Police": "Police related deaths",
+    "Prevention Future": "Prevention of Future Deaths",
+    "Product": "Product related deaths",
+    "Railway": "Railway related deaths",
+    "Road": "Road (Highways Safety) related deaths",
+    "Highways": "Road (Highways Safety) related deaths",
+    "Service Personnel": "Service Personnel related deaths",
+    "State Custody": "State Custody related deaths",
+    "Suicide": "Suicide (from 2015)"
+  }
+]

@@ -1,0 +1,64 @@
+import { try_matching } from './approx_match.js'
+
+/**
+ * @typedef {Object} CorrectionData
+ * @property {string[]} failed the list of failed matches
+ * @property {Set<string>} incorrect the list of incorrect matches
+ * @property {{[key: string]: string}[]} corrections the list of manual corrections
+ */
+
+/**
+ * Loads data common to all correction methods, used to log failed matches and
+ * short circuit matches for manually corrected fields
+ * @param {string} field the field currently being corrected
+ * @returns {Promise<CorrectionData>} the data needed to correct the field
+ */
+export async function load_correction_data(field) {
+  const { default: failed } = await import(`./failed_parses/${field}.json`, {
+    assert: { type: 'json' }
+  })
+
+  let { default: incorrect } = await import(
+    `./incorrect_fields/${field}.json`,
+    { assert: { type: 'json' } }
+  )
+  incorrect = new Set(incorrect)
+
+  const { default: corrections } = await import(
+    `./manual_replace/${field}.json`,
+    { assert: { type: 'json' } }
+  )
+
+  return { failed, incorrect, corrections }
+}
+
+/**
+ * Attempts to merge all unmatched names together, into the corrections needed
+ * to match them all.
+ *
+ * We do this on the basis of:
+ * - if a name roughly matches another name and is longer, we keep it
+ * - if a name is the initials of another name, we keep the full name
+ *
+ * @param {string[]} texts the unmatched texts to merge together
+ * @param {(field: string) => string[]} [simplify] generates simplified versions of the given field to merge
+ * @return {string[]} the corrections needed to match the texts
+ */
+export function merge_failed(texts, simplify = field => [field]) {
+  /** @type {{[key: string]: string}} */
+  let corrections = {}
+
+  for (const name of texts) {
+    for (const possible of [name, ...simplify(name)]) {
+      const match = try_matching(possible, corrections)
+      // if we find an existing simplified match, remove it
+      if (match !== undefined && match.length < possible.length) {
+        delete corrections[match]
+      }
+    }
+
+    corrections[name] = name
+  }
+
+  return Array.from(Object.keys(corrections))
+}
