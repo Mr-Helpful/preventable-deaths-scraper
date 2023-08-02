@@ -5,12 +5,12 @@
     "fetch": "node --no-warnings src/index.js",
     "correct": "node --no-warnings src/correct/run_corrections.js",
     "correct:update": "node --no-warnings src/correct/add_corrections.js",
-    "analyse:counts": "npm run analyse:areas && npm run analyse:names && npm run analyse:years && npm run analyse:genders && npm run analyse:categories",
-    "analyse:areas": "python src/analyse/counts/area-counts.py",
-    "analyse:names": "python src/analyse/counts/name-counts.py",
-    "analyse:years": "python src/analyse/counts/year-counts.py",
-    "analyse:genders": "python src/analyse/counts/gender-counts.py",
-    "analyse:categories": "python src/analyse/counts/category-counts.py",
+    "analyse:counts": "python src/analyse/counts/counts.py",
+    "analyse:areas": "python src/analyse/counts/area_counts.py",
+    "analyse:names": "python src/analyse/counts/name_counts.py",
+    "analyse:years": "python src/analyse/counts/year_counts.py",
+    "analyse:genders": "python src/analyse/counts/gender_counts.py",
+    "analyse:categories": "python src/analyse/counts/category_counts.py",
     "analyse:label-medical": "python src/analyse/natural-language/label-reports.py --causes medical-causes.txt --output medical-cause-reports.csv"
   },
   "dependencies": {
