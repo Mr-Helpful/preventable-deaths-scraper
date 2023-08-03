@@ -98,13 +98,17 @@ async function try_fetch_pdf($, parse_report) {
  * @param {string} report_url the url for the report
  * @param {Parser<R>} parse_report the custom report parser to use
  * @param {Parser<S>} parse_summary the custom summary parser to use
- * @return {Promise<R & S & {pdf_url: string}>} the formatted report
+ * @return {Promise<R & S & {pdf_url: string, report_url: string, reply_urls: string}>} the formatted report
  */
 export async function fetch_report(report_url, parse_report, parse_summary) {
   let $ = await fetch_html(report_url)
 
-  const pdf_path = 'a.related-content__link'
-  const pdf_url = $(pdf_path).attr('href')
+  const doc_path = 'li.related-content__item > a.related-content__link'
+  const doc_urls = $(doc_path)
+    .get()
+    .map(doc => $(doc).attr('href'))
+  const pdf_url = doc_urls[0]
+  const reply_urls = doc_urls.slice(1).join(' | ')
 
   const throw_network = err => {
     if (err?.name === 'NetworkError') throw err
@@ -125,6 +129,7 @@ export async function fetch_report(report_url, parse_report, parse_summary) {
     ...summary,
     ...tags,
     pdf_url,
-    report_url
+    report_url,
+    reply_urls
   }
 }
