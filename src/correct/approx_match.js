@@ -9,10 +9,9 @@ const max_by = (xs, f) =>
 /** Returns the minimum number of edits to transform str1 into str2
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
- * @param {boolean} [ignore_case=false] whether to ignore case sensitivity
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
  */
-function edit_distances(str1, str2, ignore_case = false) {
+function edit_distances(str1, str2) {
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
   let distances = Array.from({ length: str1.length + 1 }, _ =>
     Array(str2.length + 1).fill(0)
