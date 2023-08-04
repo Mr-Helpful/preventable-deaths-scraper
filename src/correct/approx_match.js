@@ -6,12 +6,30 @@ const max_by = (xs, f) =>
     [undefined, -Infinity]
   )[0]
 
+/**
+ * @typedef {Object} DistanceConfig
+ * @property {number} addition_cost the cost of adding a character
+ * @property {number} deletion_cost the cost of deleting a character
+ * @property {number} substitution_cost the cost of substituting a character
+ * @property {number} transposition_cost the cost of transposing two characters
+ */
+
 /** Returns the minimum number of edits to transform str1 into str2
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
+ * @param {DistanceConfig} config the costs of each edit type
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
  */
-function edit_distances(str1, str2) {
+function edit_distances(
+  str1,
+  str2,
+  {
+    addition_cost = 1,
+    deletion_cost = 1,
+    substitution_cost = 1,
+    transposition_cost = 1
+  } = {}
+) {
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
   let distances = Array.from({ length: str1.length + 1 }, _ =>
     Array(str2.length + 1).fill(0)
@@ -35,6 +53,12 @@ function edit_distances(str1, str2) {
         continue
       }
 
+      let costs = [
+        distances[i - 1][j] + deletion_cost, // deletion
+        distances[i][j - 1] + addition_cost, // insertion
+        distances[i - 1][j - 1] + substitution_cost // substitution
+      ]
+
       // transposed characters
       if (
         i > 1 &&
@@ -42,16 +66,10 @@ function edit_distances(str1, str2) {
         str1[i - 1] === str2[j - 2] &&
         str1[i - 2] === str2[j - 1]
       ) {
-        distances[i][j] = distances[i - 2][j - 2] + 1
-        continue
+        costs.push(distances[i - 2][j - 2] + transposition_cost)
       }
 
-      distances[i][j] =
-        Math.min(
-          distances[i - 1][j], // deletion
-          distances[i][j - 1], // insertion
-          distances[i - 1][j - 1] // substitution
-        ) + 1
+      distances[i][j] = Math.min(...costs)
     }
   }
 
