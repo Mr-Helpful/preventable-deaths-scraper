@@ -347,3 +347,73 @@ export function priority_complete_matching(text, to_match_list) {
     if (match) return match
   }
 }
+
+/**
+ * Attempts to find a match for a text within a list of phrases, using the
+ * following method:
+ * If there are sufficiently few edits in words, ignoring any replacements that
+ * have fewer than `word_typos` typos, then we accept the match.
+ *
+ * @param {string} text the text to match against
+ * @param {string[]} to_match the list of strings to match against
+ * @param {number} [phrase_typos=2] the maximum number of typos per phrase
+ * @param {number} [word_typos=2] the maximum number of typos per word
+ * @returns {string[] | undefined} the matches, or undefined if no good match
+ */
+export function hierachic_match(
+  text,
+  to_match,
+  phrase_typos = 2,
+  word_typos = 2
+) {
+  const words = text.split(non_words)
+  const word_matches = to_match.filter(phrase => {
+    const match_words = phrase.split(non_words)
+    if (Math.abs(match_words.length - words.length) > phrase_typos) return false
+
+    const edits = edit_distances(words, match_words)
+    let phrase_distance = edits[words.length][match_words.length]
+    if (phrase_distance < phrase_typos) return true
+
+    // check if any replacement words are close enough
+    let i = words.length
+    let j = match_words.length
+    while (i > 0 && j > 0) {
+      // if there's a transposition, skip it
+      if (
+        i > 1 &&
+        j > 1 &&
+        words[i - 1] === match_words[j - 2] &&
+        words[i - 2] === match_words[j - 1]
+      ) {
+        i -= 2
+        j -= 2
+        continue
+      }
+
+      const min = Math.min(
+        edits[i - 1][j - 1], // replacement
+        edits[i - 1][j], // deletion
+        edits[i][j - 1] // addition
+      )
+      if (min === edits[i - 1][j - 1]) {
+        // if a replacement is close enough, don't consider it a replacement
+        // if this brings us below the allowable phrase typos, then it's a match
+        if (edit_distance(words[i - 1], match_words[j - 1]) <= word_typos) {
+          phrase_distance--
+          if (phrase_distance < phrase_typos) return true
+        }
+        i--
+        j--
+      } else if (min === edits[i - 1][j]) {
+        i--
+      } else {
+        j--
+      }
+    }
+
+    return false
+  })
+
+  if (word_matches.length > 0) return word_matches
+}
