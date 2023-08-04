@@ -68,7 +68,7 @@ function edit_distance(str1, str2, ignore_case = false) {
   // short circuit if strings are equal
   if (str1 === str2) return 0
 
-  return edit_distances(str1, str2, ignore_case)[str1.length][str2.length]
+  return edit_distances(str1, str2)[str1.length][str2.length]
 }
 
 /**
@@ -101,6 +101,11 @@ function index_of(xs, ys) {
  *    the slice, the edit distance, all distances and the location of the slice
  */
 function min_edit_slice(pat, text, ignore_case = false) {
+  if (ignore_case) {
+    pat = pat.toLowerCase()
+    text = text.toLowerCase()
+  }
+
   // short circuit if we find a perfect match
   const i = index_of(text, pat)
   if (i !== -1)
