@@ -13,6 +13,13 @@ const max_by = (xs, f) =>
  * @property {number} substitution_cost the cost of substituting a character
  * @property {number} transposition_cost the cost of transposing two characters
  */
+/** @type {DistanceConfig} */
+const default_config = {
+  addition_cost: 1,
+  deletion_cost: 1,
+  substitution_cost: 1,
+  transposition_cost: 1
+}
 
 /** Returns the minimum number of edits to transform str1 into str2
  * @param {string} str1 the to transform
@@ -24,11 +31,11 @@ function edit_distances(
   str1,
   str2,
   {
-    addition_cost = 1,
-    deletion_cost = 1,
-    substitution_cost = 1,
-    transposition_cost = 1
-  } = {}
+    addition_cost,
+    deletion_cost,
+    substitution_cost,
+    transposition_cost
+  } = default_config
 ) {
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
   let distances = Array.from({ length: str1.length + 1 }, _ =>
@@ -356,24 +363,31 @@ export function priority_complete_matching(text, to_match_list) {
  *
  * @param {string} text the text to match against
  * @param {string[]} to_match the list of strings to match against
- * @param {number} [phrase_typos=2] the maximum number of typos per phrase
- * @param {number} [word_typos=2] the maximum number of typos per word
+ * @param {DistanceConfig & {typos: number}} phrase_config the edit distance config for the words that make up the phrase
+ * @param {DistanceConfig & {typos: number}} word_config the edit distance config for the letter that make up each word
  * @returns {string[] | undefined} the matches, or undefined if no good match
  */
 export function hierachic_match(
   text,
   to_match,
-  phrase_typos = 2,
-  word_typos = 2
+  phrase_config = { typos: 2, ...default_config },
+  word_config = { typos: 2, ...default_config }
 ) {
   const words = text.split(non_words)
   const word_matches = to_match.filter(phrase => {
     const match_words = phrase.split(non_words)
-    if (Math.abs(match_words.length - words.length) > phrase_typos) return false
+    const length_diff = words.length - match_words.length
+    if (
+      length_diff > 0 &&
+      length_diff * phrase_config.deletion_cost > phrase_config.typos
+    )
+      return false
+    if (-length_diff * phrase_config.addition_cost > phrase_config.typos)
+      return false
 
-    const edits = edit_distances(words, match_words)
+    const edits = edit_distances(words, match_words, phrase_config)
     let phrase_distance = edits[words.length][match_words.length]
-    if (phrase_distance < phrase_typos) return true
+    if (phrase_distance < phrase_config.typos) return true
 
     // check if any replacement words are close enough
     let i = words.length
@@ -384,7 +398,8 @@ export function hierachic_match(
         i > 1 &&
         j > 1 &&
         words[i - 1] === match_words[j - 2] &&
-        words[i - 2] === match_words[j - 1]
+        words[i - 2] === match_words[j - 1] &&
+        edits[i][j] === edits[i - 2][j - 2] + word_config.transposition_cost
       ) {
         i -= 2
         j -= 2
@@ -392,22 +407,26 @@ export function hierachic_match(
       }
 
       const min = Math.min(
-        edits[i - 1][j - 1], // replacement
+        edits[i][j - 1], // addition
         edits[i - 1][j], // deletion
-        edits[i][j - 1] // addition
+        edits[i - 1][j - 1] // replacement
       )
-      if (min === edits[i - 1][j - 1]) {
+      if (min === edits[i - 1][j]) i--
+      else if (min === edits[i][j - 1]) j--
+      else {
+        const word = words[i - 1]
+        const match_word = match_words[j - 1]
+        const edits = edit_distances(word, match_word, word_config)
+        const word_distance = edits[word.length][match_word.length]
+
         // if a replacement is close enough, don't consider it a replacement
         // if this brings us below the allowable phrase typos, then it's a match
-        if (edit_distance(words[i - 1], match_words[j - 1]) <= word_typos) {
-          phrase_distance--
-          if (phrase_distance < phrase_typos) return true
+        if (word_distance <= word_config.typos) {
+          phrase_distance -= word_config.substitution_cost
+          if (phrase_distance < phrase_config.typos) return true
         }
+
         i--
-        j--
-      } else if (min === edits[i - 1][j]) {
-        i--
-      } else {
         j--
       }
     }
