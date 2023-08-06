@@ -1,36 +1,36 @@
 ["coroner areas"]
-"no. parsed reports" = 4475
+"no. parsed reports" = 4489
 "no. areas" = 82
 "mean per area" = 54
 "median per area" = 45
-"IQR of areas" = [ 21.0, 66.75,]
+"IQR of areas" = [ 21.25, 66.75,]
 
 ["death categories"]
-"no. categories in reports" = 6682
+"no. categories in reports" = 6713
 "no. categories" = 19
-"mean per category" = 351
-"median per category" = 279
-"IQR of categories" = [ 97.0, 464.0,]
+"mean per category" = 353
+"median per category" = 281
+"IQR of categories" = [ 97.0, 465.5,]
 
 ["coroner name"]
-"no. reports parsed" = 4475
-"no. names with report(s)" = 422
-"no. names without reports" = 297
+"no. reports parsed" = 4489
+"no. names with report(s)" = 424
+"no. names without reports" = 295
 "mean per name" = 10
 "median per name" = 5
 "IQR of names" = [ 2.0, 11.0,]
 
 [year]
-"no. reports parsed" = 4491
+"no. reports parsed" = 4505
 "no. years covered" = 11
-"mean per year" = 449
+"mean per year" = 450
 "median per year" = 432
 "IQR of years" = [ 365.0, 476.5,]
 
 ["coroner gender"]
 "no. coroners male" = 252
-"no. coroners female" = 235
-"no. coroners unknown" = 155
-"no. reports male" = 2020
-"no. reports female" = 1743
-"no. reports unknown" = 728
+"no. coroners female" = 236
+"no. coroners unknown" = 154
+"no. reports male" = 2027
+"no. reports female" = 1748
+"no. reports unknown" = 730
