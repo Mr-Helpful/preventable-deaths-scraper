@@ -1,5 +1,9 @@
 import fs from 'fs/promises'
-import { priority_complete_matching, try_matches } from './approx_match.js'
+import {
+  heirichic_matches,
+  hierachic_match,
+  try_matches
+} from './approx_match.js'
 import {
   conjunctions,
   conjunctive_words,
@@ -92,7 +96,7 @@ export default async function Corrector(keep_failed = true) {
         known_replacements[0][simple] = destination
         known_replacements[1][to_acronym(simple)] = destination
       }
-      return text.replace(';', '|')
+      return destinations.join(' | ')
     }
 
     // if there's no connectives or punctuation, we can just return the text
@@ -104,10 +108,17 @@ export default async function Corrector(keep_failed = true) {
     }
 
     // remove conjunctions i.e. `and`, `or` as they get in the way of matching
-    const simple = text.replace(conjunctive_words, '')
-    const matches = priority_complete_matching(simple, corrections)
-    if (!matches) failed.push(text)
-    return matches && matches.filter(match => match.length > 0).join('|')
+    // const simple = text.replace(conjunctive_words, '')
+    // const all_keys = corrections.flatMap(correction => Object.keys(correction))
+    // let matches = heirichic_matches(simple, all_keys)
+    // if (matches && only_contains(text, matches)) {
+    //   const full_map = Object.assign({}, ...corrections)
+    //   return matches
+    //     .filter(match => match.length > 0)
+    //     .map(match => full_map[match])
+    //     .join('|')
+    // }
+    failed.push(text)
   }
 
   correct_name.close = async () => {
