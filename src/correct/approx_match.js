@@ -6,13 +6,37 @@ const max_by = (xs, f) =>
     [undefined, -Infinity]
   )[0]
 
+/**
+ * @typedef {Object} DistanceConfig
+ * @property {number} addition_cost the cost of adding a character
+ * @property {number} deletion_cost the cost of deleting a character
+ * @property {number} substitution_cost the cost of substituting a character
+ * @property {number} transposition_cost the cost of transposing two characters
+ */
+/** @type {DistanceConfig} */
+const default_config = {
+  addition_cost: 1,
+  deletion_cost: 1,
+  substitution_cost: 1,
+  transposition_cost: 1
+}
+
 /** Returns the minimum number of edits to transform str1 into str2
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
- * @param {boolean} [ignore_case=false] whether to ignore case sensitivity
+ * @param {DistanceConfig} config the costs of each edit type
  * @returns {number[][]} the edit distance between all prefixes of str1 and str2
  */
-function edit_distances(str1, str2, ignore_case = false) {
+function edit_distances(
+  str1,
+  str2,
+  {
+    addition_cost,
+    deletion_cost,
+    substitution_cost,
+    transposition_cost
+  } = default_config
+) {
   // distances[i][j] = edits to get str1[0:i] to str2[0:j]
   let distances = Array.from({ length: str1.length + 1 }, _ =>
     Array(str2.length + 1).fill(0)
@@ -36,6 +60,12 @@ function edit_distances(str1, str2, ignore_case = false) {
         continue
       }
 
+      let costs = [
+        distances[i - 1][j] + deletion_cost, // deletion
+        distances[i][j - 1] + addition_cost, // insertion
+        distances[i - 1][j - 1] + substitution_cost // substitution
+      ]
+
       // transposed characters
       if (
         i > 1 &&
@@ -43,16 +73,10 @@ function edit_distances(str1, str2, ignore_case = false) {
         str1[i - 1] === str2[j - 2] &&
         str1[i - 2] === str2[j - 1]
       ) {
-        distances[i][j] = distances[i - 2][j - 2] + 1
-        continue
+        costs.push(distances[i - 2][j - 2] + transposition_cost)
       }
 
-      distances[i][j] =
-        Math.min(
-          distances[i - 1][j], // deletion
-          distances[i][j - 1], // insertion
-          distances[i - 1][j - 1] // substitution
-        ) + 1
+      distances[i][j] = Math.min(...costs)
     }
   }
 
@@ -69,7 +93,7 @@ function edit_distance(str1, str2, ignore_case = false) {
   // short circuit if strings are equal
   if (str1 === str2) return 0
 
-  return edit_distances(str1, str2, ignore_case)[str1.length][str2.length]
+  return edit_distances(str1, str2)[str1.length][str2.length]
 }
 
 /**
@@ -102,6 +126,11 @@ function index_of(xs, ys) {
  *    the slice, the edit distance, all distances and the location of the slice
  */
 function min_edit_slice(pat, text, ignore_case = false) {
+  if (ignore_case && typeof pat === 'string' && typeof text === 'string') {
+    pat = pat.toLowerCase()
+    text = text.toLowerCase()
+  }
+
   // short circuit if we find a perfect match
   const i = index_of(text, pat)
   if (i !== -1)
@@ -289,7 +318,7 @@ export function priority_match(
  * @param {string[]} names the names to test
  * @returns {boolean} whether the text only contains the names
  */
-function only_contains(text, names) {
+export function only_contains(text, names) {
   const names_words = new Set(names.flatMap(name => name.split(non_words)))
   const text_words = text.split(non_words)
   return text_words.every(word => names_words.has(word))
@@ -324,4 +353,144 @@ export function priority_complete_matching(text, to_match_list) {
     const match = try_complete_matching(text, to_match)
     if (match) return match
   }
+}
+
+/**
+ * @typedef {Object} ErrorConfig
+ * @property {number} typos the maximum number of typos allowed
+ * @property {number} relative the maximum relative error allowed
+ */
+
+/** @type {ErrorConfig} */
+const default_error_config = {
+  ...default_config,
+  typos: 2,
+  relative: 0.2
+}
+
+/**
+ * Attempts to find a match for a text within a list of phrases, using the
+ * following method:
+ * If there are sufficiently few edits in words, ignoring any replacements that
+ * have fewer than `word_typos` typos, then we accept the match.
+ *
+ * @param {string} text the text to match against
+ * @param {string[]} to_match the list of strings to match against
+ * @param {ErrorConfig} config the edit distance config for the words that make up the phrase
+ * @param {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
+ */
+export function hierachic_match(
+  text,
+  to_match,
+  config = default_error_config,
+  word_config = default_error_config
+) {
+  const words = text.split(non_words)
+  const word_matches = to_match.flatMap(phrase => {
+    const match_words = phrase.split(non_words)
+    const diff = words.length - match_words.length
+    if (diff > 0 && diff * config.deletion_cost > config.typos) return []
+    if (diff < 0 && -diff * config.addition_cost > config.typos) return []
+
+    let { error, errors, loc } = min_edit_slice(words, match_words, config)
+    if (error <= config.typos && error <= words.length * config.relative)
+      return [{ phrase, loc, error }]
+
+    // check if any replacement words are close enough
+    let i = errors.length - 1
+    let j = (errors[0] ?? []).length - 1
+    while (i > 0 && j > 0) {
+      // if there's a transposition, skip it
+      if (
+        i > 1 &&
+        j > 1 &&
+        words[i - 1] === match_words[j - 2] &&
+        words[i - 2] === match_words[j - 1] &&
+        errors[i][j] === errors[i - 2][j - 2] + word_config.transposition_cost
+      ) {
+        i -= 2
+        j -= 2
+        continue
+      }
+
+      const min = Math.min(
+        errors[i][j - 1], // addition
+        errors[i - 1][j], // deletion
+        errors[i - 1][j - 1] // replacement
+      )
+      if (min === errors[i - 1][j]) i--
+      else if (min === errors[i][j - 1]) j--
+      else {
+        const word = words[i - 1]
+        const match_word = match_words[j - 1]
+        const errors = edit_distances(word, match_word, word_config)
+        const word_error = errors[word.length][match_word.length]
+
+        // if a replacement is close enough, don't consider it a replacement
+        // if this brings us below the allowable phrase typos, then it's a match
+        if (
+          word_error > 0 &&
+          word_error <= word_config.typos &&
+          word_error <= words.length * word_config.relative
+        ) {
+          console.log(
+            `${word} is close enough (${word_error}) to ${match_word}`
+          )
+          error -= word_config.substitution_cost
+          if (error < config.typos && error < words.length * config.relative)
+            return [{ phrase, loc, error }]
+        }
+
+        i--
+        j--
+      }
+    }
+
+    return []
+  })
+
+  if (word_matches.length > 0) return word_matches
+}
+
+/**
+ *
+ * @param {string} text
+ * @param {string[]} to_match
+ * @param {DistanceConfig & {typos: number}} phrase_config
+ * @param {DistanceConfig & {typos: number}} word_config
+ */
+export function heirichic_matches(
+  text,
+  to_match,
+  phrase_config = { typos: 2, ...default_config },
+  word_config = { typos: 2, ...default_config }
+) {
+  const matches = hierachic_match(text, to_match, phrase_config, word_config)
+  if (matches === undefined) return undefined
+  // basic greedy algorithm:
+  // find the lowest error at each position and ignore the others
+  matches.sort((a, b) => a.error - b.error)
+  matches.sort((a, b) => a.loc[0] - b.loc[0])
+  console.log(
+    matches.map(({ phrase, error, loc }) => [
+      phrase,
+      error,
+      text
+        .split(non_words)
+        .slice(...loc)
+        .join(' ')
+    ])
+  )
+
+  let start = 0
+  for (let i = 0; i < matches.length; i++) {
+    if (matches[i].loc[0] < start) {
+      matches.splice(i, 1)
+      i--
+    } else {
+      start = matches[i].loc[1]
+    }
+  }
+  return matches.map(({ phrase }) => phrase)
 }

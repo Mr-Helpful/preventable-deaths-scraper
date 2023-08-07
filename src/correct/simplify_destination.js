@@ -1,10 +1,9 @@
+import { re } from './helpers.js'
+
 export const connectives = /and|or/gi
-export const connective_words = RegExp(`\\b(?:${connectives.source})\\b`, 'gi')
+export const connective_words = re`\b${connectives}\b`
 export const conjunctions = /and|or|of|the|for/gi
-export const conjunctive_words = RegExp(
-  `\\b(?:${conjunctions.source})\\b`,
-  'gi'
-)
+export const conjunctive_words = re`\b${conjunctions}\b`
 
 /**
  * Returns the acronym of an organisation name
