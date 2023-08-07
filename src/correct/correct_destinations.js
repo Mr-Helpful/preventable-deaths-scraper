@@ -92,7 +92,7 @@ export default async function Corrector(keep_failed = true) {
         known_replacements[0][simple] = destination
         known_replacements[1][to_acronym(simple)] = destination
       }
-      return text.replace(';', '|')
+      return destinations.join(' | ')
     }
 
     // if there's no connectives or punctuation, we can just return the text
