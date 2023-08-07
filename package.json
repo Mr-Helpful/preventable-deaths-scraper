@@ -10,6 +10,7 @@
     "analyse:names": "python src/analyse/counts/name_counts.py",
     "analyse:years": "python src/analyse/counts/year_counts.py",
     "analyse:genders": "python src/analyse/counts/gender_counts.py",
+    "analyse:sent_to": "python src/analyse/counts/sent_counts.py",
     "analyse:categories": "python src/analyse/counts/category_counts.py",
     "analyse:label-medical": "python src/analyse/natural-language/label-reports.py --causes medical-causes.txt --output medical-cause-reports.csv"
   },

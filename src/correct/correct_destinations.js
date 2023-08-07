@@ -2,12 +2,14 @@ import fs from 'fs/promises'
 import {
   heirichic_matches,
   hierachic_match,
+  max_by,
   try_matches
 } from './approx_match.js'
 import {
   conjunctions,
   conjunctive_words,
   connective_words,
+  has_acronym,
   to_acronym
 } from './simplify_destination.js'
 import { merge_failed, load_correction_data } from './helpers.js'
@@ -83,6 +85,24 @@ export default async function Corrector(keep_failed = true) {
   if (corrections.length < 2) corrections.unshift({}, {})
   let known_replacements = corrections.slice(0, 2)
 
+  function try_known_match(text) {
+    if (known_replacements[1][text]) return known_replacements[1][text]
+
+    const simple = text.replace(conjunctive_words, '')
+    const known_keys = Object.keys(known_replacements[0])
+    const known_matches = hierachic_match(simple, known_keys)
+    if (known_matches === undefined) return undefined
+
+    const known_match = max_by(known_matches, match => -match.error).phrase
+    return known_replacements[0][known_match]
+  }
+
+  function add_to_known(text) {
+    const simple = text.replace(conjunctive_words, '')
+    known_replacements[0][simple] = text
+    if (!has_acronym(text)) known_replacements[1][to_acronym(simple)] = text
+  }
+
   /** @param {string} text */
   function correct_name(text) {
     if (text === undefined || text.length === 0) return undefined
@@ -90,20 +110,22 @@ export default async function Corrector(keep_failed = true) {
 
     // if we have `;` or `|` in the text we can assume it's a well formed list
     if (text.match(/[;|]/)) {
-      const destinations = text.split(/[;|]/g).map(dest => dest.trim())
-      for (const destination of destinations) {
-        const simple = destination.replace(conjunctive_words, '')
-        known_replacements[0][simple] = destination
-        known_replacements[1][to_acronym(simple)] = destination
-      }
-      return destinations.join(' | ')
+      let destinations = text.split(/[;|]/g).map(dest => dest.trim())
+      destinations = destinations.flatMap(dest => {
+        if (dest.length === 0) return ''
+        const known_match = try_known_match(dest)
+        if (known_match) return known_match
+        add_to_known(dest)
+        return dest
+      })
+      return destinations.filter(dest => dest.length > 0).join(' | ')
     }
 
     // if there's no connectives or punctuation, we can just return the text
     if (!text.match(/[,]/) && !text.match(connective_words)) {
-      const simple = text.replace(conjunctive_words, '')
-      known_replacements[0][simple] = text
-      known_replacements[1][to_acronym(simple)] = text
+      const known_match = try_known_match(text)
+      if (known_match) return known_match
+      add_to_known(text)
       return text
     }
 

@@ -1,6 +1,12 @@
 const non_words = /[^\w']+/g
 
-const max_by = (xs, f) =>
+/**
+ * @template T
+ * @param {T[]} xs the array to find the maximum of
+ * @param {(x: T) => number} f the function to find the maximum with
+ * @returns {T} the maximum element of xs, according to f
+ */
+export const max_by = (xs, f) =>
   xs.reduce(
     ([x, v], y) => (f(y) > v ? [y, f(y)] : [x, v]),
     [undefined, -Infinity]
@@ -384,10 +390,14 @@ export function hierachic_match(
   text,
   to_match,
   config = default_error_config,
-  word_config = default_error_config
+  word_config = default_error_config,
+  ignore_case = true
 ) {
+  if (ignore_case) text = text.toLowerCase()
   const words = text.split(non_words)
+
   const word_matches = to_match.flatMap(phrase => {
+    if (ignore_case) phrase = phrase.toLowerCase()
     const match_words = phrase.split(non_words)
     const diff = words.length - match_words.length
     if (diff > 0 && diff * config.deletion_cost > config.typos) return []
@@ -432,11 +442,9 @@ export function hierachic_match(
         if (
           word_error > 0 &&
           word_error <= word_config.typos &&
-          word_error <= words.length * word_config.relative
+          word_error <= word.length * word_config.relative
         ) {
-          console.log(
-            `${word} is close enough (${word_error}) to ${match_word}`
-          )
+          // console.log(`${word} is close (${word_error}) to ${match_word}`)
           error -= word_config.substitution_cost
           if (error < config.typos && error < words.length * config.relative)
             return [{ phrase, loc, error }]
