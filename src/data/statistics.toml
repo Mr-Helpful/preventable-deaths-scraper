@@ -36,8 +36,8 @@
 "no. reports unknown" = 730
 
 ["report recipient"]
-"no. reports parsed" = 2561
-"no. recipients with report(s)" = 2053
+"no. reports parsed" = 2553
+"no. recipients with report(s)" = 2039
 "mean per recipient" = 1
 "median per recipient" = 1
 "IQR of recipients" = [ 1.0, 1.0,]
