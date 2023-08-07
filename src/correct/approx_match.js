@@ -126,7 +126,7 @@ function index_of(xs, ys) {
  *    the slice, the edit distance, all distances and the location of the slice
  */
 function min_edit_slice(pat, text, ignore_case = false) {
-  if (ignore_case) {
+  if (ignore_case && typeof pat === 'string' && typeof text === 'string') {
     pat = pat.toLowerCase()
     text = text.toLowerCase()
   }
