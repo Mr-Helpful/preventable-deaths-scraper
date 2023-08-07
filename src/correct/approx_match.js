@@ -452,3 +452,45 @@ export function hierachic_match(
 
   if (word_matches.length > 0) return word_matches
 }
+
+/**
+ *
+ * @param {string} text
+ * @param {string[]} to_match
+ * @param {DistanceConfig & {typos: number}} phrase_config
+ * @param {DistanceConfig & {typos: number}} word_config
+ */
+export function heirichic_matches(
+  text,
+  to_match,
+  phrase_config = { typos: 2, ...default_config },
+  word_config = { typos: 2, ...default_config }
+) {
+  const matches = hierachic_match(text, to_match, phrase_config, word_config)
+  if (matches === undefined) return undefined
+  // basic greedy algorithm:
+  // find the lowest error at each position and ignore the others
+  matches.sort((a, b) => a.error - b.error)
+  matches.sort((a, b) => a.loc[0] - b.loc[0])
+  console.log(
+    matches.map(({ phrase, error, loc }) => [
+      phrase,
+      error,
+      text
+        .split(non_words)
+        .slice(...loc)
+        .join(' ')
+    ])
+  )
+
+  let start = 0
+  for (let i = 0; i < matches.length; i++) {
+    if (matches[i].loc[0] < start) {
+      matches.splice(i, 1)
+      i--
+    } else {
+      start = matches[i].loc[1]
+    }
+  }
+  return matches.map(({ phrase }) => phrase)
+}
