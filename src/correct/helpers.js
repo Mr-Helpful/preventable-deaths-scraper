@@ -1,5 +1,27 @@
 import { try_matching } from './approx_match.js'
 
+const zip = (...xss) =>
+  Array.from({ length: Math.max(...xss.map(xs => xs.length)) }, (_, i) =>
+    xss.map(xs => xs[i])
+  )
+
+/**
+ * Template literal tag that interpolates regexes into a single regex.
+ *
+ * All flags will be combined and regexes will be enclosed in non-capturing
+ * groups to prevent side effects (i.e. re\`a${'b|c'}d\` matches 'abd', 'acd').
+ * @param {TemplateStringsArray} strings The template to interpolate
+ * @param  {...RegExp} regexes The regexes to interpolate
+ */
+export function re(strings, ...regexes) {
+  const flags = new Set(regexes.map(r => r.flags).join(''))
+  const source = zip(strings.raw, regexes).reduce((res, [str, regex]) => {
+    if (regex === undefined) return res + str
+    return res + str + `(?:${regex.source})`
+  }, '')
+  return new RegExp(source, Array.from(flags).join(''))
+}
+
 /**
  * @typedef {Object} CorrectionData
  * @property {string[]} failed the list of failed matches
