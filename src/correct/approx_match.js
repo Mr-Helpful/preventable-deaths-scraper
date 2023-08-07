@@ -356,6 +356,19 @@ export function priority_complete_matching(text, to_match_list) {
 }
 
 /**
+ * @typedef {Object} ErrorConfig
+ * @property {number} typos the maximum number of typos allowed
+ * @property {number} relative the maximum relative error allowed
+ */
+
+/** @type {ErrorConfig} */
+const default_error_config = {
+  ...default_config,
+  typos: 2,
+  relative: 0.2
+}
+
+/**
  * Attempts to find a match for a text within a list of phrases, using the
  * following method:
  * If there are sufficiently few edits in words, ignoring any replacements that
@@ -363,35 +376,30 @@ export function priority_complete_matching(text, to_match_list) {
  *
  * @param {string} text the text to match against
  * @param {string[]} to_match the list of strings to match against
- * @param {DistanceConfig & {typos: number}} phrase_config the edit distance config for the words that make up the phrase
- * @param {DistanceConfig & {typos: number}} word_config the edit distance config for the letter that make up each word
- * @returns {string[] | undefined} the matches, or undefined if no good match
+ * @param {ErrorConfig} config the edit distance config for the words that make up the phrase
+ * @param {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
  */
 export function hierachic_match(
   text,
   to_match,
-  phrase_config = { typos: 2, ...default_config },
-  word_config = { typos: 2, ...default_config }
+  config = default_error_config,
+  word_config = default_error_config
 ) {
   const words = text.split(non_words)
-  const word_matches = to_match.filter(phrase => {
+  const word_matches = to_match.flatMap(phrase => {
     const match_words = phrase.split(non_words)
-    const length_diff = words.length - match_words.length
-    if (
-      length_diff > 0 &&
-      length_diff * phrase_config.deletion_cost > phrase_config.typos
-    )
-      return false
-    if (-length_diff * phrase_config.addition_cost > phrase_config.typos)
-      return false
+    const diff = words.length - match_words.length
+    if (diff > 0 && diff * config.deletion_cost > config.typos) return []
+    if (diff < 0 && -diff * config.addition_cost > config.typos) return []
 
-    const edits = edit_distances(words, match_words, phrase_config)
-    let phrase_distance = edits[words.length][match_words.length]
-    if (phrase_distance < phrase_config.typos) return true
+    let { error, errors, loc } = min_edit_slice(words, match_words, config)
+    if (error <= config.typos && error <= words.length * config.relative)
+      return [{ phrase, loc, error }]
 
     // check if any replacement words are close enough
-    let i = words.length
-    let j = match_words.length
+    let i = errors.length - 1
+    let j = (errors[0] ?? []).length - 1
     while (i > 0 && j > 0) {
       // if there's a transposition, skip it
       if (
@@ -399,7 +407,7 @@ export function hierachic_match(
         j > 1 &&
         words[i - 1] === match_words[j - 2] &&
         words[i - 2] === match_words[j - 1] &&
-        edits[i][j] === edits[i - 2][j - 2] + word_config.transposition_cost
+        errors[i][j] === errors[i - 2][j - 2] + word_config.transposition_cost
       ) {
         i -= 2
         j -= 2
@@ -407,23 +415,31 @@ export function hierachic_match(
       }
 
       const min = Math.min(
-        edits[i][j - 1], // addition
-        edits[i - 1][j], // deletion
-        edits[i - 1][j - 1] // replacement
+        errors[i][j - 1], // addition
+        errors[i - 1][j], // deletion
+        errors[i - 1][j - 1] // replacement
       )
-      if (min === edits[i - 1][j]) i--
-      else if (min === edits[i][j - 1]) j--
+      if (min === errors[i - 1][j]) i--
+      else if (min === errors[i][j - 1]) j--
       else {
         const word = words[i - 1]
         const match_word = match_words[j - 1]
-        const edits = edit_distances(word, match_word, word_config)
-        const word_distance = edits[word.length][match_word.length]
+        const errors = edit_distances(word, match_word, word_config)
+        const word_error = errors[word.length][match_word.length]
 
         // if a replacement is close enough, don't consider it a replacement
         // if this brings us below the allowable phrase typos, then it's a match
-        if (word_distance <= word_config.typos) {
-          phrase_distance -= word_config.substitution_cost
-          if (phrase_distance < phrase_config.typos) return true
+        if (
+          word_error > 0 &&
+          word_error <= word_config.typos &&
+          word_error <= words.length * word_config.relative
+        ) {
+          console.log(
+            `${word} is close enough (${word_error}) to ${match_word}`
+          )
+          error -= word_config.substitution_cost
+          if (error < config.typos && error < words.length * config.relative)
+            return [{ phrase, loc, error }]
         }
 
         i--
@@ -431,7 +447,7 @@ export function hierachic_match(
       }
     }
 
-    return false
+    return []
   })
 
   if (word_matches.length > 0) return word_matches
