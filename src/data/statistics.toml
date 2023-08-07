@@ -34,3 +34,10 @@
 "no. reports male" = 2027
 "no. reports female" = 1748
 "no. reports unknown" = 730
+
+["report recipient"]
+"no. reports parsed" = 2561
+"no. recipients with report(s)" = 2053
+"mean per recipient" = 1
+"median per recipient" = 1
+"IQR of recipients" = [ 1.0, 1.0,]
