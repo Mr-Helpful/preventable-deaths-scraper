@@ -318,7 +318,7 @@ export function priority_match(
  * @param {string[]} names the names to test
  * @returns {boolean} whether the text only contains the names
  */
-function only_contains(text, names) {
+export function only_contains(text, names) {
   const names_words = new Set(names.flatMap(name => name.split(non_words)))
   const text_words = text.split(non_words)
   return text_words.every(word => names_words.has(word))
