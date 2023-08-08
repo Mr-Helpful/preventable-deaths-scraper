@@ -11,6 +11,8 @@ import re
 import toml
 import pandas as pd
 
+TOP_N = 30
+
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
 REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
@@ -58,6 +60,12 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
   toml.dump(stats, wf)
 
 # %% [markdown]
+# ### Calculating the top coroners
+
+top_counts = sent_counts.head(TOP_N)
+
+# %% [markdown]
 # ### Saving the results
 
 sent_counts.to_csv(f"{DATA_PATH}/sent-counts.csv")
+top_counts.to_csv(f"{DATA_PATH}/top-sent-counts.csv")
