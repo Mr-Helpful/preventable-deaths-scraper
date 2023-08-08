@@ -30,21 +30,19 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 # ### Counting the number of reports in each coroner area
 
 # count the number of reports in each year
-grouped_counts = reports.groupby(['year', 'coroner_area']).size().reset_index(name='count')
-area_counts = grouped_counts.pivot(index='year', columns='coroner_area', values='count').fillna(0).astype(int)
-
-sum_counts = pd.DataFrame(area_counts.sum()).rename(columns={0: 'count'})
-sum_counts = sum_counts.sort_values(by='count', ascending=False)
+value_counts = reports.value_counts(['year', 'coroner_area'])
+area_counts = value_counts.unstack(fill_value=0)
+sum_counts = reports.value_counts(['coroner_area'])
 
 # %% [markdown]
 # ### Various statistics about the counts
 
 statistics = {
-  "no. parsed reports": int(sum_counts.sum()[0]),
+  "no. parsed reports": int(reports.count()['coroner_area']),
   "no. areas": len(sum_counts),
-  "mean per area": int(sum_counts.mean()[0]),
-  "median per area": int(sum_counts.median()[0]),
-  "IQR of areas": list(sum_counts.quantile([0.25, 0.75])["count"]),
+  "mean per area": float(round(sum_counts.mean(), 1)),
+  "median per area": float(sum_counts.median()),
+  "IQR of areas": list(sum_counts.quantile([0.25, 0.75])),
 }
 
 print(f"Area count statistics: {statistics}")

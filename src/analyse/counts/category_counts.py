@@ -38,27 +38,27 @@ with open(f"{CORRECT_PATH}/manual_replace/categories.json", 'r', encoding='utf8'
   categories = list(set(categories))
 
 # %% [markdown]
-# ### Creating columns for each category
+# ### Creating columns for each entry
 
-# Create a column for each category with a 1 if the report is in that category
-for category in categories:
-  reports[category] = reports['category'].str.contains(category, regex=False)
+exploded = reports.copy()
+exploded['category'] = reports['category'].str.split(r'\s*\|\s*')
+exploded = exploded.explode('category', ignore_index=True)
+exploded = exploded[exploded['category'].isin(categories)]
 
-category_counts = reports[categories].groupby(reports['year']).sum()
+category_counts = exploded.value_counts(['year', 'category']).unstack(fill_value=0)
 
-sum_counts = pd.DataFrame(category_counts.sum()).rename(columns={0: 'count'})
-sum_counts = sum_counts.sort_values(by='count', ascending=False)
-sum_counts.index.name = 'category'
+sum_counts = exploded.value_counts(['category'])
 
 # %% [markdown]
 # ### Various statistics about the counts
 
 statistics = {
-  "no. categories in reports": int(sum_counts.sum()[0]),
+  "no. reports parsed": int(reports.count()['category']),
+  "no. categories in reports": int(sum_counts.sum()),
   "no. categories": len(sum_counts),
-  "mean per category": int(sum_counts.mean()[0]),
-  "median per category": int(sum_counts.median()[0]),
-  "IQR of categories": list(sum_counts.quantile([0.25, 0.75])["count"]),
+  "mean per category": float(round(sum_counts.mean(), 1)),
+  "median per category": int(sum_counts.median()),
+  "IQR of categories": list(sum_counts.quantile([0.25, 0.75])),
 }
 
 print(f"Category count statistics: {statistics}")
