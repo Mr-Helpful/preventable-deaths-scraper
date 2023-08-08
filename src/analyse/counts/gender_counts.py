@@ -7,7 +7,6 @@
 # ### Importing libraries
 
 import os
-import re
 import json
 import toml
 import pandas as pd
@@ -22,6 +21,12 @@ CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 
 MALE_NAME = r"\b(?:mr|sir)\b"
 FEMALE_NAME = r"\b(?:mrs|miss|ms|lady|dame)\b"
+UNKNOWN_NAME = rf"^(?:(?!{MALE_NAME}|{FEMALE_NAME}).)*$"
+
+MALE_NAME = rf"^.*{MALE_NAME}.*$"
+FEMALE_NAME = rf"^.*{FEMALE_NAME}.*$"
+REPLACEMENTS = {MALE_NAME: 'male', FEMALE_NAME: 'female', UNKNOWN_NAME: 'unknown'}
+print(REPLACEMENTS)
 
 # %% [markdown]
 # ### Reading the reports
@@ -34,9 +39,8 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
   coroner_names = json.load(rf)
 
-coroners_male = len([name for name in coroner_names if re.match(MALE_NAME, name, re.I) is not None])
-coroners_female = len([name for name in coroner_names if re.match(FEMALE_NAME, name, re.I) is not None])
-coroners_unknown = len(coroner_names) - coroners_male - coroners_female
+website_genders = pd.Series(coroner_names).str.lower().replace(regex=REPLACEMENTS)
+website_counts = website_genders.value_counts()
 
 # %% [markdown]
 # ### Calculating the year of each report
@@ -48,27 +52,24 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 # ### Counting the number of reports in each coroner area
 
 # count the number of reports in each year
-reports['male'] = reports['coroner_name'].str.contains(MALE_NAME, na=False, case=False)
-reports['female'] = reports['coroner_name'].str.contains(FEMALE_NAME, na=False, case=False)
-reports['unknown'] = ~reports['male'] & ~reports['female']
-reports = reports[['year', 'male', 'female', 'unknown']]
-gender_counts = reports.groupby('year').sum()
-sum_counts = gender_counts.sum()
+reports['gender'] = reports['coroner_name'].str.lower().replace(regex=REPLACEMENTS)
+gender_counts = reports.value_counts(['year', 'gender']).unstack(fill_value=0)
+sum_counts = reports.value_counts('gender')
 
 # %% [markdown]
 # ### Various statistics about the counts
 
 statistics = {
-  "no. coroners male": coroners_male,
-  "no. coroners female": coroners_female,
-  "no. coroners unknown": coroners_unknown,
+  "no. coroners male": int(website_counts['male']),
+  "no. coroners female": int(website_counts['female']),
+  "no. coroners unknown": int(website_counts['unknown']),
   "no. reports male": int(sum_counts['male']),
   "no. reports female": int(sum_counts['female']),
   "no. reports unknown": int(sum_counts['unknown']),
 }
 
 print(f"Gender count statistics: {statistics}")
-print(f"Sorted counts: {gender_counts}")
+print(f"Sorted counts: {sum_counts}")
 
 # %% [markdown]
 # ### Saving the statistics
