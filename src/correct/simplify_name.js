@@ -1,3 +1,5 @@
+import { re } from './helpers.js'
+
 /**
  * Removes the [email protected] text from a name
  *
@@ -34,13 +36,13 @@ we'll also include matches for:
 - initials for the last name
 */
 
-const title =
-  'mr|mrs|ms|dr|miss|judge|cdr|justice|hon(?:ourable)?|the|prof|dame|sir'
-const title_regex = new RegExp(`\\b(${title})\\b`, 'gi')
+const titles =
+  /mr|mrs|ms|dr|miss|judge|cdr|justice|hon(?:ourable)?|the|prof|dame|sir/gi
+const re_titles = re`\b${titles}\b`
 
-const qualification =
-  'cbe|cvo|dl|eng|frcpc|hg|hh|hhj|kc|mbe|md|me|obe|phd|qc|rn|kc'
-const qualification_regex = new RegExp(`\\s*\\b(${qualification})\\b\\s*`, 'gi')
+const qualifications =
+  /cbe|cvo|dl|eng|frcpc|hg|hh|hhj|kc|mbe|md|me|obe|phd|qc|rn|kc/gi
+const re_qualifications = re`\s*\b${qualifications}\b\s*`
 
 /**
  * Simplifies a name to a first and last name
@@ -55,9 +57,9 @@ export function first_last_name(name) {
   // split on capitalised words (i.e. `A NiceCat` -> `A Nice Cat`)
   name = split_caps(name)
   // trim qualifications (i.e. `OBE FCP A Nice Cat MD` -> `A Nice Cat`)
-  name = trimRegExp(name, qualification_regex)
+  name = trimRegExp(name, re_qualifications)
   // remove titles (i.e. `Dr A Nice Cat` -> `A Nice Cat`)
-  name = name.replace(title_regex, '')
+  name = name.replace(re_titles, '')
 
   name = shorten_whitespace(name)
   name = extract_first_last(name)
@@ -80,9 +82,7 @@ export function split_caps(text) {
  * @returns {string}
  */
 function trimRegExp(text, regex) {
-  let { source, flags } = new RegExp(regex)
-  if (!flags.includes('g')) flags += 'g'
-  return text.replace(new RegExp(`^(${source})*|(${source})*$`, flags), '')
+  return text.replace(re`^(${regex})*|(${regex})*$${/()/g}`, '')
 }
 
 /**

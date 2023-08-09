@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import { fetch_html, map_series } from '../fetch/helpers.js'
-import { priority_match, try_matching } from './helpers.js'
+import { priority_match } from './approx_match.js'
 import {
   get_initials,
   remove_email_block,
@@ -8,6 +8,7 @@ import {
   split_caps,
   shorten_whitespace
 } from './simplify_name.js'
+import { merge_failed, load_correction_data } from './helpers.js'
 
 /**
  * Fetches the list of page urls from the coroner society website
@@ -68,40 +69,6 @@ async function fetch_name_list(url) {
 }
 
 /**
- * Attempts to merge all unmatched names together, into the corrections needed
- * to match them all.
- *
- * We do this on the basis of:
- * - if a name roughly matches another name and is longer, we keep it
- * - if a name is the initials of another name, we keep the full name
- *
- * @param {string[]} names the unmatched names to merge together
- * @return {{[key: string]: string}} the corrections needed to match the names
- */
-export function merge_incorrect(names) {
-  /** @type {{[key: string]: {name: string, simple: string}}} */
-  const corrections = {}
-
-  for (const name of names) {
-    const simple = first_last_name(name)
-
-    for (const possible of [simple, ...get_initials(simple)]) {
-      const match = try_matching(possible, corrections)
-      // if we find an existing shorter match, remove it
-      if (match !== undefined && match.simple.length < possible.length) {
-        delete corrections[match]
-      }
-    }
-
-    corrections[simple] = { name, simple }
-  }
-
-  return Object.fromEntries(
-    Object.entries(corrections).map(([simple, { name }]) => [simple, name])
-  )
-}
-
-/**
  * Calculates a list of possible replacements for a name map, with different
  * levels of simplification and priorities
  * @param {{[key: string]: string}} full_name_map a map from a simple to match name to the full name
@@ -144,25 +111,22 @@ export default async function Corrector(keep_failed = true) {
   const fetched_replace = Object.fromEntries(
     fetched_simple.map(name => [name, name])
   )
-  const { default: manual_replace } = await import('./data/manual_names.json', {
-    assert: { type: 'json' }
-  })
   await fs.writeFile(
     './src/correct/data/fetched_names.json',
-    JSON.stringify(fetched_simple)
+    JSON.stringify(fetched_simple, null, 2)
   )
+
+  let { failed, incorrect, corrections } = await load_correction_data('names')
+  if (!keep_failed) failed = []
 
   const replacements = [
     ...replacements_from(fetched_replace),
-    ...manual_replace.flatMap(replacements_from)
+    ...corrections.flatMap(replacements_from)
   ]
 
-  let { default: failed } = keep_failed
-    ? await import('./data/failed_names.json', { assert: { type: 'json' } })
-    : { default: [] }
-
   function correct_name(text) {
-    if (text === undefined || text.length === 0) return text
+    if (text === undefined || text.length === 0) return undefined
+    if (incorrect.has(text)) return undefined
 
     const name = split_caps(text)
     const match = priority_match(name, replacements, 2, 0.2, true)
@@ -170,16 +134,10 @@ export default async function Corrector(keep_failed = true) {
     return match
   }
 
-  correct_name.close = async () =>
-    Promise.all([
-      fs.writeFile(
-        './src/correct/data/failed_names.json',
-        JSON.stringify(failed)
-      ),
-      fs.writeFile(
-        './src/correct/data/merged_names.json',
-        JSON.stringify(merge_incorrect(failed))
-      )
-    ])
+  correct_name.close = () =>
+    fs.writeFile(
+      './src/correct/failed_parses/names.json',
+      JSON.stringify(merge_failed(failed, get_initials), null, 2)
+    )
   return correct_name
 }

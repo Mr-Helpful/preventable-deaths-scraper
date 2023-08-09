@@ -35,14 +35,14 @@ year_diff = latest.year - earliest.year + (latest.month - earliest.month) / 12 +
 # ### Counting the number of reports in each year
 
 # group by the year and count the number of reports
-year_counts = reports.groupby('year').size().reset_index(name='count').set_index('year')
+year_counts = reports.value_counts('year').sort_index()
 
 statistics = {
-  "no. reports parsed": int(year_counts.sum()[0]),
+  "no. reports parsed": int(reports.count()['year']),
   "no. years covered": len(year_counts),
-  "mean per year": int((year_counts.sum() / year_diff)[0]),
-  "median per year": int(year_counts.median()[0]),
-  "IQR of years": list(year_counts.quantile([0.25, 0.75])["count"]),
+  "mean per year": float(round(reports.count()['year'] / year_diff, 1)),
+  "median per year": int(year_counts.median()),
+  "IQR of years": list(year_counts.quantile([0.25, 0.75])),
 }
 
 print(f"Year counts statistics: {statistics}")

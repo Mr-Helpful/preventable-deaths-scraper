@@ -95,3 +95,6 @@ web_modules/
 
 # Ignore any testing I do.
 **/test.js
+
+# We're also using a fair bit of python
+__pycache__/

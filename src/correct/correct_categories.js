@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
-import categories from './category_corrections.json' assert { type: 'json' }
-import { priority_match } from './helpers.js'
+import { priority_match } from './approx_match.js'
+import { merge_failed, load_correction_data } from './helpers.js'
 
 /**
  * Creates a function that corrects the category to the closest match in the
@@ -9,11 +9,10 @@ import { priority_match } from './helpers.js'
  * @returns {Promise<import('.').CorrectFn<string>>}
  */
 export default async function Corrector(keep_failed = true) {
-  let { default: failed } = keep_failed
-    ? await import('./data/failed_categories.json', {
-        assert: { type: 'json' }
-      })
-    : { default: [] }
+  let { failed, incorrect, corrections } = await load_correction_data(
+    'categories'
+  )
+  if (!keep_failed) failed = []
 
   function correct_category(text) {
     if (text === undefined || text.length === 0) return text
@@ -21,8 +20,11 @@ export default async function Corrector(keep_failed = true) {
     return text
       .split(/\s*\|\s*/g)
       .flatMap(category => {
+        if (category === undefined || category.length === 0) return []
+        if (incorrect.has(category)) return []
+
         // I'm using flatMap like a filterMap here.
-        const match = priority_match(category, categories)
+        const match = priority_match(category, corrections)
         if (match === undefined) failed.push(category)
         return match ? [match] : []
       })
@@ -31,8 +33,8 @@ export default async function Corrector(keep_failed = true) {
 
   correct_category.close = () =>
     fs.writeFile(
-      './src/correct/data/category_corrections.json',
-      JSON.stringify(failed)
+      './src/correct/failed_parses/categories.json',
+      JSON.stringify(merge_failed(failed), null, 2)
     )
   return correct_category
 }

@@ -29,9 +29,33 @@ npm run fetch
 
 This will then save the scraped data to [`src/data/reports.csv`](./src/data/reports.csv).
 
+### Corrections
+
+We've attempted to fully automate the scraping process, but there are some things that we can't automate. These include:
+
+- Severe typos in some fields (i.e. `/0206/2023` is given as a date)
+- Transpositions of fields (i.e. a `name` being replaced with a `ref` number)
+- Ambiguity in destinations (i.e. is `University Hospitals of Derby and Burton NHS FT` one destination or two?)
+
+In these cases, we keep `json` files recording manual corrections for these in the [`src/correct/manual_replace`](./src/correct/manual_replace) directory. These need to be updated every now and then to ensure that the scraper maintains its accuracy.
+
+In order to update these corrections, you'll first need to install [node.js](https://nodejs.org/en/) and run the following command in the root directory of this repository:
+
+```bash
+npm install
+```
+
+Then manual corrections for all fields can be added by running the following command in the root directory of this repository:
+
+```bash
+npm run correct:update all
+```
+
+This will open up an interactive prompt for each failed parse, allowing you to correct, skip or mark the field entry as uncorrectable. Other options for updating individual fields' corrections are available by running `npm run correct:update -- --help`.
+
 ### Analyses
 
-Both the analyses are written in python and require [python 3.8](https://www.python.org/downloads/) or above. You'll also need to have [pip](https://pip.pypa.io/en/stable/installation/) installed.
+All analyses are written in python and require [python 3.8](https://www.python.org/downloads/) or above. You'll also need to have [pip](https://pip.pypa.io/en/stable/installation/) installed.
 
 #### Year Count Analysis
 
