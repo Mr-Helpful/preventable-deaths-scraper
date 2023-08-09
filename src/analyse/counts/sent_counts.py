@@ -24,16 +24,43 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 
 # %% [markdown]
-# ### Calculating the occurrences of each destination
+# ### Calculating the due status for each report
 
-vbar = re.compile(r'\s*\|\s*')
-reports['sent_to'] = reports['this_report_is_being_sent_to'].str.split(vbar)
-reports = reports.dropna(subset=['sent_to'])
-exploded_reports = reports.explode('sent_to', ignore_index=True)
-sent_counts = exploded_reports['sent_to'].value_counts()
+today = pd.to_datetime('today')
+reports['date'] = pd.to_datetime(reports['date_of_report'], dayfirst=True)
+report_due = (today - reports['date']).dt.days > 56
+reports['year'] = reports['date'].dt.year
 
 # %% [markdown]
-# ### Statistics
+# ### Splitting the sent to and reply urls
+
+vbar = re.compile(r'\s*\|\s*')
+reports['status'] = 'overdue'
+reports = reports.dropna(subset=['this_report_is_being_sent_to', 'reply_urls'])
+reports['sent_to'] = reports['this_report_is_being_sent_to'].str.split(vbar)
+reports['replies'] = reports['reply_urls'].str.split(vbar).apply(lambda xs: [x for x in xs if "Response" in x])
+
+# %% [markdown]
+# ### Status based on no. recipients vs replies
+
+equal_replies = reports.apply(lambda x: len(x['sent_to']) == len(x['replies']) and len(x['sent_to']) > 0, axis=1)
+reports['status'] = reports['status'].mask(equal_replies, 'received').mask(~report_due, 'pending')
+
+# %% [markdown]
+# ### Status based on recipients in replies
+
+exploded = reports.explode('sent_to', ignore_index=True)
+exploded['escaped_urls'] = exploded['reply_urls'].str.replace(r'[-_]|%20', ' ', regex=True)
+responded = exploded.apply(lambda x: str(x['sent_to']) in str(x['escaped_urls']), axis=1)
+exploded['status'] = exploded['status'].mask(responded, 'received')
+
+# %% [markdown]
+# ### Calculating the counts for each recipient
+
+sent_types = exploded.value_counts(['sent_to', 'status']).unstack(fill_value=0)
+sent_counts = exploded.value_counts('sent_to')
+sent_years = exploded.value_counts(['year', 'status']).unstack(fill_value=0)
+print(exploded['status'].value_counts())
 
 # %% [markdown]
 # ### Various statistics about the counts
@@ -41,8 +68,8 @@ sent_counts = exploded_reports['sent_to'].value_counts()
 statistics = {
   "no. reports parsed": len(reports),
   "no. recipients with report(s)": len(sent_counts),
-  "mean per recipient": int(sent_counts.mean()),
-  "median per recipient": int(sent_counts.median()),
+  "mean per recipient": float(round(sent_counts.mean(), 1)),
+  "median per recipient": float(sent_counts.median()),
   "IQR of recipients": list(sent_counts.quantile([0.25, 0.75])),
 }
 
@@ -54,7 +81,7 @@ print(f"Sorted counts: {sent_counts}")
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats = toml.load(rf)
-  stats['report recipient'] = statistics
+  stats['sent to'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
   toml.dump(stats, wf)
@@ -63,9 +90,14 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
 # ### Calculating the top coroners
 
 top_counts = sent_counts.head(TOP_N)
+top_types = sent_types.loc[top_counts.index]
 
 # %% [markdown]
 # ### Saving the results
 
 sent_counts.to_csv(f"{DATA_PATH}/sent-counts.csv")
 top_counts.to_csv(f"{DATA_PATH}/top-sent-counts.csv")
+sent_types.to_csv(f"{DATA_PATH}/sent-types.csv")
+top_types.to_csv(f"{DATA_PATH}/top-sent-types.csv")
+sent_years.to_csv(f"{DATA_PATH}/sent-types-years.csv")
+exploded.to_csv(f"{DATA_PATH}/statuses.csv")
