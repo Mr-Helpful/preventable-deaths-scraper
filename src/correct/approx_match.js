@@ -131,14 +131,13 @@ function index_of(xs, ys) {
  * @returns {{slice: string, error: number, errors: number[][], loc: [number, number]}}
  *    the slice, the edit distance, all distances and the location of the slice
  */
-function min_edit_slice(pat, text, ignore_case = false) {
-  if (ignore_case && typeof pat === 'string' && typeof text === 'string') {
-    pat = pat.toLowerCase()
-    text = text.toLowerCase()
-  }
+export function min_edit_slice(pat, text, ignore_case = false) {
+  const pat_ = ignore_case && typeof pat === 'string' ? pat.toLowerCase() : pat
+  const text_ =
+    ignore_case && typeof text === 'string' ? text.toLowerCase() : text
 
   // short circuit if we find a perfect match
-  const i = index_of(text, pat)
+  const i = index_of(text_, pat_)
   if (i !== -1)
     return {
       slice: pat,
@@ -154,15 +153,15 @@ function min_edit_slice(pat, text, ignore_case = false) {
   let slice = ''
   let loc = [0, 0]
 
-  for (let i = 0; i < text.length - pat.length + 1; i++) {
-    let text_slice = text.slice(i)
-    let distances = edit_distances(pat, text_slice, ignore_case)
+  for (let i = 0; i < text_.length - pat_.length + 1; i++) {
+    let text_slice = text_.slice(i)
+    let distances = edit_distances(pat_, text_slice)
 
-    for (const [j, distance] of distances[pat.length].entries()) {
+    for (const [j, distance] of distances[pat_.length].entries()) {
       if (distance < error) {
         errors = distances.map(row => row.slice(0, j))
         error = distance
-        slice = text_slice.slice(0, j)
+        slice = text.slice(i, i + j)
         loc = [i, i + j]
       }
     }
@@ -184,14 +183,12 @@ export function min_edit_slices_match(
   relative = false,
   ignore_case = false
 ) {
-  if (ignore_case) text = text.toLowerCase()
   let error = Infinity
   let match = ''
   let slice = ''
   let loc = [0, 0]
 
   for (const pat of to_match) {
-    if (ignore_case) pat = pat.toLowerCase()
     let min_result = min_edit_slice(pat, text, ignore_case)
     if (relative) min_result.error /= pat.length
     if (min_result.error < error) {

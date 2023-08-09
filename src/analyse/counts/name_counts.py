@@ -11,6 +11,8 @@ import json
 import toml
 import pandas as pd
 
+TOP_N = 30
+
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
 REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
@@ -37,22 +39,21 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 # ### Counting the number of reports in each coroner area
 
 # count the number of reports in each year
-grouped_counts = reports.groupby(['year', 'coroner_name']).size().reset_index(name='count')
-name_counts = grouped_counts.pivot(index='year', columns='coroner_name', values='count').fillna(0).astype(int)
 
-sum_counts = pd.DataFrame(name_counts.sum()).rename(columns={0: 'count'})
-sum_counts = sum_counts.sort_values(by='count', ascending=False)
+name_counts = reports.value_counts(['year', 'coroner_name']).unstack(fill_value=0)
+
+sum_counts = reports.value_counts('coroner_name')
 
 # %% [markdown]
 # ### Various statistics about the counts
 
 statistics = {
-  "no. reports parsed": int(sum_counts.sum()[0]),
+  "no. reports parsed": int(reports.count()['coroner_name']),
   "no. names with report(s)": len(sum_counts),
   "no. names without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-  "mean per name": int(sum_counts.mean()[0]),
-  "median per name": int(sum_counts.median()[0]),
-  "IQR of names": list(sum_counts.quantile([0.25, 0.75])["count"]),
+  "mean per name": float(round(sum_counts.mean(), 1)),
+  "median per name": int(sum_counts.median()),
+  "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
 }
 
 print(f"Name count statistics: {statistics}")
@@ -69,9 +70,9 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
   toml.dump(stats, wf)
 
 # %% [markdown]
-# ### Calculating the top 30 coroners
+# ### Calculating the top coroners
 
-top_counts = sum_counts.head(30)
+top_counts = sum_counts.head(TOP_N)
 top_names = list(top_counts.index)
 top_years = name_counts[top_names]
 
