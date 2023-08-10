@@ -31,7 +31,7 @@ import {
 	PanelHeader,
 	Flex,
 } from "@wordpress/components";
-import { SaveBlock } from "./save.js";
+import { Front } from "./save.js";
 
 /**
  * Converts a File object to a data url asynchronously
@@ -141,7 +141,7 @@ const CsvSource = ({ onChange }) => (
  * @return {WPElement} Element to render.
  */
 export default function Edit({
-	attributes: { csv_name, csv_text },
+	attributes: { csv_name, csv_text, source_url },
 	setAttributes,
 }) {
 	return (
@@ -155,7 +155,7 @@ export default function Edit({
 						onChange={async ({ url, name }) => {
 							const response = await fetch(url);
 							const csv_text = await response.text();
-							setAttributes({ csv_text, csv_name: name });
+							setAttributes({ csv_text, csv_name: name, source_url: url });
 						}}
 					/>
 				</PanelHeader>
@@ -166,7 +166,7 @@ export default function Edit({
 					buttonProps={{ disabled: csv_text.length === 0 }}
 				>
 					<PanelRow>
-						<SaveBlock csv_text={csv_text} />
+						<Front csv_text={csv_text} source_url={source_url} />
 					</PanelRow>
 				</PanelBody>
 			</Panel>
