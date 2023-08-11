@@ -38,6 +38,7 @@
 
 ["sent to"]
 "no. reports parsed" = 1725
+"no. requests for response" = 2638
 "no. recipients with report(s)" = 1512
 "mean per recipient" = 1.7
 "median per recipient" = 1.0

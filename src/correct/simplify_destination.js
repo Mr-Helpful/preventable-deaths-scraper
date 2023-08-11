@@ -22,7 +22,7 @@ export function to_acronym(organisation) {
   const words = organisation
     .trim()
     .split(/[^\w]+/g)
-    .filter(word => !conjunctions.test(word))
+    .filter(word => !conjunctive_words.test(word))
   // if there's less than 3 words or there's an acronym
   // we probably shouldn't compress it further
   if (words.length < 3 || has_acronym(organisation)) return organisation

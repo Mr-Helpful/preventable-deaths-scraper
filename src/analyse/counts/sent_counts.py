@@ -67,6 +67,7 @@ print(exploded['status'].value_counts())
 
 statistics = {
   "no. reports parsed": len(reports),
+  "no. requests for response": len(exploded),
   "no. recipients with report(s)": len(sent_counts),
   "mean per recipient": float(round(sent_counts.mean(), 1)),
   "median per recipient": float(sent_counts.median()),
