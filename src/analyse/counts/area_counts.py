@@ -38,10 +38,10 @@ sum_counts = reports.value_counts(['coroner_area'])
 # ### Various statistics about the counts
 
 statistics = {
-  "no. parsed reports": int(reports.count()['coroner_area']),
+  "no. parsed reports": reports.count()['coroner_area'],
   "no. areas": len(sum_counts),
-  "mean per area": float(round(sum_counts.mean(), 1)),
-  "median per area": float(sum_counts.median()),
+  "mean per area": round(sum_counts.mean(), 1),
+  "median per area": sum_counts.median(),
   "IQR of areas": list(sum_counts.quantile([0.25, 0.75])),
 }
 
@@ -56,7 +56,7 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats['coroner areas'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
+  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Saving the results

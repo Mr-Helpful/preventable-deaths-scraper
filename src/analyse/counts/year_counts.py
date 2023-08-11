@@ -38,10 +38,10 @@ year_diff = latest.year - earliest.year + (latest.month - earliest.month) / 12 +
 year_counts = reports.value_counts('year').sort_index()
 
 statistics = {
-  "no. reports parsed": int(reports.count()['year']),
+  "no. reports parsed": reports.count()['year'],
   "no. years covered": len(year_counts),
-  "mean per year": float(round(reports.count()['year'] / year_diff, 1)),
-  "median per year": int(year_counts.median()),
+  "mean per year": round(reports.count()['year'] / year_diff, 1),
+  "median per year": year_counts.median(),
   "IQR of years": list(year_counts.quantile([0.25, 0.75])),
 }
 
@@ -56,7 +56,7 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats['year'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
+  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Saving the results

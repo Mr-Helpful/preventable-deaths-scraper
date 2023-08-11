@@ -48,11 +48,11 @@ sum_counts = reports.value_counts('coroner_name')
 # ### Various statistics about the counts
 
 statistics = {
-  "no. reports parsed": int(reports.count()['coroner_name']),
+  "no. reports parsed": reports.count()['coroner_name'],
   "no. names with report(s)": len(sum_counts),
   "no. names without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-  "mean per name": float(round(sum_counts.mean(), 1)),
-  "median per name": int(sum_counts.median()),
+  "mean per name": round(sum_counts.mean(), 1),
+  "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
 }
 
@@ -67,7 +67,7 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats['coroner name'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
+  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Calculating the top coroners

@@ -53,11 +53,11 @@ sum_counts = exploded.value_counts(['category'])
 # ### Various statistics about the counts
 
 statistics = {
-  "no. reports parsed": int(reports.count()['category']),
-  "no. categories in reports": int(sum_counts.sum()),
+  "no. reports parsed": reports.count()['category'],
+  "no. categories in reports": sum_counts.sum(),
   "no. categories": len(sum_counts),
-  "mean per category": float(round(sum_counts.mean(), 1)),
-  "median per category": int(sum_counts.median()),
+  "mean per category": round(sum_counts.mean(), 1),
+  "median per category": sum_counts.median(),
   "IQR of categories": list(sum_counts.quantile([0.25, 0.75])),
 }
 
@@ -72,7 +72,7 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats['death categories'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
+  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Saving the results

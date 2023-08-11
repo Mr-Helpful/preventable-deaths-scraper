@@ -69,8 +69,8 @@ statistics = {
   "no. reports parsed": len(reports),
   "no. requests for response": len(exploded),
   "no. recipients with report(s)": len(sent_counts),
-  "mean per recipient": float(round(sent_counts.mean(), 1)),
-  "median per recipient": float(sent_counts.median()),
+  "mean per recipient": round(sent_counts.mean(), 1),
+  "median per recipient": sent_counts.median(),
   "IQR of recipients": list(sent_counts.quantile([0.25, 0.75])),
 }
 
@@ -85,7 +85,7 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats['sent to'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
+  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Calculating the top coroners

@@ -10,7 +10,7 @@
 "no. categories in reports" = 6741
 "no. categories" = 19
 "mean per category" = 354.8
-"median per category" = 281
+"median per category" = 281.0
 "IQR of categories" = [ 97.0, 466.5,]
 
 ["coroner name"]
@@ -18,14 +18,14 @@
 "no. names with report(s)" = 424
 "no. names without reports" = 295
 "mean per name" = 10.6
-"median per name" = 5
+"median per name" = 5.0
 "IQR of names" = [ 2.0, 11.0,]
 
 [year]
 "no. reports parsed" = 4513
 "no. years covered" = 11
 "mean per year" = 450.3
-"median per year" = 432
+"median per year" = 432.0
 "IQR of years" = [ 365.0, 478.0,]
 
 ["coroner gender"]

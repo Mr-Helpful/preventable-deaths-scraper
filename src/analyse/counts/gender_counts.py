@@ -60,12 +60,12 @@ sum_counts = reports.value_counts('gender')
 # ### Various statistics about the counts
 
 statistics = {
-  "no. coroners male": int(website_counts['male']),
-  "no. coroners female": int(website_counts['female']),
-  "no. coroners unknown": int(website_counts['unknown']),
-  "no. reports male": int(sum_counts['male']),
-  "no. reports female": int(sum_counts['female']),
-  "no. reports unknown": int(sum_counts['unknown']),
+  "no. coroners male": website_counts['male'],
+  "no. coroners female": website_counts['female'],
+  "no. coroners unknown": website_counts['unknown'],
+  "no. reports male": sum_counts['male'],
+  "no. reports female": sum_counts['female'],
+  "no. reports unknown": sum_counts['unknown'],
 }
 
 print(f"Gender count statistics: {statistics}")
@@ -79,7 +79,7 @@ with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
   stats['coroner gender'] = statistics
 
 with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
+  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Saving the results
