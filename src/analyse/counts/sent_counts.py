@@ -60,7 +60,7 @@ exploded['status'] = exploded['status'].mask(responded, 'received')
 sent_types = exploded.value_counts(['sent_to', 'status']).unstack(fill_value=0)
 sent_counts = exploded.value_counts('sent_to')
 sent_years = exploded.value_counts(['year', 'status']).unstack(fill_value=0)
-print(exploded['status'].value_counts())
+type_counts = exploded.value_counts('status')
 
 # %% [markdown]
 # ### Various statistics about the counts
@@ -68,6 +68,9 @@ print(exploded['status'].value_counts())
 statistics = {
   "no. reports parsed": len(reports),
   "no. requests for response": len(exploded),
+  "no. requests overdue": type_counts['overdue'],
+  "no. requests received": type_counts['received'],
+  "no. requests pending": type_counts['pending'],
   "no. recipients with report(s)": len(sent_counts),
   "mean per recipient": round(sent_counts.mean(), 1),
   "median per recipient": sent_counts.median(),
