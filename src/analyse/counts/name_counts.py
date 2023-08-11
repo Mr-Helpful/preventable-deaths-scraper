@@ -8,8 +8,9 @@
 
 import os
 import json
-import toml
 import pandas as pd
+
+from counts import toml_stats
 
 TOP_N = 30
 
@@ -47,7 +48,7 @@ sum_counts = reports.value_counts('coroner_name')
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
+toml_stats['coroner name'] = statistics = {
   "no. reports parsed": reports.count()['coroner_name'],
   "no. names with report(s)": len(sum_counts),
   "no. names without reports": len([name for name in coroner_names if name not in sum_counts.index]),
@@ -58,16 +59,6 @@ statistics = {
 
 print(f"Name count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
-
-# %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['coroner name'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Calculating the top coroners
