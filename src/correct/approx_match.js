@@ -1,4 +1,6 @@
-const non_words = /[^\w']+/g
+import { split_indices } from './helpers.js'
+
+export const non_words = /[\s(),-.]+/g
 
 /**
  * @template T
@@ -153,13 +155,12 @@ export function min_edit_slice(pat, text, ignore_case = false) {
   let slice = ''
   let loc = [0, 0]
 
-  for (let i = 0; i < text_.length - pat_.length + 1; i++) {
-    let text_slice = text_.slice(i)
-    let distances = edit_distances(pat_, text_slice)
+  for (let i = 0; i < text_.length; i++) {
+    let distances = edit_distances(pat_, text_.slice(i))
 
     for (const [j, distance] of distances[pat_.length].entries()) {
       if (distance < error) {
-        errors = distances.map(row => row.slice(0, j))
+        errors = distances.map(row => row.slice(0, j + 1))
         error = distance
         slice = text.slice(i, i + j)
         loc = [i, i + j]
@@ -384,36 +385,43 @@ const default_error_config = {
  * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
  */
 export function hierachic_match(
-  text,
+  text_,
   to_match,
   config = default_error_config,
   word_config = default_error_config,
   ignore_case = true
 ) {
-  if (ignore_case) text = text.toLowerCase()
+  const text = ignore_case ? text_.toLowerCase() : text_
   const words = text.split(non_words)
+  const word_indices = split_indices(text, non_words)
+  const word_index = i => word_indices[i] ?? text.length
 
   const word_matches = to_match.flatMap(phrase => {
-    if (ignore_case) phrase = phrase.toLowerCase()
-    const match_words = phrase.split(non_words)
+    const phrase_ = ignore_case ? phrase.toLowerCase() : phrase
+    const match_words = phrase_.split(non_words)
     const diff = words.length - match_words.length
     if (diff > 0 && diff * config.deletion_cost > config.typos) return []
     if (diff < 0 && -diff * config.addition_cost > config.typos) return []
 
-    let { error, errors, loc } = min_edit_slice(words, match_words, config)
-    if (error <= config.typos && error <= words.length * config.relative)
-      return [{ phrase, loc, error }]
+    let { error, errors, loc, slice } = min_edit_slice(
+      match_words,
+      words,
+      config
+    )
+    if (errors.length === 0) return []
+    if (error <= config.typos && error <= slice.length * config.relative)
+      return [{ phrase, loc: loc.map(word_index), error }]
 
     // check if any replacement words are close enough
     let i = errors.length - 1
-    let j = (errors[0] ?? []).length - 1
+    let j = errors[0].length - 1
     while (i > 0 && j > 0) {
       // if there's a transposition, skip it
       if (
         i > 1 &&
         j > 1 &&
-        words[i - 1] === match_words[j - 2] &&
-        words[i - 2] === match_words[j - 1] &&
+        slice[i - 1] === match_words[j - 2] &&
+        slice[i - 2] === match_words[j - 1] &&
         errors[i][j] === errors[i - 2][j - 2] + word_config.transposition_cost
       ) {
         i -= 2
@@ -429,10 +437,10 @@ export function hierachic_match(
       if (min === errors[i - 1][j]) i--
       else if (min === errors[i][j - 1]) j--
       else {
-        const word = words[i - 1]
-        const match_word = match_words[j - 1]
-        const errors = edit_distances(word, match_word, word_config)
-        const word_error = errors[word.length][match_word.length]
+        const match_word = match_words[i - 1]
+        const word = slice[j - 1]
+        const word_errors = edit_distances(word, match_word, word_config)
+        const word_error = word_errors[word.length][match_word.length]
 
         // if a replacement is close enough, don't consider it a replacement
         // if this brings us below the allowable phrase typos, then it's a match
@@ -441,10 +449,9 @@ export function hierachic_match(
           word_error <= word_config.typos &&
           word_error <= word.length * word_config.relative
         ) {
-          // console.log(`${word} is close (${word_error}) to ${match_word}`)
           error -= word_config.substitution_cost
-          if (error < config.typos && error < words.length * config.relative)
-            return [{ phrase, loc, error }]
+          if (error <= config.typos && error <= slice.length * config.relative)
+            return [{ phrase, loc: loc.map(word_index), error }]
         }
 
         i--
@@ -460,33 +467,25 @@ export function hierachic_match(
 
 /**
  *
- * @param {string} text
- * @param {string[]} to_match
- * @param {DistanceConfig & {typos: number}} phrase_config
- * @param {DistanceConfig & {typos: number}} word_config
+ * @param {string} text the text to match against
+ * @param {string[]} to_match the list of strings to match against
+ * @param {ErrorConfig} phrase_config the edit distance config for the words that make up the phrase
+ * @param {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
  */
 export function heirichic_matches(
   text,
   to_match,
-  phrase_config = { typos: 2, ...default_config },
-  word_config = { typos: 2, ...default_config }
+  phrase_config = default_error_config,
+  word_config = default_error_config
 ) {
   const matches = hierachic_match(text, to_match, phrase_config, word_config)
   if (matches === undefined) return undefined
+
   // basic greedy algorithm:
   // find the lowest error at each position and ignore the others
   matches.sort((a, b) => a.error - b.error)
   matches.sort((a, b) => a.loc[0] - b.loc[0])
-  console.log(
-    matches.map(({ phrase, error, loc }) => [
-      phrase,
-      error,
-      text
-        .split(non_words)
-        .slice(...loc)
-        .join(' ')
-    ])
-  )
 
   let start = 0
   for (let i = 0; i < matches.length; i++) {
@@ -497,5 +496,6 @@ export function heirichic_matches(
       start = matches[i].loc[1]
     }
   }
-  return matches.map(({ phrase }) => phrase)
+
+  return matches
 }
