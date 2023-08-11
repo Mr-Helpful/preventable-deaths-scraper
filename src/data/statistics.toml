@@ -10,7 +10,7 @@
 "no. categories in reports" = 6741
 "no. categories" = 19
 "mean per category" = 354.8
-"median per category" = 281
+"median per category" = 281.0
 "IQR of categories" = [ 97.0, 466.5,]
 
 ["coroner name"]
@@ -18,14 +18,14 @@
 "no. names with report(s)" = 424
 "no. names without reports" = 295
 "mean per name" = 10.6
-"median per name" = 5
+"median per name" = 5.0
 "IQR of names" = [ 2.0, 11.0,]
 
 [year]
 "no. reports parsed" = 4513
 "no. years covered" = 11
 "mean per year" = 450.3
-"median per year" = 432
+"median per year" = 432.0
 "IQR of years" = [ 365.0, 478.0,]
 
 ["coroner gender"]
@@ -39,6 +39,9 @@
 ["sent to"]
 "no. reports parsed" = 1901
 "no. requests for response" = 2816
+"no. requests overdue" = 901
+"no. requests received" = 1913
+"no. requests pending" = 2
 "no. recipients with report(s)" = 1502
 "mean per recipient" = 1.9
 "median per recipient" = 1.0
