@@ -8,8 +8,9 @@
 
 import os
 import re
-import toml
 import pandas as pd
+
+from counts import toml_stats
 
 TOP_N = 30
 
@@ -65,11 +66,11 @@ type_counts = exploded.value_counts('status')
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
+toml_stats['sent to'] = statistics = {
   "no. reports parsed": len(reports),
   "no. requests for response": len(exploded),
-  "no. requests overdue": type_counts['overdue'],
   "no. requests received": type_counts['received'],
+  "no. requests overdue": type_counts['overdue'],
   "no. requests pending": type_counts['pending'],
   "no. recipients with report(s)": len(sent_counts),
   "mean per recipient": round(sent_counts.mean(), 1),
@@ -79,16 +80,6 @@ statistics = {
 
 print(f"Name count statistics: {statistics}")
 print(f"Sorted counts: {sent_counts}")
-
-# %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['sent to'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Calculating the top coroners

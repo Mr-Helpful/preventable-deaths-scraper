@@ -7,8 +7,9 @@
 # ### Importing libraries
 
 import os
-import toml
 import pandas as pd
+
+from counts import toml_stats
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
@@ -18,7 +19,6 @@ REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
 # ### Reading the reports
 
 reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
-len(reports)
 
 # %% [markdown]
 # ### Calculating the year of each report
@@ -37,7 +37,7 @@ sum_counts = reports.value_counts(['coroner_area'])
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
+toml_stats['coroner areas'] = statistics = {
   "no. parsed reports": reports.count()['coroner_area'],
   "no. areas": len(sum_counts),
   "mean per area": round(sum_counts.mean(), 1),
@@ -47,16 +47,6 @@ statistics = {
 
 print(f"Area count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
-
-# %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['coroner areas'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Saving the results

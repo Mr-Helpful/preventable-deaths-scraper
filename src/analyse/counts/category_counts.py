@@ -8,8 +8,9 @@
 
 import os
 import json
-import toml
 import pandas as pd
+
+from counts import toml_stats
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
@@ -52,7 +53,7 @@ sum_counts = exploded.value_counts(['category'])
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
+toml_stats['death categories'] = statistics = {
   "no. reports parsed": reports.count()['category'],
   "no. categories in reports": sum_counts.sum(),
   "no. categories": len(sum_counts),
@@ -63,16 +64,6 @@ statistics = {
 
 print(f"Category count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
-
-# %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['death categories'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf, encoder=toml.TomlNumpyEncoder())
 
 # %% [markdown]
 # ### Saving the results
