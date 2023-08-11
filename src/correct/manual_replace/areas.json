@@ -52,5 +52,10 @@
     "West Yorkshire West": "Yorkshire West Western",
     "Wirral": "Liverpool and the Wirral",
     "York": "North Yorkshire and York"
+  },
+  {
+    "North Wales (East and Central)": "North Wales (East & Central)",
+    "North East and North Central Wales": "North Wales (East & Central)",
+    "North Central and North East Wales": "North Wales (East & Central)"
   }
 ]
