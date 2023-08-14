@@ -23,13 +23,13 @@
 "IQR of names" = [ 2.0, 11.0,]
 
 ["sent to"]
-"no. reports parsed" = 1901
-"no. requests for response" = 2816
+"no. reports parsed" = 2845
+"no. requests for response" = 4083
 "no. requests received" = 1913
-"no. requests overdue" = 901
-"no. requests pending" = 2
-"no. recipients with report(s)" = 1502
-"mean per recipient" = 1.9
+"no. requests overdue" = 2118
+"no. requests pending" = 52
+"no. recipients with report(s)" = 2026
+"mean per recipient" = 2.0
 "median per recipient" = 1.0
 "IQR of recipients" = [ 1.0, 1.0,]
 
