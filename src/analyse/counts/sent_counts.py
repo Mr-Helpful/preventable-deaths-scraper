@@ -38,8 +38,10 @@ vbar = re.compile(r'\s*\|\s*')
 non_na = reports.assign(year=report_date.dt.year).dropna(subset=['this_report_is_being_sent_to']).copy()
 non_na['status'] = 'overdue'
 non_na['sent_to'] =  non_na['this_report_is_being_sent_to'].str.split(vbar)
+non_na['no. recipients'] = non_na['sent_to'].str.len()
 
 non_na['replies'] = non_na['reply_urls'].fillna('').str.split(vbar).apply(lambda replies: [reply for reply in replies if "Response" in reply])
+non_na['no. replies'] = non_na['replies'].str.len()
 
 non_na['escaped_urls'] = non_na['reply_urls'].str.replace(r'[-_]|%20', ' ', regex=True).fillna('')
 
@@ -82,16 +84,34 @@ non_na.loc[no_responses, 'report status'] = 'overdue'
 all_responses = with_responses.str.len() == non_na['sent_to'].str.len()
 non_na.loc[all_responses, 'report status'] = 'completed'
 
+# %% [markdown]
+# ### Adding the non_na rows back to the reports
+
 reports.loc[:, 'report status'] = 'unknown'
 reports.loc[non_na.index, 'report status'] = non_na['report status']
+
+reports.loc[:, 'no. recipients'] = 0
+reports.loc[non_na.index, 'no. recipients'] = non_na['no. recipients']
+
+reports.loc[:, 'no. replies'] = 0
+reports.loc[non_na.index, 'no. replies'] = non_na['no. replies']
+
 print(reports[['ref', 'report status']].head(10))
 print(reports['report status'].value_counts())
 
 # %% [markdown]
 # ### Writing back the reports with the status
 
-reports = reports[['report status'] + reports.columns.tolist()]
-reports.to_csv(f"{REPORTS_PATH}/reports.csv", index=False)
+# Add our new columns to the reports
+report_columns = reports.columns.tolist()
+report_columns.insert(0, 'report status')
+count_idx = report_columns.index('circumstances')
+report_columns.insert(count_idx, 'no. replies')
+report_columns.insert(count_idx, 'no. recipients')
+report_columns = list(dict.fromkeys(report_columns))
+
+reports = reports[report_columns]
+reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
 
 # %% [markdown]
 # ### Various statistics about the counts
