@@ -28,30 +28,32 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
 # ### Calculating the due status for each report
 
 today = pd.to_datetime('today')
-reports['date'] = pd.to_datetime(reports['date_of_report'], dayfirst=True)
-report_due = (today - reports['date']).dt.days > 56
-reports['year'] = reports['date'].dt.year
+report_date = pd.to_datetime(reports['date_of_report'], dayfirst=True)
+report_due = (today - report_date).dt.days > 56
 
 # %% [markdown]
 # ### Splitting the sent to and reply urls
 
 vbar = re.compile(r'\s*\|\s*')
-reports['status'] = 'overdue'
-reports = reports.dropna(subset=['this_report_is_being_sent_to', 'reply_urls'])
-reports['sent_to'] = reports['this_report_is_being_sent_to'].str.split(vbar)
-reports['replies'] = reports['reply_urls'].str.split(vbar).apply(lambda xs: [x for x in xs if "Response" in x])
+non_na = reports.assign(year=report_date.dt.year).dropna(subset=['this_report_is_being_sent_to']).copy()
+non_na['status'] = 'overdue'
+non_na['sent_to'] =  non_na['this_report_is_being_sent_to'].str.split(vbar)
+
+non_na['replies'] = non_na['reply_urls'].fillna('').str.split(vbar).apply(lambda replies: [reply for reply in replies if "Response" in reply])
+
+non_na['escaped_urls'] = non_na['reply_urls'].str.replace(r'[-_]|%20', ' ', regex=True).fillna('')
 
 # %% [markdown]
 # ### Status based on no. recipients vs replies
 
-equal_replies = reports.apply(lambda x: len(x['sent_to']) == len(x['replies']) and len(x['sent_to']) > 0, axis=1)
-reports['status'] = reports['status'].mask(equal_replies, 'received').mask(~report_due, 'pending')
+equal_replies = non_na.apply(lambda x: len(x['sent_to']) == len(x['replies']) and len(x['sent_to']) > 0, axis=1)
+non_na.loc[equal_replies, 'status'] = 'received'
+non_na.loc[~report_due, 'status'] = 'pending'
 
 # %% [markdown]
 # ### Status based on recipients in replies
 
-exploded = reports.explode('sent_to', ignore_index=True)
-exploded['escaped_urls'] = exploded['reply_urls'].str.replace(r'[-_]|%20', ' ', regex=True)
+exploded = non_na.explode('sent_to', ignore_index=True)
 responded = exploded.apply(lambda x: str(x['sent_to']) in str(x['escaped_urls']), axis=1)
 exploded['status'] = exploded['status'].mask(responded, 'received')
 
@@ -64,10 +66,38 @@ sent_years = exploded.value_counts(['year', 'status']).unstack(fill_value=0)
 type_counts = exploded.value_counts('status')
 
 # %% [markdown]
+# ### Calculating the status of each report
+
+non_na.loc[:, 'report status'] = 'partial'
+
+equal_len = non_na['sent_to'].str.len() == non_na['replies'].str.len()
+non_na.loc[equal_len, 'report status'] = 'completed'
+
+responses_from = lambda row: [sent for sent in row['sent_to'] if sent in row['escaped_urls']]
+with_responses = non_na.apply(responses_from, axis=1)
+
+no_responses = with_responses.str.len() == 0
+non_na.loc[no_responses, 'report status'] = 'overdue'
+
+all_responses = with_responses.str.len() == non_na['sent_to'].str.len()
+non_na.loc[all_responses, 'report status'] = 'completed'
+
+reports.loc[:, 'report status'] = 'unknown'
+reports.loc[non_na.index, 'report status'] = non_na['report status']
+print(reports[['ref', 'report status']].head(10))
+print(reports['report status'].value_counts())
+
+# %% [markdown]
+# ### Writing back the reports with the status
+
+reports = reports[['report status'] + reports.columns.tolist()]
+reports.to_csv(f"{REPORTS_PATH}/reports.csv", index=False)
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['sent to'] = statistics = {
-  "no. reports parsed": len(reports),
+  "no. reports parsed": len(non_na),
   "no. requests for response": len(exploded),
   "no. requests received": type_counts['received'],
   "no. requests overdue": type_counts['overdue'],
