@@ -103,6 +103,12 @@ print(reports[['ref', 'report status']].head(10))
 print(reports['report status'].value_counts())
 
 # %% [markdown]
+# ### Calculating report status over time
+
+status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'report status']).unstack(fill_value=0)
+print(status_years)
+
+# %% [markdown]
 # ### Writing back the reports with the status
 
 # Add our new columns to the reports
@@ -148,4 +154,5 @@ top_counts.to_csv(f"{DATA_PATH}/top-sent-counts.csv")
 sent_types.to_csv(f"{DATA_PATH}/sent-types.csv")
 top_types.to_csv(f"{DATA_PATH}/top-sent-types.csv")
 sent_years.to_csv(f"{DATA_PATH}/sent-types-years.csv")
+status_years.to_csv(f"{DATA_PATH}/status-years.csv")
 exploded.to_csv(f"{DATA_PATH}/statuses.csv", index=False)
