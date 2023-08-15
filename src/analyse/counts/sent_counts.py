@@ -72,14 +72,17 @@ type_counts = exploded.value_counts('status')
 
 non_na.loc[:, 'report status'] = 'partial'
 
-equal_len = non_na['sent_to'].str.len() == non_na['replies'].str.len()
-non_na.loc[equal_len, 'report status'] = 'completed'
-
 responses_from = lambda row: [sent for sent in row['sent_to'] if sent in row['escaped_urls']]
 with_responses = non_na.apply(responses_from, axis=1)
 
 no_responses = with_responses.str.len() == 0
 non_na.loc[no_responses, 'report status'] = 'overdue'
+
+equal_len = (
+  non_na['sent_to'].str.len() == non_na['replies'].str.len()) & (
+  non_na['sent_to'].str.len() > 0
+)
+non_na.loc[equal_len, 'report status'] = 'completed'
 
 all_responses = with_responses.str.len() == non_na['sent_to'].str.len()
 non_na.loc[all_responses, 'report status'] = 'completed'
