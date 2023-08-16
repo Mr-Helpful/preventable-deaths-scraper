@@ -68,5 +68,5 @@ print(f"Sorted counts: {sum_counts}")
 # %% [markdown]
 # ### Saving the results
 
-category_counts.to_csv(f"{DATA_PATH}/category-years.csv")
-sum_counts.to_csv(f"{DATA_PATH}/category-counts.csv")
+category_counts.to_csv(f"{DATA_PATH}/category/category-years.csv")
+sum_counts.to_csv(f"{DATA_PATH}/category/category-counts.csv")
