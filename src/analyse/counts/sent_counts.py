@@ -106,6 +106,7 @@ print(reports['report status'].value_counts())
 # ### Calculating report status over time
 
 status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'report status']).unstack(fill_value=0)
+status_years = status_years[['unknown', 'overdue', 'partial', 'completed']]
 print(status_years)
 
 # %% [markdown]
