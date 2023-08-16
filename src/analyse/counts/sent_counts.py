@@ -150,10 +150,11 @@ top_types = sent_types.loc[top_counts.index]
 # %% [markdown]
 # ### Saving the results
 
-sent_counts.to_csv(f"{DATA_PATH}/sent-counts.csv")
-top_counts.to_csv(f"{DATA_PATH}/top-sent-counts.csv")
-sent_types.to_csv(f"{DATA_PATH}/sent-types.csv")
-top_types.to_csv(f"{DATA_PATH}/top-sent-types.csv")
-sent_years.to_csv(f"{DATA_PATH}/sent-types-years.csv")
-status_years.to_csv(f"{DATA_PATH}/status-years.csv")
-exploded.to_csv(f"{DATA_PATH}/statuses.csv", index=False)
+sent_counts.to_csv(f"{DATA_PATH}/sent/sent-counts.csv")
+top_counts.to_csv(f"{DATA_PATH}/sent/top-sent-counts.csv")
+sent_types.to_csv(f"{DATA_PATH}/sent/sent-types.csv")
+top_types.to_csv(f"{DATA_PATH}/sent/top-sent-types.csv")
+sent_years.to_csv(f"{DATA_PATH}/sent/sent-types-years.csv")
+status_years.to_csv(f"{DATA_PATH}/sent/status-years.csv")
+exploded.to_csv(f"{DATA_PATH}/sent/statuses.csv", index=False)
+area_statuses.to_csv(f"{DATA_PATH}/sent/area-statuses.csv")

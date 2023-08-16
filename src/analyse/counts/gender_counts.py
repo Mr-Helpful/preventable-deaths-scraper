@@ -75,4 +75,4 @@ print(f"Sorted counts: {sum_counts}")
 # %% [markdown]
 # ### Saving the results
 
-gender_counts.to_csv(f"{DATA_PATH}/gender-years.csv")
+gender_counts.to_csv(f"{DATA_PATH}/gender/gender-years.csv")
