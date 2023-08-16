@@ -124,6 +124,13 @@ reports = reports[report_columns]
 reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
 
 # %% [markdown]
+# ### Calculating statistics over coroner areas
+
+area_statuses = reports.value_counts(['coroner_area', 'report status']).unstack(fill_value=0)
+area_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_area')[['no. recipients', 'no. replies']].sum()
+area_statuses = area_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['sent to'] = statistics = {
