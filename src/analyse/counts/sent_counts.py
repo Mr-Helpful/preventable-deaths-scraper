@@ -83,6 +83,7 @@ equal_len = (
   non_na['sent_to'].str.len() > 0
 )
 non_na.loc[equal_len, 'response status'] = 'completed'
+all_responses = with_responses.str.len() >= non_na['sent_to'].str.len()
 non_na.loc[all_responses, 'response status'] = 'completed'
 
 non_na.loc[~report_due & (non_na['response status'] == 'overdue'), 'response status'] = 'pending'
@@ -116,7 +117,7 @@ print(status_years)
 # Add our new columns to the reports
 report_columns = reports.columns.tolist()
 report_columns.insert(0, 'response status')
-count_idx = report_columns.index('circumstances')
+count_idx = report_columns.index('this_report_is_being_sent_to')
 report_columns.insert(count_idx, 'no. replies')
 report_columns.insert(count_idx, 'no. recipients')
 report_columns = list(dict.fromkeys(report_columns))
