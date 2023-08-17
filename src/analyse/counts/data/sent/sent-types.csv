@@ -21,7 +21,6 @@ AGD Equipment Limited,1,0,0
 AR1 Homecare Limited,0,0,1
 Abbey Court Independent Hospital,1,0,0
 Abbotsbury Elderly Persons Home,1,0,0
-Able Care and Support Services Ltd,0,0,1
 Acorn Lodge Care Home,1,0,0
 Adams Pharmacy,1,0,0
 Adbolton Hall Nursing Home,0,0,1
@@ -72,7 +71,6 @@ Arjo Huntliegh,1,0,0
 Army Headquarters,0,0,1
 Ashford Borough Council,1,0,0
 Ashford St Peter Hospital,1,0,0
-Ashford and St Peter's Hospitals NHS Trust,1,0,0
 Ashgate House Nursing Home,1,0,0
 Ashley Gardens Care Centre,1,0,0
 Association Ambulance,1,0,0
@@ -89,7 +87,6 @@ Avon Somerset Police,1,0,0
 Avon Wiltshire Mental Health NHS Trust,4,0,1
 Avon Wiltshire Mental Health Partnership NHS Trust,4,0,0
 Avon Wiltshire NHS Mental Health Trust,1,0,0
-Avon and Wiltshire NHS Mental Health Trust,0,0,1
 Avon and Wiltshire NHS Trust,0,0,1
 B D Civil Engineering Limited,0,0,1
 BAE Systems Ltd,0,0,2
@@ -113,8 +110,6 @@ Barchester Healthcare,0,0,1
 Barchester Homes,0,0,1
 Barking Havering Redbridge NHS Trust,1,0,2
 Barking Havering Redbridge University NHS Trust,1,0,0
-"Barking, Havering and Redbridge University Hospital NHS Foundation Trust",0,1,0
-"Barking, Havering and Redbridge University Hospitals NHS Trust",0,1,0
 Barnet Council,0,0,1
 Barnet Enfield Haringey Mental Health NHS Trust,1,0,0
 Barnsley District General Hospital,1,0,0
@@ -288,7 +283,6 @@ Calderdale Council Highways Department,1,0,0
 Calderdale Huddersfield NHS Trust,2,0,0
 Calderdale Metropolitan Borough Council,0,0,1
 Calderdale Royal Hospital,1,0,0
-Calderdale and Huddersfield NHS Trust,1,0,0
 Cambian Group,0,0,3
 Cambridge Peterborough NHS Trust,2,0,0
 Cambridgeshire Constabulary,1,0,0
@@ -298,9 +292,8 @@ Camden Council,0,0,1
 Camden Islington NHS Foundation Trust,2,0,1
 Camden Islington NHS Trust,3,0,4
 Camino Healthcare,0,0,1
-Canal River Trust,0,0,1
 Canal Trust Bath,1,0,0
-Canal and River Trust,2,0,0
+Canal and River Trust,2,0,1
 Canary Wharf Group PLC,0,0,1
 Cancer Alliance,1,0,0
 Capita,0,0,2
@@ -318,7 +311,6 @@ Care First Homes,1,0,0
 Care Inn Limited,1,0,0
 Care Inspectorate Wales,1,0,0
 Care Outlook Ltd,0,0,1
-Care Quality Commission,37,0,18
 Care Quality Commission CQC,0,0,1
 Care UK,9,0,7
 Care UK Clinical Services,2,0,0
@@ -424,7 +416,6 @@ Cornwall NHS Trust,1,0,2
 Cornwall Partnership Foundation Trust,0,1,3
 Cornwall Partnership NHS Foundation Trust,1,0,0
 Cornwall Partnershipship NHS Trust,0,0,1
-Cornwall and Isles of Scilly Safeguarding Adults Board,1,0,0
 Cotswold Hunt,1,0,0
 Council Hunting,1,0,0
 County Durham Darlington NHS Trust,1,0,1
@@ -486,14 +477,10 @@ Department Housing Communities Local Government,1,0,0
 Department State Social Care,0,0,1
 Department Transport,22,1,14
 Department Work Pensions,1,0,1
-Department for Digital Culture Media and Sport,0,0,1
-Department for Housing Communities and Local Government,0,0,1
 Department fr Health,1,0,0
-Department of Health & Social Care,19,1,13
-Department of Health NHS England,1,0,0
+Department of Health and Social Care,29,1,31
 Department of Work and Pensions,0,0,1
 Derby Teaching Hospitals NHS Trust,1,0,0
-Derby and Burton NHS Foundation Trust,0,0,1
 Derbyshire Community Health Services,1,0,0
 Derbyshire County Council,1,0,0
 Derriford Hospital,1,0,1
@@ -524,8 +511,6 @@ Doncaster Bassetlaw Teaching Hospital,1,0,0
 Doncaster County Council,0,0,1
 Doncaster Highways Services,0,0,1
 Doncaster Royal Infirmary,0,0,3
-Doncaster and Bassetlaw Hospital NHS Trust,0,0,1
-Doncaster and Bassetlaw Teaching Hospitals NHS Trust,0,0,1
 Donneybrook Medical Centre,0,0,1
 Dorset CCG,0,0,1
 Dorset Council Highways Department,0,0,1
@@ -705,7 +690,6 @@ Great Western Hospitals NHS Trust,1,0,2
 Great Western NHS Hospital Trust,1,0,0
 Great Western Railway,0,0,1
 Greater Manchester Combined Authority,1,0,1
-Greater Manchester Fire and Rescue Service,0,0,1
 Greater Manchester Health Social Care Partnership,6,0,7
 Greater Manchester Integrated Care,0,2,0
 Greater Manchester Medicines Management Group,0,0,1
@@ -815,7 +799,6 @@ Harbour Healthcare Limited,2,0,0
 Harden Bingley Park Ltd,0,0,1
 Haringey Council,1,0,0
 Harrogate Rural District Clinical Commissioning Group,0,0,1
-Hart Care Nursing and Residential Home,0,0,1
 Haughton Thornley Medical Centres,0,0,1
 Haulage Contractors Limited,1,0,0
 Haven Day Care Centre,1,0,0
@@ -826,9 +809,7 @@ Head Safeguarding,1,0,0
 Health Education England,1,0,1
 Health Inspectorate Wales,1,0,0
 Health Safety Executive,14,0,10
-Health and Care Professions Council,0,0,1
 Health and Communities Wakefield,0,0,1
-Health and Safety Executive,0,0,1
 Healthcare Care UK,0,0,1
 Healthcare Management Solutions Ltd,1,0,0
 Healthcare Safety Investigation Branch,1,0,3
@@ -846,7 +827,6 @@ Hellesdon Hospital,0,0,4
 Hereford County Hospital,0,0,1
 Herefordshire Clinical Commission Group,1,0,0
 Herefordshire Council,0,1,0
-Herefordshire and Worcestershire Healthy Minds,0,0,1
 Heritage Attractions Ltd,1,0,0
 Hertfordshire Constabulary,0,0,1
 Hertfordshire County Council,0,0,1
@@ -857,7 +837,6 @@ Hewett School,1,0,0
 Heywood Health,1,0,0
 High Commissioner Saint Lucia to UK,1,0,0
 Highgrove Rest Home,0,1,0
-Highlands and Trafalgar Square Surgery,0,0,1
 Highways Agency,3,0,1
 Highways Agency Essex County Council,0,0,1
 Highways Authority,2,0,0
@@ -941,8 +920,7 @@ Kent County Council,2,0,3
 Kent Police,0,0,2
 Kent and Canterbury Hospital,0,0,1
 Kent and Medway NHS,0,0,1
-Kent and Medway NHS Trust,1,0,0
-Kent and Medway Social Care Partnership Trust,0,0,1
+Kent and Medway NHS Trust,2,0,0
 Kernow CCG,0,0,1
 Kernow Clinical Commissioning Group,2,0,1
 Kettering General Hospital,2,0,0
@@ -971,7 +949,6 @@ Lancashire Care NHS Trust,1,0,2
 Lancashire Constabulary,0,0,2
 Lancashire County Council,0,0,1
 Lancashire Teaching Hospitals NHS Trust,1,0,0
-Lancashire and South Cumbria NHS Foundation Trust,0,0,1
 Lancs Cumbria Lifts UK Ltd,1,0,0
 Landlord,0,0,1
 Lands End Resort,1,0,0
@@ -984,15 +961,12 @@ Leeds City Council Highways Department,0,0,1
 Leeds Martial Arts College,1,0,0
 Leeds Teaching Hospital NHS Trust,0,0,1
 Leeds Teaching Hospitals NHS Trust,5,0,5
-Leeds Teaching hospitals and York Hospital Legal trust,0,1,0
-Leeds and York Partnership NHS Foundation Trust,0,0,1
 Leek Health Centre,1,0,0
 Leicester City Council,1,0,0
 Leicester NHS Trust,0,0,1
 Leicester Partnership NHS Trust,0,0,1
 Leicestershire NHS Trust,1,0,1
 Leicestershire Partnership NHS Trust,1,0,2
-Leicestershire and Rutland Integrated Care Board,1,0,0
 Lewisham Greenwich NHS Trust,1,0,0
 Lifeshield Medical Services Limited,0,0,1
 Lifeskills,0,0,1
@@ -1064,7 +1038,6 @@ Maesteg Comprehensive School,0,0,1
 Magenta Living Support Link,0,0,1
 Maidstone Tonbridge Wells NHS Trust,0,0,2
 Maidstone Tunbridge Wells NHS Trust,2,0,2
-Maidstone and Tunbridge Wells NHS Foundation Trust,0,0,1
 Managing Director Cegedim,1,0,0
 Manchester Airport Group,1,0,0
 Manchester CCG,1,0,0
@@ -1082,7 +1055,7 @@ Manchester University NHS Trust,3,0,2
 Manor Field Surgery,0,0,1
 Mansfield Ashfield,1,0,0
 Marble Ideas Ltd,0,0,1
-Maritime Coastguard Agency,2,1,3
+Maritime & Coastguard Agency,3,1,2
 Maritime and Coastguard Agency,0,0,2
 Marks and Spencer,0,0,1
 Masta Limited,1,0,0
@@ -1100,7 +1073,6 @@ Medical Centre,0,0,1
 Medical Centre Stalybridge,1,0,0
 Medical Director Leeds Teaching Hospitals NHS Trust,1,0,0
 Medical Officer Welsh Government,0,0,1
-Medicines & Healthcare products Regulatory Agency,1,0,0
 Medicines Healthcare products Regulatory Agency,5,0,4
 Medico Legal Manager,1,0,0
 Medicspro,1,0,0
@@ -1123,7 +1095,6 @@ Mid Cheshire NHS Trust,1,0,0
 Mid Essex CCG Trust,1,0,0
 Mid Yorkshire Hospitals NHS Trust,1,0,3
 Mid Yorkshire NHS Trust,2,0,1
-Mid and South Essex NHS Foundation Trust,0,0,1
 Midgehole Working Mens Club,0,0,1
 Midland Partnership NHS Trust,0,0,1
 Midlands Lancashire Commissioning Support Unit,1,0,0
@@ -1225,7 +1196,6 @@ National Fire Chiefs,2,0,0
 National Food Crime Unit Food Standard Agency,0,0,1
 National Highways,0,0,1
 National Institute Health Care Excellence,1,0,1
-National Institute for Health & Care Excellence,0,0,3
 National Offender Management,1,0,0
 National Offender Management Service,22,0,8
 National Police Chief s Council,7,0,6
@@ -1257,7 +1227,6 @@ Norfolk County Council,0,0,3
 Norfolk Norwich University Hospital,4,0,1
 Norfolk Suffolk NHS Foundation Trust,2,0,2
 Norfolk Suffolk NHS Trust,1,0,6
-Norfolk and Norwich University Hospital NHS Foundation Trust,0,0,1
 Norfolk and Suffolk NHS Trust,0,0,5
 Normanton Village View Nursing Home,1,0,0
 North Bristol NHS Trust,2,0,2
@@ -1316,7 +1285,6 @@ Northern Rail,1,0,0
 Northern Rail Limited,0,0,1
 Northfield Medical Practice,0,0,1
 Northumberland Fire Rescue Service,1,0,0
-"Northumberland, Tyne and Wear NHS Trust",1,0,0
 Northumbria Health Care Trust,0,0,1
 Northumbria Health Trust,1,0,0
 Northumbria Police,0,0,2
@@ -1336,7 +1304,6 @@ Nottingham Police,1,0,0
 Nottingham University Hospital NHS Trust,1,0,1
 Nottingham University Hospitals NHS Trust,0,0,3
 Nottingham West,1,0,0
-Nottingham and Nottinghamshire Clinical Commissioning Group,0,0,1
 Nottinghamshire County Council,2,0,0
 Nottinghamshire Healthcare NHS Foundation Trust,2,1,2
 Nottinghamshire Healthcare NHS Trust,3,0,1
@@ -1419,7 +1386,6 @@ Police Metropolis,0,0,1
 Police Prisons Ombudsman,1,0,0
 Police Service Northern Ireland Belfast,1,0,0
 Policy and Commissioning Manager,0,0,1
-Policy and Patient Safety Directorate,0,0,1
 Portland Hospital,0,0,1
 Portsmouth City Council,0,0,2
 Portsmouth Hospitals NHS Trust,4,0,3
@@ -1508,7 +1474,6 @@ Rosewood Lodge Nursing Home,0,0,1
 Rossendale Nursing Home,0,0,1
 Rossmere Park Care Home,1,0,0
 Rotherham Borough Council,0,0,1
-Rotherham Doncaster and South Humber NHS Foundation Trust,0,0,1
 Rotherham Hospital NHS Foundation Trust,0,0,1
 Rotherham NHS Trust,0,0,1
 Roundhouse,1,0,0
@@ -1540,7 +1505,6 @@ Royal College Psychiatrists,2,0,1
 Royal College Radiologists,1,0,1
 Royal College Surgeons,3,0,0
 Royal College Surgeons England,0,0,1
-Royal College of Obstetricians and Gynaecologists,1,0,0
 Royal Cornwall Hospital,1,0,3
 Royal Derby Hospital,1,0,0
 Royal Devon Exeter NHS Foundation Trust,0,0,1
@@ -1568,7 +1532,6 @@ Royal United Hospital,1,0,2
 Royal United Hospital Bath,1,0,0
 Royal United Hospitals,0,1,0
 Royal United Hospitals Bath NHS Foundation Trust,1,0,0
-Royal Wolverhampton NHS Trust,0,0,2
 Royal Yachting Association,2,0,1
 Royton Crompton Family Practice,1,0,0
 Rt Hon Grant Shapps MP,1,0,0
@@ -1599,7 +1562,6 @@ Sandwell Council,0,0,1
 Sandwell Local Authority,0,0,1
 Sandwell West Birmingham Hospitals NHS Trust,0,0,3
 Sandwell West Birmingham NHS Trust,2,0,0
-Sandwell and West Birmingham Hospitals NHS Trust,0,0,1
 Sapphire House,1,0,0
 Scania,1,0,0
 Scotia Gas Network,1,0,0
@@ -1616,7 +1578,6 @@ Secretary State Home Department,2,0,1
 Secretary State Housing,1,0,0
 Secretary State Justice,4,0,0
 Secretary State Transport,5,0,5
-Secretary of State for Health & Social Care,2,0,10
 Select Healthcare,1,0,0
 Senior Highway Engineer Surrey,1,0,0
 Serco,1,0,0
@@ -1628,7 +1589,6 @@ Sheffield Children s Hospital,0,0,1
 Sheffield Children s NHS Trust,0,0,1
 Sheffield City Council,1,0,3
 Sheffield Council,1,0,0
-Sheffield Health and Social Care NHS Foundation Trust,1,0,0
 Sheffield Hospitals NHS Trust,0,0,1
 Sheffield Teaching Hospitals NHS Foundation Trust,3,0,3
 Sheffield Teaching Hospitals NHS Trust,0,0,1
@@ -1766,8 +1726,6 @@ Surrey Downs Clinical Commissioning Group,0,0,1
 Surrey Fire Rescue Service,3,0,0
 Surrey Local Highways Services Group Manager,0,0,1
 Surrey Police,3,0,2
-Surrey and Borders Partnership NHS Foundation Trust,2,0,1
-Surrey and Sussex Healthcare NHS Trust,0,0,1
 Suspension Bridge Trustees,0,0,1
 Sussex Community NHS Foundation Trust,0,0,1
 Sussex NHS Trust,0,0,2
@@ -1804,13 +1762,11 @@ Tameside Hospital NHS Foundation Trust,1,0,3
 Tameside Hospital NHS Trust,0,0,2
 Tameside Metropolitan Borough Council,0,0,1
 Tameside and Glossop CCG,1,0,0
-Tameside and Glossop Care NHS Trust,1,0,0
 Tandridge District Council,2,0,0
 Tanglewood Cloverleaf Care Home,0,0,1
 Taunton Deane District Council,1,0,0
 Tees Esk Wear Valley NHS Trust,2,0,0
 Tees Esk Wear Valleys NHS Foundation Trust,1,0,0
-Tees Esk and Wear Valley NHS Trust,0,0,1
 "Tees, Esk and Wear Valley NHS Trust",0,0,1
 Teesside University Hospitals,1,0,0
 Templemore Care Home,1,0,0
@@ -1819,17 +1775,14 @@ Tesco Store PLC,1,0,0
 Tettenhall Medical Practice,0,0,1
 Teva UK Ltd,0,0,1
 Thames Valley Police,0,0,2
-Thames Valley and Wessex Operational Delivery Networks,1,0,0
 Thameside Prison,1,0,0
 The AACE,0,0,1
-"The Asset, Policy and Commissioning Manager",0,0,1
-The British Obesity and Metabolic Surgery Society,1,0,0
 The Canal and River Trust,0,0,1
-The Care Quality Commission,8,0,4
+The Care Quality Commission,51,0,16
 The Director-General of the Security Service,1,0,0
 The Glass and Glazing Federation,1,0,0
-The Leeds and York Partnership NHS Trust,0,0,1
 The Oaks and Woodcroft Care Home,0,0,1
+The Royal Wolverhampton NHS Trust,0,0,2
 Thomas Cook,0,0,1
 Thornton Heath Medical Practice,1,0,0
 Thornton Ross Ltd,1,0,0
@@ -1863,7 +1816,6 @@ Turning Point,0,0,2
 Twinglobe Care Homes Limited,0,0,1
 Tynant Nursing Home,0,0,1
 Tyne Housing Association,1,0,0
-Tyne and Wear NHS Foundation Trust,0,0,1
 UCAS,0,0,2
 UK Active,1,0,0
 UK Health Security Agency,0,1,0
@@ -1871,11 +1823,10 @@ UK Home Care,1,0,0
 UNMH,0,0,1
 URBN UK Ltd,0,0,1
 United Lincolnshire Hospital,2,0,0
-United Lincolnshire Hospital Trust,1,1,0
+United Lincolnshire Hospital Trust,1,0,0
 United Lincolnshire Hospitals NHS Trust,2,0,2
-United Lincolnshire Hospitals Trust,0,0,1
+United Lincolnshire Hospitals Trust,0,1,1
 United Response,1,0,0
-Universities and Colleges Admissions Service (UCAS),0,0,1
 University Arts London,0,0,1
 University Birmingham,0,0,1
 University College Hospital,1,0,0
@@ -1892,7 +1843,6 @@ University Hospital North Midalnds,0,0,1
 University Hospital North Midlands,1,0,1
 University Hospital Southampton NHS Foundation Trust,0,0,2
 University Hospitals Birmimgham NHS Trust,0,0,1
-University Hospitals Birmingham NHS Foundation Trust,0,1,2
 University Hospitals Birmingham NHS Trust,1,0,5
 University Hospitals Bristol,0,0,1
 University Hospitals Bristol NHS Trust,0,0,1
@@ -1904,7 +1854,7 @@ University Hospitals North Midlands,0,0,1
 University Hospitals North Midlands NHS Trust,0,0,1
 University Hospitals Plymouth NHS Trust,2,0,2
 University Hospitals Sussex NHS Foundation Trust,0,0,1
-University Hospitals of Birmingham NHS Foundation Trust,0,0,1
+University Hospitals of Birmingham NHS Foundation Trust,0,1,3
 University Leicester Hospitals NHS Trust,1,0,0
 University Manchester NHS Foundation Trust,1,0,0
 University North Midlands Hospital NHS Trust,0,0,1
@@ -1939,7 +1889,6 @@ Walsall Mental Health Partnership,1,0,0
 Walsall Metropolitan Borough,1,0,0
 Walsall Metropolitan Borough Council,1,0,0
 Wandsworth Borough Council,1,0,0
-Wandsworth Consortium Drug and Alcohol Services,1,0,0
 Wandsworth Merton Richmond Sutton Borough Council,1,0,0
 Wanstead Place Surgery,1,0,0
 Warwick Hospital,0,0,3
