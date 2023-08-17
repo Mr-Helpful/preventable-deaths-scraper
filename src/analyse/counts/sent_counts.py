@@ -72,20 +72,26 @@ type_counts = exploded.value_counts('status')
 
 non_na.loc[:, 'response status'] = 'partial'
 
+# for each report, calculate the list of recipients with responses
 responses_from = lambda row: [sent for sent in row['sent_to'] if sent in row['escaped_urls']]
 with_responses = non_na.apply(responses_from, axis=1)
 
+# if there's none, mark overdue
 no_responses = with_responses.str.len() == 0
 non_na.loc[no_responses, 'response status'] = 'overdue'
 
+# if there's an equal number of recipients and replies, mark completed
 equal_len = (
   non_na['sent_to'].str.len() == non_na['replies'].str.len()) & (
   non_na['sent_to'].str.len() > 0
 )
 non_na.loc[equal_len, 'response status'] = 'completed'
+
+# if all are responded to, mark completed
 all_responses = with_responses.str.len() >= non_na['sent_to'].str.len()
 non_na.loc[all_responses, 'response status'] = 'completed'
 
+# if a report is pending or overdue and less than 56 days old, mark pending
 non_na.loc[~report_due & (non_na['response status'] == 'overdue'), 'response status'] = 'pending'
 non_na.loc[~report_due & (non_na['response status'] == 'partial'), 'response status'] = 'pending'
 
@@ -105,7 +111,7 @@ print(reports[['ref', 'response status']].head(10))
 print(reports['response status'].value_counts())
 
 # %% [markdown]
-# ### Calculating report status over time
+# ### Calculating response status over time
 
 status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'response status']).unstack(fill_value=0)
 status_years = status_years[['unknown', 'pending', 'overdue', 'partial', 'completed']]
