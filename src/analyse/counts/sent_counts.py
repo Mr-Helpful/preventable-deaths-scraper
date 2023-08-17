@@ -22,7 +22,7 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Calculating the due status for each report
