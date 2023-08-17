@@ -132,6 +132,11 @@ reports = reports[report_columns]
 reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
 
 # %% [markdown]
+# ### Calculating statistics
+
+status_counts = reports.value_counts('response status')
+
+# %% [markdown]
 # ### Calculating statistics over coroner areas
 
 area_statuses = reports.value_counts(['coroner_area', 'response status']).unstack(fill_value=0)
@@ -162,11 +167,15 @@ name_statuses = name_statuses.rename({
 
 toml_stats['sent to'] = statistics = {
   "no. reports parsed": len(non_na),
+  "no. reports pending": status_counts['pending'],
+  "no. reports overdue": status_counts['overdue'],
+  "no. reports partial": status_counts['partial'],
+  "no. reports completed": status_counts['completed'],
   "no. requests for response": len(exploded),
-  "no. requests received": type_counts['received'],
-  "no. requests overdue": type_counts['overdue'],
   "no. requests pending": type_counts['pending'],
-  "no. recipients with report(s)": len(sent_counts),
+  "no. requests overdue": type_counts['overdue'],
+  "no. requests received": type_counts['received'],
+  "no. recipients with requests": len(sent_counts),
   "mean per recipient": round(sent_counts.mean(), 1),
   "median per recipient": sent_counts.median(),
   "IQR of recipients": list(sent_counts.quantile([0.25, 0.75])),
