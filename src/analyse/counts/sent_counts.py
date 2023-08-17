@@ -85,8 +85,8 @@ equal_len = (
 non_na.loc[equal_len, 'response status'] = 'completed'
 non_na.loc[all_responses, 'response status'] = 'completed'
 
-all_responses = with_responses.str.len() == non_na['sent_to'].str.len()
-non_na.loc[all_responses, 'report status'] = 'completed'
+non_na.loc[~report_due & (non_na['response status'] == 'overdue'), 'response status'] = 'pending'
+non_na.loc[~report_due & (non_na['response status'] == 'partial'), 'response status'] = 'pending'
 
 # %% [markdown]
 # ### Adding the non_na rows back to the reports
@@ -107,7 +107,7 @@ print(reports['response status'].value_counts())
 # ### Calculating report status over time
 
 status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'response status']).unstack(fill_value=0)
-status_years = status_years[['unknown', 'overdue', 'partial', 'completed']]
+status_years = status_years[['unknown', 'pending', 'overdue', 'partial', 'completed']]
 print(status_years)
 
 # %% [markdown]
@@ -129,14 +129,26 @@ reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
 
 area_statuses = reports.value_counts(['coroner_area', 'response status']).unstack(fill_value=0)
 area_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_area')[['no. recipients', 'no. replies']].sum()
-area_statuses = area_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+area_statuses = area_statuses.rename({
+  "completed": "no. complete responses",
+  "partial": "no. partial responses",
+  "overdue": "no. overdue responses",
+  "unknown": "no. failed parses",
+  "pending": "no. pending responses"
+},axis=1)
 
 # %% [markdown]
 # ### Calculating statistics over coroner names
 
 name_statuses = reports.value_counts(['coroner_name', 'response status']).unstack(fill_value=0)
 name_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_name')[['no. recipients', 'no. replies']].sum()
-name_statuses = name_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+name_statuses = name_statuses.rename({
+  "completed": "no. complete responses",
+  "partial": "no. partial responses",
+  "overdue": "no. overdue responses",
+  "unknown": "no. failed parses",
+  "pending": "no. pending responses"
+},axis=1)
 
 # %% [markdown]
 # ### Various statistics about the counts
