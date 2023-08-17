@@ -123,7 +123,7 @@ print(status_years)
 # Add our new columns to the reports
 report_columns = reports.columns.tolist()
 report_columns.insert(0, 'response status')
-count_idx = report_columns.index('this_report_is_being_sent_to')
+count_idx = report_columns.index('this_report_is_being_sent_to') + 1
 report_columns.insert(count_idx, 'no. replies')
 report_columns.insert(count_idx, 'no. recipients')
 report_columns = list(dict.fromkeys(report_columns))
