@@ -18,7 +18,7 @@ REPORTS_PATH = os.path.abspath(f"{PATH}/../../data")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Calculating the year of each report

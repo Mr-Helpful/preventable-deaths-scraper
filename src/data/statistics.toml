@@ -7,28 +7,28 @@
 "IQR of categories" = [ 97.0, 466.5,]
 
 ["coroner gender"]
-"no. coroners male" = 253
+"no. coroners male" = 254
 "no. coroners female" = 236
 "no. coroners unknown" = 152
-"no. reports male" = 2027
+"no. reports male" = 2034
 "no. reports female" = 1748
-"no. reports unknown" = 725
+"no. reports unknown" = 718
 
 ["coroner name"]
 "no. reports parsed" = 4500
-"no. names with report(s)" = 426
+"no. names with report(s)" = 427
 "no. names without reports" = 295
-"mean per name" = 10.6
+"mean per name" = 10.5
 "median per name" = 5.0
 "IQR of names" = [ 2.0, 11.0,]
 
 ["sent to"]
-"no. reports parsed" = 2818
-"no. requests for response" = 4054
-"no. requests received" = 1850
-"no. requests overdue" = 2154
-"no. requests pending" = 50
-"no. recipients with report(s)" = 2045
+"no. reports parsed" = 2784
+"no. requests for response" = 4020
+"no. requests received" = 1818
+"no. requests overdue" = 2155
+"no. requests pending" = 47
+"no. recipients with report(s)" = 1994
 "mean per recipient" = 2.0
 "median per recipient" = 1.0
 "IQR of recipients" = [ 1.0, 1.0,]

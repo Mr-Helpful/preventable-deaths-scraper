@@ -22,7 +22,7 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Calculating the due status for each report
@@ -131,6 +131,13 @@ area_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coron
 area_statuses = area_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
 
 # %% [markdown]
+# ### Calculating statistics over coroner names
+
+name_statuses = reports.value_counts(['coroner_name', 'report status']).unstack(fill_value=0)
+name_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_name')[['no. recipients', 'no. replies']].sum()
+name_statuses = name_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['sent to'] = statistics = {
@@ -164,4 +171,6 @@ top_types.to_csv(f"{DATA_PATH}/sent/top-sent-types.csv")
 sent_years.to_csv(f"{DATA_PATH}/sent/sent-types-years.csv")
 status_years.to_csv(f"{DATA_PATH}/sent/status-years.csv")
 exploded.to_csv(f"{DATA_PATH}/sent/statuses.csv", index=False)
+
 area_statuses.to_csv(f"{DATA_PATH}/sent/area-statuses.csv")
+name_statuses.to_csv(f"{DATA_PATH}/sent/name-statuses.csv")
