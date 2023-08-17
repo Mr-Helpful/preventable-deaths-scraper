@@ -70,7 +70,7 @@ top_years = name_counts[top_names]
 # %% [markdown]
 # ### Saving the results
 
-top_counts.to_csv(f"{DATA_PATH}/top-name-counts.csv")
-name_counts.to_csv(f"{DATA_PATH}/name-years.csv")
-top_years.to_csv(f"{DATA_PATH}/top-name-years.csv")
-sum_counts.to_csv(f"{DATA_PATH}/name-counts.csv")
+top_counts.to_csv(f"{DATA_PATH}/name/top-name-counts.csv")
+name_counts.to_csv(f"{DATA_PATH}/name/name-years.csv")
+top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
+sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")

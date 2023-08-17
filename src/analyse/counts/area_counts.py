@@ -51,5 +51,5 @@ print(f"Sorted counts: {sum_counts}")
 # %% [markdown]
 # ### Saving the results
 
-area_counts.to_csv(f"{DATA_PATH}/area-years.csv")
-sum_counts.to_csv(f"{DATA_PATH}/area-counts.csv")
+area_counts.to_csv(f"{DATA_PATH}/area/area-years.csv")
+sum_counts.to_csv(f"{DATA_PATH}/area/area-counts.csv")

@@ -51,4 +51,4 @@ print(f"Sorted counts: {year_counts}")
 # %% [markdown]
 # ### Saving the results
 
-year_counts.to_csv(f"{DATA_PATH}/year-counts.csv")
+year_counts.to_csv(f"{DATA_PATH}/year/year-counts.csv")

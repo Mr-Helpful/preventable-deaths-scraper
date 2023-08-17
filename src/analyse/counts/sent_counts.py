@@ -124,6 +124,20 @@ reports = reports[report_columns]
 reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
 
 # %% [markdown]
+# ### Calculating statistics over coroner areas
+
+area_statuses = reports.value_counts(['coroner_area', 'report status']).unstack(fill_value=0)
+area_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_area')[['no. recipients', 'no. replies']].sum()
+area_statuses = area_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+
+# %% [markdown]
+# ### Calculating statistics over coroner names
+
+name_statuses = reports.value_counts(['coroner_name', 'report status']).unstack(fill_value=0)
+name_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_name')[['no. recipients', 'no. replies']].sum()
+name_statuses = name_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['sent to'] = statistics = {
@@ -150,10 +164,13 @@ top_types = sent_types.loc[top_counts.index]
 # %% [markdown]
 # ### Saving the results
 
-sent_counts.to_csv(f"{DATA_PATH}/sent-counts.csv")
-top_counts.to_csv(f"{DATA_PATH}/top-sent-counts.csv")
-sent_types.to_csv(f"{DATA_PATH}/sent-types.csv")
-top_types.to_csv(f"{DATA_PATH}/top-sent-types.csv")
-sent_years.to_csv(f"{DATA_PATH}/sent-types-years.csv")
-status_years.to_csv(f"{DATA_PATH}/status-years.csv")
-exploded.to_csv(f"{DATA_PATH}/statuses.csv", index=False)
+sent_counts.to_csv(f"{DATA_PATH}/sent/sent-counts.csv")
+top_counts.to_csv(f"{DATA_PATH}/sent/top-sent-counts.csv")
+sent_types.to_csv(f"{DATA_PATH}/sent/sent-types.csv")
+top_types.to_csv(f"{DATA_PATH}/sent/top-sent-types.csv")
+sent_years.to_csv(f"{DATA_PATH}/sent/sent-types-years.csv")
+status_years.to_csv(f"{DATA_PATH}/sent/status-years.csv")
+exploded.to_csv(f"{DATA_PATH}/sent/statuses.csv", index=False)
+
+area_statuses.to_csv(f"{DATA_PATH}/sent/area-statuses.csv")
+name_statuses.to_csv(f"{DATA_PATH}/sent/name-statuses.csv")
