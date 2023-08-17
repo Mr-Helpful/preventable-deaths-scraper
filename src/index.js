@@ -37,19 +37,21 @@ async function fetch_seen_reports(file_path) {
  * @param {string} reports_url the url to fetch from
  * @param {string} csv_path the `.csv` file to write reports to
  * @param {string} log_path where to write a log of the latest fetch
- * @param {string[]} headers the headers we're using for the `.csv` file
+ * @param {string[]} columns the headers we're using for the `.csv` file
  * @param {Parser<R>} parse_report
  * @param {Parser<S>} parse_summary
  */
 export async function write_reports(
   reports_url,
   csv_path,
+  correct_path,
   log_path,
-  headers,
+  columns,
   parse_report,
   parse_summary
 ) {
-  const reports = await fetch_seen_reports(csv_path)
+  let reports = await fetch_seen_reports(csv_path)
+  let correct = await fetch_seen_reports(correct_path)
   const correct_report = await ReportCorrector()
 
   const page_urls = await fetch_page_urls(reports_url)
@@ -63,19 +65,28 @@ export async function write_reports(
     urls,
     url =>
       fetch_report(url, parse_report, parse_summary)
-        .then(correct_report)
+        .then(report => [report, correct_report(report)])
         .catch(_ => {
           // ignore any errors from this, we'll either get it next time
           // or this report can't be effectively read at all
         }),
     'Reading reports |:bar| :current/:total urls'
   )
-  reports.unshift(...new_reports.filter(report => report !== undefined))
-  reports.sort(({ ref: a = '' }, { ref: b = '' }) => b.localeCompare(a)) // descending sort ref
+  new_reports = new_reports.filter(report => report !== undefined)
 
+  for (const [report, corrected] of new_reports.reverse()) {
+    reports.unshift(report)
+    correct.unshift(corrected)
+  }
+
+  // descending sort ref
+  reports.sort(({ ref: a = '' }, { ref: b = '' }) => b.localeCompare(a))
+  correct.sort(({ ref: a = '' }, { ref: b = '' }) => b.localeCompare(a))
+
+  await fs.writeFile(csv_path, Papa.unparse(reports, { header: true, columns }))
   await fs.writeFile(
-    csv_path,
-    Papa.unparse(reports, { header: true, columns: headers })
+    correct_path,
+    Papa.unparse(correct, { header: true, columns })
   )
 }
 
@@ -103,6 +114,7 @@ const headers = [
 write_reports(
   'https://www.judiciary.uk/prevention-of-future-death-reports/',
   'src/data/reports.csv',
+  'src/data/reports-corrected.csv',
   'src/data/latest.log',
   headers,
   parse_report_basic,

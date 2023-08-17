@@ -32,7 +32,7 @@ print(REPLACEMENTS)
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Reading coroner names
