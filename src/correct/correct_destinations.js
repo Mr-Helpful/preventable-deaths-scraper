@@ -89,7 +89,7 @@ export default async function Corrector(keep_failed = true) {
   function try_known_match(text) {
     if (known_replacements[1][text]) return known_replacements[1][text]
 
-    let replacements = [...known_replacements]
+    let replacements = [...corrections]
     replacements[1] = {} // don't try heirachic matches on acronyms
     replacements = Object.assign({}, ...replacements)
     replacements = object_map(replacements, text =>
