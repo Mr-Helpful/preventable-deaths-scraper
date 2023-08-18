@@ -35,11 +35,6 @@ we'll be relying on is that:
 
 export const punctuation = re`${conjunctive_words}|[^\w'-]+`
 
-const object_map = (obj, key_func = x => x, value_func = x => x) =>
-  Object.fromEntries(
-    Object.entries(obj).map(([k, v]) => [key_func(k), value_func(v)])
-  )
-
 /**
  * Removes all matched segments from the text
  * @param {string} text the text to remove from
@@ -95,7 +90,7 @@ export default async function Corrector(keep_failed = true) {
     replacements = Object.assign({}, ...replacements)
     const known_keys = Object.keys(replacements)
     const known_matches = hierachic_match(text, known_keys, {
-      ignored_words: non_connective_words
+      ignored_words: punctuation
     })
     if (known_matches === undefined) return undefined
 
@@ -144,7 +139,7 @@ export default async function Corrector(keep_failed = true) {
     // few errors, we can return those matches
     const replacements = Object.assign({}, ...corrections)
     const matches = heirichic_matches(text, Object.keys(replacements), {
-      ignored_words: non_connective_words
+      ignored_words: punctuation
     })
     if (matches && is_complete_match(text, matches))
       return matches.map(match => replacements[match.phrase]).join(' | ')
