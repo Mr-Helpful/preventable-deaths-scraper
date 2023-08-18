@@ -70,28 +70,36 @@ type_counts = exploded.value_counts('status')
 # %% [markdown]
 # ### Calculating the status of each report
 
-non_na.loc[:, 'report status'] = 'partial'
+non_na.loc[:, 'response status'] = 'partial'
 
+# for each report, calculate the list of recipients with responses
 responses_from = lambda row: [sent for sent in row['sent_to'] if sent in row['escaped_urls']]
 with_responses = non_na.apply(responses_from, axis=1)
 
+# if there's none, mark overdue
 no_responses = with_responses.str.len() == 0
-non_na.loc[no_responses, 'report status'] = 'overdue'
+non_na.loc[no_responses, 'response status'] = 'overdue'
 
+# if there's an equal number of recipients and replies, mark completed
 equal_len = (
   non_na['sent_to'].str.len() == non_na['replies'].str.len()) & (
   non_na['sent_to'].str.len() > 0
 )
-non_na.loc[equal_len, 'report status'] = 'completed'
+non_na.loc[equal_len, 'response status'] = 'completed'
 
-all_responses = with_responses.str.len() == non_na['sent_to'].str.len()
-non_na.loc[all_responses, 'report status'] = 'completed'
+# if all are responded to, mark completed
+all_responses = with_responses.str.len() >= non_na['sent_to'].str.len()
+non_na.loc[all_responses, 'response status'] = 'completed'
+
+# if a report is pending or overdue and less than 56 days old, mark pending
+non_na.loc[~report_due & (non_na['response status'] == 'overdue'), 'response status'] = 'pending'
+non_na.loc[~report_due & (non_na['response status'] == 'partial'), 'response status'] = 'pending'
 
 # %% [markdown]
 # ### Adding the non_na rows back to the reports
 
-reports.loc[:, 'report status'] = 'unknown'
-reports.loc[non_na.index, 'report status'] = non_na['report status']
+reports.loc[:, 'response status'] = 'unknown'
+reports.loc[non_na.index, 'response status'] = non_na['response status']
 
 reports.loc[:, 'no. recipients'] = 0
 reports.loc[non_na.index, 'no. recipients'] = non_na['no. recipients']
@@ -99,14 +107,14 @@ reports.loc[non_na.index, 'no. recipients'] = non_na['no. recipients']
 reports.loc[:, 'no. replies'] = 0
 reports.loc[non_na.index, 'no. replies'] = non_na['no. replies']
 
-print(reports[['ref', 'report status']].head(10))
-print(reports['report status'].value_counts())
+print(reports[['ref', 'response status']].head(10))
+print(reports['response status'].value_counts())
 
 # %% [markdown]
-# ### Calculating report status over time
+# ### Calculating response status over time
 
-status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'report status']).unstack(fill_value=0)
-status_years = status_years[['unknown', 'overdue', 'partial', 'completed']]
+status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'response status']).unstack(fill_value=0)
+status_years = status_years[['unknown', 'pending', 'overdue', 'partial', 'completed']]
 print(status_years)
 
 # %% [markdown]
@@ -114,8 +122,8 @@ print(status_years)
 
 # Add our new columns to the reports
 report_columns = reports.columns.tolist()
-report_columns.insert(0, 'report status')
-count_idx = report_columns.index('circumstances')
+report_columns.insert(0, 'response status')
+count_idx = report_columns.index('this_report_is_being_sent_to') + 1
 report_columns.insert(count_idx, 'no. replies')
 report_columns.insert(count_idx, 'no. recipients')
 report_columns = list(dict.fromkeys(report_columns))
@@ -124,29 +132,50 @@ reports = reports[report_columns]
 reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
 
 # %% [markdown]
+# ### Calculating statistics
+
+status_counts = reports.value_counts('response status')
+
+# %% [markdown]
 # ### Calculating statistics over coroner areas
 
-area_statuses = reports.value_counts(['coroner_area', 'report status']).unstack(fill_value=0)
+area_statuses = reports.value_counts(['coroner_area', 'response status']).unstack(fill_value=0)
 area_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_area')[['no. recipients', 'no. replies']].sum()
-area_statuses = area_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+area_statuses = area_statuses.rename({
+  "completed": "no. complete responses",
+  "partial": "no. partial responses",
+  "overdue": "no. overdue responses",
+  "unknown": "no. failed parses",
+  "pending": "no. pending responses"
+},axis=1)
 
 # %% [markdown]
 # ### Calculating statistics over coroner names
 
-name_statuses = reports.value_counts(['coroner_name', 'report status']).unstack(fill_value=0)
+name_statuses = reports.value_counts(['coroner_name', 'response status']).unstack(fill_value=0)
 name_statuses.loc[:, ['no. recipients', 'no. replies']] = reports.groupby('coroner_name')[['no. recipients', 'no. replies']].sum()
-name_statuses = name_statuses.rename({"completed": "no. complete responses", "partial": "no. partial responses", "overdue": "no. overdue responses", "unknown": "no. failed parses"},axis=1)
+name_statuses = name_statuses.rename({
+  "completed": "no. complete responses",
+  "partial": "no. partial responses",
+  "overdue": "no. overdue responses",
+  "unknown": "no. failed parses",
+  "pending": "no. pending responses"
+},axis=1)
 
 # %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['sent to'] = statistics = {
   "no. reports parsed": len(non_na),
+  "no. reports pending": status_counts['pending'],
+  "no. reports overdue": status_counts['overdue'],
+  "no. reports partial": status_counts['partial'],
+  "no. reports completed": status_counts['completed'],
   "no. requests for response": len(exploded),
-  "no. requests received": type_counts['received'],
-  "no. requests overdue": type_counts['overdue'],
   "no. requests pending": type_counts['pending'],
-  "no. recipients with report(s)": len(sent_counts),
+  "no. requests overdue": type_counts['overdue'],
+  "no. requests received": type_counts['received'],
+  "no. recipients with requests": len(sent_counts),
   "mean per recipient": round(sent_counts.mean(), 1),
   "median per recipient": sent_counts.median(),
   "IQR of recipients": list(sent_counts.quantile([0.25, 0.75])),
