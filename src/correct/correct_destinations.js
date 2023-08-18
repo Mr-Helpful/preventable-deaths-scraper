@@ -11,6 +11,7 @@ import {
   conjunctive_words,
   connective_words,
   has_acronym,
+  non_connective_words,
   to_acronym
 } from './simplify_destination.js'
 import { merge_failed, load_correction_data, re } from './helpers.js'
@@ -33,11 +34,6 @@ we'll be relying on is that:
 */
 
 export const punctuation = re`${conjunctive_words}|[^\w'-]+`
-
-const object_map = (obj, key_func = x => x, value_func = x => x) =>
-  Object.fromEntries(
-    Object.entries(obj).map(([k, v]) => [key_func(k), value_func(v)])
-  )
 
 /**
  * Removes all matched segments from the text
@@ -89,17 +85,13 @@ export default async function Corrector(keep_failed = true) {
   function try_known_match(text) {
     if (known_replacements[1][text]) return known_replacements[1][text]
 
-    let replacements = [...known_replacements]
+    let replacements = [...corrections]
     replacements[1] = {} // don't try heirachic matches on acronyms
     replacements = Object.assign({}, ...replacements)
-    replacements = object_map(replacements, text =>
-      text.replace(punctuation, '').trim()
-    )
     const known_keys = Object.keys(replacements)
-    const known_matches = hierachic_match(
-      text.replace(punctuation, '').trim(),
-      known_keys
-    )
+    const known_matches = hierachic_match(text, known_keys, {
+      ignored_words: punctuation
+    })
     if (known_matches === undefined) return undefined
 
     const known_match = max_by(known_matches, match => -match.error).phrase
@@ -146,7 +138,9 @@ export default async function Corrector(keep_failed = true) {
     // if the text can be built from known matches and connectives, with only a
     // few errors, we can return those matches
     const replacements = Object.assign({}, ...corrections)
-    const matches = heirichic_matches(text, Object.keys(replacements))
+    const matches = heirichic_matches(text, Object.keys(replacements), {
+      ignored_words: punctuation
+    })
     if (matches && is_complete_match(text, matches))
       return matches.map(match => replacements[match.phrase]).join(' | ')
 

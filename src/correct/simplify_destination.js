@@ -2,6 +2,8 @@ import { re } from './helpers.js'
 
 export const connectives = /and|or/gi
 export const connective_words = re`\b${connectives}\b`
+export const non_connectives = /of|the|for/gi
+export const non_connective_words = re`\b${non_connectives}\b`
 export const conjunctions = /and|or|of|the|for/gi
 export const conjunctive_words = re`\b${conjunctions}\b`
 
