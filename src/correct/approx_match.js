@@ -373,6 +373,14 @@ const default_error_config = {
 }
 
 /**
+ * @typedef {Object} HierachicConfig
+ * @property {ErrorConfig} config the edit distance config for the words that make up the phrase
+ * @property {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @property {boolean} ignore_case whether to ignore case when matching
+ * @property {RegExp} ignored_words words to ignore when matching
+ */
+
+/**
  * Attempts to find a match for a text within a list of phrases, using the
  * following method:
  * If there are sufficiently few edits in words, ignoring any replacements that
@@ -380,16 +388,18 @@ const default_error_config = {
  *
  * @param {string} text the text to match against
  * @param {string[]} to_match the list of strings to match against
- * @param {ErrorConfig} config the edit distance config for the words that make up the phrase
- * @param {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @param {HierachicConfig} config the edit distance config for the words that make up the phrase
  * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
  */
 export function hierachic_match(
   text_,
   to_match,
-  config = default_error_config,
-  word_config = default_error_config,
-  ignore_case = true
+  {
+    config = default_error_config,
+    word_config = default_error_config,
+    ignore_case = true,
+    ignored_words = /(?:)/i
+  } = {}
 ) {
   const text = ignore_case ? text_.toLowerCase() : text_
   const words = text.split(non_words)
@@ -409,7 +419,12 @@ export function hierachic_match(
       config
     )
     if (errors.length === 0) return []
-    if (error <= config.typos && error <= slice.length * config.relative)
+
+    const allowed_errors = Math.min(
+      config.typos,
+      slice.length * config.relative
+    )
+    if (error <= allowed_errors)
       return [{ phrase, loc: loc.map(word_index), error }]
 
     // check if any replacement words are close enough
@@ -439,20 +454,25 @@ export function hierachic_match(
       else {
         const match_word = match_words[i - 1]
         const word = slice[j - 1]
-        const word_errors = edit_distances(word, match_word, word_config)
-        const word_error = word_errors[word.length][match_word.length]
 
-        // if a replacement is close enough, don't consider it a replacement
-        // if this brings us below the allowable phrase typos, then it's a match
-        if (
-          word_error > 0 &&
-          word_error <= word_config.typos &&
-          word_error <= word.length * word_config.relative
-        ) {
+        if (ignored_words.test(word) && ignored_words.test(match_word)) {
           error -= word_config.substitution_cost
-          if (error <= config.typos && error <= slice.length * config.relative)
-            return [{ phrase, loc: loc.map(word_index), error }]
+        } else {
+          const word_errors = edit_distances(word, match_word, word_config)
+          const word_error = word_errors[word.length][match_word.length]
+
+          // if a replacement is close enough, don't consider it a replacement
+          // if this brings us below the allowable typos, then it's a match
+          if (
+            word_error > 0 &&
+            word_error <= word_config.typos &&
+            word_error <= word.length * word_config.relative
+          )
+            error -= word_config.substitution_cost
         }
+
+        if (error <= allowed_errors)
+          return [{ phrase, loc: loc.map(word_index), error }]
 
         i--
         j--
