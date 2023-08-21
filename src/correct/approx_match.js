@@ -30,6 +30,68 @@ const default_config = {
 }
 
 /** Returns the minimum number of edits to transform str1 into str2
+ * @param {string} str1 the origin to transform
+ * @param {string} str2 the target to transform to
+ * @param {DistanceConfig} config the costs of each edit type
+ * @returns {{error: number, errors: number[][]}} the error between str1 and str2 and the edit distance between all prefixes of str1 and str2
+ */
+function edit_match(
+  str1,
+  str2,
+  {
+    addition_cost = 1,
+    deletion_cost = 1,
+    substitution_cost = 1,
+    transposition_cost = 1
+  } = default_config
+) {
+  // errors[i][j] = edits to get str1[0:i] to str2[0:j]
+  let errors = Array.from({ length: str1.length + 1 }, _ =>
+    Array(str2.length + 1).fill(0)
+  )
+
+  // short circuit if strings are equal
+  if (str1 === str2) return { error: 0, errors }
+
+  // distance from empty string to str2[0:j] is j
+  for (let j = 0; j <= str2.length; j++) {
+    errors[0][j] = j
+  }
+
+  for (let i = 1; i <= str1.length; i++) {
+    errors[i][0] = i
+
+    for (let j = 1; j <= str2.length; j++) {
+      // identical characters
+      if (str1[i - 1] === str2[j - 1]) {
+        errors[i][j] = errors[i - 1][j - 1]
+        continue
+      }
+
+      let costs = [
+        errors[i - 1][j] + deletion_cost, // deletion
+        errors[i][j - 1] + addition_cost, // insertion
+        errors[i - 1][j - 1] + substitution_cost // substitution
+      ]
+
+      // transposed characters
+      if (
+        i > 1 &&
+        j > 1 &&
+        str1[i - 1] === str2[j - 2] &&
+        str1[i - 2] === str2[j - 1]
+      ) {
+        costs.push(errors[i - 2][j - 2] + transposition_cost)
+      }
+
+      errors[i][j] = Math.min(...costs)
+    }
+  }
+
+  return { error: errors[str1.length][str2.length], errors }
+}
+
+/** Returns the minimum number of edits to transform str1 into str2
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
  * @param {DistanceConfig} config the costs of each edit type
@@ -42,66 +104,24 @@ function edit_distances(
     addition_cost,
     deletion_cost,
     substitution_cost,
-    transposition_cost
+    transposition_cost,
+    ignore_case
   } = default_config
 ) {
-  // distances[i][j] = edits to get str1[0:i] to str2[0:j]
-  let distances = Array.from({ length: str1.length + 1 }, _ =>
-    Array(str2.length + 1).fill(0)
-  )
-
-  // short circuit if strings are equal
-  if (str1 === str2) return distances
-
-  // distance from empty string to str2[0:j] is j
-  for (let j = 0; j <= str2.length; j++) {
-    distances[0][j] = j
-  }
-
-  for (let i = 1; i <= str1.length; i++) {
-    distances[i][0] = i
-
-    for (let j = 1; j <= str2.length; j++) {
-      // identical characters
-      if (str1[i - 1] === str2[j - 1]) {
-        distances[i][j] = distances[i - 1][j - 1]
-        continue
-      }
-
-      let costs = [
-        distances[i - 1][j] + deletion_cost, // deletion
-        distances[i][j - 1] + addition_cost, // insertion
-        distances[i - 1][j - 1] + substitution_cost // substitution
-      ]
-
-      // transposed characters
-      if (
-        i > 1 &&
-        j > 1 &&
-        str1[i - 1] === str2[j - 2] &&
-        str1[i - 2] === str2[j - 1]
-      ) {
-        costs.push(distances[i - 2][j - 2] + transposition_cost)
-      }
-
-      distances[i][j] = Math.min(...costs)
-    }
-  }
-
-  return distances
+  return edit_match(str1, str2, {
+    addition_cost,
+    deletion_cost,
+    substitution_cost,
+    transposition_cost,
+    ignore_case
+  }).errors
 }
 
 /** Helper function for the edit distance of the full strings */
-function edit_distance(str1, str2, ignore_case = false) {
-  if (ignore_case) {
-    str1 = str1.toLowerCase()
-    str2 = str2.toLowerCase()
-  }
-
-  // short circuit if strings are equal
-  if (str1 === str2) return 0
-
-  return edit_distances(str1, str2)[str1.length][str2.length]
+function edit_distance(str1_, str2_, ignore_case = false) {
+  const str1 = ignore_case ? str1_.toLowerCase() : str1_
+  const str2 = ignore_case ? str2_.toLowerCase() : str2_
+  return edit_match(str1, str2, { ignore_case }).error
 }
 
 /**
