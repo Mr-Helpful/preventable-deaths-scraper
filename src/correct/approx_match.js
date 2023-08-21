@@ -380,9 +380,11 @@ export function priority_complete_matching(text, to_match_list) {
 }
 
 /**
- * @typedef {Object} ErrorConfig
+ * @typedef {Object} ErrorConfig_
  * @property {number} typos the maximum number of typos allowed
  * @property {number} relative the maximum relative error allowed
+ *
+ * @typedef {ErrorConfig_ & DistanceConfig} ErrorConfig
  */
 
 /** @type {ErrorConfig} */
