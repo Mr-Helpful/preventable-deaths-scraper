@@ -30,6 +30,68 @@ const default_config = {
 }
 
 /** Returns the minimum number of edits to transform str1 into str2
+ * @param {string} str1 the origin to transform
+ * @param {string} str2 the target to transform to
+ * @param {DistanceConfig} config the costs of each edit type
+ * @returns {{error: number, errors: number[][]}} the error between str1 and str2 and the edit distance between all prefixes of str1 and str2
+ */
+function edit_match(
+  str1,
+  str2,
+  {
+    addition_cost = 1,
+    deletion_cost = 1,
+    substitution_cost = 1,
+    transposition_cost = 1
+  } = default_config
+) {
+  // errors[i][j] = edits to get str1[0:i] to str2[0:j]
+  let errors = Array.from({ length: str1.length + 1 }, _ =>
+    Array(str2.length + 1).fill(0)
+  )
+
+  // short circuit if strings are equal
+  if (str1 === str2) return { error: 0, errors }
+
+  // distance from empty string to str2[0:j] is j
+  for (let j = 0; j <= str2.length; j++) {
+    errors[0][j] = j
+  }
+
+  for (let i = 1; i <= str1.length; i++) {
+    errors[i][0] = i
+
+    for (let j = 1; j <= str2.length; j++) {
+      // identical characters
+      if (str1[i - 1] === str2[j - 1]) {
+        errors[i][j] = errors[i - 1][j - 1]
+        continue
+      }
+
+      let costs = [
+        errors[i - 1][j] + deletion_cost, // deletion
+        errors[i][j - 1] + addition_cost, // insertion
+        errors[i - 1][j - 1] + substitution_cost // substitution
+      ]
+
+      // transposed characters
+      if (
+        i > 1 &&
+        j > 1 &&
+        str1[i - 1] === str2[j - 2] &&
+        str1[i - 2] === str2[j - 1]
+      ) {
+        costs.push(errors[i - 2][j - 2] + transposition_cost)
+      }
+
+      errors[i][j] = Math.min(...costs)
+    }
+  }
+
+  return { error: errors[str1.length][str2.length], errors }
+}
+
+/** Returns the minimum number of edits to transform str1 into str2
  * @param {string} str1 the to transform
  * @param {string} str2 the target to transform to
  * @param {DistanceConfig} config the costs of each edit type
@@ -42,66 +104,24 @@ function edit_distances(
     addition_cost,
     deletion_cost,
     substitution_cost,
-    transposition_cost
+    transposition_cost,
+    ignore_case
   } = default_config
 ) {
-  // distances[i][j] = edits to get str1[0:i] to str2[0:j]
-  let distances = Array.from({ length: str1.length + 1 }, _ =>
-    Array(str2.length + 1).fill(0)
-  )
-
-  // short circuit if strings are equal
-  if (str1 === str2) return distances
-
-  // distance from empty string to str2[0:j] is j
-  for (let j = 0; j <= str2.length; j++) {
-    distances[0][j] = j
-  }
-
-  for (let i = 1; i <= str1.length; i++) {
-    distances[i][0] = i
-
-    for (let j = 1; j <= str2.length; j++) {
-      // identical characters
-      if (str1[i - 1] === str2[j - 1]) {
-        distances[i][j] = distances[i - 1][j - 1]
-        continue
-      }
-
-      let costs = [
-        distances[i - 1][j] + deletion_cost, // deletion
-        distances[i][j - 1] + addition_cost, // insertion
-        distances[i - 1][j - 1] + substitution_cost // substitution
-      ]
-
-      // transposed characters
-      if (
-        i > 1 &&
-        j > 1 &&
-        str1[i - 1] === str2[j - 2] &&
-        str1[i - 2] === str2[j - 1]
-      ) {
-        costs.push(distances[i - 2][j - 2] + transposition_cost)
-      }
-
-      distances[i][j] = Math.min(...costs)
-    }
-  }
-
-  return distances
+  return edit_match(str1, str2, {
+    addition_cost,
+    deletion_cost,
+    substitution_cost,
+    transposition_cost,
+    ignore_case
+  }).errors
 }
 
 /** Helper function for the edit distance of the full strings */
-function edit_distance(str1, str2, ignore_case = false) {
-  if (ignore_case) {
-    str1 = str1.toLowerCase()
-    str2 = str2.toLowerCase()
-  }
-
-  // short circuit if strings are equal
-  if (str1 === str2) return 0
-
-  return edit_distances(str1, str2)[str1.length][str2.length]
+function edit_distance(str1_, str2_, ignore_case = false) {
+  const str1 = ignore_case ? str1_.toLowerCase() : str1_
+  const str2 = ignore_case ? str2_.toLowerCase() : str2_
+  return edit_match(str1, str2, { ignore_case }).error
 }
 
 /**
@@ -360,9 +380,11 @@ export function priority_complete_matching(text, to_match_list) {
 }
 
 /**
- * @typedef {Object} ErrorConfig
+ * @typedef {Object} ErrorConfig_
  * @property {number} typos the maximum number of typos allowed
  * @property {number} relative the maximum relative error allowed
+ *
+ * @typedef {ErrorConfig_ & DistanceConfig} ErrorConfig
  */
 
 /** @type {ErrorConfig} */
@@ -378,6 +400,7 @@ const default_error_config = {
  * @property {ErrorConfig} word_config the edit distance config for the letter that make up each word
  * @property {boolean} ignore_case whether to ignore case when matching
  * @property {RegExp} ignored_words words to ignore when matching
+ * @property {boolean} full_match whether to match a slice or the full text
  */
 
 /**
@@ -398,7 +421,8 @@ export function hierachic_match(
     config = default_error_config,
     word_config = default_error_config,
     ignore_case = true,
-    ignored_words = /(?:)/i
+    ignored_words = /(?:)/i,
+    full_match = false
   } = {}
 ) {
   const text = ignore_case ? text_.toLowerCase() : text_
@@ -408,16 +432,18 @@ export function hierachic_match(
 
   const word_matches = to_match.flatMap(phrase => {
     const phrase_ = ignore_case ? phrase.toLowerCase() : phrase
-    const match_words = phrase_.split(non_words)
-    const diff = words.length - match_words.length
+    const phrase_words = phrase_.split(non_words)
+    const diff = words.length - phrase_words.length
     if (diff > 0 && diff * config.deletion_cost > config.typos) return []
     if (diff < 0 && -diff * config.addition_cost > config.typos) return []
 
-    let { error, errors, loc, slice } = min_edit_slice(
-      match_words,
-      words,
-      config
-    )
+    let { error, errors, loc, slice } = full_match
+      ? {
+          ...edit_match(phrase_words, words, config),
+          loc: [0, words.length],
+          slice: words
+        }
+      : min_edit_slice(phrase_words, words, config)
     if (errors.length === 0) return []
 
     const allowed_errors = Math.min(
@@ -435,8 +461,8 @@ export function hierachic_match(
       if (
         i > 1 &&
         j > 1 &&
-        slice[i - 1] === match_words[j - 2] &&
-        slice[i - 2] === match_words[j - 1] &&
+        slice[i - 1] === phrase_words[j - 2] &&
+        slice[i - 2] === phrase_words[j - 1] &&
         errors[i][j] === errors[i - 2][j - 2] + word_config.transposition_cost
       ) {
         i -= 2
@@ -452,7 +478,7 @@ export function hierachic_match(
       if (min === errors[i - 1][j]) i--
       else if (min === errors[i][j - 1]) j--
       else {
-        const match_word = match_words[i - 1]
+        const match_word = phrase_words[i - 1]
         const word = slice[j - 1]
 
         if (ignored_words.test(word) && ignored_words.test(match_word)) {
@@ -489,17 +515,27 @@ export function hierachic_match(
  *
  * @param {string} text the text to match against
  * @param {string[]} to_match the list of strings to match against
- * @param {ErrorConfig} phrase_config the edit distance config for the words that make up the phrase
- * @param {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @param {HierachicConfig} config the edit distance config for the words that make up the phrase
  * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
  */
 export function heirichic_matches(
   text,
   to_match,
-  phrase_config = default_error_config,
-  word_config = default_error_config
+  {
+    config = default_error_config,
+    word_config = default_error_config,
+    ignore_case = true,
+    ignored_words = /(?:)/i,
+    full_match = false
+  } = {}
 ) {
-  const matches = hierachic_match(text, to_match, phrase_config, word_config)
+  const matches = hierachic_match(text, to_match, {
+    config,
+    word_config,
+    ignore_case,
+    ignored_words,
+    full_match
+  })
   if (matches === undefined) return undefined
 
   // basic greedy algorithm:

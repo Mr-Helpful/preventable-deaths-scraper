@@ -15,6 +15,7 @@ import {
   to_acronym
 } from './simplify_destination.js'
 import { merge_failed, load_correction_data, re } from './helpers.js'
+import { map_series } from '../fetch/helpers.js'
 
 /* Assumptions
 
@@ -76,9 +77,11 @@ export default async function Corrector(keep_failed = true) {
 
   if (corrections.length < 2) corrections.unshift({}, {})
   let known_replacements = [{}, {}]
-  for (const key of Object.keys(corrections[0])) {
-    if (!try_known_match(key)) add_to_known(key)
-  }
+  await map_series(
+    Object.keys(corrections[0]),
+    key => !try_known_match(key) && add_to_known(key),
+    'Merging destinations |:bar| :current/:total corrections'
+  )
   corrections[0] = known_replacements[0]
   corrections[1] = known_replacements[1]
 
@@ -90,7 +93,9 @@ export default async function Corrector(keep_failed = true) {
     replacements = Object.assign({}, ...replacements)
     const known_keys = Object.keys(replacements)
     const known_matches = hierachic_match(text, known_keys, {
-      ignored_words: punctuation
+      ignore_case: true,
+      ignored_words: punctuation,
+      full_match: true
     })
     if (known_matches === undefined) return undefined
 
