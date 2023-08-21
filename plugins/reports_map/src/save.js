@@ -75,19 +75,15 @@ export function Front({ csv_text, source_url }) {
 	);
 
 	return (
-		<>
 			<Flex direction={["column"]}>
 				<ReportHeatMap
 					area_counts={area_counts}
 					max={max}
 					scale={color_scales.custom}
-					className="report-heatmap-block"
-					data-props={JSON.stringify({ csv_text, source_url })}
 				/>
 
-				<RangeInput />
+			{/* <RangeInput /> */}
 			</Flex>
-		</>
 	);
 }
 
