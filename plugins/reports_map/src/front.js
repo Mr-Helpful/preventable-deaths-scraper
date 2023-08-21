@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { SaveBlock } from "./save";
+import { Front } from "./save";
 
 window.addEventListener("load", () => {
 	const blocks = document.querySelectorAll(".report-heatmap-block");
@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
 		const properties = JSON.parse(block.getAttribute("data-props"));
 		createRoot(block).render(
 			<div className="report-heatmap-block" data-props={properties}>
-				<SaveBlock {...properties} />
+				<Front {...properties} />
 			</div>
 		);
 	}
