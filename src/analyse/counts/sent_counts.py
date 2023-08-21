@@ -148,9 +148,9 @@ area_statuses = area_statuses.rename({
   "unknown": "no. failed parses",
   "pending": "no. pending responses"
 },axis=1)
-area_statuses['no. reports'] = reports['coroner_area'].value_counts()
-area_statuses = area_statuses.sort_values('no. reports', ascending=False)
-area_statuses = area_statuses[['no. reports', 'no. recipients', 'no. replies', 'no. complete responses', 'no. partial responses', 'no. overdue responses', 'no. pending responses', 'no. failed parses']]
+area_statuses['no. PFDs'] = reports['coroner_area'].value_counts()
+area_statuses = area_statuses.sort_values('no. PFDs', ascending=False)
+area_statuses = area_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no. complete responses', 'no. partial responses', 'no. overdue responses', 'no. pending responses', 'no. failed parses']]
 
 # %% [markdown]
 # ### Calculating statistics over coroner names
@@ -164,9 +164,9 @@ name_statuses = name_statuses.rename({
   "unknown": "no. failed parses",
   "pending": "no. pending responses"
 },axis=1)
-name_statuses['no. reports'] = reports['coroner_name'].value_counts()
-name_statuses = name_statuses.sort_values('no. reports', ascending=False)
-name_statuses = name_statuses[['no. reports', 'no. recipients', 'no. replies', 'no. complete responses', 'no. partial responses', 'no. overdue responses', 'no. pending responses', 'no. failed parses']]
+name_statuses['no. PFDs'] = reports['coroner_name'].value_counts()
+name_statuses = name_statuses.sort_values('no. PFDs', ascending=False)
+name_statuses = name_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no. complete responses', 'no. partial responses', 'no. overdue responses', 'no. pending responses', 'no. failed parses']]
 
 # %% [markdown]
 # ### Various statistics about the counts
