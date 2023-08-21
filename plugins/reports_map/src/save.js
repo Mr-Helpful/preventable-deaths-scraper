@@ -64,12 +64,15 @@ export function Front({ csv_text, source_url }) {
 
 	// const filtered = useMemo(() => csv_.filter({ year }), [csv_]);
 
-	const csv = Papa.parse(csv_text, { header: true, skipEmptyLines: true }).data;
-	if (csv.length === 0) return <div>No data</div>;
-	const area_counts = Object.fromEntries(
-		csv.map(({ coroner_area, count }) => [coroner_area, parseInt(count)])
+	const area_counts = useMemo(
+		() => sum_columns(csv.slice(...range)),
+		[csv, range]
 	);
-	const max = Math.max(...Object.values(area_counts), 0);
+
+	const max = useMemo(
+		() => Math.max(...Object.values(sum_columns(csv)), 1),
+		[csv]
+	);
 
 	return (
 		<>
