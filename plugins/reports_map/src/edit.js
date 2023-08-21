@@ -133,6 +133,20 @@ const CsvSource = ({ onChange }) => (
 );
 
 /**
+ * @typedef {Object} CsvComboSourceProps
+ * @property {({url: string, name: string, text: string}) => void} onChange A callback that is provided with the url and the parsed csv
+ */
+
+/**
+ * An input that allows the user to load a csv from a file or external url
+ * this will display a data url when the file is uploaded
+ * @param {CsvComboSourceProps} param0 The parameters for the CSVInput component
+ */
+const CsvComboSource = ({ onChange }) => {
+	return <></>;
+};
+
+/**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
