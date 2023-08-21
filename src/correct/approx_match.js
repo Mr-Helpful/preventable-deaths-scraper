@@ -400,6 +400,7 @@ const default_error_config = {
  * @property {ErrorConfig} word_config the edit distance config for the letter that make up each word
  * @property {boolean} ignore_case whether to ignore case when matching
  * @property {RegExp} ignored_words words to ignore when matching
+ * @property {boolean} full_match whether to match a slice or the full text
  */
 
 /**
@@ -420,7 +421,8 @@ export function hierachic_match(
     config = default_error_config,
     word_config = default_error_config,
     ignore_case = true,
-    ignored_words = /(?:)/i
+    ignored_words = /(?:)/i,
+    full_match = false
   } = {}
 ) {
   const text = ignore_case ? text_.toLowerCase() : text_
@@ -430,16 +432,18 @@ export function hierachic_match(
 
   const word_matches = to_match.flatMap(phrase => {
     const phrase_ = ignore_case ? phrase.toLowerCase() : phrase
-    const match_words = phrase_.split(non_words)
-    const diff = words.length - match_words.length
+    const phrase_words = phrase_.split(non_words)
+    const diff = words.length - phrase_words.length
     if (diff > 0 && diff * config.deletion_cost > config.typos) return []
     if (diff < 0 && -diff * config.addition_cost > config.typos) return []
 
-    let { error, errors, loc, slice } = min_edit_slice(
-      match_words,
-      words,
-      config
-    )
+    let { error, errors, loc, slice } = full_match
+      ? {
+          ...edit_match(phrase_words, words, config),
+          loc: [0, words.length],
+          slice: words
+        }
+      : min_edit_slice(phrase_words, words, config)
     if (errors.length === 0) return []
 
     const allowed_errors = Math.min(
@@ -457,8 +461,8 @@ export function hierachic_match(
       if (
         i > 1 &&
         j > 1 &&
-        slice[i - 1] === match_words[j - 2] &&
-        slice[i - 2] === match_words[j - 1] &&
+        slice[i - 1] === phrase_words[j - 2] &&
+        slice[i - 2] === phrase_words[j - 1] &&
         errors[i][j] === errors[i - 2][j - 2] + word_config.transposition_cost
       ) {
         i -= 2
@@ -474,7 +478,7 @@ export function hierachic_match(
       if (min === errors[i - 1][j]) i--
       else if (min === errors[i][j - 1]) j--
       else {
-        const match_word = match_words[i - 1]
+        const match_word = phrase_words[i - 1]
         const word = slice[j - 1]
 
         if (ignored_words.test(word) && ignored_words.test(match_word)) {
@@ -511,17 +515,27 @@ export function hierachic_match(
  *
  * @param {string} text the text to match against
  * @param {string[]} to_match the list of strings to match against
- * @param {ErrorConfig} phrase_config the edit distance config for the words that make up the phrase
- * @param {ErrorConfig} word_config the edit distance config for the letter that make up each word
+ * @param {HierachicConfig} config the edit distance config for the words that make up the phrase
  * @returns {{phrase: string, loc: [number, number], error: number}[] | undefined} the matches, or undefined if no good match
  */
 export function heirichic_matches(
   text,
   to_match,
-  phrase_config = default_error_config,
-  word_config = default_error_config
+  {
+    config = default_error_config,
+    word_config = default_error_config,
+    ignore_case = true,
+    ignored_words = /(?:)/i,
+    full_match = false
+  } = {}
 ) {
-  const matches = hierachic_match(text, to_match, phrase_config, word_config)
+  const matches = hierachic_match(text, to_match, {
+    config,
+    word_config,
+    ignore_case,
+    ignored_words,
+    full_match
+  })
   if (matches === undefined) return undefined
 
   // basic greedy algorithm:
