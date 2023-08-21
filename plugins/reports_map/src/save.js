@@ -39,19 +39,26 @@ export function Front({ csv_text, source_url }) {
 	// TODO: replace this with:
 	// 1. CSVs loaded on the frontend (for freshness)
 	// 2. Time selection controls
-	const [csv_, setCsv] = useState([]);
+	const [range, _setRange] = useState([0, undefined]);
+	const [years, setYears] = useState([2020]);
+	const [csv, setCsv] = useState([]);
 
-	// this might be okay depending on how react tests if a returned value is a
-	// cleanup function, otherwise it might try to call a promise as a function
 	useEffect(() => {
 		(async () => {
 			const url = source_url;
 			const response = await fetch(url);
 			const text = await response.text();
+
 			let { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-			const csv = data.map((row) => object_map(row, parseInt));
+			let csv = data.map((row) => object_map(row, parseInt));
+			let years = csv.map(({ year }) => year);
+			csv = csv.map(({ year, ...rest }) => rest);
+
 			// if we're still on the same url, update the csv
-			if (url === source_url) setCsv(csv);
+			if (url === source_url) {
+				setYears(years);
+				setCsv(csv);
+			}
 		})();
 	}, [source_url]);
 
