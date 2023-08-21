@@ -20,6 +20,15 @@ import { RangeInput } from "./timescale-slider/slider.js";
 const object_map = (obj, fn) =>
 	Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
 
+/** Sums the columns of a csv represented in a json format */
+const sum_columns = (csv) =>
+	Object.fromEntries(
+		Object.keys(csv[0] ?? {}).map((area) => [
+			area,
+			csv.reduce((a, b) => a + (b[area] ?? 0), 0),
+		])
+	);
+
 /**
  * Dynamically Renders the saved content of the block.
  * We split this out to allow it to be rendered both in the editor and on the
