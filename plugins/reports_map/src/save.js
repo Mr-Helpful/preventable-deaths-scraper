@@ -75,15 +75,15 @@ export function Front({ csv_text, source_url }) {
 	);
 
 	return (
-			<Flex direction={["column"]}>
-				<ReportHeatMap
-					area_counts={area_counts}
-					max={max}
-					scale={color_scales.custom}
-				/>
+		<Flex direction={["column"]}>
+			<ReportHeatMap
+				area_counts={area_counts}
+				max={max}
+				scale={color_scales.custom}
+			/>
 
 			{/* <RangeInput /> */}
-			</Flex>
+		</Flex>
 	);
 }
 
@@ -103,9 +103,7 @@ export default function Save({ attributes }) {
 	}).data;
 	if (csv.length === 0) return <div>No Data</div>;
 
-	const area_counts = Object.fromEntries(
-		csv.map(({ coroner_area, count }) => [coroner_area, parseInt(count)])
-	);
+	const area_counts = sum_columns(csv);
 	const max = Math.max(...Object.values(area_counts), 0);
 	return (
 		<div {...useBlockProps.save()}>
