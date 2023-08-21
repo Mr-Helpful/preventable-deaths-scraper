@@ -21,6 +21,8 @@ const ReportHeatmap = ({ area_counts, max, scale, ...svg_props }) => {
 			data-name="Report Heatmap"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 647.73 680.32"
+			width={630}
+			height={680}
 			role="group"
 			aria-labelledby="Report_Heatmap_Title Report_Heatmap_Desc"
 			onClick={() => console.log("Heatmap clicked!")}
