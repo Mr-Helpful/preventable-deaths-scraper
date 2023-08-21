@@ -9,7 +9,7 @@ import { useBlockProps } from "@wordpress/block-editor";
 import Papa from "papaparse";
 import ReportHeatMap from "./heatmap/ReportHeatmap.js";
 import color_scales from "./heatmap/report-scales.json";
-import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useMemo, useState } from "@wordpress/element";
 
 import { Flex } from "@wordpress/components";
 import { RangeInput } from "./timescale-slider/slider.js";
