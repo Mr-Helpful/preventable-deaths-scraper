@@ -93,7 +93,9 @@ export default async function Corrector(keep_failed = true) {
     replacements = Object.assign({}, ...replacements)
     const known_keys = Object.keys(replacements)
     const known_matches = hierachic_match(text, known_keys, {
-      ignored_words: punctuation
+      ignore_case: true,
+      ignored_words: punctuation,
+      full_match: true
     })
     if (known_matches === undefined) return undefined
 
