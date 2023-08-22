@@ -2,7 +2,7 @@ coroner_area,no. PFDs,no. recipients,no. replies,no. complete responses,no. part
 Greater Manchester South,383,334,211,132,7,94,8,142
 London Inner North,222,222,134,87,9,51,2,73
 "West Sussex, Brighton and Hove",140,96,65,38,5,26,0,71
-Surrey,139,133,62,22,9,32,1,75
+Surrey,139,133,62,22,9,33,0,75
 Birmingham and Solihull,137,184,131,53,9,32,1,42
 London East,127,76,37,24,3,35,1,64
 London Inner South,121,131,78,25,9,33,0,54
@@ -61,7 +61,7 @@ North Yorkshire and York,23,14,6,4,0,7,0,12
 "Shropshire, Telford and Wrekin",22,20,14,10,0,5,1,6
 Swansea and Neath Port Talbot,22,22,9,8,0,6,1,7
 Carmarthenshire and Pembrokeshire,21,17,10,8,0,6,0,7
-Buckinghamshire,20,19,9,7,1,7,1,4
+Buckinghamshire,20,19,9,7,1,8,0,4
 Kent North East,20,13,7,6,0,4,0,10
 Isle of Wight,19,20,8,4,1,8,0,6
 Coventry,19,12,3,3,0,7,0,9
