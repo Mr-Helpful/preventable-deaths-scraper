@@ -24,15 +24,15 @@
 
 ["sent to"]
 "no. reports parsed" = 2748
-"no. reports pending" = 44
-"no. reports overdue" = 1161
+"no. reports pending" = 42
+"no. reports overdue" = 1163
 "no. reports partial" = 147
 "no. reports completed" = 1396
 "no. requests for response" = 3982
-"no. requests pending" = 46
-"no. requests overdue" = 2093
+"no. requests pending" = 44
+"no. requests overdue" = 2095
 "no. requests received" = 1843
-"no. recipients with requests" = 1866
+"no. recipients with requests" = 1865
 "mean per recipient" = 2.1
 "median per recipient" = 1.0
 "IQR of recipients" = [ 1.0, 2.0,]

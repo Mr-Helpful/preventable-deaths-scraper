@@ -424,7 +424,6 @@ Department for Community and Local Government,1,0,0
 Department for Digital Culture Media and Sport,0,0,2
 "Department for Digital, Culture, Media and Sport",1,0,0
 Department for Education,4,0,6
-Department for Health,14,0,9
 Department for Housing Communities and Local Government,0,0,1
 "Department for Housing, Communities and Local Government",1,0,0
 Department for Transport,13,1,14
@@ -437,7 +436,7 @@ Department of Culture Media and Sport,1,0,0
 Department of Education,5,0,2
 Department of Environment Food and Rural Affairs,1,0,0
 "Department of Environment, Food and Rural Affairs",1,0,0
-Department of Health and Social Care,102,1,111
+Department of Health and Social Care,116,1,120
 "Department of Health, NHS England",0,0,1
 Department of State for Social Care,0,0,1
 Department of Transport,5,0,4
@@ -496,7 +495,7 @@ Durham County Council Highways Section,1,0,0
 Dyfed Powys Police,1,0,1
 EAM Care Group,0,0,1
 EFAS,1,0,0
-EMIS Health,1,1,0
+EMIS Health,2,0,0
 ENT,1,0,0
 EPUT,2,0,2
 Each Step Nursing Home,0,0,1
@@ -1286,7 +1285,7 @@ RCI,1,0,0
 RCP,1,0,0
 RCPLT,1,0,0
 RDaSH NHS Trust,1,0,0
-REDACTED,2,1,1
+REDACTED,3,0,1
 RICS,0,0,1
 RPFI,1,0,0
 RSSB,2,0,0
