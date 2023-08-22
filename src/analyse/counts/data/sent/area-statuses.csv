@@ -1,5 +1,5 @@
 coroner_area,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
-Greater Manchester South,383,334,211,132,7,94,8,142
+Greater Manchester South,383,334,211,131,7,95,8,142
 London Inner North,222,222,134,87,9,51,2,73
 "West Sussex, Brighton and Hove",140,96,65,38,5,26,0,71
 Surrey,139,133,62,22,9,33,0,75
@@ -14,18 +14,18 @@ Norfolk,96,62,54,41,1,9,2,43
 Nottinghamshire,91,101,56,22,3,27,2,37
 Cornwall and the Isles of Scilly,87,94,60,34,6,22,0,25
 Avon,81,79,35,19,2,28,2,30
-North Wales (East & Central),79,62,35,31,0,17,3,28
+North Wales (East & Central),79,62,35,32,0,16,3,28
 The Black Country Jurisdiction,77,69,39,23,4,20,0,30
 "Hampshire, Portsmouth and Southampton",75,85,43,23,8,25,0,19
 Yorkshire West Western,73,76,39,19,5,26,1,22
-County Durham and Darlington,72,57,37,26,1,11,0,34
+County Durham and Darlington,72,57,37,26,0,12,0,34
 Yorkshire South West,67,55,30,23,2,18,0,24
 Leicester City and South Leicestershire,66,48,35,15,2,16,0,33
 London Inner West,64,79,44,14,6,24,1,19
 Bedfordshire and Luton,64,49,31,25,1,14,0,24
 Essex,63,61,24,10,5,25,1,22
 Milton Keynes,62,47,24,18,0,21,1,22
-Manchester City,60,69,36,14,3,22,0,21
+Manchester City,60,69,36,14,2,23,0,21
 Staffordshire South,60,44,28,20,1,13,0,26
 Cumbria,59,33,30,20,0,7,0,32
 London North,57,24,23,12,1,8,0,36
