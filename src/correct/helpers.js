@@ -23,6 +23,22 @@ export function re(strings, ...regexes) {
 }
 
 /**
+ * Gets the start indices for each word within `text.split(regex)` within `text`
+ * @param {string} text the text that would be split
+ * @param {RegExp} regex the regex that would be split on
+ * @returns {number[]} the indices of the split
+ */
+export function split_indices(text, regex) {
+  regex = new RegExp(regex) // copy so regex isn't mutated
+  let indices = [0]
+  let match
+  while ((match = regex.exec(text)) !== null) {
+    indices.push(match.index + match[0].length)
+  }
+  return indices
+}
+
+/**
  * @typedef {Object} CorrectionData
  * @property {string[]} failed the list of failed matches
  * @property {Set<string>} incorrect the list of incorrect matches

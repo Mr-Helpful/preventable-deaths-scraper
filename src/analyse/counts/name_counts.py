@@ -8,8 +8,9 @@
 
 import os
 import json
-import toml
 import pandas as pd
+
+from helpers import toml_stats
 
 TOP_N = 30
 
@@ -21,7 +22,7 @@ CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Reading coroner names
@@ -47,27 +48,17 @@ sum_counts = reports.value_counts('coroner_name')
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
-  "no. reports parsed": int(reports.count()['coroner_name']),
+toml_stats['coroner name'] = statistics = {
+  "no. reports parsed": reports.count()['coroner_name'],
   "no. names with report(s)": len(sum_counts),
   "no. names without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-  "mean per name": float(round(sum_counts.mean(), 1)),
-  "median per name": int(sum_counts.median()),
+  "mean per name": round(sum_counts.mean(), 1),
+  "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
 }
 
 print(f"Name count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
-
-# %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['coroner name'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
 
 # %% [markdown]
 # ### Calculating the top coroners
@@ -79,7 +70,7 @@ top_years = name_counts[top_names]
 # %% [markdown]
 # ### Saving the results
 
-top_counts.to_csv(f"{DATA_PATH}/top-name-counts.csv")
-name_counts.to_csv(f"{DATA_PATH}/name-years.csv")
-top_years.to_csv(f"{DATA_PATH}/top-name-years.csv")
-sum_counts.to_csv(f"{DATA_PATH}/name-counts.csv")
+top_counts.to_csv(f"{DATA_PATH}/name/top-name-counts.csv")
+name_counts.to_csv(f"{DATA_PATH}/name/name-years.csv")
+top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
+sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")

@@ -24,4 +24,7 @@ async function correct_current_reports(csv_path, out_path) {
   await fs.writeFile(out_path, Papa.unparse(corrected))
 }
 
-correct_current_reports('./src/data/reports.csv', './src/data/corrected.csv')
+correct_current_reports(
+  './src/data/reports.csv',
+  './src/data/reports-corrected.csv'
+)

@@ -8,8 +8,9 @@
 
 import os
 import json
-import toml
 import pandas as pd
+
+from helpers import toml_stats
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
@@ -31,7 +32,7 @@ print(REPLACEMENTS)
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Reading coroner names
@@ -59,29 +60,19 @@ sum_counts = reports.value_counts('gender')
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
-  "no. coroners male": int(website_counts['male']),
-  "no. coroners female": int(website_counts['female']),
-  "no. coroners unknown": int(website_counts['unknown']),
-  "no. reports male": int(sum_counts['male']),
-  "no. reports female": int(sum_counts['female']),
-  "no. reports unknown": int(sum_counts['unknown']),
+toml_stats['coroner gender'] = statistics = {
+  "no. coroners male": website_counts['male'],
+  "no. coroners female": website_counts['female'],
+  "no. coroners unknown": website_counts['unknown'],
+  "no. reports male": sum_counts['male'],
+  "no. reports female": sum_counts['female'],
+  "no. reports unknown": sum_counts['unknown'],
 }
 
 print(f"Gender count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
 
 # %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['coroner gender'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
-
-# %% [markdown]
 # ### Saving the results
 
-gender_counts.to_csv(f"{DATA_PATH}/gender-years.csv")
+gender_counts.to_csv(f"{DATA_PATH}/gender/gender-years.csv")

@@ -28,7 +28,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
   "-r", "--reports", type=str,
-  nargs="?", default="reports.csv",
+  nargs="?", default="reports-corrected.csv",
   help="The .csv file containing the reports"
 )
 parser.add_argument(

@@ -8,8 +8,9 @@
 
 import os
 import json
-import toml
 import pandas as pd
+
+from helpers import toml_stats
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
@@ -19,7 +20,7 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
 
 # %% [markdown]
 # ### Calculating the year of each report
@@ -52,12 +53,12 @@ sum_counts = exploded.value_counts(['category'])
 # %% [markdown]
 # ### Various statistics about the counts
 
-statistics = {
-  "no. reports parsed": int(reports.count()['category']),
-  "no. categories in reports": int(sum_counts.sum()),
+toml_stats['death categories'] = statistics = {
+  "no. reports parsed": reports.count()['category'],
+  "no. categories in reports": sum_counts.sum(),
   "no. categories": len(sum_counts),
-  "mean per category": float(round(sum_counts.mean(), 1)),
-  "median per category": int(sum_counts.median()),
+  "mean per category": round(sum_counts.mean(), 1),
+  "median per category": sum_counts.median(),
   "IQR of categories": list(sum_counts.quantile([0.25, 0.75])),
 }
 
@@ -65,17 +66,7 @@ print(f"Category count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
 
 # %% [markdown]
-# ### Saving the statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'r', encoding="utf8") as rf:
-  stats = toml.load(rf)
-  stats['death categories'] = statistics
-
-with open(f"{REPORTS_PATH}/statistics.toml", 'w', encoding="utf8") as wf:
-  toml.dump(stats, wf)
-
-# %% [markdown]
 # ### Saving the results
 
-category_counts.to_csv(f"{DATA_PATH}/category-years.csv")
-sum_counts.to_csv(f"{DATA_PATH}/category-counts.csv")
+category_counts.to_csv(f"{DATA_PATH}/category/category-years.csv")
+sum_counts.to_csv(f"{DATA_PATH}/category/category-counts.csv")
