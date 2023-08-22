@@ -29,6 +29,14 @@ const sum_columns = (csv) =>
 		])
 	);
 
+const parse_csv = (text) => {
+	let { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
+	let csv = data.map((row) => object_map(row, parseInt));
+	let years = csv.map(({ year }) => year);
+	csv = csv.map(({ year, ...rest }) => rest);
+	return { years, csv };
+};
+
 /**
  * Dynamically Renders the saved content of the block.
  * We split this out to allow it to be rendered both in the editor and on the
@@ -36,33 +44,20 @@ const sum_columns = (csv) =>
  * @param {SaveBlockProps} props
  */
 export function Front({ csv_text, source_url }) {
-	// TODO: replace this with:
-	// 1. CSVs loaded on the frontend (for freshness)
-	// 2. Time selection controls
+	// TODO: add time selection controls
+	const parsed = useMemo(() => parse_csv(csv_text), [csv_text]);
 	const [range, _setRange] = useState([0, undefined]);
-	const [years, setYears] = useState([2020]);
-	const [csv, setCsv] = useState([]);
+	const [{ years, csv }, setData] = useState(parsed);
 
 	useEffect(() => {
 		(async () => {
 			const url = source_url;
 			const response = await fetch(url);
 			const text = await response.text();
-
-			let { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-			let csv = data.map((row) => object_map(row, parseInt));
-			let years = csv.map(({ year }) => year);
-			csv = csv.map(({ year, ...rest }) => rest);
-
-			// if we're still on the same url, update the csv
-			if (url === source_url) {
-				setYears(years);
-				setCsv(csv);
-			}
+			// if we're still on the same url, update the data
+			if (url === source_url) setData(parse_csv(text));
 		})();
 	}, [source_url]);
-
-	// const filtered = useMemo(() => csv_.filter({ year }), [csv_]);
 
 	const area_counts = useMemo(
 		() => sum_columns(csv.slice(...range)),
