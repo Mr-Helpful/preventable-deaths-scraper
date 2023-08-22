@@ -4,12 +4,6 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-reports-map {
-	.csv-input {
-		margin: 0 0.5rem;
-	}
-
-	.file-input {
-		margin: 0.5rem;
-	}
+.wp-block-create-block-reports-map .csv-input {
+	margin: .55em -.55em 0 .55em;
 }
