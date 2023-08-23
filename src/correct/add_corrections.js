@@ -93,7 +93,7 @@ async function categorise_failures(failed) {
     } = await inquirer.prompt({
       type: 'list',
       name: 'type',
-      message: `[${padnum(i, strlen)}/${
+      message: `[${padnum(i + 1, strlen)}/${
         decisions.length
       }] For the text '${text}':`,
       choices
