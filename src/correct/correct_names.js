@@ -105,6 +105,10 @@ export default async function Corrector(keep_failed = true) {
   const fetched = await fetch_name_list(
     'https://www.coronersociety.org.uk/coroners/'
   )
+  await fs.writeFile(
+    './src/correct/data/fetched_coroners.json',
+    JSON.stringify(fetched, null, 2)
+  )
   const fetched_simple = fetched.map(({ name }) =>
     shorten_whitespace(remove_email_block(name))
   )
