@@ -11,8 +11,19 @@ import ReportHeatMap from "./heatmap/ReportHeatmap.js";
 import color_scales from "./heatmap/report-scales.json";
 import { useEffect, useMemo, useState } from "@wordpress/element";
 
-import { Flex } from "@wordpress/components";
+import { Flex, RangeControl } from "@wordpress/components";
 import { RangeInput } from "./timescale-slider/slider.js";
+
+const Playback = ({ min, max, setValue }) => {
+	const [playing, setPlaying] = useState(false);
+	return (
+		<span
+			width={50}
+			height={50}
+			className="dashicons dashicons-controls-play"
+		></span>
+	);
+};
 
 /** @typedef {{csv_text: string, source_url: string}} SaveBlockProps */
 
@@ -26,6 +37,14 @@ const sum_columns = (csv) =>
 		Object.keys(csv[0] ?? {}).map((area) => [
 			area,
 			csv.reduce((a, b) => a + (b[area] ?? 0), 0),
+		])
+	);
+
+const max_columns = (csv) =>
+	Object.fromEntries(
+		Object.keys(csv[0] ?? {}).map((area) => [
+			area,
+			Math.max(...csv.map((row) => row[area] ?? 0), 0),
 		])
 	);
 
@@ -46,8 +65,8 @@ const parse_csv = (text) => {
 export function Front({ csv_text, source_url }) {
 	// TODO: add time selection controls
 	const parsed = useMemo(() => parse_csv(csv_text), [csv_text]);
-	const [range, _setRange] = useState([0, undefined]);
 	const [{ years, csv }, setData] = useState(parsed);
+	const [index, setIndex] = useState(undefined);
 
 	useEffect(() => {
 		(async () => {
@@ -60,24 +79,37 @@ export function Front({ csv_text, source_url }) {
 	}, [source_url]);
 
 	const area_counts = useMemo(
-		() => sum_columns(csv.slice(...range)),
-		[csv, range]
+		() => (index === undefined ? sum_columns(csv) : csv[index]),
+		[csv, index]
 	);
 
-	const max = useMemo(
-		() => Math.max(...Object.values(sum_columns(csv)), 1),
-		[csv]
-	);
+	const max = useMemo(() => {
+		const columns = index === undefined ? sum_columns(csv) : max_columns(csv);
+		return Math.max(...Object.values(columns), 1);
+	}, [csv]);
 
 	return (
 		<Flex direction={["column"]}>
+			<Flex direction={["row"]} justify="space-between">
+				<Playback
+					min={years[0]}
+					max={years[csv.length - 1]}
+					setValue={() => {}}
+				/>
+				<RangeControl
+					initialPosition={0}
+					min={years[0]}
+					max={years[csv.length - 1]}
+					withInputField={false}
+					marks={years.map((year) => ({ value: year, label: "" }))}
+				/>
+			</Flex>
+
 			<ReportHeatMap
 				area_counts={area_counts}
 				max={max}
 				scale={color_scales.custom}
 			/>
-
-			{/* <RangeInput /> */}
 		</Flex>
 	);
 }
