@@ -1,6 +1,12 @@
 import sys
 sys.path.append(".")
 
+import shutil
+shutil.copyfile(
+  "src/data/reports-corrected.csv",
+  "src/data/reports-analysed.csv"
+)
+
 import area_counts as _
 import category_counts as _
 import gender_counts as _
