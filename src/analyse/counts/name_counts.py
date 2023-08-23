@@ -71,6 +71,16 @@ top_names = list(top_counts.index)
 top_years = name_counts[top_names]
 
 # %% [markdown]
+# ### Calculating counts for titles
+
+sum_titles = sum_counts.copy()
+sum_titles.index = sum_titles.index.map(coroner_titles).rename('coroner_title')
+sum_titles = sum_titles.groupby(level=0).sum()
+top_titles = top_counts.copy()
+top_titles.index = top_titles.index.map(coroner_titles).rename('coroner_title')
+top_titles = top_titles.groupby(level=0).sum()
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['coroner name'] = statistics = {
@@ -91,6 +101,8 @@ print(f"Sorted counts: {sum_counts}")
 # ### Saving the results
 
 top_counts.to_csv(f"{DATA_PATH}/name/top-name-counts.csv")
+top_titles.to_csv(f"{DATA_PATH}/name/top-titles.csv")
 name_counts.to_csv(f"{DATA_PATH}/name/name-years.csv")
 top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
 sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")
+sum_titles.to_csv(f"{DATA_PATH}/name/title-counts.csv")
