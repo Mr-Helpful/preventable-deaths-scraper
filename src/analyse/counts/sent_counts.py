@@ -170,20 +170,23 @@ name_statuses = name_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no.
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats['sent to'] = statistics = {
+toml_stats['report response rates'] = statistics = {
   "no. reports parsed": len(non_na),
   "no. reports pending": status_counts['pending'],
   "no. reports overdue": status_counts['overdue'],
   "no. reports partial": status_counts['partial'],
   "no. reports completed": status_counts['completed'],
+}
+
+toml_stats['request response rates'] = {
+  "no. recipients with requests": len(sent_counts),
   "no. requests for response": len(exploded),
   "no. requests pending": type_counts['pending'],
   "no. requests overdue": type_counts['overdue'],
   "no. requests received": type_counts['received'],
-  "no. recipients with requests": len(sent_counts),
-  "mean per recipient": round(sent_counts.mean(), 1),
-  "median per recipient": sent_counts.median(),
-  "IQR of recipients": list(sent_counts.quantile([0.25, 0.75])),
+  "mean no. requests per recipient": round(sent_counts.mean(), 1),
+  "median no. requests per recipient": sent_counts.median(),
+  "IQR of requests per recipients": list(sent_counts.quantile([0.25, 0.75])),
 }
 
 print(f"Name count statistics: {statistics}")
