@@ -7,9 +7,9 @@
 "IQR of categories" = [ 97.0, 466.5,]
 
 ["coroner gender"]
-"no. coroners male" = 254
+"no. coroners male" = 253
 "no. coroners female" = 236
-"no. coroners unknown" = 152
+"no. coroners unknown" = 151
 "no. reports male" = 2034
 "no. reports female" = 1748
 "no. reports unknown" = 718
@@ -17,8 +17,8 @@
 ["coroner name"]
 "no. reports parsed" = 4500
 "no. coroner names in reports" = 427
-"no. names in society with reports" = 347
-"no. names in society without reports" = 295
+"no. names in society with reports" = 346
+"no. names in society without reports" = 294
 "mean per name" = 10.5
 "median per name" = 5.0
 "IQR of names" = [ 2.0, 11.0,]

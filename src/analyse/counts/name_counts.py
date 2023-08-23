@@ -28,7 +28,7 @@ reports = pd.read_csv(f"{REPORTS_PATH}/reports-analysed.csv")
 # ### Reading coroner names
 
 with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
-  coroner_names = json.load(rf)
+  coroner_names = json.load(rf).keys()
 
 # %% [markdown]
 # ### Reading the coroner data
