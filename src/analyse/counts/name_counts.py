@@ -40,12 +40,14 @@ with open(f"{CORRECTION_PATH}/fetched_coroners.json", 'r', encoding="utf8") as r
 # %% [markdown]
 # ### Adding coroner titles to the reports
 
-report_cols = list(reports.columns)
+report_columns = list(reports.columns)
 reports['coroner_title'] = reports['coroner_name'].map(coroner_titles)
 
-title_idx = report_cols.index('coroner_name')  + 1
-report_cols.insert(title_idx, 'coroner_title')
-reports[report_cols].to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
+title_idx = report_columns.index('coroner_name')  + 1
+report_columns.insert(title_idx, 'coroner_title')
+report_columns = list(dict.fromkeys(report_columns))
+
+reports[report_columns].to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
 
 # %% [markdown]
 # ### Calculating the year of each report
