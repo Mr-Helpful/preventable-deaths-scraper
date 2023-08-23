@@ -31,6 +31,23 @@ with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
   coroner_names = json.load(rf)
 
 # %% [markdown]
+# ### Reading the coroner data
+
+with open(f"{CORRECTION_PATH}/fetched_coroners.json", 'r', encoding="utf8") as rf:
+  coroner_data = json.load(rf)
+  coroner_titles = {row['name']: row['title'] for row in coroner_data}
+
+# %% [markdown]
+# ### Adding coroner titles to the reports
+
+report_cols = list(reports.columns)
+reports['coroner_title'] = reports['coroner_name'].map(coroner_titles)
+
+title_idx = report_cols.index('coroner_name')  + 1
+report_cols.insert(title_idx, 'coroner_title')
+reports[report_cols].to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
+
+# %% [markdown]
 # ### Calculating the year of each report
 
 # use a regex to extract the year from the date of report
