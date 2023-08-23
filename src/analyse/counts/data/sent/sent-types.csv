@@ -362,6 +362,7 @@ Commissioner for Highways,1,0,0
 Committee on Vaccination and Immunisation,2,0,0
 Compliance Manager,1,0,0
 Compton Lodge Care Home,0,0,1
+Connectivity and Environment,0,0,1
 Constable of Lincolnshire,1,0,0
 Construction Industry Council,0,0,1
 Construction Plant Hire Association,1,0,0
@@ -423,10 +424,11 @@ Denton Medical Centre,1,0,0
 Department for Community and Local Government,1,0,0
 Department for Digital Culture Media and Sport,0,0,2
 "Department for Digital, Culture, Media and Sport",1,0,0
-Department for Education,4,0,6
+Department for Education,13,0,17
 Department for Housing Communities and Local Government,0,0,1
 "Department for Housing, Communities and Local Government",1,0,0
-Department for Transport,13,1,14
+"Department for Levelling Up, Housing and Communities",0,0,1
+Department for Transport,16,1,14
 "Department for the Environment, Food and Rural Affairs",1,0,0
 Department fr Health,1,0,0
 Department of Business Energy and Industrial Strategy,1,0,1
@@ -436,7 +438,7 @@ Department of Culture Media and Sport,1,0,0
 Department of Education,5,0,2
 Department of Environment Food and Rural Affairs,1,0,0
 "Department of Environment, Food and Rural Affairs",1,0,0
-Department of Health and Social Care,116,1,120
+Department of Health and Social Care,119,1,133
 "Department of Health, NHS England",0,0,1
 Department of State for Social Care,0,0,1
 Department of Transport,5,0,4
@@ -492,7 +494,7 @@ Dudley and Walsall Mental Health NHS Trust,1,0,0
 Dulwich Dive Club,0,0,1
 Durham County Council,2,0,7
 Durham County Council Highways Section,1,0,0
-Dyfed Powys Police,1,0,1
+Dyfed-Powys Police,1,0,1
 EAM Care Group,0,0,1
 EFAS,1,0,0
 EMIS Health,2,0,0
@@ -657,10 +659,7 @@ HM Prison Bedford,1,0,0
 HM Prison Cardiff,0,0,1
 HM Prison Leeds,1,0,0
 HM Prison Service,3,0,0
-HM Prison and Probation Service,29,1,22
-HM Prisons and Probation,1,0,0
-HM Prisons and Probation Service,6,1,1
-HM Probation and Prison Service,1,0,0
+HM Prison and Probation Service,36,0,17
 HMCTS,1,0,1
 HMP Bedford,1,0,0
 HMP Berwyn,1,0,0
@@ -778,7 +777,7 @@ Holmes Care Group Limited,1,0,0
 Holy Cross Hospital,0,0,1
 Home Care Support Limited,1,0,0
 Home Farm Trust Limited,0,0,1
-Home Office,11,0,12
+Home Office,12,0,14
 Homerton Healthcare NHS Foundation Trust,3,2,3
 Homerton University Hospital,1,0,1
 Homerton University NHS Trust,1,0,0
@@ -932,10 +931,8 @@ M & S Water Services,0,0,1
 M C Federation,1,0,0
 MAC Skip Hire Limited,1,0,0
 MFT,1,0,1
-MHRA,8,0,9
 MIRUS Wales,0,0,1
 MOD,1,0,5
-MOJ,20,0,2
 MRHA,1,0,0
 Maesteg Comprehensive School,0,0,1
 Magenta Living Support Link,0,0,1
@@ -974,6 +971,7 @@ Medical Centre Stalybridge,1,0,0
 "Medical Director, Leeds Teaching Hospitals, NHS Trust",1,0,0
 Medical Officer Welsh Government,0,0,1
 Medicines & Healthcare products Regulatory Agency,6,0,4
+Medicines and Healthcare Products Regulatory Agency,12,0,5
 Medico Legal Manager,1,0,0
 Medicspro,1,0,0
 Medway Community Healthcare,1,0,0
@@ -1018,7 +1016,7 @@ Ministry for Defence,0,1,0
 Ministry for Justice,1,0,0
 Ministry of Defence,1,0,3
 "Ministry of Housing, Communities and Local Government",1,0,0
-Ministry of Justice,3,0,1
+Ministry of Justice,23,0,3
 Ministry of Justice (Coroners),0,0,1
 Mitie Care & Custody,1,0,0
 Mitie Care and Custody,1,0,0
@@ -1262,7 +1260,6 @@ Priory Hospital,0,0,1
 Priory Hospital Roehampton,1,0,0
 Prison Officers Association,1,0,0
 Prison and Probation Ombudsman,1,0,0
-Prison and Probation service,1,0,0
 Probation Service,1,0,0
 Proprietary Association,1,0,0
 Prospect Park Hospital,1,0,0
@@ -1405,11 +1402,8 @@ Scotia Gas Network,1,0,0
 Scottish Cycling,1,0,0
 Seaton and Colyton Medical Practice,0,0,1
 Secretary for Communities and Local Government,0,0,1
-Secretary for State for Health,1,0,0
+Secretary for State for Health,4,0,3
 Secretary of State,1,0,0
-Secretary of State for Education,12,0,14
-Secretary of State for Health & Social Care,1,0,5
-Secretary of State for the Home Department,2,0,1
 Select Healthcare,1,0,0
 Senior Highway Engineer for Surrey,1,0,0
 Serco,1,0,0
@@ -1663,7 +1657,6 @@ The Royal Wolverhampton NHS Trust,0,0,1
 The Royal Yachting Association,2,0,0
 The Samaritans,1,0,0
 The Scout Association,1,0,0
-The Secretary of State for Transport,3,0,0
 The Showmen’s Guild of Great Britain,3,0,0
 The Sixth Form Colleges Association,1,0,0
 The Society of Radiographers,0,0,1
