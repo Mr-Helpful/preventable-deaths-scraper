@@ -76,7 +76,7 @@ toml_stats['coroner name'] = statistics = {
   "no. coroner names in reports": len(sum_counts),
   "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
   "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-  f"% made up by top {TOP_N} names": f"{round(100 * top_counts.sum() / sum_counts.sum(), 1)}%",
+  f"% made up by top {TOP_N} names": round(100 * top_counts.sum() / sum_counts.sum(), 1),
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
