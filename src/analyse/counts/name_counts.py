@@ -22,7 +22,7 @@ CORRECTION_PATH = os.path.abspath(f"{PATH}/../../correct/data")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-analysed.csv")
 
 # %% [markdown]
 # ### Reading coroner names
