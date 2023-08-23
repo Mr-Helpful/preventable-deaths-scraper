@@ -602,7 +602,6 @@
     "HM Inspector of Prisons": "HM Inspector of Prisons",
     "Advisory Panel on Deaths in Custody": "Advisory Panel on Deaths in Custody",
     "Prison Officers Association": "Prison Officers Association",
-    "Dyfed Powys Police": "Dyfed Powys Police",
     "Hywel Dda Health Board": "Hywel Dda Health Board",
     "MOD": "MOD",
     "Public Health Suicide Prevention Group": "Public Health Suicide Prevention Group",
@@ -2090,7 +2089,6 @@
     "TDL": "Treatment Direct Limited",
     "APoDiC": "Advisory Panel on Deaths in Custody",
     "POA": "Prison Officers Association",
-    "DPP": "Dyfed Powys Police",
     "HDHB": "Hywel Dda Health Board",
     "PHSPG": "Public Health Suicide Prevention Group",
     "GMMHSC": "Greater Manchester Mental Health and Social Care",
@@ -2704,5 +2702,9 @@
     "NICE": "National Institute for Health and Care Excellence",
     "N I C E": "National Institute for Health and Care Excellence",
     "BCUHB": "Betsi Cadwaladr University Health Board"
+  },
+  {
+    "HMPPS": "HMPPS",
+    "Dyfed-Powys Police": "Dyfed-Powys Police"
   }
 ]
