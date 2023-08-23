@@ -83,7 +83,7 @@ top_titles = top_titles.groupby(level=0).sum()
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats["coroners in reports"] = statistics = {
+toml_stats["coroner names in reports"] = statistics = {
   "no. reports parsed": reports.count()['coroner_name'],
   "no. coroner names in reports": len(sum_counts),
   f"num reports from top {TOP_N} names": top_counts.sum(),
@@ -93,7 +93,7 @@ toml_stats["coroners in reports"] = statistics = {
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
 }
 
-toml_stats["coroner's society website"] = {
+toml_stats["coroner's society names"] = {
   "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
   "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
 }
