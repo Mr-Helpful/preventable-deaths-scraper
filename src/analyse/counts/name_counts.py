@@ -40,12 +40,14 @@ with open(f"{CORRECTION_PATH}/fetched_coroners.json", 'r', encoding="utf8") as r
 # %% [markdown]
 # ### Adding coroner titles to the reports
 
-report_cols = list(reports.columns)
+report_columns = list(reports.columns)
 reports['coroner_title'] = reports['coroner_name'].map(coroner_titles)
 
-title_idx = report_cols.index('coroner_name')  + 1
-report_cols.insert(title_idx, 'coroner_title')
-reports[report_cols].to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
+title_idx = report_columns.index('coroner_name')  + 1
+report_columns.insert(title_idx, 'coroner_title')
+report_columns = list(dict.fromkeys(report_columns))
+
+reports[report_columns].to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
 
 # %% [markdown]
 # ### Calculating the year of each report
@@ -69,6 +71,16 @@ top_names = list(top_counts.index)
 top_years = name_counts[top_names]
 
 # %% [markdown]
+# ### Calculating counts for titles
+
+sum_titles = sum_counts.copy()
+sum_titles.index = sum_titles.index.map(coroner_titles).rename('coroner_title')
+sum_titles = sum_titles.groupby(level=0).sum()
+top_titles = top_counts.copy()
+top_titles.index = top_titles.index.map(coroner_titles).rename('coroner_title')
+top_titles = top_titles.groupby(level=0).sum()
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['coroner name'] = statistics = {
@@ -76,7 +88,7 @@ toml_stats['coroner name'] = statistics = {
   "no. coroner names in reports": len(sum_counts),
   "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
   "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-  f"% made up by top {TOP_N} names": f"{round(100 * top_counts.sum() / sum_counts.sum(), 1)}%",
+  f"% made up by top {TOP_N} names": round(100 * top_counts.sum() / sum_counts.sum(), 1),
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
@@ -89,6 +101,8 @@ print(f"Sorted counts: {sum_counts}")
 # ### Saving the results
 
 top_counts.to_csv(f"{DATA_PATH}/name/top-name-counts.csv")
+top_titles.to_csv(f"{DATA_PATH}/name/top-titles.csv")
 name_counts.to_csv(f"{DATA_PATH}/name/name-years.csv")
 top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
 sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")
+sum_titles.to_csv(f"{DATA_PATH}/name/title-counts.csv")
