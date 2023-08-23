@@ -16,23 +16,24 @@
 
 ["coroner name"]
 "no. reports parsed" = 4500
-"no. names with report(s)" = 427
-"no. names without reports" = 295
+"no. coroner names in reports" = 427
+"no. names in society with reports" = 347
+"no. names in society without reports" = 295
 "mean per name" = 10.5
 "median per name" = 5.0
 "IQR of names" = [ 2.0, 11.0,]
 
 ["sent to"]
 "no. reports parsed" = 2748
-"no. reports pending" = 42
-"no. reports overdue" = 1163
-"no. reports partial" = 147
+"no. reports pending" = 41
+"no. reports overdue" = 1166
+"no. reports partial" = 145
 "no. reports completed" = 1396
 "no. requests for response" = 3982
-"no. requests pending" = 44
-"no. requests overdue" = 2095
-"no. requests received" = 1843
-"no. recipients with requests" = 1865
+"no. requests pending" = 43
+"no. requests overdue" = 2098
+"no. requests received" = 1841
+"no. recipients with requests" = 1861
 "mean per recipient" = 2.1
 "median per recipient" = 1.0
 "IQR of recipients" = [ 1.0, 2.0,]

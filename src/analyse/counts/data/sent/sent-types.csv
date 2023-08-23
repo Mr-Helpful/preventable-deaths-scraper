@@ -83,7 +83,6 @@ Avon and Wiltshire NHS Trust,0,0,1
 B & D Civil Engineering Limited,0,0,1
 BAE Systems Ltd,0,0,2
 BCP Council,1,0,1
-BCUHB,7,0,16
 BEIS,1,0,0
 BMI Health Care,1,0,0
 BMI Hospitals,1,0,0
@@ -138,6 +137,7 @@ Beko Plc,1,0,0
 Belgravia Care Home Ltd,0,0,1
 Belong Village,0,0,1
 Berkeley Home Health,0,0,1
+Betsi Cadwaladr University Health Board,6,0,17
 Betsi Cadwaladr University Health Board (BCUHB),0,1,0
 Betsi Cadwaladr University Health Board BCUHB,2,1,2
 Betsi Cadwaladr University Local Health Board,0,0,2
@@ -657,7 +657,7 @@ HM Prison Bedford,1,0,0
 HM Prison Cardiff,0,0,1
 HM Prison Leeds,1,0,0
 HM Prison Service,3,0,0
-HM Prison and Probation Service,7,1,13
+HM Prison and Probation Service,29,1,22
 HM Prisons and Probation,1,0,0
 HM Prisons and Probation Service,6,1,1
 HM Probation and Prison Service,1,0,0
@@ -764,7 +764,7 @@ High Commissioner for Saint Lucia to the UK,1,0,0
 Highgrove Rest Home,0,1,0
 Highways Agency,1,0,0
 Highways Agency Essex County Council,0,0,1
-Highways Department,1,1,0
+Highways Department,2,0,0
 Highways Department Birmingham City Council,0,0,1
 Highways Department – Salford City Council,0,0,1
 Highways England,10,0,13
@@ -1029,8 +1029,6 @@ Moorfields Eye Hospital NHS Foundation Trust,0,0,1
 Morton Hall Immigration Removal Centre,1,0,0
 Motor Cross Federation,0,0,1
 Mylan Pharmaceuticals,1,0,0
-N I C E,15,0,2
-N.I.C.E,0,0,1
 NEAS Foundation Trust,1,0,0
 NEAS NHS Trust,1,0,0
 NHS,2,0,0
@@ -1064,7 +1062,6 @@ NHS Suffolk,1,0,0
 NHS Trafford Clinical Commissioning Group,11,0,1
 NHS Wales,2,0,1
 "NHS, University Hospital Bristol NHS Trust",1,0,0
-NICE,4,0,8
 NMC,2,0,0
 NSPCC,1,0,0
 NWAS,0,0,1
@@ -1079,8 +1076,7 @@ National Express West Midlands,0,0,1
 National Fire Chiefs,2,0,0
 National Highways,0,0,1
 National Institute for Health & Care Excellence,1,0,3
-National Offender Management,1,0,0
-National Offender Management Service,22,0,8
+National Institute for Health and Care Excellence,23,0,7
 National Police Chiefs’ Council,10,0,6
 National Police Council,1,0,0
 National Probation Service,4,0,3
