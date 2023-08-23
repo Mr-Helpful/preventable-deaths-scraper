@@ -105,19 +105,20 @@ export default async function Corrector(keep_failed = true) {
   const fetched = await fetch_name_list(
     'https://www.coronersociety.org.uk/coroners/'
   )
+  const fetched_simple = fetched.map(({ name, ...rest }) => ({
+    name: shorten_whitespace(remove_email_block(name)),
+    ...rest
+  }))
   await fs.writeFile(
     './src/correct/data/fetched_coroners.json',
-    JSON.stringify(fetched, null, 2)
-  )
-  const fetched_simple = fetched.map(({ name }) =>
-    shorten_whitespace(remove_email_block(name))
+    JSON.stringify(fetched_simple, null, 2)
   )
   const fetched_replace = Object.fromEntries(
-    fetched_simple.map(name => [name, name])
+    fetched_simple.map(({ name }) => [name, name])
   )
   await fs.writeFile(
     './src/correct/data/fetched_names.json',
-    JSON.stringify(fetched_simple, null, 2)
+    JSON.stringify(fetched_replace, null, 2)
   )
 
   let { failed, incorrect, corrections } = await load_correction_data('names')
