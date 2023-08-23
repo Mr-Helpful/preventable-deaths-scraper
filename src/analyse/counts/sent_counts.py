@@ -128,8 +128,7 @@ report_columns.insert(count_idx, 'no. replies')
 report_columns.insert(count_idx, 'no. recipients')
 report_columns = list(dict.fromkeys(report_columns))
 
-reports = reports[report_columns]
-reports.to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
+reports[report_columns].to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
 
 # %% [markdown]
 # ### Calculating statistics
