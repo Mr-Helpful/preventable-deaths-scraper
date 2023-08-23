@@ -62,6 +62,13 @@ name_counts = reports.value_counts(['year', 'coroner_name']).unstack(fill_value=
 sum_counts = reports.value_counts('coroner_name')
 
 # %% [markdown]
+# ### Calculating the top coroners
+
+top_counts = sum_counts.head(TOP_N)
+top_names = list(top_counts.index)
+top_years = name_counts[top_names]
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['coroner name'] = statistics = {
@@ -69,6 +76,7 @@ toml_stats['coroner name'] = statistics = {
   "no. coroner names in reports": len(sum_counts),
   "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
   "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
+  f"% made up by top {TOP_N} names": f"{round(100 * top_counts.sum() / sum_counts.sum(), 1)}%",
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
@@ -76,13 +84,6 @@ toml_stats['coroner name'] = statistics = {
 
 print(f"Name count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
-
-# %% [markdown]
-# ### Calculating the top coroners
-
-top_counts = sum_counts.head(TOP_N)
-top_names = list(top_counts.index)
-top_years = name_counts[top_names]
 
 # %% [markdown]
 # ### Saving the results
