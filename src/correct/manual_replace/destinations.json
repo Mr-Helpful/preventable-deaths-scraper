@@ -172,7 +172,6 @@
     "Highways Department – Salford City Council": "Highways Department – Salford City Council",
     "St Peter’s Hospital": "St Peter’s Hospital",
     "Cherish Home Care": "Cherish Home Care",
-    "MHRA": "MHRA",
     "Baedling Manor Care Home": "Baedling Manor Care Home",
     "Holy Cross Hospital": "Holy Cross Hospital",
     "GMMH NHS Trust": "GMMH NHS Trust",
@@ -570,7 +569,6 @@
     "Brace Street Health Centre": "Brace Street Health Centre",
     "Hampshire County Council": "Hampshire County Council",
     "Southampton County Council": "Southampton County Council",
-    "MOJ": "MOJ",
     "Carewatch": "Carewatch",
     "Boots UK Limted": "Boots UK Limted",
     "Worthing Homes": "Worthing Homes",
@@ -2693,9 +2691,7 @@
     "NOMS": "HM Prison and Probation Service",
     "NICE": "National Institute for Health and Care Excellence",
     "N I C E": "National Institute for Health and Care Excellence",
-    "BCUHB": "Betsi Cadwaladr University Health Board"
-  },
-  {
+    "BCUHB": "Betsi Cadwaladr University Health Board",
     "HMPPS": "HMPPS",
     "Dyfed-Powys Police": "Dyfed-Powys Police",
     "Secretary of State for the Home Department": "Home Office",
@@ -2705,6 +2701,8 @@
     "SStHD": "Home Office",
     "SSE": "Department for Education",
     "SSHSC": "Department of Health and Social Care",
-    "SST": "Department for Transport"
+    "SST": "Department for Transport",
+    "MOJ": "Ministry of Justice",
+    "MHRA": "Medicines and Healthcare Products Regulatory Agency"
   }
 ]
