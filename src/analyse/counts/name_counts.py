@@ -42,7 +42,6 @@ reports['year'] = reports['date_of_report'].str.extract(r'\d{2}\/\d{2}\/(\d{4})'
 # count the number of reports in each year
 
 name_counts = reports.value_counts(['year', 'coroner_name']).unstack(fill_value=0)
-
 sum_counts = reports.value_counts('coroner_name')
 
 # %% [markdown]
@@ -50,8 +49,9 @@ sum_counts = reports.value_counts('coroner_name')
 
 toml_stats['coroner name'] = statistics = {
   "no. reports parsed": reports.count()['coroner_name'],
-  "no. names with report(s)": len(sum_counts),
-  "no. names without reports": len([name for name in coroner_names if name not in sum_counts.index]),
+  "no. coroner names in reports": len(sum_counts),
+  "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
+  "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
