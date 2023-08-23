@@ -73,6 +73,8 @@ const choices = [
   }
 ]
 
+const padnum = (num, len, pad = ' ') => num.toString().padStart(len, pad)
+
 /**
  * Gets the decisions for a list of texts
  * @param {string[]} failed a list of texts that failed to parse
@@ -81,6 +83,7 @@ const choices = [
 async function categorise_failures(failed) {
   failed.sort((a, b) => a.length - b.length)
   let decisions = failed.map(text => [text, 'skipped', {}])
+  const strlen = decisions.length.toString().length
   let i = 0
 
   while (i < decisions.length) {
@@ -90,7 +93,9 @@ async function categorise_failures(failed) {
     } = await inquirer.prompt({
       type: 'list',
       name: 'type',
-      message: `For the text '${text}':`,
+      message: `[${padnum(i, strlen)}/${
+        decisions.length
+      }] For the text '${text}':`,
       choices
     })
 
@@ -129,7 +134,7 @@ async function update_corrections_for(field) {
     assert: { type: 'json' }
   })
 
-  console.log(`- Manual corrections for '${field}' (${failed.length} left) -`)
+  console.log(`- Manual corrections for '${field}' -`)
 
   const { skipped, incorrect, correct } = await categorise_failures(failed)
 
