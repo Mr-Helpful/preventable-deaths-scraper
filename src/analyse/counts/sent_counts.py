@@ -22,7 +22,7 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-analysed.csv")
 
 # %% [markdown]
 # ### Calculating the due status for each report
@@ -129,7 +129,7 @@ report_columns.insert(count_idx, 'no. recipients')
 report_columns = list(dict.fromkeys(report_columns))
 
 reports = reports[report_columns]
-reports.to_csv(f"{REPORTS_PATH}/report-statuses.csv", index=False)
+reports.to_csv(f"{REPORTS_PATH}/reports-analysed.csv", index=False)
 
 # %% [markdown]
 # ### Calculating statistics
