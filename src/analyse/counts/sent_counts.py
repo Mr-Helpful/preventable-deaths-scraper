@@ -168,6 +168,23 @@ name_statuses = name_statuses.sort_values('no. PFDs', ascending=False)
 name_statuses = name_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no. complete responses', 'no. partial responses', 'no. overdue responses', 'no. pending responses', 'no. failed parses']]
 
 # %% [markdown]
+# ### Calculating statistics over recipients
+
+exploded = reports.assign(sent_to=reports['this_report_is_being_sent_to'].str.split(vbar)).explode('sent_to', ignore_index=True)
+rcpt_statuses = exploded.value_counts(['sent_to', 'response status']).unstack(fill_value=0)
+rcpt_statuses.loc[:, ['no. recipients', 'no. replies']] = exploded.groupby('sent_to')[['no. recipients', 'no. replies']].sum()
+rcpt_statuses = rcpt_statuses.rename({
+  "completed": "no. complete responses",
+  "partial": "no. partial responses",
+  "overdue": "no. overdue responses",
+  "pending": "no. pending responses"
+},axis=1)
+rcpt_statuses['no. PFDs'] = exploded['sent_to'].value_counts()
+rcpt_statuses = rcpt_statuses.sort_values('no. PFDs', ascending=False)
+rcpt_statuses = rcpt_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no. complete responses', 'no. partial responses', 'no. overdue responses', 'no. pending responses']]
+# Quick note here: we won't ever get the no. failed parses as a recipient is only found if the parse is successful
+
+# %% [markdown]
 # ### Various statistics about the counts
 
 toml_stats['report response rates'] = statistics = {
@@ -211,3 +228,4 @@ exploded.to_csv(f"{DATA_PATH}/sent/statuses.csv", index=False)
 
 area_statuses.to_csv(f"{DATA_PATH}/sent/area-statuses.csv")
 name_statuses.to_csv(f"{DATA_PATH}/sent/name-statuses.csv")
+rcpt_statuses.to_csv(f"{DATA_PATH}/sent/rcpt-statuses.csv")
