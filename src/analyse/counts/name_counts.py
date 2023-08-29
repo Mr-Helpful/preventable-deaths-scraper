@@ -73,9 +73,7 @@ top_years = name_counts[top_names]
 # %% [markdown]
 # ### Calculating counts for titles
 
-sum_titles = sum_counts.copy()
-sum_titles.index = sum_titles.index.map(coroner_titles).rename('coroner_title')
-sum_titles = sum_titles.groupby(level=0).sum()
+sum_titles = reports.value_counts('coroner_title')
 top_titles = top_counts.copy()
 top_titles.index = top_titles.index.map(coroner_titles).rename('coroner_title')
 top_titles = top_titles.groupby(level=0).sum()
