@@ -60,17 +60,19 @@ sum_counts = reports.value_counts('gender')
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats['coroner genders in reports'] = statistics = {
+toml_stats['coroners in reports'] = statistics = dict(
+  toml_stats['coroners in reports'], **{
   "no. reports from male coroners": sum_counts['male'],
   "no. reports from female coroners": sum_counts['female'],
   "no. reports from unknown coroners": sum_counts['unknown'],
-}
+})
 
-toml_stats["coroner's society genders"] = {
-  "no. coroners from society male": website_counts['male'],
-  "no. coroners from society female": website_counts['female'],
-  "no. coroners from society unknown": website_counts['unknown'],
-}
+toml_stats["coroners' society"] = dict(
+  toml_stats["coroners' society"], **{
+  "no. coroners in society male": website_counts['male'],
+  "no. coroners in society female": website_counts['female'],
+  "no. coroners in society unknown": website_counts['unknown'],
+})
 
 print(f"Gender count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")

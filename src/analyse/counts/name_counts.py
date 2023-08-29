@@ -83,20 +83,23 @@ top_titles = top_titles.groupby(level=0).sum()
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats["coroner names in reports"] = statistics = {
+toml_stats["coroners in reports"] = statistics = dict(
+  toml_stats["coroners in reports"], **{
   "no. reports parsed": reports.count()['coroner_name'],
   "no. coroner names in reports": len(sum_counts),
-  f"num reports from top {TOP_N} names": top_counts.sum(),
+  f"no. reports from top {TOP_N} names": top_counts.sum(),
   f"% reports from top {TOP_N} names": round(100 * top_counts.sum() / sum_counts.sum(), 1),
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
-}
+})
 
-toml_stats["coroner's society names"] = {
+toml_stats["coroners' society"] = dict(
+  toml_stats["coroners' society"], **{
+  "no. names in society": len(coroner_names),
   "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
   "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-}
+})
 
 print(f"Name count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
