@@ -33,9 +33,9 @@ with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
 # %% [markdown]
 # ### Reading the coroner data
 
-with open(f"{CORRECTION_PATH}/fetched_coroners.json", 'r', encoding="utf8") as rf:
-  coroner_data = json.load(rf)
-  coroner_titles = {row['name']: row['title'] for row in coroner_data}
+coroner_data = pd.read_csv(f"{REPORTS_PATH}/coroners-society.csv")
+coroner_titles = {row['name']: row['title'] for _, row in coroner_data.iterrows()}
+
 
 # %% [markdown]
 # ### Adding coroner titles to the reports
