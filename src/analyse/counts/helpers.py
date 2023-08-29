@@ -23,7 +23,7 @@ class TOMLCache:
       pass
 
   def __getitem__(self, key):
-    return self.cache[key]
+    return self.cache.get(key, {})
 
   def __setitem__(self, key, value):
     self.cache[key] = value
