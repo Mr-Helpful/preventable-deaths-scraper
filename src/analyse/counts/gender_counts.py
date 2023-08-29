@@ -32,7 +32,7 @@ print(REPLACEMENTS)
 # %% [markdown]
 # ### Reading the reports
 
-reports = pd.read_csv(f"{REPORTS_PATH}/reports-corrected.csv")
+reports = pd.read_csv(f"{REPORTS_PATH}/reports-analysed.csv")
 
 # %% [markdown]
 # ### Reading coroner names
@@ -60,13 +60,16 @@ sum_counts = reports.value_counts('gender')
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats['coroner gender'] = statistics = {
-  "no. coroners male": website_counts['male'],
-  "no. coroners female": website_counts['female'],
-  "no. coroners unknown": website_counts['unknown'],
-  "no. reports male": sum_counts['male'],
-  "no. reports female": sum_counts['female'],
-  "no. reports unknown": sum_counts['unknown'],
+toml_stats['coroner genders in reports'] = statistics = {
+  "no. reports from male coroners": sum_counts['male'],
+  "no. reports from female coroners": sum_counts['female'],
+  "no. reports from unknown coroners": sum_counts['unknown'],
+}
+
+toml_stats["coroner's society genders"] = {
+  "no. coroners from society male": website_counts['male'],
+  "no. coroners from society female": website_counts['female'],
+  "no. coroners from society unknown": website_counts['unknown'],
 }
 
 print(f"Gender count statistics: {statistics}")
