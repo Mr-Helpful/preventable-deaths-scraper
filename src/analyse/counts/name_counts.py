@@ -36,6 +36,19 @@ with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
 coroner_data = pd.read_csv(f"{REPORTS_PATH}/coroners-society.csv")
 coroner_titles = {row['name']: row['title'] for _, row in coroner_data.iterrows()}
 
+# %% [markdown]
+# ### Calculating the titles of coroner in each area
+
+with open(f"{CORRECTION_PATH}/areas.json", encoding="utf8") as rf:
+  correct_areas = json.load(rf)
+
+coroner_area = coroner_data[['title', 'role']]
+is_area = coroner_area['role'].isin(correct_areas)
+area_counts = coroner_area[is_area]\
+  .value_counts(['role', 'title'])\
+  .unstack(fill_value=0)\
+  .rename_axis('area')
+
 
 # %% [markdown]
 # ### Adding coroner titles to the reports
@@ -111,3 +124,4 @@ name_counts.to_csv(f"{DATA_PATH}/name/name-years.csv")
 top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
 sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")
 sum_titles.to_csv(f"{DATA_PATH}/name/title-counts.csv")
+area_counts.to_csv(f"{DATA_PATH}/name/area-counts.csv")
