@@ -12,18 +12,7 @@ import color_scales from "./heatmap/report-scales.json";
 import { useEffect, useMemo, useState } from "@wordpress/element";
 
 import { Flex, RangeControl } from "@wordpress/components";
-import { RangeInput } from "./timescale-slider/slider.js";
-
-const Playback = ({ min, max, setValue }) => {
-	const [playing, setPlaying] = useState(false);
-	return (
-		<span
-			width={50}
-			height={50}
-			className="dashicons dashicons-controls-play"
-		></span>
-	);
-};
+import { Playback } from "./Playback.js";
 
 /** @typedef {{csv_text: string, source_url: string}} SaveBlockProps */
 
