@@ -84,6 +84,15 @@ top_names = list(top_counts.index)
 top_years = name_counts[top_names]
 
 # %% [markdown]
+# ### Calculating the top coroner titles
+
+top_categorised = pd.DataFrame({"count": top_counts})
+top_name_titles = top_counts.index.map(coroner_titles).fillna('Unknown')
+
+for title in top_name_titles.unique():
+  top_categorised[title] = top_categorised["count"].where(top_name_titles == title, 0)
+
+# %% [markdown]
 # ### Calculating counts for titles
 
 sum_titles = reports.value_counts('coroner_title')
@@ -125,3 +134,4 @@ top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
 sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")
 sum_titles.to_csv(f"{DATA_PATH}/name/title-counts.csv")
 area_counts.to_csv(f"{DATA_PATH}/name/area-counts.csv")
+top_categorised.to_csv(f"{DATA_PATH}/name/top-categorised.csv")
