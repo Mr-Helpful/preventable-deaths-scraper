@@ -64,6 +64,23 @@ export function is_complete_match(text, matches) {
 }
 
 /**
+ * Literally matches any acronyms in the text against the replacements
+ * @param {string} text the text to match against
+ * @param {string[]} matches the replacements to match
+ * @returns {{phrase:string, loc: [number, number]}[]} the matched replacements
+ */
+export function acronym_matches(text, matches) {
+  return matches
+    .filter(match => /[A-Z]{3,}/g.test(match))
+    .flatMap(acronym => {
+      const match = text.match(re`\b${acronym}\b`)
+      if (!match) return []
+      const loc = [match.index, match.index + acronym.length]
+      return [{ phrase: acronym, loc }]
+    })
+}
+
+/**
  * Creates a function that corrects the coroner name to the closest match in the
  * coroner society list and saves the failed matches on close
  * @param {boolean} keep_failed whether to keep existing failed parses
@@ -86,7 +103,10 @@ export default async function Corrector(keep_failed = true) {
   corrections[1] = known_replacements[1]
 
   function try_known_match(text) {
-    if (known_replacements[1][text]) return known_replacements[1][text]
+    // If there's an exact match, return it
+    for (const replacement of corrections) {
+      if (replacement[text]) return replacement[text]
+    }
 
     let replacements = [...corrections]
     replacements[1] = {} // don't try heirachic matches on acronyms
@@ -143,9 +163,11 @@ export default async function Corrector(keep_failed = true) {
     // if the text can be built from known matches and connectives, with only a
     // few errors, we can return those matches
     const replacements = Object.assign({}, ...corrections)
-    const matches = heirichic_matches(text, Object.keys(replacements), {
+    let matches = heirichic_matches(text, Object.keys(replacements), {
       ignored_words: punctuation
     })
+    if (matches)
+      matches.push(...acronym_matches(text, Object.keys(replacements)))
     if (matches && is_complete_match(text, matches))
       return matches.map(match => replacements[match.phrase]).join(' | ')
 
