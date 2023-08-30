@@ -13,41 +13,18 @@
 "median per category" = 281.0
 "IQR of categories" = [ 97.0, 466.5,]
 
-["coroner genders in reports"]
-"no. reports from male coroners" = 2034
-"no. reports from female coroners" = 1748
-"no. reports from unknown coroners" = 718
-
-["coroner's society genders"]
-"no. coroners from society male" = 253
-"no. coroners from society female" = 236
-"no. coroners from society unknown" = 151
-
-["coroner names in reports"]
-"no. reports parsed" = 4500
-"no. coroner names in reports" = 427
-"num reports from top 30 names" = 1759
-"% reports from top 30 names" = 39.1
-"mean per name" = 10.5
-"median per name" = 5.0
-"IQR of names" = [ 2.0, 11.0,]
-
-["coroner's society names"]
-"no. names in society with reports" = 346
-"no. names in society without reports" = 294
-
 ["report response rates"]
 "no. reports parsed" = 2750
-"no. reports pending" = 32
-"no. reports overdue" = 1174
+"no. reports pending" = 31
+"no. reports overdue" = 1175
 "no. reports partial" = 144
 "no. reports completed" = 1400
 
 ["request response rates"]
 "no. recipients with requests" = 1854
-"no. requests for response" = 3984
-"no. requests pending" = 34
-"no. requests overdue" = 2108
+"no. requests for response" = 5760
+"no. requests pending" = 33
+"no. requests overdue" = 2109
 "no. requests received" = 1842
 "mean no. requests per recipient" = 2.1
 "median no. requests per recipient" = 1.0
@@ -59,3 +36,23 @@
 "mean per year" = 450.3
 "median per year" = 432.0
 "IQR of years" = [ 365.0, 478.0,]
+
+["coroners in reports"]
+"no. reports parsed" = 4500
+"no. coroner names in reports" = 427
+"no. reports from male coroners" = 2034
+"no. reports from female coroners" = 1748
+"no. reports from unknown coroners" = 718
+"no. reports from top 30 names" = 1759
+"% reports from top 30 names" = 39.1
+"mean per name" = 10.5
+"median per name" = 5.0
+"IQR of names" = [ 2.0, 11.0,]
+
+["coroners' society"]
+"no. names in society" = 640
+"no. names in society with reports" = 346
+"no. names in society without reports" = 294
+"no. coroners in society male" = 253
+"no. coroners in society female" = 236
+"no. coroners in society unknown" = 151

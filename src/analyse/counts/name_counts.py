@@ -33,9 +33,22 @@ with open(f"{CORRECTION_PATH}/fetched_names.json", 'r', encoding="utf8") as rf:
 # %% [markdown]
 # ### Reading the coroner data
 
-with open(f"{CORRECTION_PATH}/fetched_coroners.json", 'r', encoding="utf8") as rf:
-  coroner_data = json.load(rf)
-  coroner_titles = {row['name']: row['title'] for row in coroner_data}
+coroner_data = pd.read_csv(f"{REPORTS_PATH}/coroners-society.csv")
+coroner_titles = {row['name']: row['title'] for _, row in coroner_data.iterrows()}
+
+# %% [markdown]
+# ### Calculating the titles of coroner in each area
+
+with open(f"{CORRECTION_PATH}/areas.json", encoding="utf8") as rf:
+  correct_areas = json.load(rf)
+
+coroner_area = coroner_data[['title', 'role']]
+is_area = coroner_area['role'].isin(correct_areas)
+area_counts = coroner_area[is_area]\
+  .value_counts(['role', 'title'])\
+  .unstack(fill_value=0)\
+  .rename_axis('area')
+
 
 # %% [markdown]
 # ### Adding coroner titles to the reports
@@ -71,11 +84,18 @@ top_names = list(top_counts.index)
 top_years = name_counts[top_names]
 
 # %% [markdown]
+# ### Calculating the top coroner titles
+
+top_categorised = pd.DataFrame({"count": top_counts})
+top_name_titles = top_counts.index.map(coroner_titles).fillna('Unknown')
+
+for title in top_name_titles.unique():
+  top_categorised[title] = top_categorised["count"].where(top_name_titles == title, 0)
+
+# %% [markdown]
 # ### Calculating counts for titles
 
-sum_titles = sum_counts.copy()
-sum_titles.index = sum_titles.index.map(coroner_titles).rename('coroner_title')
-sum_titles = sum_titles.groupby(level=0).sum()
+sum_titles = reports.value_counts('coroner_title')
 top_titles = top_counts.copy()
 top_titles.index = top_titles.index.map(coroner_titles).rename('coroner_title')
 top_titles = top_titles.groupby(level=0).sum()
@@ -83,20 +103,23 @@ top_titles = top_titles.groupby(level=0).sum()
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats["coroner names in reports"] = statistics = {
+toml_stats["coroners in reports"] = statistics = dict(
+  toml_stats["coroners in reports"], **{
   "no. reports parsed": reports.count()['coroner_name'],
   "no. coroner names in reports": len(sum_counts),
-  f"num reports from top {TOP_N} names": top_counts.sum(),
+  f"no. reports from top {TOP_N} names": top_counts.sum(),
   f"% reports from top {TOP_N} names": round(100 * top_counts.sum() / sum_counts.sum(), 1),
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
-}
+})
 
-toml_stats["coroner's society names"] = {
+toml_stats["coroners' society"] = dict(
+  toml_stats["coroners' society"], **{
+  "no. names in society": len(coroner_names),
   "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
   "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
-}
+})
 
 print(f"Name count statistics: {statistics}")
 print(f"Sorted counts: {sum_counts}")
@@ -110,3 +133,5 @@ name_counts.to_csv(f"{DATA_PATH}/name/name-years.csv")
 top_years.to_csv(f"{DATA_PATH}/name/top-name-years.csv")
 sum_counts.to_csv(f"{DATA_PATH}/name/name-counts.csv")
 sum_titles.to_csv(f"{DATA_PATH}/name/title-counts.csv")
+area_counts.to_csv(f"{DATA_PATH}/name/area-counts.csv")
+top_categorised.to_csv(f"{DATA_PATH}/name/top-categorised.csv")

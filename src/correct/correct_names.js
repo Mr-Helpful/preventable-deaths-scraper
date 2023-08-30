@@ -1,4 +1,5 @@
 import fs from 'fs/promises'
+import Papa from 'papaparse'
 import { fetch_html, map_series } from '../fetch/helpers.js'
 import { priority_match } from './approx_match.js'
 import {
@@ -110,8 +111,8 @@ export default async function Corrector(keep_failed = true) {
     ...rest
   }))
   await fs.writeFile(
-    './src/correct/data/fetched_coroners.json',
-    JSON.stringify(fetched_simple, null, 2)
+    './src/data/coroners-society.csv',
+    Papa.unparse(fetched_simple)
   )
   const fetched_replace = Object.fromEntries(
     fetched_simple.map(({ name }) => [name, name])
