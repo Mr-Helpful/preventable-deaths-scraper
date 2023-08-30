@@ -30,7 +30,7 @@ import {
 	PanelHeader,
 } from "@wordpress/components";
 import { useRef } from "@wordpress/element";
-import { Front } from "./save.js";
+import { Front } from "./front.js";
 
 /**
  * Converts a File object to a data url asynchronously
