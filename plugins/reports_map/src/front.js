@@ -58,10 +58,13 @@ window.addEventListener("load", () => {
 	if (blocks.length === 0) return;
 
 	for (const block of blocks) {
-		const properties = JSON.parse(block.getAttribute("data-props"));
+		const data_props = block.getAttribute("data-props");
+		console.log(data_props);
+		if (data_props === null) continue;
+
 		createRoot(block).render(
-			<div className="report-heatmap-block" data-props={properties}>
-				<Front {...properties} />
+			<div className="report-heatmap-block" data-props={data_props}>
+				<Front {...JSON.parse(data_props)} />
 			</div>
 		);
 	}
