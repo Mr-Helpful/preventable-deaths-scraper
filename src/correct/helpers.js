@@ -14,10 +14,11 @@ const zip = (...xss) =>
  * @param  {...RegExp} regexes The regexes to interpolate
  */
 export function re(strings, ...regexes) {
-  const flags = new Set(regexes.map(r => r.flags).join(''))
+  const flags = new Set(regexes.map(r => r.flags ?? '').join(''))
   const source = zip(strings.raw, regexes).reduce((res, [str, regex]) => {
     if (regex === undefined) return res + str
-    return res + str + `(?:${regex.source})`
+    if (regex.source) return res + str + `(?:${regex.source})`
+    return res + str + regex
   }, '')
   return new RegExp(source, Array.from(flags).join(''))
 }
