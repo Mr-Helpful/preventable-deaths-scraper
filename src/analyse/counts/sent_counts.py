@@ -189,6 +189,7 @@ rcpt_statuses = rcpt_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no.
 
 toml_stats['report response rates'] = statistics = {
   "no. reports parsed": len(non_na),
+  "no. reports failed": len(reports) - len(non_na),
   "no. reports pending": status_counts['pending'],
   "no. reports overdue": status_counts['overdue'],
   "no. reports partial": status_counts['partial'],
