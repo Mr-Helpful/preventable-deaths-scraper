@@ -5,7 +5,7 @@ import ReportHeatMap from "./heatmap/ReportHeatmap.js";
 import color_scales from "./heatmap/report-scales.json";
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import { Flex, RangeControl } from "@wordpress/components";
-import { Playback } from "./Playback.js";
+// import { Playback } from "./Playback.js";
 import { parse_csv, sum_columns, max_columns } from "./save.js";
 
 /**
@@ -43,11 +43,11 @@ export function Front({ csv_text, source_url }) {
 	return (
 		<Flex direction={["column"]}>
 			<Flex direction={["row"]} justify="space-between">
-				<Playback
+				{/* <Playback
 					min={years[0]}
 					max={years[csv.length - 1]}
 					setValue={() => {}}
-				/>
+				/> */}
 				<RangeControl
 					initialPosition={0}
 					min={years[0]}
