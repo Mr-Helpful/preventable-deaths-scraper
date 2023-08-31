@@ -19,118 +19,79 @@ import { useBlockProps } from "@wordpress/block-editor";
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import "./editor.scss";
+import "./edit.scss";
 
 import {
 	TextControl,
-	TabPanel,
 	FormFileUpload,
 	Panel,
 	PanelBody,
 	PanelRow,
 	PanelHeader,
-	Flex,
 } from "@wordpress/components";
-import { SaveBlock } from "./save.js";
+import { useRef } from "@wordpress/element";
+import { Front } from "./front.js";
+import Papa from "papaparse";
 
 /**
  * Converts a File object to a data url asynchronously
- *
  * @param {File} file the file to read
  * @returns {Promise<string>} the data url for the file
  */
-function read_to_url(file) {
-	return new Promise((resolve) => {
+const read_to_url = (file) =>
+	new Promise((resolve) => {
 		const reader = new FileReader();
 		reader.onloadend = () => resolve(reader.result);
 		reader.readAsDataURL(file);
 	});
-}
 
 /**
- * A file input that converts the input to a data url
- *
- * @param {any} param0 The parameters for the CSVInput component
- * @param {({url: string, name: string}) => Promise<void>} param0.onChange A callback that is called when a file is uploaded
- * @returns {WPElement}
+ * @typedef {Object} CsvComboSourceProps
+ * @property {string} url The url of the csv file
+ * @property {(url: string) => void} onChange A callback that is provided with the url and the parsed csv
  */
-const CsvFileSource = ({ name, onChange }) => {
-	return (
-		<Flex style={{ width: "auto" }}>
-			<div className="file-name">{name}</div>
-			<FormFileUpload
-				accept="text/csv"
-				variant="secondary"
-				className="file-input"
-				onChange={async ({ target: { files } }) => {
-					if (files.length === 0) return;
-					const url = await read_to_url(files[0]);
-					await onChange({ url, name: files[0].name });
-				}}
-			>
-				{__("Upload .csv File", "reports-map")}
-			</FormFileUpload>
-		</Flex>
-	);
-};
-
-/**
- * A text input that validates the input as a url to the given content type
- *
- * @param {any} param0 The parameters for the CSVInput component
- * @param {({url: string, name: string}) => void} param0.onChange A callback that is provided with the url
- * @returns {WPElement}
- */
-const CsvUrlSource = ({ onChange }) => {
-	return (
-		<TextControl
-			type="url"
-			label={__("Remote CSV Url", "reports-map")}
-			className="csv-input"
-			onChange={async (url) => {
-				try {
-					const response = await fetch(url);
-					const type = response.headers.get("content-type");
-					const disp = response.headers.get("content-disposition");
-					console.log(disp);
-					const name = disp.split(";")[1].split("=")[1];
-					if (type && type.includes("text/csv")) {
-						// TODO: make dialog flash on valid input
-						onChange({ url, name });
-					}
-				} catch {
-					// TODO: We should only get network errors in here
-					// maybe we want to notify the user of these errors
-				}
-			}}
-		/>
-	);
-};
 
 /**
  * An input that allows the user to load a csv from a file or external url
- *
- * @param {any} param0 The parameters for the CSVInput component
- * @param {({url: string, name: string}) => void} param0.onChange A callback that is provided with the url and the parsed csv
- * @returns {WPElement}
+ * this will display a data url when the file is uploaded
+ * @param {CsvComboSourceProps} param0 The parameters for the CSVInput component
  */
-const CsvSource = ({ onChange }) => (
-	<TabPanel
-		tabs={[
-			{
-				name: "file",
-				title: __("File Upload", "reports-map"),
-				content: <CsvFileSource onChange={onChange} />,
-			},
-			{
-				name: "url",
-				title: __("External URL", "reports-map"),
-				content: <CsvUrlSource onChange={onChange} />,
-			},
-		]}
-		children={({ content }) => content}
-	/>
-);
+const CsvComboSource = ({ url, onChange, children }) => {
+	const ref = useRef();
+	return (
+		<FormFileUpload
+			accept="text/csv"
+			variant="secondary"
+			className="file-input"
+			onChange={async ({ target: { files } }) => {
+				if (files.length === 0) return;
+				const url = await read_to_url(files[0]);
+				ref.current.value = url;
+				onChange(url);
+			}}
+		>
+			{children}
+			<TextControl
+				type="url"
+				ref={ref}
+				defaultValue={url}
+				className="csv-input"
+				onClick={(e) => e.stopPropagation()}
+				onChange={(url) =>
+					fetch(url)
+						.then((_) => {
+							// TODO: make dialog flash on valid input
+							onChange(url);
+						})
+						.catch((_) => {
+							// TODO: We should only get network errors in here
+							// maybe we want to notify the user of these errors
+						})
+				}
+			/>
+		</FormFileUpload>
+	);
+};
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -141,7 +102,7 @@ const CsvSource = ({ onChange }) => (
  * @return {WPElement} Element to render.
  */
 export default function Edit({
-	attributes: { csv_name, csv_text },
+	attributes: { csv_name, csv_text, source_url },
 	setAttributes,
 }) {
 	return (
@@ -150,14 +111,18 @@ export default function Edit({
 				{/* Header and CSV loading */}
 				<PanelHeader>
 					<h6>{__("Reports Heatmap", "reports-map")}</h6>
-					<CsvFileSource
-						name={csv_name}
-						onChange={async ({ url, name }) => {
+					<CsvComboSource
+						url={source_url}
+						onChange={async (url) => {
+							if (url === "") return;
 							const response = await fetch(url);
 							const csv_text = await response.text();
-							setAttributes({ csv_text, csv_name: name });
+							Papa.parse(csv_text, { header: true });
+							setAttributes({ csv_text, source_url: url });
 						}}
-					/>
+					>
+						{__("CSV Url", "reports-map")}
+					</CsvComboSource>
 				</PanelHeader>
 				{/* Preview Heatmap */}
 				<PanelBody
@@ -166,7 +131,7 @@ export default function Edit({
 					buttonProps={{ disabled: csv_text.length === 0 }}
 				>
 					<PanelRow>
-						<SaveBlock csv_text={csv_text} />
+						<Front csv_text={csv_text} source_url={source_url} />
 					</PanelRow>
 				</PanelBody>
 			</Panel>

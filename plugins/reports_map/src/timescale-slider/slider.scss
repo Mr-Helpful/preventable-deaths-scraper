@@ -1,0 +1,98 @@
+$w: 20em;
+$h: 1em;
+$d: .5*$h; // thumb diameter
+$r: .5*$d; // thumb radius
+$uw: $w - $d; // useful width
+
+@mixin track() {
+	width: calc(100% - var(--h));
+	height: 100%;
+	background: none
+		/* get rid of Firefox track background */
+}
+
+@mixin thumb() {
+	border: none;
+	border-radius: var(--r); // get rid of Firefox thumb border
+	width: var(--d); // get rid of Firefox corner rounding
+	height: var(--h);
+	background: currentcolor;
+	pointer-events: auto
+}
+
+[multi-range] {
+	--w: 20em;
+	--h: 1em;
+	--d: calc(var(--h) / 2); // thumb diameter
+	--r: calc(var(--d) / 2); // thumb radius
+	--uw: calc(var(--w) - var(--d)); // useful width
+	--dif: calc(var(--max) - var(--min));
+
+	width: var(--w);
+	display: grid;
+	grid-template: repeat(2, max-content) var(--h) / 1fr 1fr;
+	margin: 1em auto;
+	border-radius: var(--r);
+	background: linear-gradient(0deg, #ccc var(--h), transparent 0);
+
+	&::before,
+	&::after {
+		grid-column: 1 / span 2;
+		grid-row: 3;
+		height: 100%;
+		background: #95a;
+		content: '';
+	}
+
+	&::before {
+		margin-left: calc(var(--r) + (var(--a) - var(--min))/var(--dif)*var(--uw));
+		width: calc((var(--b) - var(--a))/var(--dif)*var(--uw));
+	}
+
+	&::after {
+		margin-left: calc(var(--r) + (var(--b) - var(--min))/var(--dif)*var(--uw));
+		width: calc((var(--a) - var(--b))/var(--dif)*var(--uw));
+	}
+}
+
+input[type='range'] {
+
+	&::-webkit-slider-runnable-track,
+	&::-webkit-slider-thumb,
+	& {
+		-webkit-appearance: none
+	}
+
+	grid-column: 1/ span 2;
+	grid-row: 3;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: #000; // get rid of white Chrome background
+	pointer-events: none;
+
+	&::-webkit-slider-runnable-track {
+		@include track
+	}
+
+	&::-moz-range-track {
+		@include track
+	}
+
+	&::-webkit-slider-thumb {
+		@include thumb
+	}
+
+	&::-moz-range-thumb {
+		@include thumb
+	}
+
+	&:focus {
+		z-index: 2;
+		outline: dotted 0px currentcolor;
+		color: darkorange
+	}
+}

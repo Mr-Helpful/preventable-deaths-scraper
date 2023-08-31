@@ -24,3 +24,17 @@ function create_block_reports_map_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'create_block_reports_map_block_init' );
+
+/**
+ * Enqueues necessary scripts to hydrate the block on the frontend.
+ */
+function create_block_reports_map_frontend_scripts() {
+	$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/front.asset.php');
+	wp_enqueue_script(
+		'create-block-reports-map-frontend-js',
+		plugins_url( 'build/front.js', __FILE__ ),
+		$asset_file['dependencies'],
+		$asset_file['version']
+	);
+}
+add_action( 'wp_enqueue_scripts', 'create_block_reports_map_frontend_scripts' );
