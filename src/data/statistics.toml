@@ -1,9 +1,9 @@
-["coroner areas"]
-"no. parsed reports" = 4498
-"no. areas" = 82
-"mean per area" = 54.9
-"median per area" = 45.0
-"IQR of areas" = [ 21.25, 66.75,]
+[year]
+"no. reports parsed" = 4513
+"no. years covered" = 11
+"mean per year" = 450.3
+"median per year" = 432.0
+"IQR of years" = [ 365.0, 478.0,]
 
 ["death categories"]
 "no. reports parsed" = 4525
@@ -12,6 +12,21 @@
 "mean per category" = 354.8
 "median per category" = 281.0
 "IQR of categories" = [ 97.0, 466.5,]
+
+["coroner areas"]
+"no. parsed reports" = 4498
+"no. areas" = 82
+"mean per area" = 54.9
+"median per area" = 45.0
+"IQR of areas" = [ 21.25, 66.75,]
+
+["coroners' society"]
+"no. coroners in society male" = 253
+"no. coroners in society female" = 236
+"no. coroners in society unknown" = 151
+"no. names in society" = 640
+"no. names in society with reports" = 346
+"no. names in society without reports" = 294
 
 ["coroners in reports"]
 "no. reports from male coroners" = 2034
@@ -24,14 +39,6 @@
 "mean per name" = 10.5
 "median per name" = 5.0
 "IQR of names" = [ 2.0, 11.0,]
-
-["coroners' society"]
-"no. coroners in society male" = 253
-"no. coroners in society female" = 236
-"no. coroners in society unknown" = 151
-"no. names in society" = 640
-"no. names in society with reports" = 346
-"no. names in society without reports" = 294
 
 ["this report is sent to"]
 "no. reports parsed" = 2783
@@ -50,10 +57,3 @@
 "mean no. requests per recipient" = 2.1
 "median no. requests per recipient" = 1.0
 "IQR of requests per recipients" = [ 1.0, 2.0,]
-
-[year]
-"no. reports parsed" = 4513
-"no. years covered" = 11
-"mean per year" = 450.3
-"median per year" = 432.0
-"IQR of years" = [ 365.0, 478.0,]
