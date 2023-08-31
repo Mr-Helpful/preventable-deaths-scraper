@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { createRoot } from "react-dom/client";
 
 import ReportHeatMap from "./heatmap/ReportHeatmap.js";
