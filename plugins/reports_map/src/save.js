@@ -29,7 +29,10 @@ export default function Save({ attributes }) {
 	const max = Math.max(...Object.values(area_counts), 0);
 	return (
 		<div {...useBlockProps.save()}>
-			<div className="report-heatmap-block" data-props={attributes}>
+			<div
+				className="report-heatmap-block"
+				data-props={JSON.stringify(attributes)}
+			>
 				<ReportHeatMap
 					area_counts={area_counts}
 					max={max}
