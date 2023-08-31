@@ -31,6 +31,7 @@ import {
 } from "@wordpress/components";
 import { useRef } from "@wordpress/element";
 import { Front } from "./front.js";
+import Papa from "papaparse";
 
 /**
  * Converts a File object to a data url asynchronously
