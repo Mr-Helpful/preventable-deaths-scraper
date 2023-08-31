@@ -42,7 +42,7 @@ export function Front({ csv_text, source_url }) {
 
 	return (
 		<Flex direction={["column"]}>
-			{/* <Playback initialIndex={0} values={years} setValue={() => {}} /> */}
+			{/* <Playback initialIndex={0} values={years} setIndex={() => {}} /> */}
 
 			<ReportHeatMap
 				area_counts={area_counts}
