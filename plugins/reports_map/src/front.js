@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { createRoot } from "react-dom/client";
 
 import ReportHeatMap from "./heatmap/ReportHeatmap.js";
@@ -9,12 +9,19 @@ import { Flex, RangeControl } from "@wordpress/components";
 import { parse_csv, sum_columns, max_columns } from "./helpers.js";
 
 /**
+ * @typedef {Object} LiveHeatmapProps
+ * @property {string} csv_text the text of the csv file
+ * @property {string} source_url the url of the csv file
+ * @property {React.Ref<SVGSVGElement>} ref a ref to the heatmap svg element
+ */
+
+/**
  * Dynamically Renders the saved content of the block.
  * We split this out to allow it to be rendered both in the editor and on the
  * frontend. As this has reactivity, it can't be used in the Save function.
- * @param {SaveBlockProps} props
+ * @param {LiveHeatmapProps} props
  */
-export function Front({ csv_text, source_url }) {
+export const LiveHeatmap = forwardRef(({ csv_text, source_url }, ref) => {
 	// TODO: add time selection controls
 	const parsed = useMemo(() => parse_csv(csv_text), [csv_text]);
 	const [{ years, csv }, setData] = useState(parsed);
@@ -45,13 +52,14 @@ export function Front({ csv_text, source_url }) {
 			{/* <Playback initialIndex={0} values={years} setIndex={() => {}} /> */}
 
 			<ReportHeatMap
+				ref={ref}
 				area_counts={area_counts}
 				max={max}
 				scale={color_scales.custom}
 			/>
 		</Flex>
 	);
-}
+});
 
 window.addEventListener("load", () => {
 	const blocks = document.querySelectorAll(".report-heatmap-block");
@@ -63,7 +71,7 @@ window.addEventListener("load", () => {
 
 		createRoot(block).render(
 			<div className="report-heatmap-block" data-props={data_props}>
-				<Front {...JSON.parse(data_props)} />
+				<LiveHeatmap {...JSON.parse(data_props)} />
 			</div>
 		);
 	}
