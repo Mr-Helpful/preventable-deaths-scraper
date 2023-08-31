@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "@wordpress/element";
 import { Flex, RangeControl } from "@wordpress/components";
 // import { Playback } from "./Playback.js";
 import { parse_csv, sum_columns, max_columns } from "./helpers.js";
+
 /**
  * @typedef {Object} LiveHeatmapProps
  * @property {string} csv_text the text of the csv file

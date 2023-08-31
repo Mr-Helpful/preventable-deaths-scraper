@@ -105,7 +105,6 @@ export const FileManager = ({ url, svg_html, onChange }) => {
 		});
 		return window.URL.createObjectURL(svgData);
 	}, [svg_html]);
-	console.log(svg_html);
 
 	return (
 		<Flex>
