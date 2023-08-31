@@ -59,7 +59,6 @@ window.addEventListener("load", () => {
 
 	for (const block of blocks) {
 		const data_props = block.getAttribute("data-props");
-		console.log(data_props);
 		if (data_props === null) continue;
 
 		createRoot(block).render(

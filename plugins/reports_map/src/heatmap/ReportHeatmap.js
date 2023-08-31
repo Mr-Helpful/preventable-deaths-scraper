@@ -25,7 +25,6 @@ const ReportHeatmap = ({ area_counts, max, scale, ...svg_props }) => {
 			height={680}
 			role="group"
 			aria-labelledby="Report_Heatmap_Title Report_Heatmap_Desc"
-			onClick={() => console.log("Heatmap clicked!")}
 			{...svg_props}
 		>
 			<title id="Report_Heatmap_Title">Reports Heatmap</title>
