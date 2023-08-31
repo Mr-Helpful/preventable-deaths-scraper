@@ -114,6 +114,7 @@ export default function Edit({
 					<CsvComboSource
 						url={source_url}
 						onChange={async (url) => {
+							if (url === "") return;
 							const response = await fetch(url);
 							const csv_text = await response.text();
 							Papa.parse(csv_text, { header: true });
