@@ -28,9 +28,13 @@ import {
 	PanelBody,
 	PanelRow,
 	PanelHeader,
+	Button,
+	Flex,
+	FlexBlock,
+	FlexItem,
 } from "@wordpress/components";
-import { useRef } from "@wordpress/element";
-import { Front } from "./front.js";
+import { useState, useMemo, useRef } from "@wordpress/element";
+import { LiveHeatmap } from "./front.js";
 import Papa from "papaparse";
 
 /**
@@ -93,6 +97,32 @@ const CsvComboSource = ({ url, onChange, children }) => {
 	);
 };
 
+export const FileManager = ({ url, svg_html, onChange }) => {
+	const svg_url = useMemo(() => {
+		if (svg_html === undefined) return;
+		const svgData = new Blob([svg_html], {
+			type: "image/svg+xml;charset=utf-8",
+		});
+		return window.URL.createObjectURL(svgData);
+	}, [svg_html]);
+
+	return (
+		<Flex>
+			<CsvComboSource
+				url={url}
+				onChange={(url) => {
+					if (url !== "") onChange(url);
+				}}
+			>
+				{__("CSV Source", "reports-map")}
+			</CsvComboSource>
+			<Button variant="secondary" href={svg_url} download={"heatmap.svg"}>
+				{__("Download SVG", "reports-map")}
+			</Button>
+		</Flex>
+	);
+};
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -105,24 +135,29 @@ export default function Edit({
 	attributes: { csv_name, csv_text, source_url },
 	setAttributes,
 }) {
+	const [svg_html, setSvgHtml] = useState(undefined);
 	return (
 		<div {...useBlockProps()}>
 			<Panel>
 				{/* Header and CSV loading */}
 				<PanelHeader>
-					<h6>{__("Reports Heatmap", "reports-map")}</h6>
-					<CsvComboSource
-						url={source_url}
-						onChange={async (url) => {
-							if (url === "") return;
-							const response = await fetch(url);
-							const csv_text = await response.text();
-							Papa.parse(csv_text, { header: true });
-							setAttributes({ csv_text, source_url: url });
-						}}
-					>
-						{__("CSV Url", "reports-map")}
-					</CsvComboSource>
+					<Flex direction={["row"]}>
+						<FlexBlock>
+							<h6>{__("Reports Heatmap", "reports-map")}</h6>
+						</FlexBlock>
+						<FlexItem>
+							<FileManager
+								url={source_url}
+								onChange={async (url) => {
+									const response = await fetch(url);
+									const csv_text = await response.text();
+									Papa.parse(csv_text, { header: true });
+									setAttributes({ csv_text, source_url: url });
+								}}
+								svg_html={svg_html}
+							/>
+						</FlexItem>
+					</Flex>
 				</PanelHeader>
 				{/* Preview Heatmap */}
 				<PanelBody
@@ -131,7 +166,14 @@ export default function Edit({
 					buttonProps={{ disabled: csv_text.length === 0 }}
 				>
 					<PanelRow>
-						<Front csv_text={csv_text} source_url={source_url} />
+						<LiveHeatmap
+							ref={(svg) => {
+								if (svg === null) return;
+								setSvgHtml(svg.outerHTML);
+							}}
+							csv_text={csv_text}
+							source_url={source_url}
+						/>
 					</PanelRow>
 				</PanelBody>
 			</Panel>
