@@ -6,40 +6,11 @@
  */
 import { useBlockProps } from "@wordpress/block-editor";
 
-import Papa from "papaparse";
 import ReportHeatMap from "./heatmap/ReportHeatmap.js";
 import color_scales from "./heatmap/report-scales.json";
+import { parse_csv, sum_columns } from "./helpers.js";
 
 /** @typedef {{csv_text: string, source_url: string}} SaveBlockProps */
-
-/** Maps a function over the values of an object, leaving keys unaffected */
-const object_map = (obj, fn) =>
-	Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
-
-/** Sums the columns of a csv represented in a json format */
-export const sum_columns = (csv) =>
-	Object.fromEntries(
-		Object.keys(csv[0] ?? {}).map((area) => [
-			area,
-			csv.reduce((a, b) => a + (b[area] ?? 0), 0),
-		])
-	);
-
-export const max_columns = (csv) =>
-	Object.fromEntries(
-		Object.keys(csv[0] ?? {}).map((area) => [
-			area,
-			Math.max(...csv.map((row) => row[area] ?? 0), 0),
-		])
-	);
-
-export const parse_csv = (text) => {
-	let { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-	let csv = data.map((row) => object_map(row, parseInt));
-	let years = csv.map(({ year }) => year);
-	csv = csv.map(({ year, ...rest }) => rest);
-	return { years, csv };
-};
 
 /**
  * The save function defines the way in which the different attributes should
@@ -51,10 +22,7 @@ export const parse_csv = (text) => {
  * @return {WPElement} Element to render.
  */
 export default function Save({ attributes }) {
-	const csv = Papa.parse(attributes.csv_text, {
-		header: true,
-		skipEmptyLines: true,
-	}).data;
+	const { csv } = parse_csv(attributes.csv_text);
 	if (csv.length === 0) return <div>No Data</div>;
 
 	const area_counts = sum_columns(csv);
