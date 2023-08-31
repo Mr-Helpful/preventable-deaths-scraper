@@ -14,18 +14,19 @@
 "IQR of categories" = [ 97.0, 466.5,]
 
 ["report response rates"]
-"no. reports parsed" = 2750
-"no. reports pending" = 31
-"no. reports overdue" = 1175
-"no. reports partial" = 144
-"no. reports completed" = 1400
+"no. reports parsed" = 2783
+"no. reports failed" = 1743
+"no. reports pending" = 33
+"no. reports overdue" = 1178
+"no. reports partial" = 153
+"no. reports completed" = 1419
 
 ["request response rates"]
-"no. recipients with requests" = 1854
-"no. requests for response" = 5760
-"no. requests pending" = 33
-"no. requests overdue" = 2109
-"no. requests received" = 1842
+"no. recipients with requests" = 1924
+"no. requests for response" = 5815
+"no. requests pending" = 36
+"no. requests overdue" = 2143
+"no. requests received" = 1893
 "mean no. requests per recipient" = 2.1
 "median no. requests per recipient" = 1.0
 "IQR of requests per recipients" = [ 1.0, 2.0,]
