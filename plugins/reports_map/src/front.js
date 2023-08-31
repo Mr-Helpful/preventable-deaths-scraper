@@ -42,20 +42,7 @@ export function Front({ csv_text, source_url }) {
 
 	return (
 		<Flex direction={["column"]}>
-			<Flex direction={["row"]} justify="space-between">
-				{/* <Playback
-					min={years[0]}
-					max={years[csv.length - 1]}
-					setValue={() => {}}
-				/> */}
-				<RangeControl
-					initialPosition={0}
-					min={years[0]}
-					max={years[csv.length - 1]}
-					withInputField={false}
-					marks={years.map((year) => ({ value: year, label: "" }))}
-				/>
-			</Flex>
+			{/* <Playback initialIndex={0} values={years} setValue={() => {}} /> */}
 
 			<ReportHeatMap
 				area_counts={area_counts}
