@@ -81,7 +81,7 @@ export default async function Corrector(keep_failed = true) {
     Object.keys(corrections[0]),
     key => {
       const match = try_known_match(key)
-      if (!match) add_to_known(match)
+      if (match) add_to_known(match)
     },
     'Merging destinations |:bar| :current/:total corrections'
   )
