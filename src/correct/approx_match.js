@@ -434,8 +434,10 @@ export function hierachic_match(
     const phrase_ = ignore_case ? phrase.toLowerCase() : phrase
     const phrase_words = phrase_.split(non_words)
     const diff = words.length - phrase_words.length
-    if (diff > 0 && diff * config.deletion_cost > config.typos) return []
-    if (diff < 0 && -diff * config.addition_cost > config.typos) return []
+    if (full_match) {
+      if (diff > 0 && diff * config.deletion_cost > config.typos) return []
+      if (diff < 0 && -diff * config.addition_cost > config.typos) return []
+    }
 
     let { error, errors, loc, slice } = full_match
       ? {
