@@ -6,28 +6,11 @@
  */
 import { useBlockProps } from "@wordpress/block-editor";
 
-import Papa from "papaparse";
 import ReportHeatMap from "./heatmap/ReportHeatmap.js";
 import color_scales from "./heatmap/report-scales.json";
+import { parse_csv, sum_columns } from "./helpers.js";
 
-export function SaveBlock({ csv_text }) {
-	// TODO: replace this with:
-	// 1. CSVs loaded on the frontend (for freshness)
-	// 2. Time selection controls
-	const csv = Papa.parse(csv_text, { header: true, skipEmptyLines: true }).data;
-	if (csv.length === 0) return <div>No data</div>;
-	const area_counts = Object.fromEntries(
-		Object.entries(csv[0]).map(([area, count]) => [area, parseInt(count)])
-	);
-	const max = Math.max(...Object.values(area_counts), 0);
-	return (
-		<ReportHeatMap
-			area_counts={area_counts}
-			max={max}
-			scale={color_scales.custom}
-		/>
-	);
-}
+/** @typedef {{csv_text: string, source_url: string}} SaveBlockProps */
 
 /**
  * The save function defines the way in which the different attributes should
@@ -38,10 +21,24 @@ export function SaveBlock({ csv_text }) {
  *
  * @return {WPElement} Element to render.
  */
-export default function Save({ attributes: { csv_text } }) {
+export default function Save({ attributes }) {
+	const { csv } = parse_csv(attributes.csv_text);
+	if (csv.length === 0) return <div>No Data</div>;
+
+	const area_counts = sum_columns(csv);
+	const max = Math.max(...Object.values(area_counts), 0);
 	return (
 		<div {...useBlockProps.save()}>
-			<SaveBlock csv_text={csv_text} />
+			<div
+				className="report-heatmap-block"
+				data-props={JSON.stringify(attributes)}
+			>
+				<ReportHeatMap
+					area_counts={area_counts}
+					max={max}
+					scale={color_scales.custom}
+				/>
+			</div>
 		</div>
 	);
 }

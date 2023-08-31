@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/reports-template",
+	"version": "1.0.0",
+	"title": "Reports Template",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "A Templating tool to fill blocks with calculated values",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "reports-template",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

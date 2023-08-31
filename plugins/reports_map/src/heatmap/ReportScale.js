@@ -15,6 +15,7 @@
  * @return {WPElement}
  */
 const ReportScale = ({ max, scale }) => {
+	if (max === 0) max = 1;
 	const exp_total = Math.floor(Math.log10(max));
 	const major_tick = Math.pow(10, exp_total);
 	const minor_tick = major_tick / 10;
