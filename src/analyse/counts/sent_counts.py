@@ -187,7 +187,7 @@ rcpt_statuses = rcpt_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no.
 # %% [markdown]
 # ### Various statistics about the counts
 
-toml_stats['report response rates'] = statistics = {
+toml_stats['this report is sent to'] = statistics = {
   "no. reports parsed": len(non_na),
   "no. reports failed": len(reports) - len(non_na),
   "no. reports pending": status_counts['pending'],
@@ -196,7 +196,7 @@ toml_stats['report response rates'] = statistics = {
   "no. reports completed": status_counts['completed'],
 }
 
-toml_stats['request response rates'] = {
+toml_stats['requests for response'] = {
   "no. recipients with requests": len(sent_counts),
   "no. requests for response": len(exploded),
   "no. requests pending": type_counts['pending'],
