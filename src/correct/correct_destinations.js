@@ -79,14 +79,20 @@ export default async function Corrector(keep_failed = true) {
   let known_replacements = [{}, {}]
   await map_series(
     Object.keys(corrections[0]),
-    key => !try_known_match(key) && add_to_known(key),
+    key => {
+      const match = try_known_match(key)
+      if (!match) add_to_known(match)
+    },
     'Merging destinations |:bar| :current/:total corrections'
   )
   corrections[0] = known_replacements[0]
   corrections[1] = known_replacements[1]
 
   function try_known_match(text) {
-    if (known_replacements[1][text]) return known_replacements[1][text]
+    // If there's an exact match, return it
+    for (const replacement of corrections) {
+      if (replacement[text]) return replacement[text]
+    }
 
     let replacements = [...corrections]
     replacements[1] = {} // don't try heirachic matches on acronyms
@@ -143,7 +149,7 @@ export default async function Corrector(keep_failed = true) {
     // if the text can be built from known matches and connectives, with only a
     // few errors, we can return those matches
     const replacements = Object.assign({}, ...corrections)
-    const matches = heirichic_matches(text, Object.keys(replacements), {
+    let matches = heirichic_matches(text, Object.keys(replacements), {
       ignored_words: punctuation
     })
     if (matches && is_complete_match(text, matches))
