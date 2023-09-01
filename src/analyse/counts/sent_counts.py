@@ -67,8 +67,9 @@ exploded['status'] = exploded['status'].mask(responded, 'received')
 
 sent_types = exploded.value_counts(['sent_to', 'status']).unstack(fill_value=0)
 sent_types['no. PFDs'] = exploded['sent_to'].value_counts()
-sent_types = sent_types[['no. PFDs', 'overdue', 'pending', 'received']]
-sent_types = sent_types.sort_values('no. PFDs', ascending=False)
+sent_types = sent_types[['no. PFDs', 'overdue', 'pending', 'received']]\
+  .sort_values('no. PFDs', ascending=False)
+sent_types['% received'] = (sent_types['received'] / sent_types['no. PFDs'] * 100).round(1)
 
 sent_counts = exploded.value_counts('sent_to')
 sent_years = exploded.value_counts(['year', 'status']).unstack(fill_value=0)
@@ -226,7 +227,7 @@ print(f"Sorted counts: {sent_counts}")
 # ### Calculating the top coroners
 
 top_counts = sent_counts.head(TOP_N)
-top_types = sent_types.drop("no. PFDs", axis=1).loc[top_counts.index]
+top_types = sent_types.loc[top_counts.index]
 
 # %% [markdown]
 # ### Saving the results
