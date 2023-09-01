@@ -1,6 +1,9 @@
 import os
 import toml
 
+def percent(n, total):
+  return round(n / total * 100, 1)
+
 class TOMLCache:
   """A TOML cache that keeps a toml file up to date with its contents."""
   def __init__(self, path, encoder = toml.TomlEncoder):
