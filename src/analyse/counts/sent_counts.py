@@ -98,7 +98,7 @@ non_na.loc[~report_due & (non_na['response status'] == 'partial'), 'response sta
 # %% [markdown]
 # ### Adding the non_na rows back to the reports
 
-reports.loc[:, 'response status'] = 'unknown'
+reports.loc[:, 'response status'] = 'failed'
 reports.loc[non_na.index, 'response status'] = non_na['response status']
 
 reports.loc[:, 'no. recipients'] = 0
@@ -114,7 +114,7 @@ print(reports['response status'].value_counts())
 # ### Calculating response status over time
 
 status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'response status']).unstack(fill_value=0)
-status_years = status_years[['unknown', 'pending', 'overdue', 'partial', 'completed']]
+status_years = status_years[['failed', 'pending', 'overdue', 'partial', 'completed']]
 print(status_years)
 
 # %% [markdown]
@@ -144,7 +144,7 @@ area_statuses = area_statuses.rename({
   "completed": "no. complete responses",
   "partial": "no. partial responses",
   "overdue": "no. overdue responses",
-  "unknown": "no. failed parses",
+  "failed": "no. failed parses",
   "pending": "no. pending responses"
 },axis=1)
 area_statuses['no. PFDs'] = reports['coroner_area'].value_counts()
@@ -160,7 +160,7 @@ name_statuses = name_statuses.rename({
   "completed": "no. complete responses",
   "partial": "no. partial responses",
   "overdue": "no. overdue responses",
-  "unknown": "no. failed parses",
+  "failed": "no. failed parses",
   "pending": "no. pending responses"
 },axis=1)
 name_statuses['no. PFDs'] = reports['coroner_name'].value_counts()
