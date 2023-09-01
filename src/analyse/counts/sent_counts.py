@@ -23,6 +23,9 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 # ### Reading the reports
 
 reports = pd.read_csv(f"{REPORTS_PATH}/reports-analysed.csv")
+fetched = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+
+fetched_non_na = fetched.dropna(subset=['this_report_is_being_sent_to'])
 
 # %% [markdown]
 # ### Calculating the due status for each report
@@ -189,7 +192,8 @@ rcpt_statuses = rcpt_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no.
 
 toml_stats['this report is sent to'] = statistics = {
   "no. reports parsed": len(non_na),
-  "no. reports failed": len(reports) - len(non_na),
+  "no. reports without recipients": len(fetched) - len(fetched_non_na),
+  "no. reports failed": len(fetched_non_na) - len(non_na),
   "no. reports pending": status_counts['pending'],
   "no. reports overdue": status_counts['overdue'],
   "no. reports partial": status_counts['partial'],

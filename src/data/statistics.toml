@@ -42,7 +42,8 @@
 
 ["this report is sent to"]
 "no. reports parsed" = 2970
-"no. reports failed" = 1556
+"no. reports without recipients" = 1036
+"no. reports failed" = 520
 "no. reports pending" = 36
 "no. reports overdue" = 1264
 "no. reports partial" = 179
