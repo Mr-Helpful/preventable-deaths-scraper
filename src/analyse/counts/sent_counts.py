@@ -10,7 +10,7 @@ import os
 import re
 import pandas as pd
 
-from helpers import toml_stats
+from helpers import toml_stats, percent
 
 TOP_N = 30
 
@@ -190,22 +190,25 @@ rcpt_statuses = rcpt_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no.
 # %% [markdown]
 # ### Various statistics about the counts
 
+without = len(fetched) - len(fetched_non_na)
+failed = len(fetched_non_na) - len(non_na)
+
 toml_stats['this report is sent to'] = statistics = {
-  "no. reports parsed": len(non_na),
-  "no. reports without recipients": len(fetched) - len(fetched_non_na),
-  "no. reports failed": len(fetched_non_na) - len(non_na),
-  "no. reports pending": status_counts['pending'],
-  "no. reports overdue": status_counts['overdue'],
-  "no. reports partial": status_counts['partial'],
-  "no. reports completed": status_counts['completed'],
+  "reports parsed": [len(non_na), percent(len(non_na), len(fetched))],
+  "reports without recipients": [without, percent(without, len(fetched))],
+  "reports failed": [failed, percent(failed, len(fetched))],
+  "reports pending": [status_counts['pending'], percent(status_counts['pending'], len(fetched))],
+  "reports overdue": [status_counts['overdue'], percent(status_counts['overdue'], len(fetched))],
+  "reports partial": [status_counts['partial'], percent(status_counts['partial'], len(fetched))],
+  "reports completed": [status_counts['completed'], percent(status_counts['completed'], len(fetched))],
 }
 
 toml_stats['requests for response'] = {
   "no. recipients with requests": len(sent_counts),
   "no. requests for response": len(exploded),
-  "no. requests pending": type_counts['pending'],
-  "no. requests overdue": type_counts['overdue'],
-  "no. requests received": type_counts['received'],
+  "requests pending": [type_counts['pending'], percent(type_counts['pending'], len(exploded))],
+  "requests overdue": [type_counts['overdue'], percent(type_counts['overdue'], len(exploded))],
+  "requests received": [type_counts['received'], percent(type_counts['received'], len(exploded))],
   "mean no. requests per recipient": round(sent_counts.mean(), 1),
   "median no. requests per recipient": sent_counts.median(),
   "IQR of requests per recipients": list(sent_counts.quantile([0.25, 0.75])),

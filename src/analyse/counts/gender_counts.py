@@ -10,7 +10,7 @@ import os
 import json
 import pandas as pd
 
-from helpers import toml_stats
+from helpers import toml_stats, percent
 
 PATH = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(f"{PATH}/data")
@@ -62,16 +62,16 @@ sum_counts = reports.value_counts('gender')
 
 toml_stats['coroners in reports'] = statistics = dict(
   toml_stats['coroners in reports'], **{
-  "no. reports from male coroners": sum_counts['male'],
-  "no. reports from female coroners": sum_counts['female'],
-  "no. reports from unknown coroners": sum_counts['unknown'],
+  "reports from male coroners": [sum_counts['male'], percent(sum_counts['male'], sum_counts.sum())],
+  "reports from female coroners": [sum_counts['female'], percent(sum_counts['female'], sum_counts.sum())],
+  "reports from unknown coroners": [sum_counts['unknown'], percent(sum_counts['unknown'], sum_counts.sum())],
 })
 
 toml_stats["coroners' society"] = dict(
   toml_stats["coroners' society"], **{
-  "no. coroners in society male": website_counts['male'],
-  "no. coroners in society female": website_counts['female'],
-  "no. coroners in society unknown": website_counts['unknown'],
+  "coroners in society male": [website_counts['male'], percent(website_counts['male'], website_counts.sum())],
+  "coroners in society female": [website_counts['female'], percent(website_counts['female'], website_counts.sum())],
+  "coroners in society unknown": [website_counts['unknown'], percent(website_counts['unknown'], website_counts.sum())],
 })
 
 print(f"Gender count statistics: {statistics}")
