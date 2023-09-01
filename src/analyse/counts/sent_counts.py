@@ -103,6 +103,8 @@ non_na.loc[~report_due & (non_na['response status'] == 'partial'), 'response sta
 
 reports.loc[:, 'response status'] = 'failed'
 reports.loc[non_na.index, 'response status'] = non_na['response status']
+empty_requests = fetched['this_report_is_being_sent_to'].isna()
+reports.loc[empty_requests, 'response status'] = 'no requests'
 
 reports.loc[:, 'no. recipients'] = 0
 reports.loc[non_na.index, 'no. recipients'] = non_na['no. recipients']
@@ -117,8 +119,7 @@ print(reports['response status'].value_counts())
 # ### Calculating response status over time
 
 status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'response status']).unstack(fill_value=0)
-status_years = status_years[['failed', 'pending', 'overdue', 'partial', 'completed']]
-print(status_years)
+status_years = status_years[['no requests', 'failed', 'pending', 'overdue', 'partial', 'completed']]
 
 # %% [markdown]
 # ### Writing back the reports with the status
