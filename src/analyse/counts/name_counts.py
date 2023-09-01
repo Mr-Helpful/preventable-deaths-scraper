@@ -107,7 +107,7 @@ toml_stats["coroners in reports"] = statistics = dict(
   toml_stats["coroners in reports"], **{
   "no. reports parsed": reports.count()['coroner_name'],
   "no. coroner names in reports": len(sum_counts),
-  f"reports from top {TOP_N} names": [top_counts.sum(), percent(top_counts.sum(), sum_counts.sum())],
+  f"reports from top {TOP_N} names": [float(top_counts.sum()), percent(top_counts.sum(), sum_counts.sum())],
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
@@ -119,8 +119,8 @@ without_reports = len(coroner_names) - with_reports
 toml_stats["coroners' society"] = dict(
   toml_stats["coroners' society"], **{
   "no. names in society": len(coroner_names),
-  "names in society with reports": [with_reports, percent(with_reports, len(coroner_names))],
-  "names in society without reports": [without_reports, percent(without_reports, len(coroner_names))],
+  "names in society with reports": [float(with_reports), percent(with_reports, len(coroner_names))],
+  "names in society without reports": [float(without_reports), percent(without_reports, len(coroner_names))],
 })
 
 print(f"Name count statistics: {statistics}")

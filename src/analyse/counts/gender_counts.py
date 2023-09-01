@@ -62,16 +62,16 @@ sum_counts = reports.value_counts('gender')
 
 toml_stats['coroners in reports'] = statistics = dict(
   toml_stats['coroners in reports'], **{
-  "reports from male coroners": [sum_counts['male'], percent(sum_counts['male'], sum_counts.sum())],
-  "reports from female coroners": [sum_counts['female'], percent(sum_counts['female'], sum_counts.sum())],
-  "reports from unknown coroners": [sum_counts['unknown'], percent(sum_counts['unknown'], sum_counts.sum())],
+  "reports from male coroners": [float(sum_counts['male']), percent(sum_counts['male'], sum_counts.sum())],
+  "reports from female coroners": [float(sum_counts['female']), percent(sum_counts['female'], sum_counts.sum())],
+  "reports from unknown coroners": [float(sum_counts['unknown']), percent(sum_counts['unknown'], sum_counts.sum())],
 })
 
 toml_stats["coroners' society"] = dict(
   toml_stats["coroners' society"], **{
-  "coroners in society male": [website_counts['male'], percent(website_counts['male'], website_counts.sum())],
-  "coroners in society female": [website_counts['female'], percent(website_counts['female'], website_counts.sum())],
-  "coroners in society unknown": [website_counts['unknown'], percent(website_counts['unknown'], website_counts.sum())],
+  "coroners in society male": [float(website_counts['male']), percent(website_counts['male'], website_counts.sum())],
+  "coroners in society female": [float(website_counts['female']), percent(website_counts['female'], website_counts.sum())],
+  "coroners in society unknown": [float(website_counts['unknown']), percent(website_counts['unknown'], website_counts.sum())],
 })
 
 print(f"Gender count statistics: {statistics}")
