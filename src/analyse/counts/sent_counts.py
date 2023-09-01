@@ -67,6 +67,7 @@ exploded['status'] = exploded['status'].mask(responded, 'received')
 
 sent_types = exploded.value_counts(['sent_to', 'status']).unstack(fill_value=0)
 sent_counts = exploded.value_counts('sent_to')
+sent_types = sent_types.loc[sent_counts.index]
 sent_years = exploded.value_counts(['year', 'status']).unstack(fill_value=0)
 type_counts = exploded.value_counts('status')
 
