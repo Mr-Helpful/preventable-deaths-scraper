@@ -3,15 +3,11 @@ import {
   heirichic_matches,
   hierachic_match,
   max_by,
-  non_words,
-  try_matches
+  non_words
 } from './approx_match.js'
 import {
-  conjunctions,
   conjunctive_words,
   connective_words,
-  has_acronym,
-  non_connective_words,
   to_acronym
 } from './simplify_destination.js'
 import { merge_failed, load_correction_data, re } from './helpers.js'
