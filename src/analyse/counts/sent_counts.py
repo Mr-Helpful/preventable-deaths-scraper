@@ -10,7 +10,7 @@ import os
 import re
 import pandas as pd
 
-from helpers import toml_stats
+from helpers import toml_stats, percent
 
 TOP_N = 30
 
@@ -23,6 +23,9 @@ CORRECT_PATH = os.path.abspath(f"{PATH}/../../correct")
 # ### Reading the reports
 
 reports = pd.read_csv(f"{REPORTS_PATH}/reports-analysed.csv")
+fetched = pd.read_csv(f"{REPORTS_PATH}/reports.csv")
+
+fetched_non_na = fetched.dropna(subset=['this_report_is_being_sent_to'])
 
 # %% [markdown]
 # ### Calculating the due status for each report
@@ -63,6 +66,11 @@ exploded['status'] = exploded['status'].mask(responded, 'received')
 # ### Calculating the counts for each recipient
 
 sent_types = exploded.value_counts(['sent_to', 'status']).unstack(fill_value=0)
+sent_types['no. PFDs'] = exploded['sent_to'].value_counts()
+sent_types = sent_types[['no. PFDs', 'overdue', 'pending', 'received']]\
+  .sort_values('no. PFDs', ascending=False)
+sent_types['% received'] = (sent_types['received'] / sent_types['no. PFDs'] * 100).round(1)
+
 sent_counts = exploded.value_counts('sent_to')
 sent_years = exploded.value_counts(['year', 'status']).unstack(fill_value=0)
 type_counts = exploded.value_counts('status')
@@ -98,8 +106,10 @@ non_na.loc[~report_due & (non_na['response status'] == 'partial'), 'response sta
 # %% [markdown]
 # ### Adding the non_na rows back to the reports
 
-reports.loc[:, 'response status'] = 'unknown'
+reports.loc[:, 'response status'] = 'failed'
 reports.loc[non_na.index, 'response status'] = non_na['response status']
+empty_requests = fetched['this_report_is_being_sent_to'].isna()
+reports.loc[empty_requests, 'response status'] = 'no requests'
 
 reports.loc[:, 'no. recipients'] = 0
 reports.loc[non_na.index, 'no. recipients'] = non_na['no. recipients']
@@ -114,8 +124,7 @@ print(reports['response status'].value_counts())
 # ### Calculating response status over time
 
 status_years = reports.assign(year=report_date.dt.year).value_counts(['year', 'response status']).unstack(fill_value=0)
-status_years = status_years[['unknown', 'pending', 'overdue', 'partial', 'completed']]
-print(status_years)
+status_years = status_years[['no requests', 'failed', 'pending', 'overdue', 'partial', 'completed']]
 
 # %% [markdown]
 # ### Writing back the reports with the status
@@ -144,7 +153,7 @@ area_statuses = area_statuses.rename({
   "completed": "no. complete responses",
   "partial": "no. partial responses",
   "overdue": "no. overdue responses",
-  "unknown": "no. failed parses",
+  "failed": "no. failed parses",
   "pending": "no. pending responses"
 },axis=1)
 area_statuses['no. PFDs'] = reports['coroner_area'].value_counts()
@@ -160,7 +169,7 @@ name_statuses = name_statuses.rename({
   "completed": "no. complete responses",
   "partial": "no. partial responses",
   "overdue": "no. overdue responses",
-  "unknown": "no. failed parses",
+  "failed": "no. failed parses",
   "pending": "no. pending responses"
 },axis=1)
 name_statuses['no. PFDs'] = reports['coroner_name'].value_counts()
@@ -187,21 +196,25 @@ rcpt_statuses = rcpt_statuses[['no. PFDs', 'no. recipients', 'no. replies', 'no.
 # %% [markdown]
 # ### Various statistics about the counts
 
+without = len(fetched) - len(fetched_non_na)
+failed = len(fetched_non_na) - len(non_na)
+
 toml_stats['this report is sent to'] = statistics = {
-  "no. reports parsed": len(non_na),
-  "no. reports failed": len(reports) - len(non_na),
-  "no. reports pending": status_counts['pending'],
-  "no. reports overdue": status_counts['overdue'],
-  "no. reports partial": status_counts['partial'],
-  "no. reports completed": status_counts['completed'],
+  "reports parsed": [float(len(non_na)), percent(len(non_na), len(fetched))],
+  "reports without recipients": [float(without), percent(without, len(fetched))],
+  "reports failed": [float(failed), percent(failed, len(fetched))],
+  "reports pending": [float(status_counts['pending']), percent(status_counts['pending'], len(fetched))],
+  "reports overdue": [float(status_counts['overdue']), percent(status_counts['overdue'], len(fetched))],
+  "reports partial": [float(status_counts['partial']), percent(status_counts['partial'], len(fetched))],
+  "reports completed": [float(status_counts['completed']), percent(status_counts['completed'], len(fetched))],
 }
 
 toml_stats['requests for response'] = {
   "no. recipients with requests": len(sent_counts),
   "no. requests for response": len(exploded),
-  "no. requests pending": type_counts['pending'],
-  "no. requests overdue": type_counts['overdue'],
-  "no. requests received": type_counts['received'],
+  "requests pending": [float(type_counts['pending']), percent(type_counts['pending'], len(exploded))],
+  "requests received": [float(type_counts['received']), percent(type_counts['received'], len(exploded))],
+  "requests overdue": [float(type_counts['overdue']), percent(type_counts['overdue'], len(exploded))],
   "mean no. requests per recipient": round(sent_counts.mean(), 1),
   "median no. requests per recipient": sent_counts.median(),
   "IQR of requests per recipients": list(sent_counts.quantile([0.25, 0.75])),

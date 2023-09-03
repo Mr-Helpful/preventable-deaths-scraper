@@ -10,7 +10,7 @@ import os
 import json
 import pandas as pd
 
-from helpers import toml_stats
+from helpers import toml_stats, percent
 
 TOP_N = 30
 
@@ -107,18 +107,20 @@ toml_stats["coroners in reports"] = statistics = dict(
   toml_stats["coroners in reports"], **{
   "no. reports parsed": reports.count()['coroner_name'],
   "no. coroner names in reports": len(sum_counts),
-  f"no. reports from top {TOP_N} names": top_counts.sum(),
-  f"% reports from top {TOP_N} names": round(100 * top_counts.sum() / sum_counts.sum(), 1),
+  f"reports from top {TOP_N} names": [float(top_counts.sum()), percent(top_counts.sum(), sum_counts.sum())],
   "mean per name": round(sum_counts.mean(), 1),
   "median per name": sum_counts.median(),
   "IQR of names": list(sum_counts.quantile([0.25, 0.75])),
 })
 
+with_reports = len([name for name in coroner_names if name in sum_counts.index])
+without_reports = len(coroner_names) - with_reports
+
 toml_stats["coroners' society"] = dict(
   toml_stats["coroners' society"], **{
   "no. names in society": len(coroner_names),
-  "no. names in society with reports": len([name for name in coroner_names if name in sum_counts.index]),
-  "no. names in society without reports": len([name for name in coroner_names if name not in sum_counts.index]),
+  "names in society with reports": [float(with_reports), percent(with_reports, len(coroner_names))],
+  "names in society without reports": [float(without_reports), percent(without_reports, len(coroner_names))],
 })
 
 print(f"Name count statistics: {statistics}")

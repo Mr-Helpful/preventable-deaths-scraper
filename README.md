@@ -7,9 +7,7 @@
 
 This repository represents a rewrite of the [Preventable Deaths Scraper](https://github.com/georgiarichards/georgiarichards.github.io) in javascript. This rewrite focuses on the explainability of the scraper (all code is documented), the speed of the scraper (we use async code to scrape whilst fetching) and the ability to run the scraper on a server (using node.js).
 
-We also include a natural language analysis of the scraped data, which uses a Large Language model approach (specifically a [form of BioBert](https://huggingface.co/pritamdeka/BioBERT-mnli-snli-scinli-scitail-mednli-stsb)) to automatically generate likely causes of death for the scraped data.
-
-Finally, we also provide 2 custom [wordpress gutenberg blocks](https://developer.wordpress.org/block-editor/how-to-guides/platform/) to be used alongside the scraped data. The first plugin generates a heatmap of coroner areas from the scraped data and the second allows for statistics of the data to be inserted into any block.
+We also provide a custom [wordpress gutenberg plugin](https://developer.wordpress.org/block-editor/how-to-guides/platform/) to be used alongside the scraped data. This takes the form of a custom block that renders a Heatmap over coroner areas, as defined on the [coroner’s society](https://www.coronersociety.org.uk/coroners//?search_keyword=&search_area=&send=1&admin=search).
 
 ## Installation and Usage
 
@@ -51,7 +49,7 @@ Then manual corrections for all fields can be added by running the following com
 npm run correct:update all
 ```
 
-This will open up an interactive prompt for each failed parse, allowing you to correct, skip or mark the field entry as uncorrectable. Other options for updating individual fields' corrections are available by running `npm run correct:update -- --help`.
+This will open up an interactive prompt for each failed parse, allowing you to correct, skip or mark the field entry as uncorrectable. Other options for updating individual columns' corrections are available by running `npm run correct:update -- --help`.
 
 ### Analyses
 
@@ -74,11 +72,11 @@ python src/analyse/aggregation/year-counts.py
 This will save the number of reports per year to [`src/data/year-counts.csv`](./src/data/year-counts.csv), in the following format:
 
 | year | count |
-|:-----|:------|
-| 2013 |   173 |
-| 2014 |   559 |
-| 2015 |   490 |
-| ...  |   ... |
+| :--- | :---- |
+| 2013 | 173   |
+| 2014 | 559   |
+| 2015 | 490   |
+| ...  | ...   |
 
 A shortcut to run the analysis is defined in the [`package.json`](./package.json) file and can be run as so:
 
@@ -103,8 +101,9 @@ python src/analyse/natural-language/cause-tags.py
 This will save the analysis to [`src/data/medical-cause-reports.csv`](./src/data/medical-cause-reports.csv) with an additional column `tags` which contains the predicted causes of death for each report (this column may be blank when prediction fails).
 
 The annotated reports look like this:
+
 | ref       | date       | area         | ... | tags                                                         |
-|:----------|:-----------|:-------------|:----|:-------------------------------------------------------------|
+| :-------- | :--------- | :----------- | :-- | :----------------------------------------------------------- |
 | 2023-0168 | 22/05/2023 | Avon         | ... | [('cerebrovascular accident/event/haemorrhage', 0.434), ...] |
 | 2023-0166 | 19/05/2023 | Warwickshire | ... | nan                                                          |
 | 2023-0074 | 27/02/2023 | Essex        | ... | [('spontaneous subarachnoid haemorrhage', 0.513), ...]       |
@@ -143,8 +142,6 @@ There are 6 main directories in the [`src`](./src) directory:
 - [`fetch`](./src/fetch): Fetching/scraping the report data.
 - [`parse`](./src/parse): Parsing the scraped data (i.e. html -> csv).
 - [`write`](./src/write): Writing to both the `reports.csv` file and the log file.
-
-The [`examples`](./examples) directory contains reference report PDFs (you probably won't need to look at this).
 
 The [`plugins`](./plugins) directory contains wordpress plugins to be used with the report CSVs produced by the scraper (these are probably only interesting if you're interested in data vis/wordpress plugins).
 
