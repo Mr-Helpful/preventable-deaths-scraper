@@ -303,7 +303,7 @@ function try_matches(
  * @param {number} [relative=0.1] the maximum number of relative edits per word
  * @returns {R | undefined} the value for the match, or undefined if no good match
  */
-function try_matching(
+export function try_matching(
   text,
   to_match,
   edits = 2,
