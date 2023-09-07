@@ -1,4 +1,4 @@
-import { fetch_html, map_async } from './helpers.js'
+import { fetch_html, map_series } from './helpers.js'
 
 /** Determines the urls of all the pages we need to search
  * @param {string} report_url the prevention of death reports page
@@ -40,7 +40,7 @@ async function fetch_urls_from_page(page_url) {
  */
 export async function fetch_all_urls(page_urls) {
   return (
-    await map_async(
+    await map_series(
       page_urls,
       fetch_urls_from_page,
       'Fetching urls |:bar| :current/:total pages'
