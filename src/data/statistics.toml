@@ -40,20 +40,20 @@
 "IQR of names" = [ 2.0, 11.0,]
 
 ["this report is sent to"]
-"reports parsed" = [ 2970.0, 65.6,]
+"reports parsed" = [ 3020.0, 66.7,]
 "reports without recipients" = [ 1036.0, 22.9,]
-"reports failed" = [ 520.0, 11.5,]
+"reports failed" = [ 470.0, 10.4,]
 "reports pending" = [ 35.0, 0.8,]
-"reports overdue" = [ 1265.0, 27.9,]
-"reports partial" = [ 179.0, 4.0,]
-"reports completed" = [ 1490.0, 32.9,]
+"reports overdue" = [ 1283.0, 28.3,]
+"reports partial" = [ 184.0, 4.1,]
+"reports completed" = [ 1517.0, 33.5,]
 
 ["requests for response"]
-"no. recipients with requests" = 1972
-"no. requests for response" = 5974
+"no. recipients with requests" = 2027
+"no. requests for response" = 6004
 "requests pending" = [ 44.0, 0.7,]
-"requests received" = [ 2046.0, 34.2,]
-"requests overdue" = [ 2328.0, 39.0,]
+"requests received" = [ 2093.0, 34.9,]
+"requests overdue" = [ 2361.0, 39.3,]
 "mean no. requests per recipient" = 2.2
 "median no. requests per recipient" = 1.0
 "IQR of requests per recipients" = [ 1.0, 2.0,]
