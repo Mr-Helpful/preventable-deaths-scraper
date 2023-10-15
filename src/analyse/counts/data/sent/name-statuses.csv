@@ -5,10 +5,10 @@ Mr Professor John S Pollard,86,38,30,20,0,13,0,1
 Mr Tom Osborne,78,60,33,23,1,24,0,4
 Ms Nadia Persaud,77,66,29,20,2,33,1,12
 Mrs Jacqueline F Lake,70,56,51,38,1,6,1,5
-Mr Andrew Harris,66,70,35,13,3,18,2,9
+Mr Andrew Harris,66,70,35,13,3,19,1,9
 Mrs Louise Hunt,64,106,83,22,8,17,0,5
 Mr Andrew Cox,60,62,51,29,3,11,0,6
-Mr John Gittins,57,47,28,23,1,10,2,2
+Mr John Gittins,57,47,28,23,1,11,1,2
 Miss Veronica HAMILTON-DEELEY,57,43,20,10,2,16,0,14
 Mr Kevin McLoughlin,53,48,34,23,1,11,1,14
 Mr Zafar Siddique,53,73,43,22,5,19,0,1
@@ -33,7 +33,7 @@ Mr Alan Peter Walsh,34,29,21,10,2,6,1,0
 Mrs Rachael Clare Griffin,34,33,46,13,1,8,0,9
 Ms Penelope Schofield,34,35,32,21,2,4,0,3
 Ms Caroline Saunders,33,36,28,20,0,11,0,2
-Miss Anna Crawford,31,28,14,13,0,11,2,5
+Miss Anna Crawford,31,28,14,13,0,12,1,5
 Dr Richard Ian Brittain,31,16,9,7,0,6,0,2
 Mr Andrew Tweddle,31,18,9,6,0,5,0,1
 Mr David William Graham RIDLEY,30,19,10,9,0,5,0,2
@@ -52,7 +52,7 @@ Mr David Clark Horsley,23,14,7,5,1,6,0,0
 Mrs Emma Elizabeth Whitting,23,28,11,8,1,12,0,2
 Mr Philip Barlow,23,18,10,8,0,7,0,3
 Ms Patricia Harding,23,16,12,10,0,4,0,3
-Dr Séan Cummings,23,31,6,3,0,10,2,5
+Dr Séan Cummings,23,31,6,3,0,12,0,5
 Mr Nigel Parsley,23,23,13,9,2,5,0,7
 Mr Richard Travers,22,34,9,1,1,8,0,3
 Mr Ian Geoffrey Pears,22,26,18,14,0,7,0,0
@@ -87,7 +87,7 @@ Mr Christopher Dorries,15,17,8,6,1,4,0,0
 Mrs Catherine Mason,15,4,4,3,0,0,0,3
 Ms Yvonne Kathleen Blake,15,18,8,6,0,7,1,1
 Ms Rachel Galloway,15,20,10,4,0,10,0,1
-Mr Crispin Giles Butler,15,17,8,6,1,6,1,0
+Mr Crispin Giles Butler,15,17,8,6,1,7,0,0
 Mr SIMON NELSON,15,9,5,4,0,2,0,0
 Mr Geoffrey Sullivan,15,17,16,10,1,2,0,2
 Ms Abigail Combes,14,13,7,5,1,5,0,3
@@ -176,7 +176,7 @@ Dr Bridget Dolan QC,7,6,5,3,0,1,0,0
 Mr Tony Williams,7,9,4,0,1,5,0,1
 Mr Alan R Craze,7,14,12,2,2,2,0,0
 Mrs Anne Pember,7,10,7,3,1,1,0,0
-Mr christopher paul williams,7,11,3,2,0,3,1,1
+Mr christopher paul williams,7,11,3,2,0,4,0,1
 Mr Stephen John Nicholls,7,6,6,5,0,0,0,1
 Mrs SARAH LOUISE SLATER,7,8,4,4,0,3,0,0
 Julie Robertson,7,9,4,2,0,5,0,0
@@ -212,7 +212,7 @@ Dr Jason Wells,5,6,5,4,0,0,0,1
 Belinda Cheney,5,7,0,0,0,2,0,1
 Mr Christopher Campbell Wilkinson,5,6,3,1,0,2,0,0
 Mr Alan Moore,5,4,1,1,0,2,0,0
-Mr Simon Milburn,5,5,0,0,0,3,1,1
+Mr Simon Milburn,5,5,0,0,0,4,0,1
 Dr Julian Rupert Laurence Morris,5,9,7,1,2,1,0,1
 Ms Fiona Borrill,4,8,3,1,0,3,0,0
 Mr Robert Cohen,4,2,1,1,0,0,1,2
@@ -322,13 +322,13 @@ Mr RAVI SIDHU,2,2,0,0,0,1,0,0
 Mr Peter Taheri,2,0,0,0,0,0,0,2
 Anthony Eastwoods,2,0,0,0,0,0,0,0
 Karon Monaghan,2,3,1,0,0,1,0,0
-Katy Thorne,2,5,0,0,0,0,1,1
+Katy Thorne,2,5,0,0,0,1,0,1
 Janet Napier,2,4,2,0,2,0,0,0
 Maria Mulrennan,2,8,4,0,0,2,0,0
 Mr Christopher Briggs,2,2,2,2,0,0,0,0
 Michael Oakley,2,2,0,0,0,2,0,0
-Ms Marianne Johnson,1,1,0,0,0,0,1,0
-Ms Leila Benyounes,1,2,0,0,0,0,1,0
+Ms Marianne Johnson,1,1,0,0,0,1,0,0
+Ms Leila Benyounes,1,2,0,0,0,1,0,0
 Ian Goldup,1,1,1,1,0,0,0,0
 Fiona Malek,1,1,0,0,0,1,0,0
 John Sleightholme,1,2,2,1,0,0,0,0
@@ -416,7 +416,7 @@ Michael Spencer,1,0,0,0,0,0,0,1
 Miss Caroline Margaret Jones,1,0,0,0,0,0,0,1
 Miss Clare Doherty,1,1,0,0,0,1,0,0
 Miss Georgina Gibbs,1,5,0,0,0,1,0,0
-Miss Isobel Thistlethwaite,1,1,0,0,0,0,1,0
+Miss Isobel Thistlethwaite,1,1,0,0,0,1,0,0
 Ms Amy Street,1,1,1,1,0,0,0,0
 Miss Laura Nash,1,1,1,1,0,0,0,0
 Miss Louise E Rae,1,1,1,1,0,0,0,0

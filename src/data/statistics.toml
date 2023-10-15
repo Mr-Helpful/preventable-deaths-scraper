@@ -43,17 +43,17 @@
 "reports parsed" = [ 3090.0, 67.1,]
 "reports without recipients" = [ 1036.0, 22.5,]
 "reports failed" = [ 477.0, 10.4,]
-"reports pending" = [ 63.0, 1.4,]
-"reports overdue" = [ 1322.0, 28.7,]
+"reports pending" = [ 51.0, 1.1,]
+"reports overdue" = [ 1334.0, 29.0,]
 "reports partial" = [ 184.0, 4.0,]
 "reports completed" = [ 1520.0, 33.0,]
 
 ["requests for response"]
 "no. recipients with requests" = 2079
 "no. requests for response" = 6145
-"requests pending" = [ 125.0, 2.0,]
+"requests pending" = [ 99.0, 1.6,]
 "requests received" = [ 2097.0, 34.1,]
-"requests overdue" = [ 2410.0, 39.2,]
+"requests overdue" = [ 2436.0, 39.6,]
 "mean no. requests per recipient" = 2.2
 "median no. requests per recipient" = 1.0
 "IQR of requests per recipients" = [ 1.0, 2.0,]
