@@ -1,10 +1,10 @@
 coroner_area,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
 Greater Manchester South,384,376,243,140,7,107,0,61
-London Inner North,227,246,150,92,10,58,3,13
+London Inner North,227,246,150,92,10,59,2,13
 "West Sussex, Brighton and Hove",141,120,79,44,6,30,1,25
 Surrey,141,165,80,28,12,43,1,21
 Birmingham and Solihull,140,211,155,62,10,35,3,15
-London East,132,117,51,28,5,44,5,38
+London East,132,117,51,28,5,46,3,38
 London Inner South,125,157,82,27,11,36,2,16
 South Wales Central,113,124,81,44,4,32,0,5
 Greater Manchester West,107,105,65,40,2,29,1,5
@@ -42,7 +42,7 @@ Berkshire,47,52,27,12,3,18,0,5
 Suffolk,47,46,21,13,2,16,0,11
 Yorkshire South East,45,39,23,19,0,10,0,2
 Exeter and Greater Devon,45,48,34,19,3,5,2,1
-Blackpool and Fylde,44,33,17,17,0,10,2,9
+Blackpool and Fylde,44,33,17,17,0,11,1,9
 Stoke on Trent and North Staffordshire,44,43,27,18,1,13,0,5
 Derby and Derbyshire,42,47,18,10,6,13,3,4
 Sunderland,41,30,22,14,0,9,0,6

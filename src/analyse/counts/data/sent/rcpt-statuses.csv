@@ -1,6 +1,6 @@
 sent_to,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses
 NHS England,201,469,225,69,37,89,6
-Department of Health and Social Care,187,471,280,82,28,70,7
+Department of Health and Social Care,187,471,280,82,28,73,4
 Care Quality Commission,86,233,111,21,19,45,1
 HM Prison and Probation Service,55,138,56,14,10,30,1
 Department for Transport,36,69,42,12,10,14,0
@@ -17,7 +17,7 @@ Department for Education,24,49,36,15,5,4,0
 Pennine Care NHS Trust,22,44,23,10,1,11,0
 Wales Ambulance Service NHS Trust,19,47,33,10,3,6,0
 Greater Manchester Health & Social Care Partnership,19,40,30,12,2,5,0
-North East London Foundation Trust,18,32,9,4,1,10,3
+North East London Foundation Trust,18,32,9,4,1,12,1
 Care UK,17,42,16,3,6,8,0
 Metropolitan Police,17,25,17,11,0,6,0
 Medicines and Healthcare Products Regulatory Agency,17,45,22,5,2,10,0
@@ -126,7 +126,7 @@ Kings College Hospital,6,13,3,1,1,4,0
 Norfolk and Norwich University Hospital,6,11,6,2,1,3,0
 South Staffordshire & Shropshire NHS Trust,5,7,3,2,0,3,0
 Swansea Bay University Health Board,5,12,5,2,0,3,0
-Royal College of Psychiatrist,5,20,11,1,1,2,1
+Royal College of Psychiatrist,5,20,11,1,1,3,0
 Ministry of Defence,5,7,5,3,1,1,0
 Stockport CCG,5,12,5,3,0,2,0
 Birmingham and Solihull CCG,5,17,10,3,1,1,0
@@ -136,7 +136,7 @@ Central & North West London NHS Foundation Trust,5,13,5,1,0,4,0
 Practice Plus Group,5,12,1,1,0,2,2
 South Wales Police,5,9,5,3,0,2,0
 University Hospitals of Birmingham NHS Foundation Trust,5,6,4,3,0,2,0
-Royal College of Paediatrics and Child Health,5,22,3,0,1,1,3
+Royal College of Paediatrics and Child Health,5,22,3,0,1,2,2
 Midlands Partnership NHS Trust,5,5,3,3,0,2,0
 Wrightington Wigan and Leigh NHS Trust,5,9,8,4,1,0,0
 Shrewsbury and Telford NHS Trust,5,5,3,3,0,2,0
@@ -344,7 +344,7 @@ HMP Birmingham,2,4,3,1,0,1,0
 Homerton University Hospital,2,3,2,1,0,1,0
 Sussex NHS Trust,2,3,2,1,1,0,0
 HMP Lindholme,2,6,1,1,0,1,0
-Product Safety and Standards,2,3,1,0,0,1,1
+Product Safety and Standards,2,3,1,0,0,2,0
 Kettering General Hospital NHS Foundation Trust,2,2,1,1,0,1,0
 East Leicestershire and Rutland CCG,2,4,5,1,0,1,0
 Southampton General Hospital,2,3,0,0,0,2,0
@@ -575,7 +575,7 @@ North NHS Trust,1,1,0,0,0,1,0
 North Somerset Clinical Commissioning Group,1,2,0,0,0,1,0
 North Somerset Council,1,2,2,1,0,0,0
 Riverside Rest Home,1,1,0,0,0,1,0
-North East London Health and Care Partnership,1,5,0,0,0,0,1
+North East London Health and Care Partnership,1,5,0,0,0,1,0
 Pennine NHS Trust,1,2,0,0,0,1,0
 Rosewood Lodge Nursing Home,1,1,1,1,0,0,0
 Rochcare,1,1,1,1,0,0,0
@@ -1659,11 +1659,11 @@ Landlord,1,1,1,1,0,0,0
 Land Owner,1,2,1,0,0,1,0
 Lancs & Cumbria Lifts UK Ltd,1,3,0,0,0,1,0
 Lancashire and South Cumbria NHS Foundation Trust,1,1,1,1,0,0,0
-Lancashire and South Cumbria Integrated Care Board,1,2,0,0,0,0,1
+Lancashire and South Cumbria Integrated Care Board,1,2,0,0,0,1,0
 Lincolnshire Community Health Service NHS Trust,1,1,1,1,0,0,0
 Lincs Firwood Co Ltd,1,2,1,0,0,1,0
 Lancashire Care Foundation Trust,1,1,0,0,0,1,0
-London Borough of Redbridge Council,1,3,0,0,0,0,1
+London Borough of Redbridge Council,1,3,0,0,0,1,0
 Lord Chancellor,1,1,1,1,0,0,0
 Longton Police Station,1,2,0,0,0,1,0
 Long Furlong Medical Centre,1,1,0,0,0,1,0
