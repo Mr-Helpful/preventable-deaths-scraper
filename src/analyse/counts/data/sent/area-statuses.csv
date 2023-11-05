@@ -3,8 +3,8 @@ Greater Manchester South,384,376,243,140,7,107,0,61
 London Inner North,227,246,150,92,10,59,2,13
 "West Sussex, Brighton and Hove",141,120,79,44,6,30,1,25
 Surrey,141,165,80,28,12,43,1,21
-Birmingham and Solihull,140,211,155,62,10,35,3,15
-London East,132,117,51,28,5,46,3,38
+Birmingham and Solihull,140,211,155,62,10,36,2,15
+London East,132,117,51,28,5,47,2,38
 London Inner South,125,157,82,27,11,36,2,16
 South Wales Central,113,124,81,44,4,32,0,5
 Greater Manchester West,107,105,65,40,2,29,1,5
@@ -12,8 +12,8 @@ Greater Manchester North,103,115,71,36,3,32,0,5
 Yorkshire West Eastern,99,82,55,38,1,24,0,15
 Norfolk,99,78,62,46,1,14,2,7
 Nottinghamshire,91,116,64,27,3,33,0,11
-Cornwall and the Isles of Scilly,89,117,73,38,8,27,1,8
-Avon,83,86,36,18,3,31,2,8
+Cornwall and the Isles of Scilly,89,117,73,38,8,28,0,8
+Avon,83,86,36,18,3,32,1,8
 North Wales (East & Central),82,71,40,34,1,20,2,5
 "Hampshire, Portsmouth and Southampton",77,95,47,24,9,26,2,1
 The Black Country Jurisdiction,77,83,51,30,5,21,0,4
@@ -52,7 +52,7 @@ Warwickshire,34,37,16,13,0,15,1,0
 Cambridgeshire and Peterborough,34,38,12,3,1,11,1,11
 Gloucestershire,34,38,22,18,0,12,0,1
 Hertfordshire,30,27,21,15,1,5,0,3
-Cheshire,29,35,21,10,3,10,1,2
+Cheshire,29,35,21,10,3,11,0,2
 Newcastle and North Tyneside,29,26,17,7,1,12,2,4
 Oxfordshire,27,19,18,14,0,1,0,0
 Northamptonshire,27,37,18,10,1,10,0,3
@@ -67,7 +67,7 @@ Kent North East,20,12,7,6,0,3,0,8
 Coventry,19,13,3,3,0,8,0,1
 Isle of Wight,19,20,8,4,1,8,0,1
 Somerset,19,16,9,5,1,6,0,1
-North West Wales,17,11,8,7,0,1,2,3
+North West Wales,17,11,8,7,0,3,0,3
 Northumberland North,17,15,11,5,2,2,0,2
 East Sussex,16,28,19,5,3,6,0,1
 London City,13,10,5,3,0,4,0,2

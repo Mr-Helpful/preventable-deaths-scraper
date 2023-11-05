@@ -1,6 +1,6 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,201,100,6,95,47.3
-Department of Health and Social Care,187,92,4,91,48.7
+NHS England,201,101,5,95,47.3
+Department of Health and Social Care,187,93,3,91,48.7
 Care Quality Commission,86,59,1,26,30.2
 HM Prison and Probation Service,55,37,1,17,30.9
 Department for Transport,36,17,0,19,52.8
@@ -48,10 +48,10 @@ Greater Manchester Mental Health NHS Foundation Trust,12,7,1,4,33.3
 Cwm Taf Morgannwg University Health Board,11,5,0,6,54.5
 General Medical Council,11,6,0,5,45.5
 West Midlands Police,11,4,1,6,54.5
-Betsi Cadwaladr University Health Board BCUHB,11,5,2,4,36.4
+Betsi Cadwaladr University Health Board BCUHB,11,6,1,4,36.4
 Royal London Hospital,11,4,0,7,63.6
 Stockport NHS Foundation Trust,11,3,0,8,72.7
-Barts Health NHS Foundation Trust,11,4,3,4,36.4
+Barts Health NHS Foundation Trust,11,6,1,4,36.4
 Gloucestershire Hospital NHS Foundation Trust,10,2,1,7,70.0
 Department of Transport,10,6,0,4,40.0
 East Midlands Ambulance Service,10,2,0,8,80.0
@@ -427,7 +427,7 @@ Solent NHS Trust,2,0,0,2,100.0
 Royal College of Pathologists,2,2,0,0,0.0
 Oldham Council,2,1,0,1,50.0
 King’s College Hospital NHS Foundation Trust,2,0,0,2,100.0
-The National Institute for Health and Care Excellence,2,0,2,0,0.0
+The National Institute for Health and Care Excellence,2,1,1,0,0.0
 Care UK Clinical Services,2,2,0,0,0.0
 British Cycling,2,0,0,2,100.0
 Local Government Association,2,1,0,1,50.0
@@ -540,7 +540,7 @@ UCAS,2,0,0,2,100.0
 Coventry and Warwickshire NHS Trust,2,1,0,1,50.0
 Tendering District Council,2,2,0,0,0.0
 Kirklees Council,2,2,0,0,0.0
-University Hospitals Bristol,2,0,1,1,50.0
+University Hospitals Bristol,2,1,0,1,50.0
 5 Borough Partnership NHS Trust,2,0,0,2,100.0
 Black Country NHS Foundation Trust,2,2,0,0,0.0
 The Care Quality Commission,2,1,0,1,50.0
@@ -642,7 +642,7 @@ Newcastle Upon Tyne NHS Trust,1,1,0,0,0.0
 Newcastle Upon Tyne City Council,1,0,0,1,100.0
 North Tyneside Hospital,1,1,0,0,0.0
 Northern Care Alliance,1,1,0,0,0.0
-Regenesis Health Travel Limited,1,0,1,0,0.0
+Regenesis Health Travel Limited,1,1,0,0,0.0
 Oxford University Hospital,1,1,0,0,0.0
 Oldham Care Commissioning Group,1,1,0,0,0.0
 Options for Care Ltd,1,0,0,1,100.0
@@ -899,7 +899,7 @@ Whirlpool UK,1,0,0,1,100.0
 West Midlands Fire Service,1,1,0,0,0.0
 Whipps Cross Hospital,1,0,0,1,100.0
 Weymouth Street Hospital,1,0,0,1,100.0
-Weston NHS Foundation Trust,1,0,1,0,0.0
+Weston NHS Foundation Trust,1,1,0,0,0.0
 Weston Area Health NHS Trust,1,1,0,0,0.0
 Westlands Care Home,1,0,0,1,100.0
 West Yorkshire Fire and Rescue Service,1,1,0,0,0.0
@@ -1123,7 +1123,7 @@ The Chief Executive of National Highways,1,0,0,1,100.0
 The Castle Rock Group,1,0,0,1,100.0
 The British Vehicle Rental and Leasing Association,1,1,0,0,0.0
 The British Obesity and Metabolic Surgery Society,1,1,0,0,0.0
-The British National Formulary,1,0,1,0,0.0
+The British National Formulary,1,1,0,0,0.0
 The British Heart Foundation,1,1,0,0,0.0
 The British Hang Gliding and Paragliding Association Ltd,1,0,0,1,100.0
 The Brewery,1,1,0,0,0.0
