@@ -11,7 +11,8 @@ export async function fetch_page_urls(report_url) {
   const link_path = 'a.page-numbers'
   const nums = $(link_path)
     .get()
-    .map(link => Number($(link).text()))
+    .flatMap(link => Array.from($(link).text().matchAll(/\d+/g)))
+    .map(num => Number(num[0]))
     .filter(isFinite)
 
   return Array.from(
