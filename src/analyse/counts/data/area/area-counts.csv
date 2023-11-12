@@ -11,10 +11,10 @@ Greater Manchester West,107
 Greater Manchester North,105
 Norfolk,100
 Yorkshire West Eastern,99
-Nottinghamshire,94
+Nottinghamshire,95
 Cornwall and the Isles of Scilly,90
+Avon,84
 North Wales (East & Central),83
-Avon,83
 The Black Country Jurisdiction,77
 "Hampshire, Portsmouth and Southampton",77
 County Durham and Darlington,75
@@ -22,27 +22,27 @@ Yorkshire West Western,74
 Yorkshire South West,72
 Leicester City and South Leicestershire,67
 Milton Keynes,66
-London Inner West,65
 Essex,65
-Bedfordshire and Luton,64
+London Inner West,65
+Bedfordshire and Luton,65
+Cumbria,61
 Staffordshire South,60
-Cumbria,60
 Manchester City,60
-Lincolnshire,59
 London North,59
+Lincolnshire,59
 Dorset,57
-Liverpool and the Wirral,54
 Kent Mid and Medway,54
-Wiltshire and Swindon,50
+Liverpool and the Wirral,54
 Worcestershire,50
 London West,50
-Berkshire,48
-Lancashire and Blackburn with Darwen,48
+Wiltshire and Swindon,50
 "Plymouth, Torbay and South Devon",48
+Lancashire and Blackburn with Darwen,48
+Berkshire,48
 Suffolk,47
 Exeter and Greater Devon,46
-Blackpool and Fylde,45
 Yorkshire South East,45
+Blackpool and Fylde,45
 Stoke on Trent and North Staffordshire,44
 Derby and Derbyshire,42
 Sunderland,41
@@ -55,16 +55,16 @@ Newcastle and North Tyneside,32
 Hertfordshire,30
 Cheshire,30
 Northamptonshire,28
-Oxfordshire,27
 Kent Central and South East,27
+Oxfordshire,27
 North Yorkshire and York,23
 Swansea and Neath Port Talbot,23
 "Shropshire, Telford and Wrekin",22
 East Riding of Yorkshire and Kingston-upon-Hull,21
 Carmarthenshire and Pembrokeshire,21
+Somerset,21
 Buckinghamshire,21
 Kent North East,20
-Somerset,20
 Isle of Wight,19
 Coventry,19
 North West Wales,18
@@ -73,11 +73,11 @@ East Sussex,16
 London City,13
 Teesside,10
 Herefordshire,10
-Rutland and North Leicestershire,8
 Gateshead and South Tyneside,8
+Rutland and North Leicestershire,8
 Kent North West,7
-North Lincolnshire and Grimsby,5
 "Sefton, Knowsley and St Helens",5
+North Lincolnshire and Grimsby,5
 Hartlepool,4
 Staffordshire and Stoke-on-Trent,1
 Ceredigion,1
