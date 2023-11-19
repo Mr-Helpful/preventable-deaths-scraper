@@ -1,6 +1,6 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,209,104,10,95,45.5
-Department of Health and Social Care,194,98,5,91,46.9
+NHS England,212,108,9,95,44.8
+Department of Health and Social Care,195,99,5,91,46.7
 Care Quality Commission,91,61,4,26,28.6
 HM Prison and Probation Service,55,37,1,17,30.9
 Department for Transport,37,17,1,19,51.4
@@ -8,24 +8,24 @@ Home Office,34,16,2,16,47.1
 Ministry of Justice,34,27,2,5,14.7
 National Institute for Health and Care Excellence,32,25,0,7,21.9
 Network Rail,31,4,0,27,87.1
-Health and Safety Executive,29,15,1,13,44.8
-Highways England,26,10,0,16,61.5
+Health and Safety Executive,30,15,2,13,43.3
 Leeds Teaching Hospitals NHS Trust,26,11,0,15,57.7
+Highways England,26,10,0,16,61.5
 Department for Education,25,7,1,17,68.0
 National Police Chiefs’ Council,25,17,2,6,24.0
 Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Pennine Care NHS Trust,22,12,0,10,45.5
-Wales Ambulance Service NHS Trust,19,9,0,10,52.6
+Wales Ambulance Service NHS Trust,20,9,1,10,50.0
 Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
 North East London Foundation Trust,18,13,0,5,27.8
-Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
 Care UK,17,10,0,7,41.2
+Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
 Metropolitan Police,17,6,0,11,64.7
 Greater Manchester Police,16,3,0,13,81.2
+Birmingham and Solihull Mental Health Foundation Trust,16,7,2,7,43.8
 Medicines & Healthcare products Regulatory Agency,16,9,1,6,37.5
-NHS Improvement,15,8,0,7,46.7
-Birmingham and Solihull Mental Health Foundation Trust,15,7,1,7,46.7
-College of Policing,15,7,0,8,53.3
-University Hospitals Plymouth NHS Trust,15,3,0,12,80.0
 Barts Health NHS Trust,15,5,0,10,66.7
+College of Policing,15,7,0,8,53.3
+NHS Improvement,15,8,0,7,46.7
 Metropolitan Police Service,15,8,0,7,46.7
+University Hospitals Plymouth NHS Trust,15,3,0,12,80.0
