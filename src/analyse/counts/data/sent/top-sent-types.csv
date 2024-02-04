@@ -1,13 +1,13 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,237,129,13,95,40.1
-Department of Health and Social Care,215,115,9,91,42.3
+NHS England,237,135,7,95,40.1
+Department of Health and Social Care,215,116,8,91,42.3
 Care Quality Commission,92,65,1,26,28.3
-HM Prison and Probation Service,58,38,3,17,29.3
-Department for Transport,40,20,1,19,47.5
+HM Prison and Probation Service,58,39,2,17,29.3
+Department for Transport,40,21,0,19,47.5
 Home Office,38,21,1,16,42.1
 Ministry of Justice,34,29,0,5,14.7
 National Institute for Health and Care Excellence,32,25,0,7,21.9
-Network Rail,32,4,1,27,84.4
+Network Rail,32,5,0,27,84.4
 Health and Safety Executive,30,17,0,13,43.3
 National Police Chiefs’ Council,26,19,1,6,23.1
 Leeds Teaching Hospitals NHS Trust,26,11,0,15,57.7
@@ -21,11 +21,11 @@ North East London Foundation Trust,18,13,0,5,27.8
 NHS Improvement,18,10,1,7,38.9
 Metropolitan Police,17,6,0,11,64.7
 Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
-Medicines & Healthcare products Regulatory Agency,17,10,1,6,35.3
-Greater Manchester Police,17,3,1,13,76.5
+Medicines & Healthcare products Regulatory Agency,17,11,0,6,35.3
+Greater Manchester Police,17,4,0,13,76.5
 Birmingham and Solihull Mental Health Foundation Trust,17,10,0,7,41.2
 Care UK,17,10,0,7,41.2
-Betsi Cadwaladr University Health Board BCUHB,16,9,3,4,25.0
+Betsi Cadwaladr University Health Board BCUHB,16,10,2,4,25.0
 College of Policing,16,8,0,8,50.0
-University Hospitals Plymouth NHS Trust,16,3,1,12,75.0
+University Hospitals Plymouth NHS Trust,16,4,0,12,75.0
 Barts Health NHS Foundation Trust,16,10,2,4,25.0
