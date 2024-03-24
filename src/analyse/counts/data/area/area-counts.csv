@@ -1,10 +1,10 @@
 coroner_area,count
-Greater Manchester South,404
-London Inner North,253
-"West Sussex, Brighton and Hove",154
-Birmingham and Solihull,149
-Surrey,149
-London East,138
+Greater Manchester South,410
+London Inner North,254
+"West Sussex, Brighton and Hove",155
+Surrey,151
+Birmingham and Solihull,150
+London East,140
 London Inner South,130
 South Wales Central,120
 Greater Manchester North,111
@@ -14,13 +14,13 @@ Yorkshire West Eastern,103
 Norfolk,102
 Cornwall and the Isles of Scilly,97
 North Wales (East & Central),91
-Avon,88
+Avon,89
 "Hampshire, Portsmouth and Southampton",82
 County Durham and Darlington,81
 The Black Country Jurisdiction,80
-Yorkshire South West,78
+Yorkshire South West,79
 Yorkshire West Western,78
-Essex,74
+Essex,75
 London Inner West,73
 Bedfordshire and Luton,70
 Leicester City and South Leicestershire,69
@@ -28,28 +28,28 @@ Milton Keynes,67
 Cumbria,66
 Manchester City,62
 London North,62
-Dorset,60
 Lincolnshire,60
+Dorset,60
 Staffordshire South,60
 Liverpool and the Wirral,58
 Kent Mid and Medway,57
 Suffolk,55
+Worcestershire,52
 London West,52
 Berkshire,51
 Wiltshire and Swindon,51
-Worcestershire,51
 Lancashire and Blackburn with Darwen,50
 "Plymouth, Torbay and South Devon",50
+Derby and Derbyshire,48
 Exeter and Greater Devon,47
-Derby and Derbyshire,47
 Yorkshire South East,46
 Blackpool and Fylde,45
 Stoke on Trent and North Staffordshire,44
-Sunderland,41
-London South,39
+Sunderland,42
 Warwickshire,39
+London South,39
+Gwent,38
 Cambridgeshire and Peterborough,37
-Gwent,37
 Cheshire,35
 Gloucestershire,35
 Newcastle and North Tyneside,33
@@ -63,22 +63,22 @@ North Yorkshire and York,24
 "Shropshire, Telford and Wrekin",22
 Somerset,22
 Carmarthenshire and Pembrokeshire,21
+North West Wales,21
 Kent North East,21
 Buckinghamshire,21
-North West Wales,20
+East Sussex,21
 Coventry,19
 Isle of Wight,19
-East Sussex,19
 Northumberland North,17
 London City,13
 Herefordshire,11
 Teesside,10
 Rutland and North Leicestershire,9
 Kent North West,8
+Hartlepool,8
 Gateshead and South Tyneside,8
-Hartlepool,7
-"Sefton, Knowsley and St Helens",6
 North Lincolnshire and Grimsby,6
+"Sefton, Knowsley and St Helens",6
 Staffordshire and Stoke-on-Trent,4
-Northumberland South,1
 Ceredigion,1
+Northumberland South,1
