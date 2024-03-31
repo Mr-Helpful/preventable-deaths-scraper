@@ -1,9 +1,9 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,258,147,15,96,37.2
-Department of Health and Social Care,228,126,8,94,41.2
-Care Quality Commission,99,66,7,26,26.3
+NHS England,258,148,14,96,37.2
+Department of Health and Social Care,229,126,9,94,41.0
+Care Quality Commission,99,68,5,26,26.3
 HM Prison and Probation Service,58,41,0,17,29.3
-Department for Transport,40,21,0,19,47.5
+Department for Transport,43,21,2,20,46.5
 Home Office,39,22,1,16,41.0
 Ministry of Justice,34,29,0,5,14.7
 Network Rail,33,5,1,27,81.8
@@ -16,7 +16,7 @@ Leeds Teaching Hospitals NHS Trust,26,11,0,15,57.7
 Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Pennine Care NHS Trust,23,13,0,10,43.5
 Wales Ambulance Service NHS Trust,23,11,1,11,47.8
-Betsi Cadwaladr University Health Board BCUHB,20,12,4,4,20.0
+Betsi Cadwaladr University Health Board BCUHB,20,13,3,4,20.0
 Medicines & Healthcare products Regulatory Agency,19,11,2,6,31.6
 Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
 NHS Improvement,18,11,0,7,38.9
