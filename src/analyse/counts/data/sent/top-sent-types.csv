@@ -1,8 +1,8 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,258,148,14,96,37.2
-Department of Health and Social Care,229,126,9,94,41.0
-Care Quality Commission,99,68,5,26,26.3
-HM Prison and Probation Service,58,41,0,17,29.3
+NHS England,259,150,13,96,37.1
+Department of Health and Social Care,230,129,7,94,40.9
+Care Quality Commission,99,70,3,26,26.3
+HM Prison and Probation Service,59,42,0,17,28.8
 Department for Transport,43,21,2,20,46.5
 Home Office,39,22,1,16,41.0
 Ministry of Justice,34,29,0,5,14.7
@@ -10,22 +10,22 @@ Network Rail,33,5,1,27,81.8
 National Institute for Health and Care Excellence,32,25,0,7,21.9
 Health and Safety Executive,31,17,1,13,41.9
 Department for Education,27,9,1,17,63.0
-National Police Chiefs’ Council,26,20,0,6,23.1
-Highways England,26,10,0,16,61.5
 Leeds Teaching Hospitals NHS Trust,26,11,0,15,57.7
+Highways England,26,10,0,16,61.5
+National Police Chiefs’ Council,26,20,0,6,23.1
 Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Pennine Care NHS Trust,23,13,0,10,43.5
-Wales Ambulance Service NHS Trust,23,11,1,11,47.8
-Betsi Cadwaladr University Health Board BCUHB,20,13,3,4,20.0
+Wales Ambulance Service NHS Trust,23,12,0,11,47.8
+Betsi Cadwaladr University Health Board BCUHB,21,13,4,4,19.0
 Medicines & Healthcare products Regulatory Agency,19,11,2,6,31.6
 Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
-NHS Improvement,18,11,0,7,38.9
 Greater Manchester Police,18,4,1,13,72.2
+NHS Improvement,18,11,0,7,38.9
 North East London Foundation Trust,18,13,0,5,27.8
-Birmingham and Solihull Mental Health Foundation Trust,17,10,0,7,41.2
-Metropolitan Police,17,6,0,11,64.7
-Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
-HM Prison,17,9,2,6,35.3
 College of Policing,17,8,0,9,52.9
-Probation Service,17,10,2,5,29.4
 Care UK,17,10,0,7,41.2
+HM Prison,17,10,1,6,35.3
+Homerton Healthcare NHS Foundation Trust,17,10,4,3,17.6
+Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
+Probation Service,17,11,1,5,29.4
+Birmingham and Solihull Mental Health Foundation Trust,17,10,0,7,41.2
