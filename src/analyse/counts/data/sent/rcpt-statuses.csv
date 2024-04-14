@@ -1,7 +1,7 @@
 sent_to,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses
-NHS England,259,621,228,70,37,139,13
-Department of Health and Social Care,230,593,288,85,28,110,7
-Care Quality Commission,99,271,111,21,19,56,3
+NHS England,259,621,228,70,37,140,12
+Department of Health and Social Care,230,593,288,85,28,112,5
+Care Quality Commission,99,271,111,21,19,57,2
 HM Prison and Probation Service,59,147,58,14,10,35,0
 Department for Transport,43,81,43,13,10,18,2
 Home Office,39,98,41,12,6,20,1
@@ -16,8 +16,8 @@ National Police Chiefs’ Council,26,71,26,6,6,14,0
 Betsi Cadwaladr University Health Board,24,33,20,17,1,6,0
 Pennine Care NHS Trust,23,46,23,10,1,12,0
 Wales Ambulance Service NHS Trust,23,56,39,11,3,9,0
-Betsi Cadwaladr University Health Board BCUHB,21,28,6,4,0,13,4
-Medicines & Healthcare products Regulatory Agency,19,55,32,6,2,9,2
+Betsi Cadwaladr University Health Board BCUHB,21,28,6,4,0,14,3
+Medicines & Healthcare products Regulatory Agency,19,55,32,6,2,10,1
 Greater Manchester Health & Social Care Partnership,19,40,30,12,2,5,0
 Greater Manchester Police,18,48,27,11,3,3,1
 NHS Improvement,18,53,24,3,8,7,0
@@ -53,7 +53,7 @@ Essex Partnership NHS Trust,12,17,7,3,1,8,0
 West Midlands Police,12,33,22,4,5,2,1
 General Medical Council,12,35,19,3,3,6,0
 Royal London Hospital,11,12,8,7,0,4,0
-Greater Manchester Integrated Care,11,30,4,3,0,5,3
+Greater Manchester Integrated Care,11,30,4,3,0,6,2
 Stockport NHS Foundation Trust,11,11,10,8,0,3,0
 Queen Elizabeth Hospital,11,18,12,5,1,3,2
 Cwm Taf Morgannwg University Health Board,11,16,7,6,0,5,0
@@ -71,7 +71,7 @@ Welsh Ambulance Services NHS Trust,9,19,6,2,1,6,0
 University Health Board,9,16,10,4,1,4,0
 Avon and Wiltshire Mental Health NHS Trust,9,18,6,2,1,6,0
 Driver & Vehicle Licensing Agency,9,15,6,1,3,5,0
-Department of Education,9,23,9,2,1,5,1
+Department of Education,9,23,9,2,1,6,0
 Cornwall Council,9,18,12,4,1,4,0
 Tameside & Glossop Integrated Care NHS Foundation Trust,9,13,10,5,0,4,0
 Durham County Council,9,10,8,7,0,2,0
@@ -90,7 +90,7 @@ Portsmouth Hospitals NHS Trust,8,16,8,2,3,3,0
 NHS Pathways,8,16,9,4,0,4,0
 Swansea Bay University Health Board,8,23,5,2,0,3,3
 Central and North West London NHS Trust,8,16,11,3,2,3,0
-Central & North West London NHS Foundation Trust,8,19,5,1,0,4,3
+Central & North West London NHS Foundation Trust,8,19,5,1,0,5,2
 North East Ambulance Service NHS Foundation Trust,8,11,4,4,0,4,0
 Warwickshire County Council,8,8,1,1,0,7,0
 London Ambulance Service,8,28,18,4,2,2,0
@@ -154,7 +154,7 @@ Great Western Hospital NHS Trust,5,8,3,3,0,2,0
 Highways Department,5,9,1,0,1,4,0
 Stockport CCG,5,12,5,3,0,2,0
 Gloucestershire Hospitals NHS Trust,5,5,4,4,0,1,0
-The Department for Work and Pensions,5,9,4,1,1,2,1
+The Department for Work and Pensions,5,9,4,1,1,3,0
 Joint Royal Colleges Ambulance Liaison Committee,5,15,4,0,0,5,0
 Shrewsbury and Telford NHS Trust,5,5,3,3,0,2,0
 Milton Keynes CCG,5,7,4,3,0,2,0
@@ -319,7 +319,7 @@ St Peter’s Hospital,3,5,1,1,0,2,0
 Kettering General Hospital NHS Foundation Trust,3,3,1,1,0,2,0
 Doncaster and Bassetlaw Hospital NHS Foundation Trust,3,4,2,2,0,1,0
 The Priory Group,3,3,2,2,0,1,0
-Dorset Council,3,6,4,2,0,0,1
+Dorset Council,3,6,4,2,0,1,0
 Dorset Healthcare University NHS Foundation Trust,3,5,0,0,0,3,0
 West London Mental Health Trust,3,4,1,1,0,2,0
 Pennine Acute NHS Trust,3,5,4,0,0,3,0
@@ -341,7 +341,7 @@ National Police Chiefs Council,3,10,2,0,0,3,0
 Warwick Hospital,3,3,3,3,0,0,0
 Medway NHS Trust,3,3,0,0,0,3,0
 NHS England & NHS Improvement,3,16,9,0,1,2,0
-Black Country NHS Foundation Trust,3,6,2,0,0,2,1
+Black Country NHS Foundation Trust,3,6,2,0,0,3,0
 Bedfordshire Police,3,4,2,1,1,1,0
 Trafford Borough Council,3,6,4,0,0,3,0
 North Cumbria University Hospitals NHS Trust,3,4,4,3,0,0,0
@@ -350,7 +350,7 @@ Trafford Clinical Commissioning Group,3,4,5,2,0,1,0
 Brighton and Sussex University Hospitals NHS Trust,3,8,3,1,0,2,0
 Mid Yorkshire NHS Trust,3,5,2,1,0,2,0
 Bristol University,2,3,3,0,0,2,0
-Derbyshire Constabulary,2,7,0,0,0,1,1
+Derbyshire Constabulary,2,7,0,0,0,2,0
 Military of Defence,2,2,2,2,0,0,0
 RSSB,2,2,0,0,0,2,0
 Hertfordshire County Council,2,2,1,1,0,1,0
@@ -382,7 +382,7 @@ Department of Communities and Local Government,2,4,2,0,0,2,0
 Sunrise Senior Living,2,3,3,2,0,0,0
 Oldham CCG,2,8,0,0,0,2,0
 Avon and Wiltshire NHS Mental Health Trust,2,5,4,1,0,1,0
-Cygnet Health Care,2,7,1,0,1,0,1
+Cygnet Health Care,2,7,1,0,1,1,0
 British Society of Gastroenterology,2,5,2,1,0,0,1
 Trafford Metropolitan Borough Council,2,5,3,1,1,0,0
 Cumbria Northumberland Tyne & Wear NHS Trust,2,4,1,1,0,1,0
@@ -393,7 +393,7 @@ Trafford CCG,2,3,3,0,0,2,0
 BAE Systems Ltd,2,4,4,2,0,0,0
 Ofcom,2,11,0,0,0,2,0
 Sussex NHS Trust,2,3,2,1,1,0,0
-Gwent Police,2,2,0,0,0,1,1
+Gwent Police,2,2,0,0,0,2,0
 Oldham Council,2,3,3,1,0,1,0
 Greater Manchester West Mental Health NHS Trust,2,4,3,1,0,1,0
 Dartford and Gravesend NHS Trust,2,3,0,0,0,1,1
@@ -443,7 +443,7 @@ Forward Trust,2,5,0,0,0,2,0
 Prestwich Hospital,2,3,3,2,0,0,0
 Barnet Enfield and Haringey Mental Health NHS Trust,2,4,1,0,0,2,0
 Incommunities,2,2,1,1,0,1,0
-University Hospitals North Midlands NHS Trust,2,4,1,1,0,0,1
+University Hospitals North Midlands NHS Trust,2,4,1,1,0,1,0
 University Hospitals Coventry and Warwickshire NHS Trust,2,3,1,1,0,1,0
 West Suffolk Hospital,2,3,1,1,0,1,0
 Essex Highways Agency,2,2,0,0,0,2,0
@@ -519,7 +519,7 @@ HMP Dovegate,2,2,2,2,0,0,0
 Cambridge and Peterborough NHS Trust,2,7,0,0,0,2,0
 Thames Valley Police,2,4,3,1,1,0,0
 Rotherham Doncaster and South Humber NHS Foundation Trust,2,2,3,1,0,1,0
-Royal Berkshire Hospital,2,4,0,0,0,1,1
+Royal Berkshire Hospital,2,4,0,0,0,2,0
 North Somerset Council,2,4,2,1,0,1,0
 Worcester Health and care Trust,2,3,2,1,0,1,0
 London Heliport,2,6,4,0,0,2,0
@@ -919,14 +919,14 @@ The Prison Service,1,2,0,0,0,1,0
 The Priory Hospital Cheadle,1,2,0,0,0,1,0
 The Priority Group,1,2,1,0,1,0,0
 The Portland Hospital,1,1,1,1,0,0,0
-The Ministry of Justice,1,5,0,0,0,0,1
+The Ministry of Justice,1,5,0,0,0,1,0
 The Pipeline Industries Guild,1,2,0,0,0,1,0
 The Phonix Partnership,1,2,0,0,0,0,1
 The Peligoni Club,1,1,0,0,0,1,0
 The Oaks and Woodcroft Care Home,1,1,1,1,0,0,0
 The Newcastle Upon Tyne Hospitals NHS Foundation Trust,1,2,0,0,0,1,0
 Waste Industry Safety & Health Forum,1,1,1,1,0,0,0
-The National Institute for Health and Care Excellence (NICE),1,4,0,0,0,0,1
+The National Institute for Health and Care Excellence (NICE),1,4,0,0,0,1,0
 The National Food Crime Unit Food Standard Agency,1,2,2,1,0,0,0
 The National Counter Terrorism Security Office,1,9,5,0,1,0,0
 The Moat Surgery,1,1,1,1,0,0,0
@@ -1204,7 +1204,7 @@ Welsh Government – Department for Health and Social Service,1,2,0,0,0,1,0
 Stockport Homes,1,2,0,0,0,0,1
 Welsh Health Minister,1,3,0,0,0,1,0
 Stockport Council,1,1,1,1,0,0,0
-Wessex Water Services Limited,1,2,0,0,0,0,1
+Wessex Water Services Limited,1,2,0,0,0,1,0
 StockXS Limited,1,3,1,0,0,1,0
 Stanley Park Care Centre,1,1,0,0,0,1,0
 Stamford Quarter Shopping Centre,1,1,0,0,0,1,0
@@ -1344,7 +1344,7 @@ Commissioning Manager Drug and Alcohol Action Team,1,2,2,1,0,0,0
 Commissioner for Highways,1,1,2,0,0,1,0
 Comish Way Group Practise,1,1,1,1,0,0,0
 Comfort Call Limited,1,1,1,1,0,0,0
-Colton Lodges Nursing Home,1,3,0,0,0,0,1
+Colton Lodges Nursing Home,1,3,0,0,0,1,0
 Collingwood Nursing Home,1,1,0,0,0,1,0
 College and Society of Radiographers,1,3,2,0,1,0,0
 Cole Valley Care Ltd,1,1,1,1,0,0,0
@@ -1447,11 +1447,11 @@ Devon Local Medical Centre,1,5,4,0,1,0,0
 Devon Highways,1,1,1,1,0,0,0
 Devon County Council – Adult Social Care,1,1,0,0,0,1,0
 Derwent Students,1,1,1,1,0,0,0
-Derbyshire NHS Foundation Trust,1,5,0,0,0,0,1
+Derbyshire NHS Foundation Trust,1,5,0,0,0,1,0
 Derbyshire County Council,1,1,0,0,0,1,0
 Derbyshire Community Health Services,1,2,0,0,0,1,0
 Derby and Burton NHS Foundation Trust,1,2,1,1,0,0,0
-Derby City Council,1,5,0,0,0,0,1
+Derby City Council,1,5,0,0,0,1,0
 Depaul UK,1,1,0,0,0,1,0
 Department of Work and Pensions,1,1,1,1,0,0,0
 Dorset CCG,1,2,2,1,0,0,0
@@ -1475,7 +1475,7 @@ Dorset County Council,1,1,1,1,0,0,0
 EAM Care Group,1,1,1,1,0,0,0
 Durham County Council Highways Section,1,1,0,0,0,1,0
 Dulwich Dive Club,1,2,2,1,0,0,0
-Dudley Integrated Health and Care NHS Trust,1,2,0,0,0,0,1
+Dudley Integrated Health and Care NHS Trust,1,2,0,0,0,1,0
 Drug Alcohol Action Team Cornwall Council,1,3,1,0,0,1,0
 Drayton Manor Theme Park,1,2,0,0,0,1,0
 Drager,1,2,2,1,0,0,0
@@ -1597,7 +1597,7 @@ Avon and Somerset Constabulary,1,2,0,0,0,1,0
 BUPA UK,1,1,1,1,0,0,0
 BUPA,1,3,0,0,0,1,0
 BTP Fatal Investigations Officer,1,2,1,0,0,1,0
-BNF Publications,1,3,0,0,0,0,1
+BNF Publications,1,3,0,0,0,1,0
 BMI The Shelburne Hospital,1,1,1,1,0,0,0
 BMI Hospitals,1,5,2,0,1,0,0
 BMI Health Care,1,1,0,0,0,1,0
@@ -1721,7 +1721,7 @@ Buckingham Council Children’s Services,1,1,1,1,0,0,0
 Bucher Municipal Ltd,1,2,2,1,0,0,0
 Brunswick Retirement Village,1,1,0,0,0,1,0
 Broomcroft House Nursing Home,1,2,0,0,0,1,0
-Brook Medical Centre,1,3,0,0,0,0,1
+Brook Medical Centre,1,3,0,0,0,1,0
 Brompton NHS Trust,1,2,3,0,1,0,0
 Bromley CCG,1,2,2,1,0,0,0
 Bromford Lane Nursing Home,1,1,1,1,0,0,0
@@ -1735,7 +1735,7 @@ Bourne House,1,1,0,0,0,1,0
 Birmingham Community NHS Trust,1,5,1,0,0,1,0
 Birmingham Children’s Hospital NHS Trust,1,5,0,0,0,1,0
 Betsi Cadwaladr University NHS Trust,1,1,0,0,0,1,0
-Berkshire and Surrey Pathology Services,1,2,0,0,0,0,1
+Berkshire and Surrey Pathology Services,1,2,0,0,0,1,0
 Berkshire Integrated Care Board,1,5,0,0,0,1,0
 Berkeley Home Health,1,1,1,1,0,0,0
 Belong Village,1,2,2,1,0,0,0
@@ -1972,7 +1972,7 @@ Motor Cross Federation,1,1,1,1,0,0,0
 Morton Hall Immigration Removal Centre,1,2,0,0,0,1,0
 Moorfields Eye Hospital NHS Foundation Trust,1,1,1,1,0,0,0
 Monmouthshire County Council,1,1,0,0,0,1,0
-Metropolis,1,3,0,0,0,0,1
+Metropolis,1,3,0,0,0,1,0
 Merseyside Passenger Transport Authority,1,1,0,0,0,1,0
 Long Furlong Medical Centre,1,1,0,0,0,1,0
 Mersey Care NHS Trust,1,2,0,0,1,0,0
@@ -2040,7 +2040,7 @@ Frome Nursing Home,1,1,0,0,0,1,0
 Goodmayes Hospital NHS Trust,1,1,0,0,0,1,0
 Goodmayes Hospital Foundation Trust,1,1,0,0,0,1,0
 Goodmayes Hospital,1,2,0,0,0,1,0
-Godfrey Care,1,3,0,0,0,0,1
+Godfrey Care,1,3,0,0,0,1,0
 Goals Soccer Centres PLC,1,2,1,0,0,1,0
 Gloucestershire Police,1,6,2,0,1,0,0
 Gloucestershire Clinical Group,1,2,0,0,0,1,0
@@ -2068,7 +2068,7 @@ Google,1,8,0,0,0,1,0
 Government Legal Department,1,2,2,1,0,0,0
 Governor HMP Hewell,1,2,1,0,0,1,0
 Greater Manchester Mental Health,1,2,2,1,0,0,0
-HC-One Healthcare Company,1,3,0,0,0,0,1
+HC-One Healthcare Company,1,3,0,0,0,1,0
 HC One Limited,1,1,0,0,0,1,0
 H R Healthcare Limited,1,2,1,0,1,0,0
 Gwynedd Council,1,1,1,1,0,0,0

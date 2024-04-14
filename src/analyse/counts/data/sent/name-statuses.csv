@@ -1,5 +1,5 @@
 coroner_name,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
-Ms Alison Patricia Mutch OBE,192,234,132,68,4,69,4,46
+Ms Alison Patricia Mutch OBE,192,234,132,68,4,70,3,46
 Ms Mary Hassell,157,188,106,62,9,47,0,7
 Mr Professor John S Pollard,86,38,30,20,0,13,0,1
 Ms Nadia Persaud,81,72,29,20,2,36,2,12
@@ -30,7 +30,7 @@ Mr Andrew Roger Barkley,39,43,30,14,2,11,0,1
 Mr Derek Winter DL,39,25,17,12,0,9,0,6
 Mrs Rachael Clare Griffin,37,37,46,13,1,9,1,10
 Mr Alan Wilson,36,24,13,13,0,8,0,7
-Ms Caroline Saunders,36,39,28,20,0,12,2,2
+Ms Caroline Saunders,36,39,28,20,0,13,1,2
 Dr Richard Ian Brittain,35,24,9,7,0,10,0,2
 Ms Penelope Schofield,35,35,32,21,2,4,0,4
 Mr Alan Peter Walsh,35,30,21,10,2,8,0,0
@@ -60,7 +60,7 @@ Ms Jacqueline P Devonish,23,25,11,7,1,10,0,3
 Mr Ian Geoffrey Pears,22,26,18,14,0,7,0,0
 Mr David Donald William REID,22,27,15,10,2,7,1,1
 Mr Richard Travers,22,34,9,1,1,8,0,3
-Mr Crispin Oliver,22,29,15,10,1,5,1,3
+Mr Crispin Oliver,22,29,15,10,1,6,0,3
 Miss Caroline Topping,22,39,24,5,6,6,0,5
 Mr DAVID LLEWELYN ROBERTS,21,15,11,8,0,2,0,0
 Mr Andrew Michael Bridgman,21,21,9,7,1,8,0,3
@@ -88,7 +88,7 @@ Ms Abigail Combes,16,15,8,6,1,6,0,3
 Ms Yvonne Kathleen Blake,16,19,8,6,0,7,2,1
 Mrs Catherine Mason,15,4,4,3,0,0,0,3
 Ms Rachel Galloway,15,20,10,4,0,10,0,1
-Mr Brendan Joseph Allen,15,17,12,9,1,3,1,1
+Mr Brendan Joseph Allen,15,17,12,9,1,4,0,1
 Mr Christopher Dorries,15,17,8,6,1,4,0,0
 Mrs Samantha Marsh,15,24,7,6,1,7,0,1
 Mr Crispin Giles Butler,15,17,8,6,1,7,0,0
@@ -147,7 +147,7 @@ Ms Kate Robertson,9,10,0,0,0,6,2,1
 Dr James Adeley,9,11,1,1,0,8,0,0
 Dr David J Osborne,9,1,1,1,0,0,0,0
 John Tomalin,9,8,6,5,0,2,0,0
-Mr Adam Hodson,9,10,9,6,0,1,1,1
+Mr Adam Hodson,9,10,9,6,0,2,0,1
 Mrs Joanne Andrews,9,7,3,3,0,3,1,2
 Elizabeth Carlyon,9,13,0,0,0,8,0,0
 Mrs SARAH LOUISE SLATER,9,10,4,4,0,3,2,0
@@ -183,12 +183,12 @@ Mr Robert Cohen,7,4,1,1,0,3,0,3
 Mr David Lewis,7,8,6,5,0,2,0,0
 Dr Julian Rupert Laurence Morris,7,12,7,1,2,2,1,1
 Mr Tim Holloway,7,5,3,3,0,1,0,2
-Mr John Hobson,7,9,5,5,0,0,2,0
+Mr John Hobson,7,9,5,5,0,1,1,0
 Mr Tony Williams,7,9,4,0,1,5,0,1
 Mr Zak Golombeck,7,9,7,2,1,2,0,2
 Mr Terence Carney,7,9,0,0,0,3,0,0
 Mr Andrew Philip Hetherington,7,10,8,3,1,1,0,2
-Miss Alison McCormick,7,12,0,0,0,5,2,0
+Miss Alison McCormick,7,12,0,0,0,6,1,0
 Ms Julie Alison Goulding,7,13,2,0,0,7,0,0
 Lorna Tagliavini,7,3,2,1,1,0,0,0
 Ms Anna Morris,7,10,3,1,0,4,1,1
@@ -250,7 +250,7 @@ Ms Johanna Thompson,4,8,3,1,1,2,0,0
 Mr Rob Turnbull,4,4,2,1,0,1,0,0
 Dr Peter Henry Straker,4,3,0,0,0,2,0,2
 Claire Balysz,3,2,1,1,0,1,0,0
-Miss Sarah Riley,3,3,1,1,0,1,1,0
+Miss Sarah Riley,3,3,1,1,0,2,0,0
 Miss Karin Elizabeth Welsh,3,1,1,1,0,0,0,2
 Miss Fiona Butler,3,3,2,2,0,1,0,0
 Mr Paul John Rogers,3,12,0,0,0,3,0,0
@@ -419,7 +419,7 @@ Mrs Sally Anne Robinson,1,4,0,0,0,1,0,0
 Mr D T Bowen,1,1,0,0,0,1,0,0
 Mr DAVID MORRIS,1,0,0,0,0,0,0,0
 Mrs Rebecca Sutton,1,2,0,0,0,1,0,0
-Mr Daniel Howe,1,3,0,0,0,0,1,0
+Mr Daniel Howe,1,3,0,0,0,1,0,0
 Alison Owen,1,1,1,1,0,0,0,0
 Mrs Patricia Claire Morgan,1,1,0,0,0,1,0,0
 Mrs Michaela Amy Blackmore,1,1,0,0,0,1,0,0
