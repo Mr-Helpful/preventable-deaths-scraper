@@ -1,22 +1,22 @@
 coroner_area,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
-Greater Manchester South,410,420,243,140,7,122,5,67
-London Inner North,254,286,152,93,10,84,3,13
-"West Sussex, Brighton and Hove",156,143,79,44,6,39,3,29
+Greater Manchester South,410,420,243,140,7,123,4,67
+London Inner North,255,288,152,93,10,84,4,13
+"West Sussex, Brighton and Hove",157,144,80,45,6,39,3,29
+Birmingham and Solihull,151,235,155,62,10,47,2,15
 Surrey,151,181,81,28,12,51,2,22
-Birmingham and Solihull,150,233,155,62,10,47,1,15
 London East,143,140,51,28,5,54,6,38
-London Inner South,131,168,86,27,11,42,2,16
+London Inner South,132,169,86,27,11,43,2,16
 South Wales Central,121,138,84,45,4,37,1,6
 Greater Manchester North,111,130,74,37,3,39,0,5
 Greater Manchester West,108,106,65,40,2,31,0,5
-Nottinghamshire,105,136,64,27,3,43,3,12
-Yorkshire West Eastern,103,94,55,38,1,27,1,15
-Norfolk,103,83,62,46,1,16,3,8
-Cornwall and the Isles of Scilly,99,124,73,38,8,33,0,13
-North Wales (East & Central),92,92,40,34,1,29,3,5
+Nottinghamshire,107,138,64,27,3,43,5,12
+Yorkshire West Eastern,103,94,55,38,1,28,0,15
+Norfolk,103,83,62,46,1,17,2,8
+Cornwall and the Isles of Scilly,100,127,73,38,8,33,1,13
+North Wales (East & Central),92,92,40,34,1,30,2,5
 Avon,89,99,36,18,3,37,2,8
+Yorkshire South West,83,93,39,25,4,31,5,4
 "Hampshire, Portsmouth and Southampton",82,106,48,25,9,32,0,1
-Yorkshire South West,82,91,39,25,4,31,4,4
 County Durham and Darlington,81,79,43,28,1,19,1,10
 The Black Country Jurisdiction,80,91,51,30,5,24,0,4
 Yorkshire West Western,78,94,46,22,5,35,0,4
@@ -32,8 +32,8 @@ Dorset,60,62,64,26,2,14,1,13
 Lincolnshire,60,53,22,15,2,22,1,2
 Staffordshire South,60,49,32,24,1,13,0,2
 Liverpool and the Wirral,58,57,23,13,3,20,0,7
+Suffolk,57,56,21,13,2,20,2,15
 Kent Mid and Medway,57,47,24,21,1,16,1,10
-Suffolk,55,53,21,13,2,20,0,15
 London West,53,71,21,15,1,27,1,2
 Berkshire,52,62,27,12,3,22,1,5
 Worcestershire,52,45,26,19,2,14,1,4
@@ -79,6 +79,6 @@ Hartlepool,8,7,1,0,0,4,1,2
 Gateshead and South Tyneside,8,11,0,0,0,4,0,0
 North Lincolnshire and Grimsby,6,3,1,1,0,2,0,0
 "Sefton, Knowsley and St Helens",6,11,3,0,1,5,0,0
-Staffordshire and Stoke-on-Trent,4,8,0,0,0,3,1,0
+Staffordshire and Stoke-on-Trent,4,8,0,0,0,4,0,0
 Ceredigion,1,2,2,1,0,0,0,0
 Northumberland South,1,1,0,0,0,1,0,0
