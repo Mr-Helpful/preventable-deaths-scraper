@@ -1,6 +1,6 @@
 sent_to,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses
-NHS England,262,626,228,70,37,141,14
-Department of Health and Social Care,232,597,288,85,28,112,7
+NHS England,262,626,228,70,37,143,12
+Department of Health and Social Care,232,597,288,85,28,113,6
 Care Quality Commission,99,271,111,21,19,57,2
 HM Prison and Probation Service,59,147,58,14,10,35,0
 Department for Transport,43,81,43,13,10,18,2
@@ -16,7 +16,7 @@ National Police Chiefs’ Council,26,71,26,6,6,14,0
 Betsi Cadwaladr University Health Board,24,33,20,17,1,6,0
 Wales Ambulance Service NHS Trust,23,56,39,11,3,9,0
 Pennine Care NHS Trust,23,46,23,10,1,12,0
-Betsi Cadwaladr University Health Board BCUHB,21,28,6,4,0,14,3
+Betsi Cadwaladr University Health Board BCUHB,21,28,6,4,0,16,1
 Greater Manchester Health & Social Care Partnership,19,40,30,12,2,5,0
 Medicines & Healthcare products Regulatory Agency,19,55,32,6,2,10,1
 NHS Improvement,18,53,24,3,8,7,0
@@ -27,7 +27,7 @@ Metropolitan Police,17,25,17,11,0,6,0
 HM Prison,17,39,10,5,2,9,1
 College of Policing,17,50,26,6,5,6,0
 Birmingham and Solihull Mental Health Foundation Trust,17,46,25,7,3,7,0
-Homerton Healthcare NHS Foundation Trust,17,30,6,3,1,9,4
+Homerton Healthcare NHS Foundation Trust,17,30,6,3,1,10,3
 Care UK,17,42,16,3,6,8,0
 Probation Service,17,40,12,5,3,8,1
 Aneurin Bevan University Health Board,16,19,11,9,0,6,1
@@ -228,7 +228,7 @@ Whittington Health NHS Trust,4,7,3,2,1,1,0
 Manchester University NHS Foundation Trust,4,7,6,3,0,1,0
 Maritime and Coastguard Agency,4,8,6,2,2,0,0
 Wiltshire Police,4,11,4,2,1,1,0
-Mid and South Essex NHS Foundation Trust,4,9,1,1,0,2,1
+Mid and South Essex NHS Foundation Trust,4,9,1,1,0,3,0
 New Cross Hospital,4,6,1,0,0,4,0
 Wye Valley NHS Trust,4,4,3,2,0,2,0
 Yorkshire Ambulance Service,4,5,3,2,1,1,0
@@ -437,7 +437,7 @@ Bristol Community Health,2,3,1,0,0,2,0
 Cambridge and Peterborough NHS Trust,2,7,0,0,0,2,0
 Bristol University,2,3,3,0,0,2,0
 London Heliport,2,6,4,0,0,2,0
-Disclosure and Barring Service,2,3,1,1,0,0,1
+Disclosure and Barring Service,2,3,1,1,0,1,0
 University Hospitals North Midlands NHS Trust,2,4,1,1,0,1,0
 Ford UK,2,4,3,0,1,1,0
 "Foreign, Commonwealth & Development Office",2,5,0,0,0,2,0
@@ -534,7 +534,7 @@ Advisory Panel on Deaths in Custody,2,8,0,0,0,2,0
 Wythenshawe Hospital,2,2,0,0,0,2,0
 Tameside CCG,2,3,0,0,0,2,0
 Merseyside Police,2,16,1,0,1,1,0
-Chief Constable,2,3,0,0,0,1,1
+Chief Constable,2,3,0,0,0,2,0
 Chesterfield Royal Hospital NHS Foundation Trust,2,2,0,0,0,2,0
 Chesterfield Royal Hospital,2,5,1,0,1,1,0
 National Institute for Clinical Excellence,2,5,0,0,0,2,0
@@ -604,7 +604,7 @@ Cumbria Northumberland Tyne & Wear NHS Trust,2,4,1,1,0,1,0
 North Lincolnshire Council,2,2,1,1,0,1,0
 The Highways Authority,2,2,0,0,0,2,0
 North Somerset Council,2,4,2,1,0,1,0
-Torbay and South Devon NHS Trust,2,4,2,1,0,0,1
+Torbay and South Devon NHS Trust,2,4,2,1,0,1,0
 National Police Council,1,2,1,0,0,1,0
 President of the Royal College of Pathologists,1,2,1,0,0,1,0
 Wrexham County Council,1,2,2,1,0,0,0
@@ -774,7 +774,7 @@ Nottinghamshire Safeguarding Children Board,1,5,4,0,0,1,0
 Nottinghamshire Healthcare Trust,1,2,2,1,0,0,0
 West Timperley Medical Centre,1,1,1,1,0,0,0
 North & Mid Wales Trunk Road Agency,1,1,1,1,0,0,0
-North Bristol Trust,1,1,0,0,0,0,1
+North Bristol Trust,1,1,0,0,0,1,0
 Wilsden Medical Practice,1,1,1,1,0,0,0
 Nottingham West,1,7,2,0,1,0,0
 West Yorkshire Fire and Rescue Service,1,3,1,0,0,1,0
@@ -880,7 +880,7 @@ ORCi,1,2,2,1,0,0,0
 Newton House formerly Regency Hospital,1,1,0,0,0,1,0
 The Priority Group,1,2,1,0,1,0,0
 Next Stage,1,2,2,1,0,0,0
-OFCOM,1,4,0,0,0,0,1
+OFCOM,1,4,0,0,0,1,0
 Nightingale Hospital,1,2,1,0,1,0,0
 Nuttall Ltd,1,2,2,1,0,0,0
 West Quay Surgery,1,2,2,1,0,0,0
@@ -1256,7 +1256,7 @@ South Hampshire Ambulance Service,1,3,0,0,0,1,0
 Shindig Events Limited,1,2,0,0,0,1,0
 Sherwood Forest Hospital Trust,1,1,2,0,0,1,0
 Shepherds Bush Medical Centre,1,2,0,0,0,1,0
-University Hospitals Sussex NHS Foundation,1,1,0,0,0,0,1
+University Hospitals Sussex NHS Foundation,1,1,0,0,0,1,0
 Sapphire Independent Living,1,1,0,0,0,1,0
 Sapphire House,1,2,1,0,0,1,0
 University of Manchester NHS Foundation Trust,1,1,0,0,0,1,0
