@@ -1,31 +1,31 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,269,157,16,96,35.7
-Department of Health and Social Care,236,133,9,94,39.8
-Care Quality Commission,99,72,1,26,26.3
+NHS England,272,161,15,96,35.3
+Department of Health and Social Care,240,135,11,94,39.2
+Care Quality Commission,100,73,1,26,26.0
 HM Prison and Probation Service,59,42,0,17,28.8
 Department for Transport,44,21,3,20,45.5
-Home Office,40,22,2,16,40.0
+Home Office,40,23,1,16,40.0
 Ministry of Justice,34,29,0,5,14.7
 Network Rail,33,6,0,27,81.8
 National Institute for Health and Care Excellence,32,25,0,7,21.9
 Health and Safety Executive,31,18,0,13,41.9
 Department for Education,27,10,0,17,63.0
-National Police Chiefs’ Council,26,20,0,6,23.1
 Leeds Teaching Hospitals NHS Trust,26,11,0,15,57.7
+National Police Chiefs’ Council,26,20,0,6,23.1
 Highways England,26,10,0,16,61.5
 Betsi Cadwaladr University Health Board,24,7,0,17,70.8
-Pennine Care NHS Trust,23,13,0,10,43.5
 Wales Ambulance Service NHS Trust,23,12,0,11,47.8
+Pennine Care NHS Trust,23,13,0,10,43.5
 Betsi Cadwaladr University Health Board BCUHB,21,16,1,4,19.0
 Greater Manchester Police,19,5,1,13,68.4
-Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
-Medicines & Healthcare products Regulatory Agency,19,12,1,6,31.6
+Medicines & Healthcare products Regulatory Agency,19,13,0,6,31.6
 North East London Foundation Trust,19,13,1,5,26.3
-Homerton Healthcare NHS Foundation Trust,18,11,4,3,16.7
-College of Policing,18,8,1,9,50.0
+Homerton Healthcare NHS Foundation Trust,19,11,5,3,15.8
+Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
 NHS Improvement,18,11,0,7,38.9
-Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
+College of Policing,18,8,1,9,50.0
+Probation Service,17,12,0,5,29.4
+Care UK,17,10,0,7,41.2
 Metropolitan Police,17,6,0,11,64.7
-HM Prison,17,10,1,6,35.3
-Birmingham and Solihull Mental Health Foundation Trust,17,10,0,7,41.2
-Probation Service,17,11,1,5,29.4
+Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
+HM Prison,17,11,0,6,35.3
