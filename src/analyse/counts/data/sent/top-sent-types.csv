@@ -1,9 +1,9 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,272,161,15,96,35.3
-Department of Health and Social Care,240,135,11,94,39.2
-Care Quality Commission,100,73,1,26,26.0
+NHS England,274,162,16,96,35.0
+Department of Health and Social Care,242,136,12,94,38.8
+Care Quality Commission,101,73,2,26,25.7
 HM Prison and Probation Service,59,42,0,17,28.8
-Department for Transport,44,21,3,20,45.5
+Department for Transport,45,23,2,20,44.4
 Home Office,40,23,1,16,40.0
 Ministry of Justice,34,29,0,5,14.7
 Network Rail,33,6,0,27,81.8
@@ -17,15 +17,15 @@ Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Wales Ambulance Service NHS Trust,23,12,0,11,47.8
 Pennine Care NHS Trust,23,13,0,10,43.5
 Betsi Cadwaladr University Health Board BCUHB,21,16,1,4,19.0
-Greater Manchester Police,19,5,1,13,68.4
-Medicines & Healthcare products Regulatory Agency,19,13,0,6,31.6
-North East London Foundation Trust,19,13,1,5,26.3
 Homerton Healthcare NHS Foundation Trust,19,11,5,3,15.8
+North East London Foundation Trust,19,13,1,5,26.3
+Greater Manchester Police,19,5,1,13,68.4
 Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
+Medicines & Healthcare products Regulatory Agency,19,13,0,6,31.6
 NHS Improvement,18,11,0,7,38.9
+Barts Health NHS Foundation Trust,18,12,2,4,22.2
 College of Policing,18,8,1,9,50.0
-Probation Service,17,12,0,5,29.4
-Care UK,17,10,0,7,41.2
-Metropolitan Police,17,6,0,11,64.7
 Medicines and Healthcare Products Regulatory Agency,17,12,0,5,29.4
+Birmingham and Solihull Mental Health Foundation Trust,17,10,0,7,41.2
 HM Prison,17,11,0,6,35.3
+Probation Service,17,12,0,5,29.4
