@@ -1,18 +1,18 @@
 coroner_area,count
-Greater Manchester South,417
+Greater Manchester South,420
 London Inner North,261
 "West Sussex, Brighton and Hove",160
 Birmingham and Solihull,155
 Surrey,155
 London East,146
 London Inner South,132
-South Wales Central,121
-Greater Manchester North,116
+South Wales Central,122
+Greater Manchester North,117
+Nottinghamshire,108
 Greater Manchester West,108
-Nottinghamshire,107
 Yorkshire West Eastern,106
 Norfolk,105
-Cornwall and the Isles of Scilly,102
+Cornwall and the Isles of Scilly,103
 North Wales (East & Central),93
 Avon,89
 Yorkshire South West,85
@@ -28,14 +28,14 @@ Milton Keynes,68
 Cumbria,67
 Manchester City,63
 London North,62
-Dorset,61
-Lincolnshire,60
+Dorset,62
 Staffordshire South,60
-Suffolk,59
+Lincolnshire,60
 Liverpool and the Wirral,59
+Suffolk,59
 Kent Mid and Medway,58
+Worcestershire,55
 Berkshire,55
-Worcestershire,54
 Wiltshire and Swindon,54
 London West,53
 Lancashire and Blackburn with Darwen,51
@@ -47,39 +47,39 @@ Blackpool and Fylde,46
 Stoke on Trent and North Staffordshire,44
 Sunderland,42
 Warwickshire,41
+Cheshire,41
 Cambridgeshire and Peterborough,40
-Cheshire,39
-Gwent,39
 London South,39
+Gwent,39
 Gloucestershire,35
 Newcastle and North Tyneside,33
 Hertfordshire,31
 Northamptonshire,29
+Kent Central and South East,28
 East Riding of Yorkshire and Kingston-upon-Hull,27
-Kent Central and South East,27
 Oxfordshire,27
 North Yorkshire and York,26
 Swansea and Neath Port Talbot,25
+"Shropshire, Telford and Wrekin",24
 East Sussex,24
-"Shropshire, Telford and Wrekin",23
 Somerset,23
 Carmarthenshire and Pembrokeshire,21
-North West Wales,21
 Kent North East,21
+North West Wales,21
 Buckinghamshire,21
 Coventry,19
 Isle of Wight,19
 Northumberland North,17
 London City,13
 Herefordshire,11
-Gateshead and South Tyneside,10
 Teesside,10
-Hartlepool,9
+Gateshead and South Tyneside,10
 Rutland and North Leicestershire,9
+Hartlepool,9
 Kent North West,8
-"Sefton, Knowsley and St Helens",6
 Staffordshire and Stoke-on-Trent,6
+"Sefton, Knowsley and St Helens",6
 North Lincolnshire and Grimsby,6
 Northumberland,2
-Ceredigion,1
 Northumberland South,1
+Ceredigion,1

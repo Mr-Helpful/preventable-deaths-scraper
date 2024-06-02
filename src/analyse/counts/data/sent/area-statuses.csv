@@ -1,18 +1,18 @@
 coroner_area,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
-Greater Manchester South,417,430,243,140,7,127,6,68
-London Inner North,261,296,152,93,10,87,7,13
+Greater Manchester South,420,436,243,140,7,127,8,69
+London Inner North,261,296,152,93,10,88,6,13
 "West Sussex, Brighton and Hove",160,150,80,45,6,42,2,30
-Birmingham and Solihull,155,244,155,62,10,48,5,15
+Birmingham and Solihull,155,244,155,62,10,49,4,15
 Surrey,155,188,81,28,12,53,4,22
-London East,146,144,51,28,5,59,4,38
+London East,146,144,51,28,5,60,3,38
 London Inner South,132,169,86,27,11,44,1,16
-South Wales Central,121,138,84,45,4,38,0,6
-Greater Manchester North,116,137,74,37,3,39,3,7
+South Wales Central,122,139,84,45,4,38,1,6
+Greater Manchester North,117,139,74,37,3,39,4,7
+Nottinghamshire,108,139,64,27,3,47,2,12
 Greater Manchester West,108,106,65,40,2,31,0,5
-Nottinghamshire,107,138,64,27,3,45,3,12
 Yorkshire West Eastern,106,102,55,38,1,28,3,15
 Norfolk,105,85,62,46,1,18,3,8
-Cornwall and the Isles of Scilly,102,133,73,38,8,34,2,13
+Cornwall and the Isles of Scilly,103,134,73,38,8,35,2,13
 North Wales (East & Central),93,93,40,34,1,32,1,5
 Avon,89,99,36,18,3,39,0,8
 Yorkshire South West,85,96,39,25,4,36,1,5
@@ -28,58 +28,58 @@ Milton Keynes,68,67,28,19,1,29,0,8
 Cumbria,67,49,32,20,0,17,1,7
 Manchester City,63,81,39,15,3,26,1,6
 London North,62,26,23,12,1,9,0,8
-Dorset,61,63,64,26,2,15,1,13
-Lincolnshire,60,53,22,15,2,22,1,2
+Dorset,62,64,64,26,2,15,2,13
 Staffordshire South,60,49,32,24,1,13,0,2
-Suffolk,59,59,22,14,2,22,1,15
+Lincolnshire,60,53,22,15,2,22,1,2
 Liverpool and the Wirral,59,58,23,13,3,20,1,7
+Suffolk,59,59,22,14,2,23,0,15
 Kent Mid and Medway,58,48,25,22,1,17,0,10
+Worcestershire,55,50,26,19,2,17,1,4
 Berkshire,55,67,27,12,3,23,3,5
-Worcestershire,54,49,26,19,2,16,1,4
 Wiltshire and Swindon,54,44,19,15,0,16,1,3
 London West,53,71,21,15,1,28,0,2
 Lancashire and Blackburn with Darwen,51,51,21,16,1,25,1,0
 Derby and Derbyshire,51,65,18,10,6,21,3,5
 "Plymouth, Torbay and South Devon",50,48,26,14,3,20,0,3
-Yorkshire South East,48,42,24,20,0,10,2,2
+Yorkshire South East,48,42,24,20,0,12,0,2
 Exeter and Greater Devon,47,50,34,19,3,9,0,1
 Blackpool and Fylde,46,36,17,17,0,13,1,9
 Stoke on Trent and North Staffordshire,44,43,27,18,1,13,0,5
 Sunderland,42,34,22,14,0,10,0,6
 Warwickshire,41,49,16,13,0,22,1,0
+Cheshire,41,51,21,10,3,16,5,4
 Cambridgeshire and Peterborough,40,48,13,4,1,15,2,11
-Cheshire,39,49,21,10,3,16,3,4
-Gwent,39,38,24,16,0,14,1,2
 London South,39,46,21,10,1,14,0,4
+Gwent,39,38,24,16,0,14,1,2
 Gloucestershire,35,38,22,18,0,12,0,2
 Newcastle and North Tyneside,33,35,17,7,1,18,0,4
 Hertfordshire,31,28,21,15,1,6,0,3
 Northamptonshire,29,44,18,10,1,12,0,3
+Kent Central and South East,28,22,9,7,0,10,1,2
 East Riding of Yorkshire and Kingston-upon-Hull,27,30,6,2,2,13,1,8
-Kent Central and South East,27,21,9,7,0,10,0,2
 Oxfordshire,27,19,18,14,0,1,0,0
 North Yorkshire and York,26,21,8,5,0,12,0,5
 Swansea and Neath Port Talbot,25,30,10,8,1,9,1,2
+"Shropshire, Telford and Wrekin",24,24,17,11,0,7,0,0
 East Sussex,24,42,19,5,3,12,2,1
-"Shropshire, Telford and Wrekin",23,23,16,10,0,7,0,0
 Somerset,23,23,9,5,1,9,1,1
 Carmarthenshire and Pembrokeshire,21,17,10,8,0,6,0,0
-North West Wales,21,15,8,7,0,7,0,3
 Kent North East,21,14,7,6,0,4,0,8
+North West Wales,21,15,8,7,0,7,0,3
 Buckinghamshire,21,20,9,7,1,9,0,0
 Coventry,19,13,3,3,0,8,0,1
 Isle of Wight,19,20,8,4,1,8,0,1
 Northumberland North,17,15,11,5,2,2,0,2
 London City,13,10,5,3,0,4,0,2
 Herefordshire,11,11,7,5,0,5,0,1
-Gateshead and South Tyneside,10,14,2,1,0,4,1,0
 Teesside,10,3,3,3,0,0,0,0
-Hartlepool,9,8,1,0,0,5,1,2
+Gateshead and South Tyneside,10,14,2,1,0,4,1,0
 Rutland and North Leicestershire,9,9,0,0,0,5,0,0
+Hartlepool,9,8,1,0,0,5,1,2
 Kent North West,8,9,6,5,1,2,0,0
-"Sefton, Knowsley and St Helens",6,11,3,0,1,5,0,0
 Staffordshire and Stoke-on-Trent,6,13,0,0,0,4,2,0
+"Sefton, Knowsley and St Helens",6,11,3,0,1,5,0,0
 North Lincolnshire and Grimsby,6,3,1,1,0,2,0,0
 Northumberland,2,1,0,0,0,0,1,1
-Ceredigion,1,2,2,1,0,0,0,0
 Northumberland South,1,1,0,0,0,1,0,0
+Ceredigion,1,2,2,1,0,0,0,0
