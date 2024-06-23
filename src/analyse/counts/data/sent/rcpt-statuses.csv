@@ -1,10 +1,10 @@
 sent_to,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses
-NHS England,285,697,228,70,37,163,15
-Department of Health and Social Care,252,653,288,85,28,123,16
+NHS England,285,697,228,70,37,165,13
+Department of Health and Social Care,252,653,288,85,28,125,14
 Care Quality Commission,101,279,111,21,19,59,2
 HM Prison and Probation Service,61,155,58,14,10,35,2
 Department for Transport,45,85,43,13,10,21,1
-Home Office,43,120,41,12,6,21,4
+Home Office,43,120,41,12,6,22,3
 Ministry of Justice,39,98,33,5,5,24,5
 Network Rail,33,48,38,25,2,6,0
 Health and Safety Executive,32,73,34,12,1,18,1
@@ -18,11 +18,11 @@ Pennine Care NHS Trust,23,46,23,10,1,12,0
 Wales Ambulance Service NHS Trust,23,56,39,11,3,9,0
 Betsi Cadwaladr University Health Board BCUHB,21,28,6,4,0,17,0
 Homerton Healthcare NHS Foundation Trust,21,40,6,3,1,13,4
-Greater Manchester Police,20,56,27,11,3,4,2
-College of Policing,20,62,26,6,5,7,2
-Barts Health NHS Foundation Trust,20,36,4,4,0,12,4
+Greater Manchester Police,20,56,27,11,3,5,1
+College of Policing,20,62,26,6,5,8,1
+Barts Health NHS Foundation Trust,20,36,4,4,0,13,3
 Greater Manchester Health & Social Care Partnership,19,40,30,12,2,5,0
-North East London Foundation Trust,19,33,9,4,1,13,1
+North East London Foundation Trust,19,33,9,4,1,14,0
 Medicines & Healthcare products Regulatory Agency,19,55,32,6,2,11,0
 Birmingham and Solihull Mental Health Foundation Trust,18,54,25,7,3,7,1
 NHS Improvement,18,53,24,3,8,7,0
@@ -47,7 +47,7 @@ East London NHS Trust,14,18,9,8,0,6,0
 Nottingham University Hospital NHS Trust,14,23,13,6,0,8,0
 West Midlands Police,13,41,22,4,5,3,1
 Civil Aviation Authority,13,23,16,9,0,4,0
-Royal College of Obstetricians and Gynaecologists,13,32,9,1,2,9,1
+Royal College of Obstetricians and Gynaecologists,13,32,9,1,2,10,0
 NHS Trafford Clinical Commissioning Group,13,31,14,2,3,8,0
 Norfolk and Suffolk NHS Trust,12,15,14,11,0,1,0
 Cwm Taf Morgannwg University Health Board,12,17,7,6,0,5,1
@@ -79,18 +79,18 @@ Avon and Wiltshire Mental Health NHS Trust,9,18,6,2,1,6,0
 Driver & Vehicle Licensing Agency,9,15,6,1,3,5,0
 Tameside & Glossop Integrated Care NHS Foundation Trust,9,13,10,5,0,4,0
 East of England Ambulance Service,9,15,13,5,2,2,0
-Swansea Bay University Health Board,9,26,5,2,0,6,1
+Swansea Bay University Health Board,9,26,5,2,0,7,0
 Medway NHS Foundation Trust,9,11,7,6,0,3,0
 Department of Education,9,23,9,2,1,6,0
 North West Ambulance Service,9,35,19,6,0,3,0
 Milton Keynes University Hospital,9,11,6,4,1,4,0
 Norfolk and Suffolk NHS Foundation Trust,9,19,6,3,1,4,1
-University Hospitals of Birmingham NHS Foundation Trust,9,15,4,3,0,4,2
+University Hospitals of Birmingham NHS Foundation Trust,9,15,4,3,0,5,1
 NHS Digital,9,28,19,5,3,1,0
 Sandwell and West Birmingham NHS Trust,9,14,6,4,0,5,0
 Surrey County Council,9,19,7,1,2,5,1
 G4S,9,28,9,3,0,6,0
-Nursing and Midwifery Council,9,25,10,3,1,3,2
+Nursing and Midwifery Council,9,25,10,3,1,4,1
 East London NHS Foundation Trust,8,11,4,3,1,4,0
 South London and Maudsley NHS Foundation Trust,8,18,7,1,1,6,0
 West Midlands Ambulance Service,8,14,9,5,1,1,1
@@ -153,7 +153,7 @@ Oxford Health NHS Trust,5,7,5,3,1,1,0
 Birmingham and Solihull CCG,5,17,10,3,1,1,0
 Leicestershire Partnership NHS Trust,5,6,2,2,0,2,1
 University Hospital of North Midalnds,5,6,3,3,0,2,0
-Camden and Islington NHS Foundation Trust,5,7,4,2,0,2,1
+Camden and Islington NHS Foundation Trust,5,7,4,2,0,3,0
 The Royal College of General Practitioners,5,22,10,1,1,3,0
 British Transport Police,5,27,2,1,0,3,1
 Joint Royal Colleges Ambulance Liaison Committee,5,15,4,0,0,5,0
@@ -236,8 +236,8 @@ County Durham and Darlington NHS Foundation Trust,4,5,0,0,0,3,1
 The Home Office,4,11,6,2,0,2,0
 Doncaster Royal Infirmary,4,4,3,3,0,1,0
 HMP Woodhill,4,7,3,0,1,3,0
-NHS Wales,4,13,5,1,0,2,1
-National Police Chiefs Council,4,12,2,0,0,3,1
+NHS Wales,4,13,5,1,0,3,0
+National Police Chiefs Council,4,12,2,0,0,4,0
 New Cross Hospital,4,6,1,0,0,4,0
 University Hospitals of Leicester NHS Trust,4,7,4,0,2,2,0
 NHS England & NHS Improvement,4,18,9,0,1,2,1
@@ -407,7 +407,7 @@ International Academics of Emergency Dispatch,2,2,2,1,0,1,0
 Barnet Enfield and Haringey Mental Health NHS Trust,2,4,1,0,0,2,0
 Stoke on Trent City Council,2,2,2,2,0,0,0
 HMP Wymott,2,2,2,0,0,2,0
-Walsall MBC,2,5,3,0,0,1,1
+Walsall MBC,2,5,3,0,0,2,0
 HMP Stoke Heath,2,4,0,0,0,2,0
 HMP Lindholme,2,6,1,1,0,1,0
 Derbyshire Constabulary,2,7,0,0,0,2,0
@@ -418,7 +418,7 @@ Cumbria Northumberland Tyne & Wear NHS Trust,2,4,1,1,0,1,0
 Royal College of Nursing,2,6,2,1,0,1,0
 John Radcliffe Hospital,2,3,2,1,0,1,0
 Department of Communities and Local Government,2,4,2,0,0,2,0
-NHS Sussex Integrated Care Board,2,5,1,1,0,0,1
+NHS Sussex Integrated Care Board,2,5,1,1,0,1,0
 Banes Park and Services,2,9,3,0,0,2,0
 HMP Leeds,2,2,2,2,0,0,0
 NHS Lothian Scotland,2,2,0,0,0,2,0
@@ -434,7 +434,7 @@ Hertfordshire County Council,2,2,1,1,0,1,0
 Whirlpool UK Appliances,2,2,2,2,0,0,0
 Shropshire Community Health NHS Trust,2,3,2,1,0,1,0
 RSSB,2,2,0,0,0,2,0
-NHS Birmingham and Solihull Integrated Care Board,2,7,0,0,0,1,1
+NHS Birmingham and Solihull Integrated Care Board,2,7,0,0,0,2,0
 Highway and Transport  Wiltshire Council,2,2,2,2,0,0,0
 Highways Agency,2,2,0,0,0,2,0
 Greater Manchester Combined Authority,2,4,2,1,0,1,0
@@ -820,7 +820,7 @@ National Referral Support Service,1,2,0,0,0,0,1
 Queen Alexandra Hospital,1,1,0,0,0,0,1
 Nursing & Midwifery Council,1,2,2,1,0,0,0
 North East London Trust,1,1,1,1,0,0,0
-National Institute of Clinical Excellence,1,3,0,0,0,0,1
+National Institute of Clinical Excellence,1,3,0,0,0,1,0
 RPFI,1,2,0,0,0,1,0
 ORCi,1,2,2,1,0,0,0
 Radcliffe Investment Properties,1,1,1,1,0,0,0
@@ -923,7 +923,7 @@ Universities and Colleges Admissions Service (UCAS),1,2,1,0,1,0,0
 Unity MAT,1,2,0,0,0,1,0
 Unity Insurance Services: Scouting and Scout Groups Insurance,1,9,0,0,0,1,0
 United Response,1,1,0,0,0,1,0
-United Children’s Services,1,1,0,0,0,0,1
+United Children’s Services,1,1,0,0,0,1,0
 "Unilink Software Ltd, provider of email a Prisoner",1,5,0,0,0,0,1
 Ultra Events Ltd,1,2,0,0,0,0,1
 URBN UK Ltd,1,1,1,1,0,0,0
@@ -1207,7 +1207,7 @@ Secretary for Communities and Local Government,1,2,2,1,0,0,0
 Seaton and Colyton Medical Practice,1,2,2,1,0,0,0
 Scottish Cycling,1,3,1,0,1,0,0
 Scotia Gas Network,1,4,0,0,0,1,0
-Scape Living Student Accommodation,1,1,0,0,0,0,1
+Scape Living Student Accommodation,1,1,0,0,0,1,0
 Scania,1,4,2,0,0,1,0
 Saxon Weald,1,2,0,0,0,0,1
 Sapphire Independent Living,1,1,0,0,0,1,0
@@ -1401,7 +1401,7 @@ Clatterbridge Cancer Centre,1,1,0,0,0,1,0
 Clarion Housing Group,1,1,1,1,0,0,0
 Clacton Community Practices,1,1,0,0,0,1,0
 City of Bradford Metropolitan District Council,1,1,0,0,0,1,0
-City and County of Swansea,1,3,0,0,0,0,1
+City and County of Swansea,1,3,0,0,0,1,0
 City and County Healthcare Group,1,2,2,1,0,0,0
 City Hospitals Sunderland NHS Foundation Trust,1,1,1,1,0,0,0
 City Healthcare Partnership Hull,1,6,0,0,0,0,1
@@ -1575,7 +1575,7 @@ Department for Community and Local Government,1,5,2,0,0,1,0
 "Department for Business, Energy and Industrial Strategy",1,1,1,1,0,0,0
 Department for Business and Trade,1,3,1,0,0,1,0
 Denton Medical Centre,1,1,0,0,0,1,0
-Dennis Eagle Ltd,1,1,0,0,0,0,1
+Dennis Eagle Ltd,1,1,0,0,0,1,0
 Delamere Medical Practice,1,1,1,1,0,0,0
 David Ake & Co Solicitors,1,1,1,1,0,0,0
 Darwin medical Practice,1,3,3,1,0,0,0
@@ -1928,7 +1928,7 @@ Instastop Ltd,1,1,1,1,0,0,0
 Inspector of Diving,1,2,0,0,0,1,0
 Informa Healthcare,1,5,3,0,0,1,0
 LPFT Legal Services,1,2,1,0,0,0,1
-Independent Office for Police Conduct,1,3,0,0,0,0,1
+Independent Office for Police Conduct,1,3,0,0,0,1,0
 Independent Monitoring Board,1,2,2,1,0,0,0
 Independent Healthcare Providers Network,1,2,1,0,0,1,0
 "Independent Futures, Southwinds Care Home",1,1,1,1,0,0,0
@@ -1990,7 +1990,7 @@ Minister for Prisons,1,2,1,0,0,1,0
 Minister for Health and Social Services,1,3,1,0,1,0,0
 Minister for Health Welsh Assembly Government,1,2,1,0,0,1,0
 "Minister for Education, Wales",1,9,0,0,0,1,0
-MiHomecare,1,1,0,0,0,0,1
+MiHomecare,1,1,0,0,0,1,0
 Milton Keynes City Council,1,2,0,0,0,1,0
 Millbrook Healthcare Limited,1,1,0,0,0,1,0
 Mill View Nursing Home,1,3,0,0,0,1,0
