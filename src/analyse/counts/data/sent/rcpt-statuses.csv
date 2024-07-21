@@ -1,15 +1,15 @@
 sent_to,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses
-NHS England,292,713,228,70,37,171,14
+NHS England,292,713,228,70,37,173,12
 Department of Health and Social Care,258,667,291,85,29,133,11
 Care Quality Commission,102,282,111,21,19,61,1
 HM Prison and Probation Service,61,155,58,14,10,36,1
 Department for Transport,46,88,43,13,10,22,1
-Home Office,43,120,41,12,6,22,3
+Home Office,43,120,41,12,6,23,2
 Ministry of Justice,40,99,33,5,5,26,4
 Network Rail,33,48,38,25,2,6,0
 National Institute for Health and Care Excellence,32,75,35,7,2,23,0
 Health and Safety Executive,32,73,34,12,1,18,1
-Department for Education,28,64,36,15,5,7,1
+Department for Education,28,64,36,15,5,8,0
 National Police Chiefs’ Council,27,79,26,6,6,14,1
 Leeds Teaching Hospitals NHS Trust,26,31,20,14,1,11,0
 Highways England,26,37,21,14,2,10,0
@@ -18,14 +18,14 @@ Wales Ambulance Service NHS Trust,24,57,39,11,3,9,1
 Pennine Care NHS Trust,23,46,23,10,1,12,0
 Betsi Cadwaladr University Health Board BCUHB,22,29,6,4,0,17,1
 College of Policing,21,63,26,6,5,8,2
-Homerton Healthcare NHS Foundation Trust,21,40,6,3,1,15,2
+Homerton Healthcare NHS Foundation Trust,21,40,6,3,1,16,1
 Greater Manchester Police,20,56,27,11,3,5,1
-Barts Health NHS Foundation Trust,20,36,4,4,0,14,2
+Barts Health NHS Foundation Trust,20,36,4,4,0,15,1
 Medicines & Healthcare products Regulatory Agency,20,58,32,6,2,11,1
 North East London Foundation Trust,19,33,9,4,1,14,0
 Greater Manchester Health & Social Care Partnership,19,40,30,12,2,5,0
 Birmingham and Solihull Mental Health Foundation Trust,19,55,25,7,3,7,2
-Midlands Partnership NHS Foundation trust,18,36,13,5,1,10,2
+Midlands Partnership NHS Foundation trust,18,36,13,5,1,11,1
 National Institute for Health & Care Excellence,18,44,19,6,1,10,1
 NHS Improvement,18,53,24,3,8,7,0
 Care UK,17,42,16,3,6,8,0
@@ -33,7 +33,7 @@ Metropolitan Police,17,25,17,11,0,6,0
 Medicines and Healthcare Products Regulatory Agency,17,45,22,5,2,10,0
 Metropolitan Police Service,17,34,17,7,1,8,1
 Probation Service,17,40,12,5,3,9,0
-Aneurin Bevan University Health Board,17,20,11,9,0,7,1
+Aneurin Bevan University Health Board,17,20,11,9,0,8,0
 HM Prison,17,39,10,5,2,10,0
 Greater Manchester Integrated Care,16,40,4,3,0,11,2
 University Hospitals Plymouth NHS Trust,16,24,17,11,1,4,0
@@ -49,7 +49,7 @@ Civil Aviation Authority,13,23,16,9,0,4,0
 Cwm Taf Morgannwg University Health Board,13,19,7,6,0,5,2
 NHS Trafford Clinical Commissioning Group,13,31,14,2,3,8,0
 West Midlands Police,13,41,22,4,5,3,1
-REDACTED,13,14,1,1,0,10,2
+REDACTED,13,14,1,1,0,11,1
 Essex Partnership NHS Trust,13,20,7,3,1,8,1
 Royal College of Obstetricians and Gynaecologists,13,32,9,1,2,10,0
 Norfolk and Suffolk NHS Trust,12,15,14,11,0,1,0
@@ -294,7 +294,7 @@ Royal College of Surgeons,3,10,5,0,1,2,0
 Royal College of Pathologists,3,11,0,0,0,3,0
 Pennine Acute NHS Trust,3,5,4,0,0,3,0
 Swindon Borough Council,3,4,2,1,0,2,0
-Thames Valley Police,3,11,3,1,1,0,1
+Thames Valley Police,3,11,3,1,1,1,0
 TFL,3,4,3,2,0,1,0
 Cwm Taf Health Board,3,4,3,2,0,1,0
 Royal College of GPs,3,10,7,0,1,2,0
@@ -305,7 +305,7 @@ Royal College of Nursing,3,7,2,1,0,1,1
 Royal College of Midwives,3,9,2,1,0,2,0
 Lancashire Constabulary,3,22,5,0,2,1,0
 Surrey & Borders Partnership NHS Trust,3,8,5,1,1,1,0
-Ministry for Justice,3,12,0,0,0,2,1
+Ministry for Justice,3,12,0,0,0,3,0
 Department for Housing Communities and Local Government,3,9,2,2,0,1,0
 West Wales General Hospital,3,3,4,2,0,1,0
 Department of Environment Food and Rural Affairs,3,11,3,0,0,3,0
@@ -965,7 +965,7 @@ The Grange Care Centre,1,1,1,1,0,0,0
 The Glass and Glazing Federation,1,1,0,0,0,1,0
 The General Dental Council,1,1,0,0,0,1,0
 The Garage Equipment Association,1,4,2,0,0,1,0
-The GP Partners,1,1,0,0,0,0,1
+The GP Partners,1,1,0,0,0,1,0
 The Forest of Marston Vale Trust,1,1,1,1,0,0,0
 The Foreign Secretary,1,1,1,1,0,0,0
 The Food Standards Agency,1,2,0,0,0,1,0
@@ -1496,7 +1496,7 @@ Devon & Cornwall Police,1,3,0,0,0,1,0
 Doncaster County Council,1,1,1,1,0,0,0
 Derwent Students,1,1,1,1,0,0,0
 Derbyshire NHS Foundation Trust,1,5,0,0,0,1,0
-Derbyshire Healthcare NHS Trust,1,1,0,0,0,0,1
+Derbyshire Healthcare NHS Trust,1,1,0,0,0,1,0
 Derbyshire County Council,1,1,0,0,0,1,0
 Derbyshire Community Health Services,1,2,0,0,0,1,0
 Derby and Burton NHS Foundation Trust,1,2,1,1,0,0,0
@@ -1987,7 +1987,7 @@ London Underground,1,1,0,0,0,1,0
 Long Furlong Medical Centre,1,1,0,0,0,1,0
 East Surrey Hospital,1,4,3,0,1,0,0
 Minister for Health,1,3,2,0,0,1,0
-Ministry of Justice and Inquests team,1,2,0,0,0,0,1
+Ministry of Justice and Inquests team,1,2,0,0,0,1,0
 Ministry of Justice Coroners,1,1,1,1,0,0,0
 Ministry of Housing Communities and Local Government,1,2,0,0,0,1,0
 Ministry for Housing and Local Government,1,1,1,1,0,0,0
@@ -2306,7 +2306,7 @@ HICA Group,1,2,1,0,1,0,0
 HMP Highpoint,1,1,0,0,0,1,0
 HMP Usk,1,1,0,0,0,1,0
 HMP Swaleside,1,1,1,1,0,0,0
-HMP Styal,1,2,0,0,0,0,1
+HMP Styal,1,2,0,0,0,1,0
 HMP Stoke,1,2,2,1,0,0,0
 HMP Ryehill,1,1,0,0,0,1,0
 HMP Ranby,1,3,2,0,0,1,0
