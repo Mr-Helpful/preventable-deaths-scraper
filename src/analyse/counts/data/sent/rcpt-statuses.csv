@@ -1,11 +1,11 @@
 sent_to,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses
-NHS England,292,713,228,70,37,173,12
-Department of Health and Social Care,258,667,291,85,29,133,11
+NHS England,292,713,228,70,37,175,10
+Department of Health and Social Care,258,667,291,85,29,138,6
 Care Quality Commission,102,282,111,21,19,61,1
-HM Prison and Probation Service,61,155,58,14,10,36,1
+HM Prison and Probation Service,61,155,58,14,10,37,0
 Department for Transport,46,88,43,13,10,22,1
-Home Office,43,120,41,12,6,23,2
-Ministry of Justice,40,99,33,5,5,26,4
+Home Office,43,120,41,12,6,24,1
+Ministry of Justice,40,99,33,5,5,29,1
 Network Rail,33,48,38,25,2,6,0
 National Institute for Health and Care Excellence,32,75,35,7,2,23,0
 Health and Safety Executive,32,73,34,12,1,18,1
@@ -19,7 +19,7 @@ Pennine Care NHS Trust,23,46,23,10,1,12,0
 Betsi Cadwaladr University Health Board BCUHB,22,29,6,4,0,17,1
 College of Policing,21,63,26,6,5,8,2
 Homerton Healthcare NHS Foundation Trust,21,40,6,3,1,16,1
-Greater Manchester Police,20,56,27,11,3,5,1
+Greater Manchester Police,20,56,27,11,3,6,0
 Barts Health NHS Foundation Trust,20,36,4,4,0,15,1
 Medicines & Healthcare products Regulatory Agency,20,58,32,6,2,11,1
 North East London Foundation Trust,19,33,9,4,1,14,0
@@ -39,14 +39,14 @@ Greater Manchester Integrated Care,16,40,4,3,0,11,2
 University Hospitals Plymouth NHS Trust,16,24,17,11,1,4,0
 Worcestershire Acute Hospitals NHS trust,16,22,8,6,0,9,1
 Clinical Commissioning Group,15,32,17,7,2,6,0
-Pennine Care NHS Foundation Trust,15,20,11,10,0,4,1
+Pennine Care NHS Foundation Trust,15,20,11,10,0,5,0
 Cardiff and Vale University Health Board,15,32,16,6,0,9,0
 Barts Health NHS Trust,15,22,15,6,4,5,0
 Greater Manchester Mental Health NHS Foundation Trust,14,23,7,4,0,10,0
 East London NHS Trust,14,18,9,8,0,6,0
 Nottingham University Hospital NHS Trust,14,23,13,6,0,8,0
 Civil Aviation Authority,13,23,16,9,0,4,0
-Cwm Taf Morgannwg University Health Board,13,19,7,6,0,5,2
+Cwm Taf Morgannwg University Health Board,13,19,7,6,0,6,1
 NHS Trafford Clinical Commissioning Group,13,31,14,2,3,8,0
 West Midlands Police,13,41,22,4,5,3,1
 REDACTED,13,14,1,1,0,11,1
@@ -81,7 +81,7 @@ G4S,9,28,9,3,0,6,0
 East of England Ambulance Service,9,15,13,5,2,2,0
 Medway NHS Foundation Trust,9,11,7,6,0,3,0
 Avon and Wiltshire Mental Health NHS Trust,9,18,6,2,1,6,0
-Norfolk and Suffolk NHS Foundation Trust,9,19,6,3,1,4,1
+Norfolk and Suffolk NHS Foundation Trust,9,19,6,3,1,5,0
 NHS Digital,9,28,19,5,3,1,0
 Surrey County Council,9,19,7,1,2,6,0
 North West Ambulance Service,9,35,19,6,0,3,0
@@ -534,7 +534,7 @@ UK Health Security Agency,2,3,0,0,0,2,0
 Birmingham Cross City CCG,2,6,6,2,0,0,0
 Bournemouth Christchurch and Poole Council,2,4,2,0,0,2,0
 North Somerset Council,2,4,2,1,0,1,0
-University Hospitals of Derby and Burton NHS Trust,2,3,1,1,0,0,1
+University Hospitals of Derby and Burton NHS Trust,2,3,1,1,0,1,0
 University Hospitals North Midlands NHS Trust,2,4,1,1,0,1,0
 Borough Care,2,2,2,2,0,0,0
 United Lincolnshire Hospital,2,2,0,0,0,2,0
@@ -674,7 +674,7 @@ Regenesis Health Travel Limited,1,1,0,0,0,1,0
 National Trading Standards,1,3,1,0,0,1,0
 North East London Foundation Trust Goodmayes Hospital,1,2,1,0,0,1,0
 National College of Policing,1,3,0,0,0,1,0
-Norfolk and Waveney Integrated Care Board,1,5,0,0,0,0,1
+Norfolk and Waveney Integrated Care Board,1,5,0,0,0,1,0
 Newport County Council,1,1,0,0,0,1,0
 Newham Social Care,1,2,0,0,0,1,0
 National Highways Agency,1,2,0,0,0,1,0
@@ -926,7 +926,7 @@ Unity MAT,1,2,0,0,0,1,0
 Unity Insurance Services: Scouting and Scout Groups Insurance,1,9,0,0,0,1,0
 United Response,1,1,0,0,0,1,0
 United Children’s Services,1,1,0,0,0,1,0
-"Unilink Software Ltd, provider of email a Prisoner",1,5,0,0,0,0,1
+"Unilink Software Ltd, provider of email a Prisoner",1,5,0,0,0,1,0
 Ultra Events Ltd,1,2,0,0,0,0,1
 URBN UK Ltd,1,1,1,1,0,0,0
 UPS,1,2,2,1,0,0,0
@@ -1106,7 +1106,7 @@ Wayland Farms Limited,1,1,1,1,0,0,0
 Waveney River Centre,1,1,1,1,0,0,0
 Waste Industry Safety & Health Forum,1,1,1,1,0,0,0
 Warwick Medical School,1,2,2,1,0,0,0
-Warrington Hospital,1,1,0,0,0,0,1
+Warrington Hospital,1,1,0,0,0,1,0
 Wanstead Place Surgery,1,1,0,0,0,1,0
 Wandsworth Merton Richmond and Sutton Borough Council,1,2,1,0,1,0,0
 Wandsworth Consortium Drug and Alcohol Services,1,1,0,0,0,1,0
@@ -1336,8 +1336,8 @@ Sunnyside Nursing Home,1,2,2,1,0,0,0
 Suicide (from 2015),1,3,0,0,0,1,0
 Suffolk Safeguarding Partnership,1,2,2,1,0,0,0
 Suffolk Highways,1,2,2,1,0,0,0
-Suffolk County Council,1,5,0,0,0,0,1
-Suffolk Constabulary Police Headquarters,1,5,0,0,0,0,1
+Suffolk County Council,1,5,0,0,0,1,0
+Suffolk Constabulary Police Headquarters,1,5,0,0,0,1,0
 SubCPartner,1,1,0,0,0,1,0
 Student Roost,1,2,0,0,0,1,0
 Stretton Medical Centre,1,1,0,0,0,1,0
@@ -1505,7 +1505,7 @@ Depaul UK,1,1,0,0,0,1,0
 Department of Work and Pensions,1,1,1,1,0,0,0
 Department of State for Social Care,1,2,2,1,0,0,0
 "Department of Housing, Communities & Local Government",1,1,2,0,0,1,0
-Department of Health and Social Care  Secretary of State Victims and Safeguarding,1,5,0,0,0,0,1
+Department of Health and Social Care  Secretary of State Victims and Safeguarding,1,5,0,0,0,1,0
 Department of Health NHS England,1,3,3,1,0,0,0
 Doncaster Bassetlaw Teaching Hospital,1,2,0,0,0,1,0
 Doncaster Highways Services,1,1,1,1,0,0,0
@@ -1532,7 +1532,7 @@ Downham Grange Care Home,1,1,1,1,0,0,0
 Dorset University NHS Trust,1,1,0,0,0,1,0
 Dorset Healthcare University Hospital NHS Trust,1,1,1,1,0,0,0
 Dorset Health Care University,1,3,1,0,1,0,0
-Dorset County Hospital NHS Foundation Trust,1,1,0,0,0,0,1
+Dorset County Hospital NHS Foundation Trust,1,1,0,0,0,1,0
 Dorset County Hospital,1,1,1,1,0,0,0
 Dorset County Council,1,1,1,1,0,0,0
 Dorset Council Highways Department,1,1,1,1,0,0,0
@@ -2320,7 +2320,7 @@ HMP Humber,1,1,0,0,0,1,0
 HMP High Down,1,2,1,0,1,0,0
 Havering Highways,1,1,2,0,0,1,0
 HMP Guys Marsh Prison,1,1,1,1,0,0,0
-HMP Guys Marsh,1,5,0,0,0,0,1
+HMP Guys Marsh,1,5,0,0,0,1,0
 HMP Grendon,1,1,0,0,0,1,0
 HMP Elmley,1,1,1,1,0,0,0
 HMP Dartmoor,1,1,1,1,0,0,0
