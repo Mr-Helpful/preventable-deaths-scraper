@@ -33,7 +33,7 @@ We've attempted to fully automate the scraping process, but there are some thing
 
 - Severe typos in some fields (i.e. `/0206/2023` is given as a date)
 - Transpositions of fields (i.e. a `name` being replaced with a `ref` number)
-- Ambiguity in destinations (i.e. is `University Hospitals of Derby and Burton NHS FT` one destination or two?)
+- Ambiguity in destinations (i.e. is `University Hospitals of Derby and Burton NHS FT` 1 destination or 2?)
 
 In these cases, we keep `json` files recording manual corrections for these in the [`src/correct/manual_replace`](./src/correct/manual_replace) directory. These need to be updated every now and then to ensure that the scraper maintains its accuracy.
 
