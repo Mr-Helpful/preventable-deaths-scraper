@@ -1,6 +1,6 @@
 coroner_area,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
-Greater Manchester South,434,457,243,140,7,144,3,70
-London Inner North,271,310,152,93,10,98,5,13
+Greater Manchester South,438,463,243,140,7,146,4,71
+London Inner North,271,310,152,93,10,99,4,13
 "West Sussex, Brighton and Hove",166,157,80,45,6,47,1,30
 Birmingham and Solihull,161,258,155,62,10,56,2,15
 Surrey,161,192,81,28,12,58,1,23
@@ -9,57 +9,57 @@ London Inner South,134,175,86,27,11,46,1,16
 Greater Manchester North,125,147,77,37,4,45,2,9
 South Wales Central,123,141,84,45,4,40,0,6
 Nottinghamshire,113,142,65,28,3,50,1,13
-Norfolk,109,86,62,46,1,20,2,9
-Greater Manchester West,108,106,65,40,2,31,0,5
-Yorkshire West Eastern,106,102,55,38,1,31,0,15
+Norfolk,109,86,62,46,1,21,1,9
+Greater Manchester West,109,108,65,40,2,31,1,5
+Yorkshire West Eastern,107,104,55,38,1,31,1,15
 Cornwall and the Isles of Scilly,106,137,73,38,8,39,0,13
-North Wales (East & Central),96,96,40,34,1,34,2,5
-Avon,92,104,36,18,3,41,1,8
-County Durham and Darlington,92,85,43,28,1,23,3,12
+North Wales (East & Central),96,96,40,34,1,35,1,5
+Avon,92,104,36,18,3,42,0,8
+County Durham and Darlington,92,85,43,28,1,24,2,12
 Yorkshire South West,88,98,39,25,4,39,0,5
-"Hampshire, Portsmouth and Southampton",85,107,48,25,9,33,0,2
+"Hampshire, Portsmouth and Southampton",87,110,51,27,9,33,0,2
 The Black Country Jurisdiction,82,94,53,31,5,25,0,4
 Yorkshire West Western,80,96,46,22,5,36,1,4
 Essex,78,105,28,13,5,48,0,3
 London Inner West,75,114,47,15,7,40,0,2
-Cumbria,72,50,32,20,0,18,1,8
 Leicester City and South Leicestershire,72,53,36,14,2,20,0,8
+Cumbria,72,50,32,20,0,18,1,8
 Milton Keynes,71,72,28,19,1,29,2,9
 Bedfordshire and Luton,71,70,36,26,3,22,0,5
 Dorset,65,69,64,26,2,18,0,13
 Manchester City,64,82,39,15,3,28,0,6
 Suffolk,64,65,22,14,2,25,0,18
 London North,63,27,23,12,1,9,1,8
-Liverpool and the Wirral,60,58,23,13,3,21,0,7
-Lincolnshire,60,53,22,15,2,22,1,2
 Worcestershire,60,56,26,19,2,22,0,5
-Kent Mid and Medway,60,50,25,22,1,17,1,11
-Berkshire,60,73,28,13,3,28,2,5
 Staffordshire South,60,49,32,24,1,13,0,2
+Kent Mid and Medway,60,50,25,22,1,17,1,11
+Lincolnshire,60,53,22,15,2,22,1,2
+Liverpool and the Wirral,60,58,23,13,3,21,0,7
+Berkshire,60,73,28,13,3,28,2,5
 Wiltshire and Swindon,55,44,19,15,0,17,0,3
-London West,54,71,21,15,1,28,0,2
 Derby and Derbyshire,54,68,18,10,6,27,0,5
+London West,54,71,21,15,1,28,0,2
 Lancashire and Blackburn with Darwen,52,52,22,17,1,26,0,0
 "Plymouth, Torbay and South Devon",50,48,26,14,3,20,0,3
-Cheshire,49,57,21,10,3,25,1,5
+Yorkshire South East,49,43,24,20,0,12,1,2
+Cheshire,49,57,21,10,3,26,0,5
 Blackpool and Fylde,48,36,17,17,0,14,0,11
-Yorkshire South East,48,42,24,20,0,12,0,2
 Exeter and Greater Devon,47,50,34,19,3,9,0,1
 Stoke on Trent and North Staffordshire,44,43,27,18,1,13,0,5
 Cambridgeshire and Peterborough,43,52,13,4,1,18,1,11
 Warwickshire,42,49,16,13,0,23,0,0
-Sunderland,42,34,22,14,0,10,0,6
 London South,42,46,21,10,1,14,0,4
+Sunderland,42,34,22,14,0,10,0,6
 Gwent,41,39,24,16,0,15,1,2
 Gloucestershire,36,38,22,18,0,12,0,2
 Newcastle and North Tyneside,35,38,17,7,1,20,0,4
 Northamptonshire,33,46,18,10,1,13,0,6
 Hertfordshire,31,28,21,15,1,6,0,3
 East Riding of Yorkshire and Kingston-upon-Hull,29,31,6,2,2,14,1,8
-Kent Central and South East,28,22,9,7,0,11,0,2
+Kent Central and South East,29,23,10,8,0,11,0,2
 Oxfordshire,28,20,18,14,0,1,1,0
-North Yorkshire and York,26,21,8,5,0,12,0,5
 Swansea and Neath Port Talbot,26,31,10,8,1,11,0,2
+North Yorkshire and York,26,21,8,5,0,12,0,5
 East Sussex,25,43,19,5,3,15,0,1
 Somerset,24,26,9,5,1,11,0,1
 "Shropshire, Telford and Wrekin",24,24,17,11,0,7,0,0
@@ -70,17 +70,17 @@ North West Wales,21,15,8,7,0,7,0,3
 Coventry,19,13,3,3,0,8,0,1
 Isle of Wight,19,20,8,4,1,8,0,1
 Northumberland North,17,15,11,5,2,2,0,2
-London City,13,10,5,3,0,4,0,2
 Herefordshire,13,13,7,5,1,5,0,2
-Rutland and North Leicestershire,11,12,0,0,0,7,0,0
+London City,13,10,5,3,0,4,0,2
+Rutland and North Leicestershire,12,18,1,0,0,8,0,0
 Gateshead and South Tyneside,10,14,2,1,0,5,0,0
 Teesside,10,3,3,3,0,0,0,0
 Hartlepool,9,8,1,0,0,6,0,2
 Staffordshire and Stoke-on-Trent,9,16,0,0,0,7,1,0
 Kent North West,8,9,6,5,1,2,0,0
-"Sefton, Knowsley and St Helens",6,11,3,0,1,5,0,0
 North Lincolnshire and Grimsby,6,3,1,1,0,2,0,0
+"Sefton, Knowsley and St Helens",6,11,3,0,1,5,0,0
 Northumberland,3,1,0,0,0,1,0,2
-Northumberland South,1,1,0,0,0,1,0,0
 Teesside and Hartlepool,1,4,0,0,0,0,1,0
 Ceredigion,1,2,2,1,0,0,0,0
+Northumberland South,1,1,0,0,0,1,0,0
