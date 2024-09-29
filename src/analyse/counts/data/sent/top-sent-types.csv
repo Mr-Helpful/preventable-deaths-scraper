@@ -1,7 +1,7 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,297,196,5,96,32.3
-Department of Health and Social Care,264,163,6,95,36.0
-Care Quality Commission,105,76,3,26,24.8
+NHS England,298,196,6,96,32.2
+Department of Health and Social Care,265,163,7,95,35.8
+Care Quality Commission,106,76,4,26,24.5
 HM Prison and Probation Service,62,44,1,17,27.4
 Department for Transport,46,26,0,20,43.5
 Home Office,43,27,0,16,37.2
@@ -9,23 +9,23 @@ Ministry of Justice,42,35,2,5,11.9
 Network Rail,33,6,0,27,81.8
 Health and Safety Executive,33,20,0,13,39.4
 National Institute for Health and Care Excellence,32,25,0,7,21.9
-National Police Chiefs’ Council,29,21,1,7,24.1
 Department for Education,29,11,1,17,58.6
+National Police Chiefs’ Council,29,21,1,7,24.1
 Leeds Teaching Hospitals NHS Trust,27,11,1,15,55.6
 Highways England,26,10,0,16,61.5
-Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Wales Ambulance Service NHS Trust,24,13,0,11,45.8
+Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Pennine Care NHS Trust,24,13,1,10,41.7
 Betsi Cadwaladr University Health Board BCUHB,23,19,0,4,17.4
 Barts Health NHS Foundation Trust,22,16,2,4,18.2
+Homerton Healthcare NHS Foundation Trust,21,17,1,3,14.3
 Medicines & Healthcare products Regulatory Agency,21,14,1,6,28.6
 College of Policing,21,12,0,9,42.9
-Homerton Healthcare NHS Foundation Trust,21,17,1,3,14.3
-National Institute for Health & Care Excellence,20,12,2,6,30.0
 Birmingham and Solihull Mental Health Foundation Trust,20,12,1,7,35.0
+National Institute for Health & Care Excellence,20,12,2,6,30.0
 Greater Manchester Police,20,7,0,13,65.0
-Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
 North East London Foundation Trust,19,14,0,5,26.3
-Midlands Partnership NHS Foundation trust,18,13,0,5,27.8
+Midlands Partnership NHS Foundation trust,19,13,1,5,26.3
+Greater Manchester Health & Social Care Partnership,19,7,0,12,63.2
 NHS Improvement,18,11,0,7,38.9
-Aneurin Bevan University Health Board,18,8,1,9,50.0
+Greater Manchester Integrated Care,18,13,2,3,16.7

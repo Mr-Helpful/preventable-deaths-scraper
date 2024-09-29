@@ -1,18 +1,18 @@
 coroner_area,count
-Greater Manchester South,440
+Greater Manchester South,442
 London Inner North,272
-"West Sussex, Brighton and Hove",166
-Surrey,164
+"West Sussex, Brighton and Hove",167
+Surrey,165
 Birmingham and Solihull,161
 London East,157
-London Inner South,134
+London Inner South,135
 Greater Manchester North,125
 South Wales Central,124
 Nottinghamshire,113
 Greater Manchester West,110
+Yorkshire West Eastern,109
 Norfolk,109
-Yorkshire West Eastern,108
-Cornwall and the Isles of Scilly,107
+Cornwall and the Isles of Scilly,108
 North Wales (East & Central),96
 Avon,92
 County Durham and Darlington,92
@@ -30,7 +30,7 @@ Dorset,65
 Suffolk,64
 Manchester City,64
 London North,63
-Worcestershire,60
+Worcestershire,62
 Berkshire,60
 Staffordshire South,60
 Kent Mid and Medway,60
@@ -55,11 +55,11 @@ Gloucestershire,36
 Newcastle and North Tyneside,35
 Northamptonshire,33
 Hertfordshire,31
+East Riding of Yorkshire and Kingston-upon-Hull,30
 Kent Central and South East,29
-East Riding of Yorkshire and Kingston-upon-Hull,29
 Oxfordshire,28
-North Yorkshire and York,26
 Swansea and Neath Port Talbot,26
+North Yorkshire and York,26
 Somerset,25
 East Sussex,25
 "Shropshire, Telford and Wrekin",24
@@ -67,20 +67,20 @@ Carmarthenshire and Pembrokeshire,23
 Buckinghamshire,22
 North West Wales,21
 Kent North East,21
-Isle of Wight,19
 Coventry,19
+Isle of Wight,19
 Northumberland North,17
 London City,13
 Herefordshire,13
 Rutland and North Leicestershire,12
-Gateshead and South Tyneside,10
 Teesside,10
+Gateshead and South Tyneside,10
 Staffordshire and Stoke-on-Trent,9
 Hartlepool,9
 Kent North West,8
 "Sefton, Knowsley and St Helens",6
 North Lincolnshire and Grimsby,6
 Northumberland,3
-Ceredigion,1
 Teesside and Hartlepool,1
 Northumberland South,1
+Ceredigion,1
