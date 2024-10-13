@@ -1,6 +1,6 @@
 coroner_name,no. PFDs,no. recipients,no. replies,no. complete responses,no. partial responses,no. overdue responses,no. pending responses,no. failed parses
 Ms Alison Patricia Mutch OBE,212,265,132,68,4,85,5,49
-Ms Mary Hassell,163,196,106,62,9,50,2,7
+Ms Mary Hassell,163,196,106,62,9,51,1,7
 Mr Professor John S Pollard,86,38,30,20,0,13,0,1
 Ms Nadia Persaud,85,74,29,20,2,38,1,12
 Mr Tom Osborne,82,62,33,23,1,25,1,6
@@ -16,40 +16,40 @@ Mr Zafar Siddique,55,77,47,24,5,19,0,1
 Mr Kevin McLoughlin,55,52,34,23,1,13,1,14
 Mrs lydia brown,53,54,40,23,2,12,0,2
 Mr Andrew Walker,52,24,25,12,1,6,0,4
-Ms Joanne Kearsley,51,70,40,12,5,13,2,5
+Ms Joanne Kearsley,51,70,40,12,5,14,1,5
 Mr Andrew Adrian Haigh,50,34,26,22,0,9,0,2
 Mr Martin Dominic Fleming,48,44,22,11,2,20,1,1
-Mrs Heidi Julia Connor,47,64,30,12,4,20,1,4
+Mrs Heidi Julia Connor,47,64,30,12,4,21,0,4
 Dr Fiona Jane Wilcox,47,62,24,7,6,24,0,1
 Mrs Maria Eileen Voisin,43,44,21,9,1,16,0,5
 Miss Emma Brown,42,70,45,22,1,15,0,4
 Ms Lisa Jeanette Hashmi,42,41,20,11,0,15,0,0
 Mrs Caroline Beasley-Murray OBE,40,53,19,7,5,21,0,1
 Mr Andrew Roger Barkley,40,45,30,14,2,12,0,1
-Ms Caroline Saunders,39,41,28,20,0,15,1,2
+Ms Caroline Saunders,39,41,28,20,0,16,0,2
 Mr Derek Winter DL,39,25,17,12,0,9,0,6
+Mrs Rachael Clare Griffin,39,43,46,13,1,11,1,10
 Ms Penelope Schofield,39,42,33,22,2,6,0,5
 Mr André Rebello OBE,39,30,18,11,1,11,0,5
-Mrs Rachael Clare Griffin,38,42,46,13,1,11,0,10
 Mr Alan Wilson,38,24,13,13,0,8,0,9
 Miss Anna Crawford,37,35,14,13,0,18,0,5
 Mr Alan Peter Walsh,35,30,21,10,2,8,0,0
 Mr David William Graham RIDLEY,35,25,11,9,0,8,0,3
 Dr Richard Ian Brittain,35,24,9,7,0,10,0,2
+Ms Sonia Marie Hayes,33,47,19,13,0,14,1,4
 Dr Karen Henderson,33,43,18,4,3,8,0,7
-Ms Sonia Marie Hayes,32,46,19,13,0,14,0,4
 Mr Andrew Tweddle,31,18,9,6,0,5,0,1
 Mr S. McGovern,30,22,9,9,0,13,0,0
+Mr Nigel Parsley,30,33,14,10,2,7,1,10
 Mr Nicholas Leslie Rheinberg,30,40,19,9,2,17,0,0
-Mr Nigel Parsley,29,30,14,10,2,7,0,10
 Mr Nigel Meadows,29,30,17,8,1,10,0,3
 Mr David Donald William REID,28,35,15,10,2,13,0,2
+Guy Davies,28,32,15,8,3,9,1,7
 Margaret Jones,28,35,19,10,1,9,0,2
 Dr Séan Cummings,28,43,6,3,0,16,1,5
 Ms Nicola Jane Mundy,27,20,13,10,0,4,2,1
 Mrs Emma Elizabeth Whitting,27,33,11,8,1,16,0,2
 Ms Patricia Harding,27,21,13,11,0,6,0,4
-Guy Davies,27,32,15,8,3,9,1,6
 Mr Geraint Williams,26,19,11,7,0,7,0,1
 Mr Ian Arrow,26,21,11,8,2,7,0,3
 Ms Jacqueline P Devonish,25,27,11,7,1,12,0,3
@@ -84,23 +84,23 @@ Mrs Samantha Marsh,17,28,7,6,1,8,1,1
 Ms Sarah Bourke,17,20,12,8,1,7,0,1
 Dr E. Emma Carlyon,17,26,18,8,3,5,0,0
 Dr Sarah-Jane Richards,16,11,5,4,0,4,0,2
+Dr Elizabeth A Earland,16,10,7,2,1,2,0,1
 Mrs Catherine Mason,16,5,4,3,0,1,0,3
 Mr Crispin Giles Butler,16,23,8,6,1,8,0,0
-Mrs Helen Rachel Redman,16,10,1,1,0,7,0,0
 Ms Abigail Combes,16,15,8,6,1,6,0,3
+Mrs Helen Rachel Redman,16,10,1,1,0,7,0,0
 Mr Peter J Bedford,16,13,10,3,0,5,0,0
-Dr Elizabeth A Earland,16,10,7,2,1,2,0,1
 Ms Yvonne Kathleen Blake,16,19,8,6,0,8,1,1
-Mr Geoffrey Sullivan,15,17,16,10,1,2,0,2
+Mr Jeremy Chipperfield,15,15,5,5,0,7,1,1
 Mr Robert Craig Simpson,15,21,9,7,0,6,0,2
+Mr Geoffrey Sullivan,15,17,16,10,1,2,0,2
 Mr SIMON NELSON,15,9,5,4,0,2,0,0
 Mr Christopher Dorries,15,17,8,6,1,4,0,0
 Ms Rachel Galloway,15,20,10,4,0,10,0,1
-David Urpeath,14,17,11,8,0,3,0,1
 Miss Rachel Elisabeth Knight,14,20,13,8,0,3,0,3
-Christopher Murray,14,27,6,5,0,5,3,0
+David Urpeath,14,17,11,8,0,3,0,1
 Dr Nicholas Alastair Shaw,14,10,5,4,0,4,0,4
-Mr Jeremy Chipperfield,14,13,5,5,0,7,0,1
+Christopher Murray,14,27,6,5,0,5,3,0
 Mr Peter Nieto,14,17,4,4,0,7,0,3
 Ms Mary T Burke,14,19,11,2,2,4,0,1
 Mr Michael Singleton,14,10,6,6,0,4,0,0
@@ -109,7 +109,7 @@ Hassan Shah,13,23,6,2,0,8,0,2
 Miss Lorraine Harris,13,10,7,3,2,3,0,5
 Mr Jason Pegg,13,12,8,7,1,3,0,1
 Mr Grahame Antony Short,13,16,11,6,2,4,0,0
-Mrs Anna Loxton,13,21,10,5,2,3,1,2
+Mrs Anna Loxton,13,21,10,5,2,4,0,2
 Stephanie Haskey,13,10,5,4,0,2,0,0
 Mr Adam Hodson,13,18,9,6,0,4,2,1
 Dr Alexander Robert Walker Forrest,13,4,1,0,1,2,0,1
@@ -120,7 +120,7 @@ Mr Paul Vernon Marks,12,9,2,2,0,6,0,3
 Mr Adrian John Farrow,12,25,5,4,0,4,0,3
 Mr Robert Chapman,12,5,2,2,0,2,0,0
 Mr David Regan,12,16,4,4,0,7,1,0
-Mr Ian Potter,12,16,0,0,0,9,3,0
+Mr Ian Potter,12,16,0,0,0,11,1,0
 Mr Oliver Robert Longstaff,12,25,12,5,1,6,0,0
 Mr James Edward Thompson,11,10,7,5,0,3,0,3
 Mrs Tanyka Samantha Rawden,11,17,4,1,1,9,0,0
@@ -151,12 +151,12 @@ Mrs Anne Pember,10,10,7,3,1,1,0,3
 Miss Rachel Raheela Syed,10,18,6,1,1,7,0,1
 Mr Andrew Philip Hetherington,10,11,8,3,1,2,0,4
 Mr Ian Smith,10,2,1,1,0,1,0,0
-Mr Robert Cohen,9,5,1,1,0,3,1,3
+Mr Robert Cohen,9,5,1,1,0,4,0,3
 Mr Stuart P G Fisher,9,2,2,2,0,0,0,0
 Miss Kate Thomas,9,9,5,5,0,3,0,0
 John Tomalin,9,8,6,5,0,2,0,0
 Dr Shirley Radcliffe,9,17,5,3,1,3,2,0
-Miss Janine Richards,9,4,1,1,0,2,1,3
+Miss Janine Richards,9,4,1,1,0,3,0,3
 Mr Paul Duncan Smith,9,10,4,3,0,5,0,0
 Mr Zak Golombeck,9,13,7,2,1,4,0,2
 Dr David J Osborne,9,1,1,1,0,0,0,0
@@ -191,30 +191,31 @@ Mr John Hobson,7,9,5,5,0,2,0,0
 Mr Tony Williams,7,9,4,0,1,5,0,1
 Julie Robertson,7,9,4,2,0,5,0,0
 Dr Julian Rupert Laurence Morris,7,12,7,1,2,3,0,1
+Ms Deborah Archer,7,14,0,0,0,5,2,0
 Ms Melanie Lee,7,9,0,0,0,6,1,0
 Dr Bridget Dolan QC,7,6,5,3,0,1,0,0
-Mr Alan R Craze,7,14,12,2,2,2,0,0
 R .David Crawford Clarke,7,16,9,0,3,3,0,0
-Ms Anna Morris,7,10,3,1,0,5,0,1
+Mr Alan R Craze,7,14,12,2,2,2,0,0
 Miss CARLY ELIZABETH HENLEY,7,8,3,2,0,2,0,2
 Terence Moore,7,6,0,0,0,3,0,0
 Lorna Tagliavini,7,3,2,1,1,0,0,0
 Ms Julie Alison Goulding,7,13,2,0,0,7,0,0
+Ms Anna Morris,7,10,3,1,0,5,0,1
 Mr Matthew A Cox,6,8,7,3,0,2,0,0
 Mr Mark Andrew Beresford,6,6,4,4,0,1,0,0
+Mr Mr P J Bennett,6,11,0,0,0,4,0,1
 Mr Ian Wade KC,6,5,2,2,0,3,0,0
+Ian Brownhill,6,5,3,1,0,1,0,4
 Miss Bina Patel,6,6,3,2,1,2,0,1
-Ms Deborah Archer,6,8,0,0,0,5,1,0
 Mrs Lauren Costello,6,5,3,1,0,2,0,3
 Mr Jonathan Richard Heath,6,7,4,2,0,3,0,1
 Dr Robert Hunter,6,4,2,1,0,2,0,0
-Mr Mr P J Bennett,6,11,0,0,0,4,0,1
 Michael R Rose,6,1,1,1,0,0,0,0
 Mr David Pojur,6,16,1,1,0,5,0,0
 Mr Simon Jones,6,7,4,3,0,2,0,0
 Mr Christopher Campbell Wilkinson,6,9,3,1,0,3,0,0
 Mr Roger Linton Hatch,6,7,5,4,1,1,0,0
-Jane Gillespie,5,3,2,2,0,1,0,1
+Mr Alan Moore,5,4,1,1,0,2,0,0
 Mrs Victoria Davies,5,4,0,0,0,2,0,2
 Miss Isobel Thistlethwaite,5,6,0,0,0,5,0,0
 Mrs Eleanor Kay McGann,5,2,0,0,0,2,0,0
@@ -224,16 +225,15 @@ Miss Elizabeth Dudley-Jones,5,5,3,1,1,1,0,0
 Mr Nicholas Moss QC,5,8,4,1,0,2,0,2
 Miss Kirsty Gomersal,5,6,8,1,0,4,0,0
 Mrs Charlotte Keighley,5,7,0,0,0,4,0,0
-Mr Alan Moore,5,4,1,1,0,2,0,0
 Mrs Anita Bhardwaj,5,11,1,0,2,3,0,0
+Jane Gillespie,5,3,2,2,0,1,0,1
 Miss Fiona Butler,5,11,3,2,0,3,0,0
-Ian Brownhill,5,5,3,1,0,1,0,3
 Mr Stephen Simblet KC,5,5,0,0,0,4,0,1
 Dr Jason Wells,5,6,5,4,0,0,0,1
-Ms jessica russell-mitra,5,7,1,0,0,5,0,0
 Belinda Cheney,5,7,0,0,0,2,0,1
-Miss Sabyta Kaushal,5,4,1,1,0,3,0,1
+Ms jessica russell-mitra,5,7,1,0,0,5,0,0
 Andrew McNamara,5,10,6,1,0,3,0,0
+Miss Sabyta Kaushal,5,4,1,1,0,3,0,1
 Ms Joy Michelle Brown OBE,5,9,0,0,0,5,0,0
 Miss Sarah Murphy,5,5,3,2,0,2,0,1
 Mr Stephen Covell,5,8,3,2,0,3,0,0
@@ -241,14 +241,14 @@ Ms Johanna Thompson,4,8,3,1,1,2,0,0
 Mr Nicholas Graham,4,1,0,0,0,1,0,0
 Ms Katy Ainge,4,2,1,1,0,1,0,2
 Mrs Deborah Suzanne Rookes,4,8,1,1,0,2,0,1
-Dr Leslie Hamilton,4,2,1,1,0,1,0,1
+Dr Peter Henry Straker,4,3,0,0,0,2,0,2
 Richard Furniss,4,7,0,0,0,4,0,0
 Mr Paul Kelly,4,1,0,0,0,1,0,0
 Richard A Hulett,4,1,0,0,0,1,0,0
+Mr Rob Turnbull,4,4,2,1,0,1,0,0
 Mr Peter Sigee,4,5,5,2,0,2,0,0
 Mr Peter Taheri,4,3,0,0,0,2,0,2
-Mr Rob Turnbull,4,4,2,1,0,1,0,0
-Dr Peter Henry Straker,4,3,0,0,0,2,0,2
+Dr Leslie Hamilton,4,2,1,1,0,1,0,1
 Ms Susan Ridge,4,6,0,0,0,2,2,0
 Mrs Sarah L. Whitby,4,3,0,0,0,3,0,0
 "Mr Michael J C Burgess CVO, OBE",4,0,0,0,0,0,0,0
@@ -264,7 +264,7 @@ Mrs Krestina Hayes,4,4,0,0,0,3,0,0
 Mr Heath Westerman,4,7,2,2,0,2,0,0
 Mr James Newman,4,5,2,1,1,1,0,0
 Ms Alexandra Pountney,3,3,0,0,0,3,0,0
-Mr Harry Nathaniel Lambert,3,3,0,0,0,2,1,0
+Mr Harry Nathaniel Lambert,3,3,0,0,0,3,0,0
 Mrs kirsten heaven,3,5,4,2,0,1,0,0
 Andrew Thompson,3,0,0,0,0,0,0,0
 Anthony Howard,3,3,3,3,0,0,0,0
@@ -357,7 +357,7 @@ Janet Napier,2,4,2,0,2,0,0,0
 Miss Louise E Rae,2,3,1,1,0,1,0,0
 John Woolley,2,0,0,0,0,0,0,0
 Mr Tom Stoate,2,4,2,1,1,0,0,0
-Miss Jessica Swift,2,2,0,0,0,0,1,0
+Miss Jessica Swift,2,2,0,0,1,0,0,0
 Julian Fox,2,0,0,0,0,0,0,0
 Miss Janine Wolstenholme,2,0,0,0,0,0,0,2
 Karon Monaghan,2,3,1,0,0,1,0,0
@@ -367,7 +367,7 @@ Dr Murray James Spittal,2,3,0,0,0,2,0,0
 Mr Gareth Lewis,2,1,0,0,0,1,0,0
 Maria Mulrennan,2,8,4,0,0,2,0,0
 Anthony Curzon,2,2,0,0,0,2,0,0
-Mr Nicholas Walker,2,1,0,0,0,0,1,0
+Mr Nicholas Walker,2,1,0,0,0,1,0,0
 David Skipp,2,1,3,0,0,1,0,0
 Mr Matthew Kewley,2,3,0,0,0,2,0,0
 Anthony Eastwoods,2,0,0,0,0,0,0,0
@@ -445,7 +445,7 @@ Mr Michael Walsh,1,1,0,0,0,1,0,0
 Mr Nicholas Mark Flanagan,1,4,1,0,0,1,0,0
 Mr Nick Seán Stanage,1,1,1,1,0,0,0,0
 Mr Paul B Matthews,1,0,0,0,0,0,0,0
-Mr Paul Michael Appleton,1,4,0,0,0,0,1,0
+Mr Paul Michael Appleton,1,4,0,0,0,1,0,0
 Mr Peter Anthony Murphy,1,1,0,0,0,1,0,0
 Mr Peter Brunton,1,2,2,1,0,0,0,0
 Mr Raja Mahmood,1,1,0,0,0,1,0,0
