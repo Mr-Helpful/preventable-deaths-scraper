@@ -1,10 +1,10 @@
 sent_to,no. PFDs,overdue,pending,received,% received
-NHS England,327,214,17,96,29.4
-Department of Health and Social Care,292,184,13,95,32.5
-Care Quality Commission,110,82,2,26,23.6
+NHS England,327,218,13,96,29.4
+Department of Health and Social Care,292,186,11,95,32.5
+Care Quality Commission,110,83,1,26,23.6
 HM Prison and Probation Service,63,46,0,17,27.0
 Department for Transport,51,27,4,20,39.2
-Ministry of Justice,47,39,3,5,10.6
+Ministry of Justice,47,40,2,5,10.6
 Home Office,46,29,1,16,34.8
 Health and Safety Executive,34,20,1,13,38.2
 Network Rail,33,6,0,27,81.8
@@ -18,7 +18,7 @@ Betsi Cadwaladr University Health Board BCUHB,24,19,0,5,20.8
 Betsi Cadwaladr University Health Board,24,7,0,17,70.8
 Pennine Care NHS Trust,24,14,0,10,41.7
 Homerton Healthcare NHS Foundation Trust,24,20,1,3,12.5
-National Institute for Health & Care Excellence,24,16,2,6,25.0
+National Institute for Health & Care Excellence,24,17,1,6,25.0
 Medicines & Healthcare products Regulatory Agency,22,15,1,6,27.3
 Barts Health NHS Foundation Trust,22,18,0,4,18.2
 Midlands Partnership NHS Foundation trust,21,15,1,5,23.8
@@ -42,7 +42,7 @@ Barts Health NHS Trust,16,6,0,10,62.5
 Pennine Care NHS Foundation Trust,16,6,0,10,62.5
 Cardiff and Vale University Health Board,16,10,0,6,37.5
 Clinical Commissioning Group,15,6,0,9,60.0
-REDACTED,15,13,1,1,6.7
+REDACTED,15,14,0,1,6.7
 Greater Manchester Mental Health NHS Foundation Trust,15,11,0,4,26.7
 East London NHS Trust,14,6,0,8,57.1
 Nottingham University Hospital NHS Trust,14,8,0,6,42.9
@@ -57,7 +57,7 @@ Sheffield Teaching Hospitals NHS Foundation Trust,12,7,0,5,41.7
 Surrey County Council,12,11,0,1,8.3
 Norfolk and Suffolk NHS Trust,12,1,0,11,91.7
 Department for Digital Culture Media and Sport,12,9,1,2,16.7
-Royal College of Paediatrics and Child Health,12,10,1,1,8.3
+Royal College of Paediatrics and Child Health,12,11,0,1,8.3
 General Medical Council,12,7,0,5,41.7
 Public Health England,12,8,0,4,33.3
 Association of Ambulance Chief Executives,11,8,0,3,27.3
@@ -68,7 +68,7 @@ Royal London Hospital,11,4,0,7,63.6
 Stockport NHS Foundation Trust,11,3,0,8,72.7
 Norfolk and Suffolk NHS Foundation Trust,11,7,1,3,27.3
 Driver & Vehicle Licensing Agency,11,9,1,1,9.1
-Department of Transport,11,6,1,4,36.4
+Department of Transport,11,7,0,4,36.4
 East London NHS Foundation Trust,10,7,0,3,30.0
 HMP Pentonville,10,9,0,1,10.0
 Swansea Bay University Health Board,10,8,0,2,20.0
@@ -107,7 +107,7 @@ South London and Maudsley NHS Foundation Trust,8,7,0,1,12.5
 Warwickshire County Council,8,7,0,1,12.5
 Avon Fire and Rescue Services,8,7,0,1,12.5
 Royal Stoke University Hospital,8,5,0,3,37.5
-The Royal College of General Practitioners,8,6,1,1,12.5
+The Royal College of General Practitioners,8,7,0,1,12.5
 East Lancashire Hospitals NHS Trust,8,5,0,3,37.5
 Camden & Islington NHS Trust,8,4,0,4,50.0
 Central & North West London NHS Foundation Trust,8,7,0,1,12.5
@@ -125,9 +125,9 @@ West Sussex County Council,7,2,0,5,71.4
 Essex Partnership University NHS Foundation Trust,7,4,0,3,42.9
 Royal College Emergency Medicine,7,7,0,0,0.0
 Royal College of Anaesthetists,7,6,0,1,14.3
-Royal College of Radiologists,7,4,1,2,28.6
+Royal College of Radiologists,7,5,0,2,28.6
 South Wales Police,7,4,0,3,42.9
-NHS England & NHS Improvement,7,5,2,0,0.0
+NHS England & NHS Improvement,7,6,1,0,0.0
 Tameside General Hospital,7,4,0,3,42.9
 Stockport NHS Trust,7,5,0,2,28.6
 Manchester University NHS Foundation Trust,7,4,0,3,42.9
@@ -159,11 +159,11 @@ South Central Ambulance Service,6,3,0,3,50.0
 British Medical Association,6,6,0,0,0.0
 Powys County Council,6,5,0,1,16.7
 British Transport Police,6,5,0,1,16.7
-Royal College of Surgeons,6,2,3,1,16.7
+Royal College of Surgeons,6,3,2,1,16.7
 Hywel Dda University Health Board,5,4,0,1,20.0
 "Department for Levelling Up, Housing and Communities",5,4,0,1,20.0
 Birmingham and Solihull CCG,5,1,0,4,80.0
-Coventry and Warwickshire NHS Trust,5,2,2,1,20.0
+Coventry and Warwickshire NHS Trust,5,3,1,1,20.0
 Product Safety and Standards,5,5,0,0,0.0
 University Hospital of North Midalnds,5,2,0,3,60.0
 Stockport Clinical Commissioning Group,5,2,0,3,60.0
@@ -246,7 +246,7 @@ SoS for Health and Social Care,4,1,0,3,75.0
 Nottinghamshire Healthcare NHS Trust,4,3,0,1,25.0
 Dorset Police,4,2,0,2,50.0
 Essex Partnership University Trust,4,4,0,0,0.0
-London Borough of Hackney,4,2,1,1,25.0
+London Borough of Hackney,4,3,0,1,25.0
 Royal College of Pathologists,4,3,1,0,0.0
 South Central Ambulance Service NHS Trust,4,2,0,2,50.0
 OFSTED,4,3,0,1,25.0
@@ -332,7 +332,7 @@ Tameside and Glossop Care NHS Trust,3,2,0,1,33.3
 Devon County Council,3,2,0,1,33.3
 The Highways Agency,3,2,0,1,33.3
 The Great Western Hospital NHS Foundation Trust,3,2,0,1,33.3
-Ministry of Housing Communities and Local Government,3,2,1,0,0.0
+Ministry of Housing Communities and Local Government,3,3,0,0,0.0
 Medway Maritime Hospital,3,1,0,2,66.7
 Ministry for Justice,3,3,0,0,0.0
 Derbyshire Constabulary,3,3,0,0,0.0
@@ -496,7 +496,7 @@ Guys & St Thomas NHS Trust,2,1,0,1,50.0
 Luton Borough Council,2,1,0,1,50.0
 Greater Manchester West Mental Health NHS Trust,2,1,0,1,50.0
 HMCTS,2,1,0,1,50.0
-Salford Royal Hospital NHS Trust,2,1,1,0,0.0
+Salford Royal Hospital NHS Trust,2,2,0,0,0.0
 HMP Bedford,2,2,0,0,0.0
 SECAMBS,2,1,0,1,50.0
 MFT,2,1,0,1,50.0
@@ -521,7 +521,7 @@ Health and Care Professions Council,2,1,0,1,50.0
 Office of Product Safety Standards,2,0,2,0,0.0
 North Cumbria University NHS Trust: NHS England,2,0,0,2,100.0
 South Tees Hospitals NHS Foundation Trust,2,0,1,1,50.0
-East Riding of Yorkshire Council,2,0,2,0,0.0
+East Riding of Yorkshire Council,2,2,0,0,0.0
 HM Inspector of Railways,2,2,0,0,0.0
 Lincolnshire Police,2,2,0,0,0.0
 Mid & South Essex NHS Trust,2,0,2,0,0.0
@@ -718,7 +718,7 @@ Park Holiday UK Limited,1,0,0,1,100.0
 Park & Francis Surgery,1,0,0,1,100.0
 POM-EKO,1,1,0,0,0.0
 PJ Care,1,1,0,0,0.0
-Oxfordshire County Council ,1,0,1,0,0.0
+Oxfordshire County Council ,1,1,0,0,0.0
 PCRSteel Ltd.,1,1,0,0,0.0
 Pentree Lodge Home,1,0,0,1,100.0
 Vantage Drilling Company,1,0,0,1,100.0
@@ -1052,7 +1052,7 @@ UPS,1,0,0,1,100.0
 South West Trains,1,1,0,0,0.0
 The Crossing Project,1,1,0,0,0.0
 The Dalmeny Hotal,1,0,0,1,100.0
-The Department for Education ,1,0,1,0,0.0
+The Department for Education ,1,1,0,0,0.0
 The Difficult Airway Society,1,1,0,0,0.0
 The Director General of the Security Service,1,1,0,0,0.0
 South West and St George’s Mental Health Trust,1,1,0,0,0.0
@@ -1427,7 +1427,7 @@ The Royal Wolverhampton NHS Trust,1,0,0,1,100.0
 "The Royal Wolverhampton, New Cross Hospital",1,0,0,1,100.0
 Royal Surrey County Hospital NHS Trust,1,1,0,0,0.0
 Royal Surrey County Hospital,1,1,0,0,0.0
-Royal Society for the Prevention of Accidents,1,0,1,0,0.0
+Royal Society for the Prevention of Accidents,1,1,0,0,0.0
 Safehands Ltd,1,1,0,0,0.0
 The Secretary of State for Health and Social Care,1,1,0,0,0.0
 The Sixth Form Colleges Association,1,1,0,0,0.0
@@ -1542,7 +1542,7 @@ Cardiff Council,1,1,0,0,0.0
 Cardiff City Council,1,0,0,1,100.0
 Capital Karts Trading Ltd,1,0,0,1,100.0
 Capita PLC,1,1,0,0,0.0
-Cannock Chase Hospital,1,0,1,0,0.0
+Cannock Chase Hospital,1,1,0,0,0.0
 Cancer Alliance,1,1,0,0,0.0
 Canary Wharf Management Limited,1,1,0,0,0.0
 Canary Wharf Group PLC,1,0,0,1,100.0
@@ -1639,7 +1639,7 @@ Department for Science Innovation and Technology,1,1,0,0,0.0
 Divine Health Services,1,1,0,0,0.0
 Doncaster Bassetlaw Teaching Hospital,1,1,0,0,0.0
 Doncaster County Council,1,0,0,1,100.0
-Driver Vehicle Standards Agency,1,0,1,0,0.0
+Driver Vehicle Standards Agency,1,1,0,0,0.0
 East Kent University Hospitals,1,1,0,0,0.0
 East Kent University Hospital NHS Trust,1,0,0,1,100.0
 East Kent Hospital Foundation Trust,1,1,0,0,0.0
@@ -1825,7 +1825,7 @@ ACPO,1,1,0,0,0.0
 ABTA – The Travel Association,1,1,0,0,0.0
 ABTA,1,1,0,0,0.0
 AACE’s National Directors of Operations Group,1,1,0,0,0.0
-A&B Healthcare Ltd,1,0,1,0,0.0
+A&B Healthcare Ltd,1,1,0,0,0.0
 Abbotswood,1,1,0,0,0.0
 A ONE+,1,1,0,0,0.0
 A J Way & Co Ltd,1,1,0,0,0.0
@@ -2490,7 +2490,7 @@ Hospital Death (Clinical Procedures and medical management) related deaths,1,1,0
 Hopwood House Medical Practice,1,0,0,1,100.0
 Honda UK,1,1,0,0,0.0
 Homerton University NHS Trust,1,1,0,0,0.0
-Home Office ,1,0,1,0,0.0
+Home Office ,1,1,0,0,0.0
 Home Farm Trust Limited,1,0,0,1,100.0
 Home Dot Care Limited,1,1,0,0,0.0
 Home Care Support Limited,1,1,0,0,0.0
