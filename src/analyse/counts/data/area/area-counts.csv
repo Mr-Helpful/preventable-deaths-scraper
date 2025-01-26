@@ -1,19 +1,19 @@
 coroner_area,count
-Greater Manchester South,459
+Greater Manchester South,461
 London Inner North,289
-"West Sussex, Brighton and Hove",175
+"West Sussex, Brighton and Hove",176
 Surrey,174
 Birmingham and Solihull,168
 London East,162
 London Inner South,138
+South Wales Central,128
 Greater Manchester North,126
-South Wales Central,126
-Nottinghamshire,119
+Nottinghamshire,120
 Cornwall and the Isles of Scilly,117
 Norfolk,115
-Yorkshire West Eastern,113
+Yorkshire West Eastern,114
 Greater Manchester West,113
-North Wales (East & Central),99
+North Wales (East & Central),100
 Avon,96
 County Durham and Darlington,95
 "Hampshire, Portsmouth and Southampton",92
@@ -26,10 +26,10 @@ Leicester City and South Leicestershire,74
 Cumbria,74
 Milton Keynes,72
 Bedfordshire and Luton,71
+Dorset,70
 Suffolk,70
-Dorset,69
 Berkshire,68
-Worcestershire,66
+Worcestershire,67
 Liverpool and the Wirral,66
 London North,65
 Manchester City,64
@@ -41,9 +41,9 @@ London West,56
 Lancashire and Blackburn with Darwen,56
 Wiltshire and Swindon,55
 Cheshire,52
+Blackpool and Fylde,51
 Yorkshire South East,50
 "Plymouth, Torbay and South Devon",50
-Blackpool and Fylde,50
 Exeter and Greater Devon,47
 Cambridgeshire and Peterborough,46
 Stoke on Trent and North Staffordshire,44
@@ -52,7 +52,7 @@ Sunderland,43
 London South,42
 Gwent,41
 Gloucestershire,38
-East Riding of Yorkshire and Kingston-upon-Hull,36
+East Riding of Yorkshire and Kingston-upon-Hull,37
 Newcastle and North Tyneside,36
 Northamptonshire,33
 Oxfordshire,32
@@ -74,8 +74,8 @@ Herefordshire,15
 London City,13
 Rutland and North Leicestershire,12
 Staffordshire and Stoke-on-Trent,11
+Gateshead and South Tyneside,11
 Teesside,10
-Gateshead and South Tyneside,10
 Hartlepool,9
 Kent North West,9
 North Lincolnshire and Grimsby,6
